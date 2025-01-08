@@ -1,7 +1,7 @@
 {
-  "name": "@0xintuition/template",
+  "name": "@buildproof/buildproof_dapp",
   "version": "0.1.0",
-  "description": "Auth Ready Remix Template",
+  "description": "Buildproof Dapp Application",
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -12,8 +12,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/0xIntuition/intuition-ts",
-    "directory": "apps/template"
+    "url": "https://github.com/buildproof/buildproof-ts",
+    "directory": "buildproof_Dapp"
   },
   "dependencies": {
     "@0xintuition/1ui": "workspace:^",

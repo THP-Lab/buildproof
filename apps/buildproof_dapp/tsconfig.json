@@ -57,7 +57,7 @@
   ],
   "references": [
     {
-      "path": "../packages/1ui"
+      "path": "../../packages/1ui"
     }
   ]
 }
