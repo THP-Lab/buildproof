@@ -38,7 +38,7 @@ export function Header({
             src="https://cdn.prod.website-files.com/65cdf366e68587fd384547f0/65d8fe503890d1bc9776916c_intuition-logo-type-ws.svg"
             alt="Intuition Logo"
             className="h-8"
-          />{' '}
+          />
         </Link>
         <nav className="flex items-center space-x-4">
           <Button variant="ghost" size="icon" onClick={handleToggleTheme}>
