@@ -1,7 +1,7 @@
 {
   "name": "@0xintuition/buildproof_ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/1ui/src",
+  "sourceRoot": "packages/buildproof_ui/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,31 +9,31 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/1ui",
-        "tsConfig": "packages/1ui/tsconfig.lib.json",
-        "packageJson": "packages/1ui/package.json",
-        "main": "packages/1ui/src/index.ts",
-        "assets": ["packages/1ui/*.md"]
+        "outputPath": "dist/packages/buildproof_ui",
+        "tsConfig": "packages/buildproof_ui/tsconfig.lib.json",
+        "packageJson": "packages/buildproof_ui/package.json",
+        "main": "packages/buildproof_ui/src/index.ts",
+        "assets": ["packages/buildproof_ui/*.md"]
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "options": {
-        "lintFilePatterns": ["packages/1ui/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["packages/buildproof_ui/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nx/vite:test",
       "options": {
-        "config": "packages/1ui/vitest.config.ts"
+        "config": "packages/buildproof_ui/vitest.config.ts"
       }
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "build/storybook/1ui",
-        "configDir": "packages/1ui/.storybook"
+        "outputDir": "build/storybook/buildproof_ui",
+        "configDir": "packages/buildproof_ui/.storybook"
       },
       "configurations": {
         "ci": {
@@ -45,7 +45,7 @@
       "executor": "@nx/storybook:storybook",
       "options": {
         "port": 6006,
-        "configDir": "packages/1ui/.storybook"
+        "configDir": "packages/buildproof_ui/.storybook"
       },
       "configurations": {
         "ci": {
@@ -68,7 +68,7 @@
         }
       ],
       "options": {
-        "command": "tsc --noEmit -p packages/1ui/tsconfig.typecheck.json",
+        "command": "tsc --noEmit -p packages/buildproof_ui/tsconfig.typecheck.json",
         "cwd": "."
       }
     }
