@@ -89,7 +89,7 @@ type Story = StoryObj<typeof ProfileCard>
 export const BasicUsage: Story = {
   args: {
     variant: 'user',
-    avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
     name: 'John Doe',
     id: '0x1234567890abcdef1234567890abcdef12345678',
     vaultId: '131',
@@ -119,7 +119,7 @@ export const BasicUsage: Story = {
 export const SponsorProfile: Story = {
   args: {
     variant: 'user',
-    avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
     name: 'Jane Smith',
     id: '0x1234567890abcdef1234567890abcdef12345678',
     vaultId: '131',
@@ -142,7 +142,7 @@ export const SponsorProfile: Story = {
 export const AdminProfile: Story = {
   args: {
     variant: 'user',
-    avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
     name: 'Admin User',
     id: '0x1234567890abcdef1234567890abcdef12345678',
     vaultId: '131',

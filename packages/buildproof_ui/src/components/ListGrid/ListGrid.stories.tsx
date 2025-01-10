@@ -22,13 +22,13 @@ export const BasicUsage: Story = {
     <ListGrid {...args}>
       <ListCard
         displayName="Best Crypto Trackers"
-        imgSrc="https://avatars.githubusercontent.com/u/94311139?s=200&v=4"
+        imgSrc="https://avatars.githubusercontent.com/u/186075312?s=200&v=4"
         identitiesCount={45}
         buttonWrapper={(button) => <MockLink>{button}</MockLink>}
       />
       <ListCard
         displayName="Top DeFi Platforms"
-        imgSrc="https://avatars.githubusercontent.com/u/94311139?s=200&v=4"
+        imgSrc="https://avatars.githubusercontent.com/u/186075312?s=200&v=4"
         identitiesCount={45}
         buttonWrapper={(button) => <MockLink>{button}</MockLink>}
       />

@@ -56,7 +56,7 @@ const FeaturedListCard: React.FC<FeaturedListCardProps> = ({
         <img
           src={imgSrc}
           alt={displayName}
-          className="h-full object-cover rounded-xl aspect-video"
+          className="h-85 object-cover rounded-xl aspect-video"
         />
       </div>
 

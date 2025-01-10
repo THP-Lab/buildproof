@@ -16,11 +16,11 @@ export const BasicUsage: Story = {
     stakeholders: [
       {
         name: 'John Doe',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
       {
         name: 'Jane Smith',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
     ],
   },
@@ -36,7 +36,7 @@ export const SingleStakeholder: Story = {
     stakeholders: [
       {
         name: 'John Doe',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
     ],
   },
@@ -47,15 +47,15 @@ export const MultipleStakeholders: Story = {
     stakeholders: [
       {
         name: 'John Doe',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
       {
         name: 'Jane Smith',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
       {
         name: 'Bob Wilson',
-        avatar: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+        avatar: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
       },
     ],
   },

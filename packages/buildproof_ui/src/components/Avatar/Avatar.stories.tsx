@@ -51,8 +51,8 @@ export const Entity: Story = {
   render: () => (
     <Avatar
       variant="non-user"
-      src="https://avatars.githubusercontent.com/u/94311139?s=200&v=4"
-      name="Intuition"
+      src="https://avatars.githubusercontent.com/u/186075312?s=200&v=4"
+      name="BuildProof"
     />
   ),
 }

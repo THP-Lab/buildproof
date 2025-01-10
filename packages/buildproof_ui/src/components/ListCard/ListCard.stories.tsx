@@ -14,7 +14,7 @@ type Story = StoryObj<typeof ListCard>
 export const BasicUsage: Story = {
   args: {
     displayName: 'My Favorite Claims',
-    imgSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
     identitiesCount: 42,
     buttonWrapper: (button) => (
       <span
@@ -60,7 +60,7 @@ export const LongTitle: Story = {
   args: {
     displayName:
       'This is a very long list title that should be truncated properly using the Trunctacular component',
-    imgSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4',
+    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
     identitiesCount: 42,
     buttonWrapper: (button) => (
       <span
