@@ -6,7 +6,7 @@ import * as Stories from './ProfileCard.stories'
 
 <Title />
 
-#### The ProfileCard component displays an identity profile information with various details like followers, bio, and more.
+#### The ProfileCard component displays an identity profile information with various details like role, followers, bio, and more.
 
 <Source
   dark
@@ -18,13 +18,13 @@ import { ProfileCard } from '@0xintuition/buildproof_ui'
   variant="user"
   avatarSrc="path/to/avatar.jpg"
   name="John Doe"
-  walletAddress="0x1234567890abcdef1234567890abcdef12345678"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Developer', 'Judge']}
   stats={{
     numberOfFollowers: 123,
     numberOfFollowing: 45,
-    points: 671234,
   }}
-  link="https://example.com"
+  ipfsLink="https://example.com"
   bio="John Doe is a blockchain enthusiast. He loves to learn new things and share his knowledge with others. He is also a contributor to various open-source projects."
 >
   <Button
@@ -44,24 +44,49 @@ import { ProfileCard } from '@0xintuition/buildproof_ui'
 
 ## Variants
 
-### Entity Profile
+### Sponsor Profile
 
 <Source
   dark
   language="tsx"
   code={`
 <ProfileCard
-  variant="non-user"
+  variant="user"
   avatarSrc="https://example.com/avatar.jpg"
-  name="Blockchain Corp"
-  walletAddress="0x1234567890abcdef1234567890abcdef12345678"
+  name="Jane Smith"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Sponsor', 'Judge']}
   stats={{
     numberOfFollowers: 300,
+    numberOfFollowing: 150,
   }}
-  link="https://blockchaincorp.com"
-  bio='Blockchain Corp is a leading company in blockchain technology. Visit our website for more information about how you can benefit from our services.'
+  ipfsLink="https://example.com"
+  bio="Jane Smith is a blockchain enthusiast and sponsor. She supports various blockchain projects and helps them grow."
 />
 `}
 />
 
-<Canvas of={Stories.EntityProfile} sourceState="none" />
+<Canvas of={Stories.SponsorProfile} sourceState="none" />
+
+### Admin Profile
+
+<Source
+  dark
+  language="tsx"
+  code={`
+<ProfileCard
+  variant="user"
+  avatarSrc="https://example.com/avatar.jpg"
+  name="Admin User"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Admin']}
+  stats={{
+    numberOfFollowers: 50,
+    numberOfFollowing: 20,
+  }}
+  bio="Platform administrator responsible for maintaining and moderating the platform."
+/>
+`}
+/>
+
+<Canvas of={Stories.AdminProfile} sourceState="none" />

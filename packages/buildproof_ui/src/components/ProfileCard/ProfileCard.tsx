@@ -4,7 +4,7 @@ import { Link } from '@remix-run/react'
 import { Text } from 'components/Text'
 import { Trunctacular } from 'components/Trunctacular'
 import { cn } from 'styles'
-import { Identity, IdentityType } from 'types'
+import { Identity, IdentityType, UserRole } from 'types'
 
 import { ProfileCardHeader, ProfileCardStatItem } from './components'
 
@@ -17,8 +17,8 @@ export interface ProfileCardProps extends HTMLAttributes<HTMLDivElement> {
   stats?: {
     numberOfFollowers?: number
     numberOfFollowing?: number
-    points?: number
   }
+  roles?: UserRole[]
   ipfsLink?: string
   externalLink?: string
   bio?: string
@@ -36,6 +36,7 @@ const ProfileCard = ({
   id,
   vaultId,
   stats,
+  roles = [],
   ipfsLink,
   externalLink,
   bio,
@@ -45,6 +46,12 @@ const ProfileCard = ({
   onAvatarClick,
   ...props
 }: ProfileCardProps) => {
+  const highestRole = roles.sort(
+    (a, b) =>
+      [UserRole.Developer, UserRole.Sponsor, UserRole.Judge, UserRole.Admin].indexOf(a) -
+      [UserRole.Developer, UserRole.Sponsor, UserRole.Judge, UserRole.Admin].indexOf(b),
+  )[0]
+
   return (
     <div
       className={cn(
@@ -62,40 +69,42 @@ const ProfileCard = ({
         link={ipfsLink}
         onAvatarClick={onAvatarClick}
       />
-      {variant === Identity.user && stats && (
+      {variant === Identity.user && (
         <div className="flex justify-start items-center gap-4 pt-2">
-          {followingLink ? (
-            <Link to={followingLink}>
-              <ProfileCardStatItem
-                value={stats?.numberOfFollowing ?? 0}
-                label="Following"
-              />
-            </Link>
-          ) : (
-            <ProfileCardStatItem
-              value={stats?.numberOfFollowing ?? 0}
-              label="Following"
-            />
+          {stats && (
+            <>
+              {followingLink ? (
+                <Link to={followingLink}>
+                  <ProfileCardStatItem
+                    value={stats?.numberOfFollowing ?? 0}
+                    label="Following"
+                  />
+                </Link>
+              ) : (
+                <ProfileCardStatItem
+                  value={stats?.numberOfFollowing ?? 0}
+                  label="Following"
+                />
+              )}
+              {followerLink ? (
+                <Link to={followerLink}>
+                  <ProfileCardStatItem
+                    value={stats?.numberOfFollowers ?? 0}
+                    label="Followers"
+                  />
+                </Link>
+              ) : (
+                <ProfileCardStatItem
+                  value={stats?.numberOfFollowers ?? 0}
+                  label="Followers"
+                />
+              )}
+            </>
           )}
-          {followerLink ? (
-            <Link to={followerLink}>
-              <ProfileCardStatItem
-                value={stats?.numberOfFollowers ?? 0}
-                label="Followers"
-              />
-            </Link>
-          ) : (
-            <ProfileCardStatItem
-              value={stats?.numberOfFollowers ?? 0}
-              label="Followers"
-            />
-          )}
-          {stats?.points !== undefined && (
-            <ProfileCardStatItem
-              value={stats.points}
-              label="IQ Points"
-              valueClassName="text-success"
-            />
+          {highestRole && (
+            <Text variant="body" weight="medium" className="text-success">
+              {highestRole}
+            </Text>
           )}
         </div>
       )}

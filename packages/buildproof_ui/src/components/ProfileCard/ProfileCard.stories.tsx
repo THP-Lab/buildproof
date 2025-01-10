@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from 'components/Button'
-import { Identity } from 'types'
+import { Identity, UserRole } from 'types'
 
 import { ProfileCard, ProfileCardProps } from './ProfileCard'
 
@@ -45,10 +45,18 @@ const meta: Meta<typeof ProfileCard> = {
       description: 'Statistics related to the identity',
       table: {
         type: {
-          summary:
-            '{ numberOfFollowers: number, numberOfFollowing?: number, points?: number }',
+          summary: '{ numberOfFollowers: number, numberOfFollowing?: number }',
         },
       },
+    },
+    roles: {
+      description: 'User roles (Developer > Sponsor > Judge > Admin)',
+      table: {
+        type: { summary: 'UserRole[]' },
+        defaultValue: { summary: '[]' },
+      },
+      control: 'multi-select',
+      options: Object.values(UserRole),
     },
     ipfsLink: {
       description: 'Link related IPFS document',
@@ -88,8 +96,8 @@ export const BasicUsage: Story = {
     stats: {
       numberOfFollowers: 123,
       numberOfFollowing: 45,
-      points: 671234,
     },
+    roles: [UserRole.Developer, UserRole.Judge],
     bio: 'John Doe is a blockchain enthusiast. He loves to learn new things and share his knowledge with others. He is also a contributor to various open-source projects.',
   },
   render: (args: ProfileCardProps) => (
@@ -108,20 +116,42 @@ export const BasicUsage: Story = {
   ),
 }
 
-export const EntityProfile: Story = {
+export const SponsorProfile: Story = {
   args: {
-    variant: 'non-user',
+    variant: 'user',
     avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
-    name: 'Blockchain Corp',
+    name: 'Jane Smith',
     id: '0x1234567890abcdef1234567890abcdef12345678',
     vaultId: '131',
     stats: {
       numberOfFollowers: 300,
+      numberOfFollowing: 150,
     },
+    roles: [UserRole.Sponsor, UserRole.Judge],
     ipfsLink:
       'https://ipfs.io/ipfs/QmYch4WMF5p7yxjEcuZJxNa7AFR1ZeQhCRsn9xG7P3koXo',
-    externalLink: 'https://blockchaincorp.com',
-    bio: 'Blockchain Corp is a leading company in blockchain technology. Visit our website for more information about how you can benefit from our services.',
+    bio: 'Jane Smith is a blockchain enthusiast and sponsor. She supports various blockchain projects and helps them grow.',
+  },
+  render: (args: ProfileCardProps) => (
+    <div className="w-[500px]">
+      <ProfileCard {...args} />
+    </div>
+  ),
+}
+
+export const AdminProfile: Story = {
+  args: {
+    variant: 'user',
+    avatarSrc: 'https://avatars.githubusercontent.com/u/94311139?s=200&v=4"',
+    name: 'Admin User',
+    id: '0x1234567890abcdef1234567890abcdef12345678',
+    vaultId: '131',
+    stats: {
+      numberOfFollowers: 50,
+      numberOfFollowing: 20,
+    },
+    roles: [UserRole.Admin],
+    bio: 'Platform administrator responsible for maintaining and moderating the platform.',
   },
   render: (args: ProfileCardProps) => (
     <div className="w-[500px]">
