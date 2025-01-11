@@ -1,0 +1,92 @@
+import { Canvas, Controls, Meta, Source, Title } from '@storybook/blocks'
+
+import * as Stories from './ProfileCard.stories'
+
+<Meta of={Stories} />
+
+<Title />
+
+#### The ProfileCard component displays an identity profile information with various details like role, followers, bio, and more.
+
+<Source
+  dark
+  language="tsx"
+  code={`
+import { ProfileCard } from '@0xintuition/buildproof_ui'
+
+<ProfileCard
+  variant="user"
+  avatarSrc="path/to/avatar.jpg"
+  name="John Doe"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Developer', 'Judge']}
+  stats={{
+    numberOfFollowers: 123,
+    numberOfFollowing: 45,
+  }}
+  ipfsLink="https://example.com"
+  bio="John Doe is a blockchain enthusiast. He loves to learn new things and share his knowledge with others. He is also a contributor to various open-source projects."
+>
+  <Button
+    variant="accent"
+    onClick={() => window.open('https://example.com', '_blank')}
+  >
+    Follow
+  </Button>
+</ProfileCard>
+`} />
+
+<Canvas of={Stories.BasicUsage} sourceState="none" />
+
+## Properties
+
+<Controls />
+
+## Variants
+
+### Sponsor Profile
+
+<Source
+  dark
+  language="tsx"
+  code={`
+<ProfileCard
+  variant="user"
+  avatarSrc="https://example.com/avatar.jpg"
+  name="Jane Smith"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Sponsor', 'Judge']}
+  stats={{
+    numberOfFollowers: 300,
+    numberOfFollowing: 150,
+  }}
+  ipfsLink="https://example.com"
+  bio="Jane Smith is a blockchain enthusiast and sponsor. She supports various blockchain projects and helps them grow."
+/>
+`}
+/>
+
+<Canvas of={Stories.SponsorProfile} sourceState="none" />
+
+### Admin Profile
+
+<Source
+  dark
+  language="tsx"
+  code={`
+<ProfileCard
+  variant="user"
+  avatarSrc="https://example.com/avatar.jpg"
+  name="Admin User"
+  id="0x1234567890abcdef1234567890abcdef12345678"
+  roles={['Admin']}
+  stats={{
+    numberOfFollowers: 50,
+    numberOfFollowing: 20,
+  }}
+  bio="Platform administrator responsible for maintaining and moderating the platform."
+/>
+`}
+/>
+
+<Canvas of={Stories.AdminProfile} sourceState="none" />
