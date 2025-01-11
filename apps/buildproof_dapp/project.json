@@ -1,5 +1,5 @@
 {
-  "name": "@0xintuition/template",
+  "name": "@0xintuition/buildproof_dapp",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/template",
   "projectType": "application",
