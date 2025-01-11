@@ -12,8 +12,8 @@ type Story = StoryObj<typeof HackathonCard>;
 
 export const BasicUsage: Story = {
   args: {
-    title: 'Completed Hackathon Project',
-    description: 'This hackathon project has been completed successfully.',
+    title: 'Past Hackathon',
+    description: 'This hackathon project has been Past successfully.',
     tags: ['Blockchain', 'AI', 'Open Source'],
     cashPrize: '$10,000',
     imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
@@ -21,7 +21,7 @@ export const BasicUsage: Story = {
     endDate: '10/01/2023',
     winners: ['John', 'Jane'],
     isLiked: false,
-    status: 'completed',
+    status: 'past',
   },
 };
 
@@ -55,9 +55,9 @@ export const Ongoing: Story = {
   },
 };
 
-export const Completed: Story = {
+export const Past: Story = {
   args: {
-    title: 'Ongoing Hackathon Project',
+    title: 'Past Hackathon',
     description: 'This hackathon project is currently in progress.',
     tags: ['Web3', 'Innovation'],
     cashPrize: '$5,000',
