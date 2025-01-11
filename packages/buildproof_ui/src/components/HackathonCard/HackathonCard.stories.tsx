@@ -12,14 +12,60 @@ type Story = StoryObj<typeof HackathonCard>;
 
 export const BasicUsage: Story = {
   args: {
-    title: 'Amazing Hackathon Project',
-    description: 'This is a brief description of the hackathon project.',
+    title: 'Completed Hackathon Project',
+    description: 'This hackathon project has been completed successfully.',
     tags: ['Blockchain', 'AI', 'Open Source'],
     cashPrize: '$10,000',
     imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
-    startDate: '06/01/25',
-    endDate: '28/02/25',
+    startDate: '01/01/2023',
+    endDate: '10/01/2023',
     winners: ['John', 'Jane'],
     isLiked: false,
+    status: 'completed',
+  },
+};
+
+export const Upcoming: Story = {
+  args: {
+    title: 'Upcoming Hackathon',
+    description: 'This hackathon will start soon.',
+    tags: ['Blockchain', 'AI'],
+    cashPrize: '$5,000',
+    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
+    startDate: '01/02/2025',
+    endDate: '15/03/2025',
+    winners: [],
+    isLiked: false,
+    status: 'upcoming',
+  },
+};
+
+export const Ongoing: Story = {
+  args: {
+    title: 'Ongoing Hackathon',
+    description: 'This hackathon is currently in progress.',
+    tags: ['Web3', 'Innovation'],
+    cashPrize: '$10,000',
+    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
+    startDate: '06/01/2025',
+    endDate: '28/02/2025',
+    winners: [],
+    isLiked: false,
+    status: 'ongoing',
+  },
+};
+
+export const Completed: Story = {
+  args: {
+    title: 'Ongoing Hackathon Project',
+    description: 'This hackathon project is currently in progress.',
+    tags: ['Web3', 'Innovation'],
+    cashPrize: '$5,000',
+    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
+    startDate: '01/01/2023',
+    endDate: '10/01/2023',
+    winners: ['John', 'Jane'],
+    isLiked: false,
+    status: 'ongoing',
   },
 }; 

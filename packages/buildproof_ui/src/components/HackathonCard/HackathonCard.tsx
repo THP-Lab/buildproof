@@ -12,6 +12,7 @@ interface HackathonCardProps {
   winners?: string[];
   isLiked?: boolean;
   onLikeToggle?: () => void;
+  status: 'upcoming' | 'ongoing' | 'completed';
 }
 
 const HackathonCard: React.FC<HackathonCardProps> = ({
@@ -25,6 +26,7 @@ const HackathonCard: React.FC<HackathonCardProps> = ({
   winners,
   isLiked = false,
   onLikeToggle,
+  status,
 }) => {
   const [liked, setLiked] = useState(isLiked);
 
@@ -33,12 +35,18 @@ const HackathonCard: React.FC<HackathonCardProps> = ({
     if (onLikeToggle) onLikeToggle();
   };
 
+  const statusStyles = {
+    upcoming: 'text-blue-500',
+    ongoing: 'text-green-500',
+    completed: 'text-gray-500',
+  };
+
   return (
-    <div className="relative w-full flex flex-col overflow-hidden gap-3 p-5 text-left bg-primary/5 border border-primary/10 rounded-2xl hover:bg-primary/10 hover:border-primary/50 hover:cursor-pointer transition-all duration-300 max-w-[400px] md:max-w-none">
+    <div className={`relative w-full flex flex-col overflow-hidden gap-3 p-5 text-left bg-primary/5 border border-primary/10 rounded-2xl hover:bg-primary/10 hover:border-primary/50 hover:cursor-pointer transition-all duration-300 max-w-[400px] md:max-w-none`}>
       <div className="flex justify-between items-center">
-        <Text variant="headline" className="text-primary">{title}</Text>
+        <Text variant="headline" className={`title-text ${statusStyles[status]}`}>{title}</Text>
         <button onClick={handleLikeToggle}>
-          <Icon name={liked ? "bookmark-filled" : "bookmark"} className={`w-6 h-6 ${liked ? 'text-red-500' : 'text-gray-500'}`} />
+          <Icon name={liked ? "heart-filled" : "heart-outline"} className={`w-6 h-6 ${liked ? 'text-red-500' : 'text-gray-500'}`} />
         </button>
       </div>
       <div className="relative w-full mt-3">
