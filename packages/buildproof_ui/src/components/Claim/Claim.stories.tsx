@@ -55,7 +55,7 @@ export const BasicUsage: Story = {
     disabled: false,
     subject: {
       variant: 'non-user',
-      label: '0xintution',
+      label: '0xintuition',
     },
     predicate: {
       variant: 'non-user',

@@ -62,5 +62,5 @@ export const UserFallback: Story = {
 }
 
 export const EntityFallback: Story = {
-  render: () => <Avatar variant="non-user" name="Intuition" />,
+  render: () => <Avatar variant="non-user" name="BuildProof" />,
 }
