@@ -1,4 +1,4 @@
-# Welcome to the Intuition 1ui Component Library
+# Welcome to the BuildProof ui Component Library
 
 This is our initial `1ui` component library. This will eventually become a published package, but right now we're developing it and running it from within the monorepo structure. We're importing this into our `apps` such as Portal while we're building.
 

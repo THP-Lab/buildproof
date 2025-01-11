@@ -67,7 +67,7 @@ describe('IdentityCard', () => {
     const { asFragment } = render(
       <IdentityCard
         variant="non-user"
-        name="Intuition"
+        name="BuildProof"
         value={7.892}
         currency="ETH"
         walletAddress="0x1234567890abcdef1234567890abcdef12345678"
