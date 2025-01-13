@@ -21,7 +21,7 @@ import {
   PaginationPrevious,
   Text,
 } from '@0xintuition/1ui';
-import { HackathonCard } from '/home/zealra/THP/Dev/buildproof/buildproof-ts/packages/buildproof_ui/src/components/HackathonCard/HackathonCard.tsx';
+import { HackathonCard } from '../../../../../packages/buildproof_ui/src/components/HackathonCard/HackathonCard.tsx';
 
 type HackathonStatus = 'completed' | 'upcoming' | 'ongoing';
 
