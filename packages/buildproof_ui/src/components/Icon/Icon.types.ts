@@ -141,4 +141,6 @@ export const IconName = {
   mirror: 'mirror',
   warpcast: 'warpcast',
   galxe: 'galxe',
+  heartOutline: 'heart-outline',
+  heartFilled: 'heart-filled',
 } as const

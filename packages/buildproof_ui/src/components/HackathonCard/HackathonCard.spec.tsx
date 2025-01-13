@@ -15,6 +15,7 @@ describe('HackathonCard', () => {
         endDate="2023-01-10"
         winners={['John', 'Jane']}
         isLiked={false}
+        status="upcoming"
       />
     );
 
@@ -35,6 +36,7 @@ describe('HackathonCard', () => {
         startDate="06/01/25"
         endDate="28/02/25"
         isLiked={false}
+        status="upcoming"
       />
     );
 
