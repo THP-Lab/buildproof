@@ -29,8 +29,8 @@ import {
   IconName,
   SidebarNavItem,
   Icon,
+  HackathonCard
 } from '@0xintuition/buildproof_ui';
-import { HackathonCard } from '@0xintuition/buildproof_ui/src/components/HackathonCard';
 
 type HackathonStatus = 'completed' | 'upcoming' | 'ongoing';
 
