@@ -10,6 +10,7 @@
     "1ui:lint": "nx lint @0xintuition/1ui",
     "1ui:test": "nx test @0xintuition/1ui --reporter=verbose",
     "1ui:typecheck": "nx typecheck @0xintuition/1ui",
+    "buildproof_ui:build": "nx build @0xintuition/buildproof_ui",
     "api:build": "nx build @0xintuition/api",
     "api:lint": "nx lint @0xintuition/api",
     "portal:dev": "nx dev @0xintuition/portal",

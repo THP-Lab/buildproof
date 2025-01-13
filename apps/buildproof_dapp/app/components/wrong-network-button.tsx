@@ -1,4 +1,13 @@
-import { Button } from '@0xintuition/1ui'
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Text,
+} from '@0xintuition/buildproof_ui'
 
 import { getChainEnvConfig } from '@lib/utils/environment'
 import { CURRENT_ENV } from 'app/consts'

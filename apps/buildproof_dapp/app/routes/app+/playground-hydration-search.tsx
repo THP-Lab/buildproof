@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Input, Text } from '@0xintuition/1ui'
+import { Input, Text } from '@0xintuition/buildproof_ui'
 import {
   fetcher,
   GetAtomsDocument,
@@ -39,8 +39,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
       fetcher(GetAtomsDocument, {
         where: search
           ? {
-              _or: [{ label: { _ilike: `%${search}%` } }],
-            }
+            _or: [{ label: { _ilike: `%${search}%` } }],
+          }
           : undefined,
       })(),
   })
@@ -70,8 +70,8 @@ export default function PlaygroundHydration() {
     {
       where: debouncedSearch
         ? {
-            _or: [{ label: { _ilike: `%${debouncedSearch}%` } }],
-          }
+          _or: [{ label: { _ilike: `%${debouncedSearch}%` } }],
+        }
         : undefined,
     },
     {

@@ -4,7 +4,7 @@
  */
 import * as React from 'react'
 
-import { Theme, themesList } from '@0xintuition/1ui'
+import { Theme, themesList } from '@0xintuition/buildproof_ui'
 
 import { useRevalidator } from '@remix-run/react'
 
@@ -73,8 +73,8 @@ export function getHints(request?: Request) {
         /* eslint-disable @typescript-eslint/no-explicit-any */
         transform: (value: any) => infer ReturnValue
       }
-        ? ReturnValue
-        : (typeof clientHints)[name]['fallback']
+      ? ReturnValue
+      : (typeof clientHints)[name]['fallback']
     },
   )
 }
@@ -119,11 +119,11 @@ const cookies = document.cookie.split(';').map(c => c.trim()).reduce((acc, cur) 
 let cookieChanged = false;
 const hints = [
 ${Object.values(clientHints)
-  .map((hint) => {
-    const cookieName = JSON.stringify(hint.cookieName)
-    return `{ name: ${cookieName}, actual: String(${hint.getValueCode}), cookie: cookies[${cookieName}] }`
-  })
-  .join(',\n')}
+            .map((hint) => {
+              const cookieName = JSON.stringify(hint.cookieName)
+              return `{ name: ${cookieName}, actual: String(${hint.getValueCode}), cookie: cookies[${cookieName}] }`
+            })
+            .join(',\n')}
 ];
 for (const hint of hints) {
 	if (decodeURIComponent(hint.cookie) !== hint.actual) {

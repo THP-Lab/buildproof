@@ -20,7 +20,7 @@ import './styles/globals.css'
 
 import { useEffect } from 'react'
 
-import { Toaster } from '@0xintuition/1ui'
+import { Toaster } from '@0xintuition/buildproof_ui'
 import {
   API_URL_DEV,
   API_URL_PROD,

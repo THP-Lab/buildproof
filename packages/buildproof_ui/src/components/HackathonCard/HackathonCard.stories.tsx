@@ -13,7 +13,7 @@ type Story = StoryObj<typeof HackathonCard>;
 export const BasicUsage: Story = {
   args: {
     title: 'Past Hackathon',
-    description: 'This hackathon project has been completed successfully.',
+    description: 'This hackathon project has ended.',
     tags: ['Blockchain', 'AI', 'Open Source'],
     cashPrize: '$10,000',
     imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
