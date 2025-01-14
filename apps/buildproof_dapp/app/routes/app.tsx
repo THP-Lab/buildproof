@@ -1,14 +1,11 @@
-import logger from '@lib/utils/logger'
-import { invariant } from '@lib/utils/misc'
-import { json, LoaderFunctionArgs } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import { Outlet } from '@remix-run/react'
-import { requireUserWallet } from '@server/auth'
+import { getUserWallet } from '@server/auth'
+import type { LoaderFunctionArgs } from '@remix-run/node'
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  logger('[Loader] Entering app loader')
-
-  const wallet = await requireUserWallet(request)
-  invariant(wallet, 'Unauthorized')
+  // Get the wallet if it exists, but don't require it
+  const wallet = await getUserWallet(request)
 
   return json({
     wallet,

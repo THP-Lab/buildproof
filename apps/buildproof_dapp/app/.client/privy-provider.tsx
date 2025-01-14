@@ -14,7 +14,7 @@ const privyConfig: PrivyClientConfig = {
       connectionOptions: 'all',
     },
   },
-  loginMethods: ['wallet', 'email', 'sms'],
+  loginMethods: ['wallet', 'email', 'sms', 'discord', 'twitter', 'github'],
   appearance: {
     theme: 'dark',
     showWalletLoginFirst: true,
