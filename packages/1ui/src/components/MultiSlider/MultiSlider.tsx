@@ -16,9 +16,23 @@ interface MultiSliderProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
-  const handleValueChange = (onChange: (value: number) => void) => (value: number[]) => {
-    const clampedValue = Math.max(-100, Math.min(100, value[0]))
-    onChange(clampedValue)
+  const handleValueChange = (onChange: (value: number) => void, currentId: string) => (value: number[]) => {
+    const newValue = value[0]
+    
+    // Calculer la somme des valeurs absolues des autres sliders
+    const otherValuesSum = sliders
+      .filter(slider => slider.id !== currentId)
+      .reduce((sum, slider) => sum + Math.abs(slider.value), 0)
+    
+    // Vérifier si la nouvelle valeur ferait dépasser 100% au total
+    if (Math.abs(newValue) + otherValuesSum > 100) {
+      // Si on dépasse, on limite la valeur tout en gardant le signe
+      const maxAllowedValue = 100 - otherValuesSum
+      const clampedValue = newValue > 0 ? maxAllowedValue : -maxAllowedValue
+      onChange(clampedValue)
+    } else {
+      onChange(newValue)
+    }
   }
 
   const formatEth = (eth: number) => eth.toFixed(3)
@@ -47,7 +61,7 @@ const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
               max={100}
               min={-100}
               step={1}
-              onValueChange={(value) => handleValueChange(slider.onChange)(value)}
+              onValueChange={(value) => handleValueChange(slider.onChange, slider.id)(value)}
             >
               <SliderPrimitive.Track className="relative h-[6px] grow rounded-full">
                 <div className="absolute w-full h-full rounded-full bg-border/20" />
