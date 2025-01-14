@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Button, ButtonVariant, ButtonSize, Input, Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from '../../../../packages/buildproof_ui/src/components';
+import React, { useEffect } from 'react';
+import { Button, ButtonVariant, ButtonSize, Input } from '../../../../packages/buildproof_ui/src/components';
 
-interface Prize {
+export interface Prize {
   name: string;
-  amount: string;
+  amount: number;
+  percent?: number;
   otherName?: string;
 }
 
@@ -13,82 +14,44 @@ interface PrizeDistributionProps {
   removePrize: (index: number) => void;
   updatePrize: (index: number, updatedPrize: Prize) => void;
   availableOptions: { value: string; label: string }[];
+  totalCashPrize: number;
+  prizesNumber: number;
 }
 
-const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions, totalCashPrize, prizesNumber }) => {
 
-  // Fonction pour obtenir les options disponibles pour le dropdown
-  const getDropdownOptions = () => {
-    const baseOptions = [
-      { value: 'First Place', label: 'First Place' },
-      { value: 'Second Place', label: 'Second Place' },
-      { value: 'Third Place', label: 'Third Place' },
-      { value: 'Other', label: 'Other' }
-    ];
-
-    // Si on est en mode édition, on réinitialise toutes les options
-    if (isEditing) {
-      // Filtrer les options : garder celles disponibles et l'option actuellement sélectionnée
-      return baseOptions.filter(option => 
-        option.value === 'Other' || // Toujours montrer Other
-        option.value === prize.name || // Garder l'option actuelle
-        availableOptions.some(availOpt => availOpt.value === option.value) // Garder les options disponibles
-      );
+  useEffect(() => {
+    let amount = prize.amount;
+    if (prizesNumber < 2) {
+      amount = totalCashPrize;
     }
+    
+      const percent = (amount / totalCashPrize) * 100;
+      updatePrize(index, { ...prize, amount, percent });
+    
+  }, [totalCashPrize]);
 
-    // Pour un nouveau select ou après avoir quitté l'édition
-    return [
-      ...availableOptions,
-      // Toujours ajouter Other s'il n'est pas déjà présent
-      ...(!availableOptions.some(opt => opt.value === 'Other') ? [{ value: 'Other', label: 'Other' }] : [])
-    ];
+  const handleAmountChange = (amount: number) => {
+    const percent = (amount / totalCashPrize) * 100;
+    updatePrize(index, { ...prize, amount, percent });
   };
 
-  const handleValueChange = (value: string) => {
-    const updatedPrize = { ...prize, name: value, otherName: value !== 'Other' ? '' : prize.otherName };
-    updatePrize(index, updatedPrize);
-    setIsEditing(false);
+  const handlePercentChange = (percent: number) => {
+    const amount = (percent / 100) * totalCashPrize;
+    updatePrize(index, { ...prize, amount, percent });
   };
 
   return (
     <div className="flex flex-col space-y-2">
-      <div className="flex space-x-2">
-        {prize.name && !isEditing ? (
-          <Button
-            onClick={() => setIsEditing(true)}
-            variant={ButtonVariant.ghost}
-            className="flex items-center w-full px-3 py-2 bg-gray-800 rounded-md hover:bg-gray-700 transition-colors"
-          >
-            <span className="text-lg font-bold">{prize.name}</span>
-            <span className="ml-2 text-sm text-gray-400">(click to edit)</span>
-          </Button>
-        ) : (
-          <Select
-            value={prize.name}
-            onValueChange={handleValueChange}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Prize Name" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Prize Names</SelectLabel>
-                {getDropdownOptions().map(option => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        )}
+      <div className="flex justify-between">
+        <span className="text-lg font-bold">{prize.name}</span>
         <Button 
           variant={ButtonVariant.destructiveOutline}
           size={ButtonSize.default}
           type="button" 
           onClick={() => removePrize(index)} 
           className="px-4 py-0.4"
+          disabled={prize.name === 'First Place'}
         >
           Remove Prize
         </Button>
@@ -100,12 +63,22 @@ const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, rem
           onChange={(e) => updatePrize(index, { ...prize, otherName: e.target.value })}
         />
       )}
-      <Input
-        startAdornment="Amount"
-        type="number"
-        value={prize.amount}
-        onChange={(e) => updatePrize(index, { ...prize, amount: e.target.value })}
-      />
+      <div className="flex space-x-2">
+        <Input
+          startAdornment="Amount"
+          type="number"
+          value={prize.amount}
+          onChange={(e) => handleAmountChange(parseInt(e.target.value))}
+           endAdornment="$"
+        />
+        <Input
+          startAdornment="Percent"
+          type="number"
+          value={prize.percent || ''}
+          onChange={(e) => handlePercentChange(parseInt(e.target.value))}
+           endAdornment="%"
+        />
+      </div>
     </div>
   );
 };

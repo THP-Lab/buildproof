@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, ButtonVariant, ButtonSize, Input, Textarea, Select, SelectItem, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel } from '../../../../../packages/buildproof_ui/src/components';
 import PrizeDistribution from '../../components/prizeDistribution.tsx';
+import { Prize } from '../../components/prizeDistribution.tsx';
 
-interface Prize {
-  name: string;
-  amount: string;
-  otherName?: string;
-}
 
 const SubmitHackathon = () => {
   const [partnerName, setPartnerName] = useState('');
@@ -14,8 +10,8 @@ const SubmitHackathon = () => {
   const [description, setDescription] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [totalCashPrize, setTotalCashPrize] = useState('');
-  const [prizes, setPrizes] = useState<Prize[]>([{ name: '', amount: '', otherName: '' }]);
+  const [totalCashPrize, setTotalCashPrize] = useState(0);
+  const [prizes, setPrizes] = useState<Prize[]>([{ name: 'First Place', amount: totalCashPrize, percent: 100 }]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +19,9 @@ const SubmitHackathon = () => {
   };
 
   const addPrize = () => {
-    setPrizes([...prizes, { name: '', amount: '' }]);
+    const prizeOrder = ['Second Place', 'Third Place', 'Other'];
+    const nextPrize = prizeOrder[prizes.length - 1] || 'Other';
+    setPrizes([...prizes, { name: nextPrize, amount: 0}]);
   };
 
   const removePrize = (index: number) => {
@@ -31,7 +29,11 @@ const SubmitHackathon = () => {
     setPrizes(newPrizes);
   };
 
-  const totalPrizeAmount = prizes.reduce((total, prize) => total + (parseFloat(prize.amount) || 0), 0);
+  let totalPrizeAmount = prizes.reduce((total, prize) => total + (prize.amount || 0), 0);
+
+  useEffect(() => {
+    totalPrizeAmount = prizes.reduce((total, prize) => total + (prize.amount || 0), 0)
+  }, [prizes]);
 
   const today = new Date();
   const oneWeekFromNow = new Date(today);
@@ -97,14 +99,16 @@ const SubmitHackathon = () => {
         startAdornment="Total Cash Prize"
         type="number"
         value={totalCashPrize}
-        onChange={(e) => setTotalCashPrize(e.target.value)}
+        onChange={(e) => setTotalCashPrize(parseInt(e.target.value))}
         placeholder="Enter total cash prize amount"
         required
+        endAdornment="$"
       />
       {prizes.map((prize, index) => (
         <PrizeDistribution 
           key={index} 
-          prize={prize} 
+          prize={prize}
+          prizesNumber={prizes.length}
           index={index} 
           removePrize={removePrize} 
           updatePrize={(index, updatedPrize) => {
@@ -113,10 +117,11 @@ const SubmitHackathon = () => {
             setPrizes(newPrizes);
           }}
           availableOptions={getAvailablePrizeOptions()}
+          totalCashPrize={totalCashPrize || 0}
         />
       ))}
       <div className="text-red-500">
-        {totalPrizeAmount > parseFloat(totalCashPrize) && (
+        {totalPrizeAmount > totalCashPrize && (
           <p>Total prize amounts exceed the total cash prize!</p>
         )}
       </div>
@@ -134,7 +139,7 @@ const SubmitHackathon = () => {
         variant={ButtonVariant.accentOutline}
         size={ButtonSize.md}
         type="submit" 
-        disabled={totalPrizeAmount > parseFloat(totalCashPrize)} 
+        disabled={totalPrizeAmount > totalCashPrize} 
         className="px-4 py-2"
     >
         Submit
