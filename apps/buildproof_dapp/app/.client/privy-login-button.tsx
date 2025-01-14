@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Icon } from '@0xintuition/1ui'
+import { Button, Icon } from '@0xintuition/buildproof_ui'
 
 import logger from '@lib/utils/logger'
 import { useLogin, User } from '@privy-io/react-auth'
