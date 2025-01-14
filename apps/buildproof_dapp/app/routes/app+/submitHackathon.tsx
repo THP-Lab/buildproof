@@ -11,7 +11,9 @@ const SubmitHackathon = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [totalCashPrize, setTotalCashPrize] = useState(0);
-  const [prizes, setPrizes] = useState<Prize[]>([{ name: 'First Place', amount: totalCashPrize, percent: 100 }]);
+  const [prizes, setPrizes] = useState<Prize[]>([
+    { name: 'First Place', amount: 0, percent: 0 }
+  ]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,10 +33,6 @@ const SubmitHackathon = () => {
 
   let totalPrizeAmount = prizes.reduce((total, prize) => total + (prize.amount || 0), 0);
 
-  useEffect(() => {
-    totalPrizeAmount = prizes.reduce((total, prize) => total + (prize.amount || 0), 0)
-  }, [prizes]);
-
   const today = new Date();
   const oneWeekFromNow = new Date(today);
   oneWeekFromNow.setDate(today.getDate() + 7);
@@ -52,6 +50,37 @@ const SubmitHackathon = () => {
   const getAvailablePrizeOptions = () => {
     const usedPrizes = prizes.map(prize => prize.name);
     return prizeOptions.filter(option => option.value === 'other' || !usedPrizes.includes(option.value));
+  };
+
+  const updatePrize = (index: number, updatedPrize: Prize) => {
+    const newPrizes = [...prizes];
+    newPrizes[index] = updatedPrize;
+    setPrizes(newPrizes);
+  };
+
+  const handleTotalCashPrizeChange = (value: number) => {
+    setTotalCashPrize(value);
+    // Recalcule les pourcentages pour tous les prix
+    const updatedPrizes = prizes.map(prize => ({
+      ...prize,
+      percent: value > 0 ? (prize.amount / value) * 100 : 0
+    }));
+    setPrizes(updatedPrizes);
+  };
+
+  // Ajoute cette fonction pour vérifier si le formulaire est valide
+  const isFormValid = () => {
+    const isAllFieldsFilled = 
+      partnerName !== '' && 
+      hackathonTitle !== '' && 
+      description !== '' && 
+      startDate !== '' && 
+      endDate !== '' && 
+      totalCashPrize > 0;
+
+    const isTotalCorrect = totalPrizeAmount === totalCashPrize;
+
+    return isAllFieldsFilled && isTotalCorrect;
   };
 
   return (
@@ -99,7 +128,7 @@ const SubmitHackathon = () => {
         startAdornment="Total Cash Prize"
         type="number"
         value={totalCashPrize}
-        onChange={(e) => setTotalCashPrize(parseInt(e.target.value))}
+        onChange={(e) => handleTotalCashPrizeChange(parseInt(e.target.value))}
         placeholder="Enter total cash prize amount"
         required
         endAdornment="$"
@@ -108,16 +137,13 @@ const SubmitHackathon = () => {
         <PrizeDistribution 
           key={index} 
           prize={prize}
-          prizesNumber={prizes.length}
           index={index} 
           removePrize={removePrize} 
-          updatePrize={(index, updatedPrize) => {
-            const newPrizes = [...prizes];
-            newPrizes[index] = updatedPrize;
-            setPrizes(newPrizes);
-          }}
+          updatePrize={updatePrize}
           availableOptions={getAvailablePrizeOptions()}
           totalCashPrize={totalCashPrize || 0}
+          prizes={prizes}
+          prizesNumber={prizes.length}
         />
       ))}
       <div className="text-red-500">
@@ -139,7 +165,7 @@ const SubmitHackathon = () => {
         variant={ButtonVariant.accentOutline}
         size={ButtonSize.md}
         type="submit" 
-        disabled={totalPrizeAmount > totalCashPrize} 
+        disabled={!isFormValid()}
         className="px-4 py-2"
     >
         Submit

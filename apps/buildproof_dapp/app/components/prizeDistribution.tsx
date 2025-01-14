@@ -16,24 +16,18 @@ interface PrizeDistributionProps {
   availableOptions: { value: string; label: string }[];
   totalCashPrize: number;
   prizesNumber: number;
+  prizes: Prize[];
 }
 
-const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions, totalCashPrize, prizesNumber }) => {
-
-  useEffect(() => {
-    let amount = prize.amount;
-    if (prizesNumber < 2) {
-      amount = totalCashPrize;
-    }
-    
-      const percent = (amount / totalCashPrize) * 100;
-      updatePrize(index, { ...prize, amount, percent });
-    
-  }, [totalCashPrize]);
+const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions, totalCashPrize, prizesNumber, prizes }) => {
 
   const handleAmountChange = (amount: number) => {
-    const percent = (amount / totalCashPrize) * 100;
-    updatePrize(index, { ...prize, amount, percent });
+    if (totalCashPrize > 0) {
+      const percent = (amount / totalCashPrize) * 100;
+      updatePrize(index, { ...prize, amount, percent });
+    } else {
+      updatePrize(index, { ...prize, amount });
+    }
   };
 
   const handlePercentChange = (percent: number) => {
