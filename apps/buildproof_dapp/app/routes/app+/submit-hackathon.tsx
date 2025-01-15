@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, ButtonVariant, ButtonSize, Input, Textarea } from '@0xintuition/buildproof_ui';
 import PrizeDistribution from '../../components/prize-distribution.tsx';
 import { Prize } from '../../components/prize-distribution.tsx';
-
+import { usePrivy } from '@privy-io/react-auth'
+import { useNavigate } from '@remix-run/react'
 
 const SubmitHackathon = () => {
+  const { authenticated, ready } = usePrivy()
+  const navigate = useNavigate()
   const [partnerName, setPartnerName] = useState('');
   const [hackathonTitle, setHackathonTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -14,6 +17,20 @@ const SubmitHackathon = () => {
   const [prizes, setPrizes] = useState<Prize[]>([
     { name: 'First Place', amount: 0, percent: 0 }
   ]);
+
+  useEffect(() => {
+    if (ready && !authenticated) {
+      navigate('/login?redirectTo=/app/submit-hackathon')
+    }
+  }, [ready, authenticated, navigate])
+
+  if (!ready || !authenticated) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    )
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
