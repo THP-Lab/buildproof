@@ -1,4 +1,4 @@
-import { ProjectSubmission } from '../../pages/ProjectSubmission'
+import { ProjectSubmission } from '../projectSubmission/ProjectSubmission'
 
 export default function SubmitProject() {
   return <ProjectSubmission />
