@@ -15,6 +15,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@0xintuition/1ui": ["packages/1ui/src/index.ts"],
+      "@0xintuition/buildproof_ui": ["packages/buildproof_ui/src/index.ts"],
       "@0xintuition/api": ["packages/api/src/index.ts"],
       "@0xintuition/automation-tools": ["tools/src/index.ts"],
       "@0xintuition/graphql": ["packages/graphql/src/index.ts"],

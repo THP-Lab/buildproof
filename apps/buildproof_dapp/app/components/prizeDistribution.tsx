@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, ButtonVariant, ButtonSize, Input } from '../../../../packages/buildproof_ui/src/components';
+import { Button, ButtonVariant, ButtonSize, Input } from '@0xintuition/buildproof_ui';
 
 export interface Prize {
   name: string;
@@ -54,7 +54,7 @@ const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, rem
         <Input
           startAdornment="Other Prize Name"
           value={prize.otherName || ''}
-          onChange={(e) => updatePrize(index, { ...prize, otherName: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => updatePrize(index, { ...prize, otherName: e.target.value })}
         />
       )}
       <div className="flex space-x-2">
@@ -62,14 +62,14 @@ const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, rem
           startAdornment="Amount"
           type="number"
           value={prize.amount}
-          onChange={(e) => handleAmountChange(parseInt(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAmountChange(parseInt(e.target.value))}
            endAdornment="$"
         />
         <Input
           startAdornment="Percent"
           type="number"
           value={prize.percent || ''}
-          onChange={(e) => handlePercentChange(parseInt(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePercentChange(parseInt(e.target.value))}
            endAdornment="%"
         />
       </div>
