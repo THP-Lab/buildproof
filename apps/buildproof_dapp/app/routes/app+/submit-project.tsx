@@ -1,4 +1,4 @@
-import { ProjectSubmission } from '../../pages/ProjectSubmission'
+import { ProjectSubmission } from '../../components/project-submission/ProjectSubmission'
 import { usePrivy } from '@privy-io/react-auth'
 import { useNavigate } from '@remix-run/react'
 import { useEffect } from 'react'

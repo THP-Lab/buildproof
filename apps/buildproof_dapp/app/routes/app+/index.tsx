@@ -4,7 +4,7 @@ import { Link } from '@remix-run/react'
 
 import { AuthButton } from '../../components/auth-button'
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
-import { Home } from '../../pages/Home'
+import { Home } from '../../components/home/Home'
 
 export default function App() {
   const { authenticated, ready } = usePrivy()
