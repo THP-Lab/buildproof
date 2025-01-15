@@ -4,7 +4,7 @@ import { Link } from '@remix-run/react'
 
 import { AuthButton } from '../../components/auth-button'
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
-import { Home } from '../../components/home/Home'
+import { Home } from '../../components/home/home'
 
 export default function App() {
   const { authenticated, ready } = usePrivy()
@@ -17,7 +17,7 @@ export default function App() {
     )
   }
 
-return (
+  return (
     <SidebarLayoutProvider>
       <SidebarLayout>
         <SidebarLayoutNav>
