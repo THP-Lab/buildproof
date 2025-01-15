@@ -1,0 +1,1193 @@
+event_url,partner_name,total_partner_amount,prize_title,prize_amount,description,prize_breakdown
+https://ethglobal.com/events/bangkok,Bitkub,20000,Best dApp on Bitkub Chain,10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/bangkok,Bitkub,20000,Best KUB Coin Utilization,10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,Most Innovative Use of CDP SDK,7500,N/A,"1st place: $5,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,Checkout component pool prize,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,OnchainKit Pool Prize,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,CDP SDK Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,Best Combination of CDP SDK and OCK,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,CDP x HYBE Creator Economy Prize,3000,N/A,"1st place: $2,000 | 2nd place: $1,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,Best Developer Feedback,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Coinbase Developer Platform,20000,Crypto x AI Award,4500,N/A,N/A
+https://ethglobal.com/events/bangkok,Protocol Labs,20000,Filecoin Foundation: Storage & Retrieval,10500,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $2,000 | 4th place: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Protocol Labs,20000,Storacha,4500,N/A,"Storacha: $1,250 x 4"
+https://ethglobal.com/events/bangkok,Protocol Labs,20000,Store your hackathon project data using Akave,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Protocol Labs,20000,Swan Chain AI Agent Payment,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Protocol Labs,20000,Protocol Labs,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Kinto,20000,Best Kinto App,7500,N/A,N/A
+https://ethglobal.com/events/bangkok,Kinto,20000,Kinto Smart Contract APIs,5000,N/A,"1st place: $3,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Kinto,20000,Kinto Wallet SDK,5000,N/A,"1st place: $3,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Kinto,20000,Best Venn Integration,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Kinto,20000,Best UI/UX,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Kinto,20000,Best Student Project,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Polygon,20000,Best AI + Onchain App on Polygon,4000,N/A,"1st place: $2,000 | Runners-up: $1,000 x 3"
+https://ethglobal.com/events/bangkok,Polygon,20000,Best Cross-Chain Application using AggLayer,4000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/bangkok,Polygon,20000,Best Zero-Knowledge Application on Polygon zkEVM,4000,N/A,"1st place: $2,000 | Runners-up: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Polygon,20000,Real-World Impact: Best Social Good Application on Polygon,4000,N/A,"1st place: $2,000 | Runners-up: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Polygon,20000,User Onboarding Challenge: Simplifying Web3 Access on Polygon,4000,N/A,"1st place: $2,000 | Runners-up: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Sign Protocol,20000,Best Overall Application,5500,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Sign Protocol,20000,Best Use of Private Attestations,5500,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Sign Protocol,20000,Best Consumer Application,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Sign Protocol,20000,Best Technical Integration of Schema Hooks,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Sign Protocol,20000,Best Developer Feedback,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Arbitrum,20000,Stylus General Track,7500,N/A,N/A
+https://ethglobal.com/events/bangkok,Arbitrum,20000,DeFi on Stylus,8000,N/A,N/A
+https://ethglobal.com/events/bangkok,Arbitrum,20000,"Orbit, BoLD, Timeboost",2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Arbitrum,20000,Commendable Attempts at Stylus,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Flow Foundation,20000,Most Killer App Potential,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000 | 4th place: $500 x 2"
+https://ethglobal.com/events/bangkok,Flow Foundation,20000,Best Gaming App on Flow,8000,N/A,N/A
+https://ethglobal.com/events/bangkok,Flow Foundation,20000,Best Developer Feedback,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Flow Foundation,20000,Prize Pool for Developer Feedback,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,1inch,20000,Integrate Fusion+ into your project,8000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/bangkok,1inch,20000,Use the Dev Portal APIs to streamline your dApp development,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,1inch,20000,Track Portfolios with 1inch,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,LayerZero,20000,Best Omnichain Solution,12000,N/A,"1st place: $7,000 | 2nd place: $3,500 | 3rd place: $1,500"
+https://ethglobal.com/events/bangkok,LayerZero,20000,Best LayerZero Read,7500,N/A,"1st place: $5,000 | 2nd place: $2,500"
+https://ethglobal.com/events/bangkok,LayerZero,20000,Best Developer Feedback,500,N/A,N/A
+https://ethglobal.com/events/bangkok,Uniswap Foundation,20000,"Hooks, Hooks, and Hooks",10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000 | 4th place: $1,000"
+https://ethglobal.com/events/bangkok,Uniswap Foundation,20000,"Integrations, Research, and Experiments",5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Scroll,20000,Best Use Case of L1SLOAD,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Scroll,20000,Build Your Own Rollup,5000,N/A,N/A
+https://ethglobal.com/events/bangkok,Scroll,20000,Innovate on Scroll,10000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500 | 4th place: $1,200 | 5th place: $800"
+https://ethglobal.com/events/bangkok,Pyth Network,20000,Most Innovative use of Pyth pull oracle (Price Feeds),10000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500 | 4th place: $1,000 x 2 | 5th place: $1,000"
+https://ethglobal.com/events/bangkok,Pyth Network,20000,Pyth Entropy Pool Prize,8000,N/A,N/A
+https://ethglobal.com/events/bangkok,Pyth Network,20000,Developer Feedback,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Mina Protocol,20000,Best Mina application or library built using Protokit,14000,N/A,"1st place: $7,000 | 2nd place: $4,000 | 3rd place: $2,000 | 4th place: $1,000"
+https://ethglobal.com/events/bangkok,Mina Protocol,20000,zkGaming on Mina,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Chainlink,20000,Best use of Chainlink CCIP,12000,N/A,N/A
+https://ethglobal.com/events/bangkok,Chainlink,20000,Connect the World with Chainlink,8000,N/A,N/A
+https://ethglobal.com/events/bangkok,World,20000,Best Mini App,17500,N/A,"1st place: $10,000 | 2nd place: $2,500 x 2 | 3rd place: $1,250 x 2"
+https://ethglobal.com/events/bangkok,World,20000,World Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Blockscout,20000,Blockscout Explorer Big Pool Prize,20000,N/A,N/A
+https://ethglobal.com/events/bangkok,Avail,15000,Best Cartesi x Avail integrated project,5000,N/A,"1st place: $2,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Avail,15000,Pool Prize: Build anything with Avail,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Avail,15000,Developer Feedback (Test our Docs),1500,N/A,1st place: $500 | 2nd place: $300 | 3rd place: $200
+https://ethglobal.com/events/bangkok,Avail,15000,Best Arbitrum Orbit x Avail integrated project,5000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Avail,15000,Best Core Tooling Project for Avail,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hyperlane,10000,Best Use of Hyperlane,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hyperlane,10000,Best Infrastructure,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hyperlane,10000,Best Hyperlane Automation,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hyperlane,10000,Best Interchain Application,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nethermind,10000,Build Starknet.anything,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nethermind,10000,Cryptography for Society,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nethermind,10000,Build an Opinionated DEX,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nethermind,10000,Preconfirmations Innovations,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nethermind,10000,Cryptography applications and Ethereum,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,Web3Auth,10000,Best Use of Web3Auth Plug and Play Web SDKs,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Web3Auth,10000,Best Use of Web3Auth Mobile/Gaming SDKs,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Web3Auth,10000,Best Use of Single Factor Auth JS SDK,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Web3Auth,10000,Best Use of Web3Auth Native Account Abstraction,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Web3Auth,10000,Best Mini Apps built using Web3Auth SDKs,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Phala Network,10000,Best Use of AI in TEE -,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Phala Network,10000,Best Use of TEE in Blockchain -,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Phala Network,10000,Best General Use Case,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Gnosis,10000,Build social and community focused dApps using Circles SDK,3333,N/A,N/A
+https://ethglobal.com/events/bangkok,Gnosis,10000,Build on Decentralized Payments Infrastructure with Gnosis Pay,3333,N/A,N/A
+https://ethglobal.com/events/bangkok,Gnosis,10000,Build Cross-Chain Apps with Hashi State Sharing Network (SSN),3334,N/A,N/A
+https://ethglobal.com/events/bangkok,Dynamic,10000,Best consumer project,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Dynamic,10000,Best cross-chain experience,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Dynamic,10000,"Web2, but better",2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Dynamic,10000,Best novel integration,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Dynamic,10000,Future of wallets,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,ENS,10000,Best L2 Subname Experience with Durin,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,ENS,10000,Most Creative Use Case,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,ENS,10000,Best use of ENS,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,ENS,10000,Best use of L2 Primary Names,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Push Protocol,10000,Thai Street Food - Creative Bounty,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Push Protocol,10000,Push Fusion Hack,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,Push Protocol,10000,Push AI Bangkok Breakthrough,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Push Protocol,10000,Wallet Tracker / Consumer DApp Expansion Challenge,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,vlayer Labs,10000,Most inspiring use of vlayer Solidity superpowers,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,vlayer Labs,10000,Best use of Web Proofs,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,vlayer Labs,10000,Best use of Email Proofs,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,vlayer Labs,10000,Best use of Time Travel OR Teleport,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Mantle,10000,Best DeFi Project,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Mantle,10000,Best NFT / Gaming / Socials Project,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Mantle,10000,Best Infra / Tooling Project,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Mantle,10000,Best UX / UI Project,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,CoW DAO,10000,Programmatic Orders,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,CoW DAO,10000,Hooks,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,CoW DAO,10000,Open Innovation,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Circle,10000,Build with Circle's Web3 Services,6000,N/A,"1st place: $2,500 | 2nd place: $2,000 | 3rd place: $1,500"
+https://ethglobal.com/events/bangkok,Circle,10000,Build with Circle's Cross-Chain Transfer Protocol,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Circle,10000,Build with USDC/EURC,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Ledger,10000,CLEAR SIGNING,5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/bangkok,Ledger,10000,BEST LEDGER INTEGRATION,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Ledger,10000,DOCUMENTATION IMPROVEMENT,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Inco Network,10000,Best use of confidentiality for DeFi,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Inco Network,10000,Best gaming application on Inco,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Inco Network,10000,Open Innovation track,5000,N/A,N/A
+https://ethglobal.com/events/bangkok,Chiliz,10000,Fan Utility Projects,4500,N/A,"1st place: $2,750 | 2nd place: $1,750 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Chiliz,10000,SportFi Projects,4500,N/A,"1st place: $2,750 | 2nd place: $1,750"
+https://ethglobal.com/events/bangkok,Chiliz,10000,Best Runner Up,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hedera,10000,EVM Starter Bounty,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hedera,10000,Hedera-Native Services Starter Bounty,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Hedera,10000,Ecosystem Builder Bounty,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,PowerLoom,10000,Onchain Pioneer,5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/bangkok,PowerLoom,10000,GPM Mastermind,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,NEAR Protocol,10000,Control Accounts on Any EVM through NEAR,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,NEAR Protocol,10000,User owned AI is Near,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Rootstock,10000,Best DeFi dApp on Rootstock,5500,N/A,N/A
+https://ethglobal.com/events/bangkok,Rootstock,10000,Best use of Rootstock Blockchain,4500,N/A,N/A
+https://ethglobal.com/events/bangkok,Chronicle Protocol,10000,Best Integration of Chronicle Oracles,6500,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000 | 4th place: $500"
+https://ethglobal.com/events/bangkok,Chronicle Protocol,10000,Chronicle Pool Prize,3500,N/A,N/A
+https://ethglobal.com/events/bangkok,Flare Network,10000,Best Usecase of Flare's enshrined Data Protocols,9000,N/A,"1st place: $5,000 | 2nd place: $2,000 | 3rd place: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Flare Network,10000,BONUS TRACK: Build New attestation type,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Celo,10000,Best responsive web app built for mobile,6000,N/A,"1st place: $3,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Celo,10000,Best Open-Source Tool Built on Celo L2,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,Nillion,10000,Nillion Storage and Retrieval Prize,5000,N/A,N/A
+https://ethglobal.com/events/bangkok,Nillion,10000,Best Blind App Built with Create-Nillion-App,5000,N/A,N/A
+https://ethglobal.com/events/bangkok,Zircuit,10000,Best project on Zircuit,5000,N/A,"1st place: $3,000 | 2nd place: $1,200 | 3rd place: $800"
+https://ethglobal.com/events/bangkok,Zircuit,10000,Best next generation Telegram mini-app,5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/bangkok,Cartesi,10000,Build a dApp using Cartesi Rollups,5000,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/bangkok,Cartesi,10000,Build a dApp showcasing Avail integration,5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/bangkok,Base,10000,Most Based Award,5000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $500"
+https://ethglobal.com/events/bangkok,Base,10000,Best Use of OnchainKit,5000,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/bangkok,The Graph,10000,Best use of The Graph,8000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,500 x 2"
+https://ethglobal.com/events/bangkok,The Graph,10000,Best Substream,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,BitDSM,10000,DeFi app on BitDSM,7000,N/A,"1st place: $3,000 | 2nd place: $2,000 x 2 | 3rd place: $2,000"
+https://ethglobal.com/events/bangkok,BitDSM,10000,Best integration with Ethereum Ecosystem,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Neon EVM,10000,Neon EVM-Optimized Protocols and Apps,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Neon EVM,10000,Memecoin & Degen toolbox,4000,N/A,N/A
+https://ethglobal.com/events/bangkok,Brevis,10000,Build Data-driven dApps with Brevis ZK Coprocessor,10000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500 | 4th place: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Essential,10000,Best declarative DeFi application OR tooling on Essential,10000,N/A,"1st place: $7,000 | 2nd place: $3,000 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Oasis Protocol,10000,Best use of Sapphire and/or ROFL,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $1,500 | 4th place: $1,000 | 5th place: $500"
+https://ethglobal.com/events/bangkok,XMTP,10000,Building Agents with MessageKit,10000,N/A,N/A
+https://ethglobal.com/events/bangkok,Rome Protocol,10000,Best Use of Rome Protocol,10000,N/A,"1st place: $3,000 | 2nd place: $2,000 x 2 | 3rd place: $1,500 x 2 | 4th place: $1,500 | 5th place: $1,500"
+https://ethglobal.com/events/bangkok,Liquity,5000,Best use of Liquity V2 - delete,2500,N/A,N/A
+https://ethglobal.com/events/bangkok,Liquity,5000,Best use of Rate Delegation,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Liquity,5000,Liquity V2 Bots and Keepers,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Liquity,5000,Best use of Liquity V2,5000,N/A,"1st place: $4,500 | 2nd place: $500"
+https://ethglobal.com/events/bangkok,Privy,5000,Best consumer app,2000,N/A,N/A
+https://ethglobal.com/events/bangkok,Privy,5000,Crypto behind the scenes,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Privy,5000,Using Privy,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Curvegrid,5000,Best use of MultiBaas,3000,N/A,N/A
+https://ethglobal.com/events/bangkok,Curvegrid,5000,Best use of Webhooks,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Curvegrid,5000,Speedrun Time Attack,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Linea,5000,Best Project Deployed on Linea and MetaMask JSON-RPC API (Recommended),5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Linea,5000,Best Project Deployed on Linea and MetaMask JSON-RPC API,5000,N/A,N/A
+https://ethglobal.com/events/bangkok,NounsDAO,5000,Best public good built with Nouns,3500,N/A,"1st place: $2,000 | 2nd place: $1,500"
+https://ethglobal.com/events/bangkok,NounsDAO,5000,Best application built with Nouns,1500,N/A,N/A
+https://ethglobal.com/events/bangkok,Blockless,5000,Best dApp Built on Blockless,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Euler,5000,Euler Telegram Integration,5000,N/A,"1st place: $3,000 | 2nd place: $1,000 x 2"
+https://ethglobal.com/events/bangkok,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/bangkok,Lit Protocol,5000,Best Use of Lit Protocol,5000,N/A,"1st place: $2,777 | 2nd place: $1,555 | 3rd place: $668"
+https://ethglobal.com/events/bangkok,Arx Research,5000,Build a Digi-Physical Experience,5000,N/A,"1st place: $2,500 | 2nd place: $1,250 x 2"
+https://ethglobal.com/events/bangkok,Axelar,4000,Best use of Axelar ITS for building/integrating cross-chain assets.,4000,N/A,"1st place: $2,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/bangkok,Venn,1000,Best DeFi dApp that integrates Venn Network firewall,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Capsule,1000,Best web app built with Capsule,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Kinode,1000,Best KinodeOS Integration,1000,N/A,N/A
+https://ethglobal.com/events/bangkok,Hyperbolic,1000,Best AI Agent,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Story,20000,Best Overall Use of the Proof of Creativity Protocol,10500,N/A,"1st place: $2,000 x 3 | 2nd place: $2,000 | 3rd place: $2,000 | 2nd place: $750 x 4 | 3rd place: $500 x 3 | 6th place: $750 | 7th place: $750 | 8th place: $500 | 9th place: $500 | 10th place: $500"
+https://ethglobal.com/events/sanfrancisco2024,Story,20000,Best AI Application on Story,3500,N/A,"1st place: $2,000 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/sanfrancisco2024,Story,20000,Best IPFi Application on Story,2500,N/A,"1st place: $1,500 | 2nd place: $500 x 2 | 3rd place: $500"
+https://ethglobal.com/events/sanfrancisco2024,Story,20000,Most Creative Use Case,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Story,20000,Best Developer Feedback,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Sign Protocol,20000,Best Overall Application,6000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Sign Protocol,20000,Best Use of Encrypted Attestations,6000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Sign Protocol,20000,Best Consumer Application,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Sign Protocol,20000,Best Technical Integration of Schema Hooks,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Polygon,20000,Best Consumer App on Polygon,7000,N/A,"1st place: $2,000 | Runner-up: $1,000 x 5 | Runner-up: $1,000 | Runner-up: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Polygon,20000,Best AI + Onchain App on Polygon,4000,N/A,"1st place: $2,000 | 2nd place: $1,000 x 2"
+https://ethglobal.com/events/sanfrancisco2024,Polygon,20000,Build anything CrossChain using AggLayer Unified Bridge,3000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Polygon,20000,Best zk App on Polygon,6000,N/A,"1st place: $2,000 | 2nd place: $1,000 x 4"
+https://ethglobal.com/events/sanfrancisco2024,Flow,20000,Most Killer App Potential,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000 | 4th place: $500 x 2"
+https://ethglobal.com/events/sanfrancisco2024,Flow,20000,Best Sports App on Flow,8000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Flow,20000,Best Developer Feedback,500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Flow,20000,Prize Pool for Developer Feedback,1500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,AirDAO,20000,Best App for AirDAO Network,10000,N/A,"1st place: $5,000"
+https://ethglobal.com/events/sanfrancisco2024,AirDAO,20000,Attention Economy,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,AirDAO,20000,AI in AirDAO,5000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/sanfrancisco2024,Uniswap Foundation,20000,"Hooks, Hooks, and Hooks",10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/sanfrancisco2024,Uniswap Foundation,20000,"Integrations, Research, and Experiments",5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,SKALE Network,20000,Best Use of Zero Gas Fees,17000,N/A,"1st place: $3,000 | 2nd place: $2,000 x 4 | 3rd place: $1,000 x 4 | 4th place: $500 x 4"
+https://ethglobal.com/events/sanfrancisco2024,SKALE Network,20000,Best use of SKALE Native Integrations,3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Nethermind,10000,Blockchain and Robotics,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Nethermind,10000,Build MEV infrastructure product,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Nethermind,10000,Build an app-specific rollup on Monomer,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Nethermind,10000,Build Starknet.anything,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Nethermind,10000,Innovative Applications of ZK in Deep Learning and the ETH Ecosystem,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Avail,10000,Build with Avail,3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Avail,10000,Best custom appchain using any rollup SDK with AvailDA,1000,N/A,"1st place: $500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Avail,10000,Best Core Tooling project,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Avail,10000,Test out the docs (Developer Feedback),500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Avail,10000,Best dApp built on Avail-powered OP rollup,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Coinbase Developer Platform,10000,Most Innovative Use of CDP SDK,3000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Coinbase Developer Platform,10000,AI x Crypto Award,3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Coinbase Developer Platform,10000,"Future of Finance (stablecoins, fintech, etc.)",2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Coinbase Developer Platform,10000,"Consumer Crypto (gaming, social, loyalty, etc.)",2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Lit Protocol,10000,Best Use of Compute Over Private Data (Decrypting within a Lit Action),3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Lit Protocol,10000,Best Use of Programmable Signing (Sign within a Lit Action),3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Lit Protocol,10000,Best Programmable Bitcoin Application,3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Lit Protocol,10000,Runners Up,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Circle,10000,Build with USDC/EURC,1500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Circle,10000,Build with Circle's Cross-Chain Transfer Protocol,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Circle,10000,Build with Circle's Web3 Services,6000,N/A,"1st place: $2,500"
+https://ethglobal.com/events/sanfrancisco2024,Hedera,10000,EVM Starter Bounty,6000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Hedera,10000,Hedera-Native Services Starter Bounty,3000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Hedera,10000,Ecosystem Builder Bounty,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,The Graph,10000,Best New Subgraph,3750,N/A,"1st place: $2,500 | 2nd place: $1,250"
+https://ethglobal.com/events/sanfrancisco2024,The Graph,10000,Best Use of Subgraph,3750,N/A,"1st place: $2,500 | 2nd place: $1,250"
+https://ethglobal.com/events/sanfrancisco2024,The Graph,10000,Best Substream,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Ledger,10000,Best use of Ledger Technology,8750,N/A,"1st place: $5,000"
+https://ethglobal.com/events/sanfrancisco2024,Ledger,10000,Best Feedback on the Ledger Developer Portal,750,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Ledger,10000,Best Clear Signing contribution and feedback,500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,ENS,10000,Most creative use case,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,ENS,10000,Best ENS experience on L2,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,ENS,10000,Best use of ENS,5000,N/A,"🥇: $2,500 | 🥈: $1,500 | 🥉: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,DELV,10000,Best App Built on Hyperdrive,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,DELV,10000,Best Integration of Hyperdrive,4500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,DELV,10000,Best Developer Feedback,4500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Chronicle Protocol,10000,Best Integration of Chronicle Protocol,4750,N/A,"1st place: $2,750 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Chronicle Protocol,10000,Best DeFi Application Powered by Chronicle,4750,N/A,"1st place: $2,750 | 2nd place: $2,000"
+https://ethglobal.com/events/sanfrancisco2024,Chronicle Protocol,10000,Best Scribe Oracles Integration Tutorial,500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Gnosis Chain,10000,Build a commit-and-reveal consumer dApp with Shutter on Gnosis Chain,3200,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Gnosis Chain,10000,Best Build with Circles on Gnosis Chain,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Gnosis Chain,10000,Build cross-chain application with Hashi,2800,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Neon EVM,10000,Develop a EVM-based application,5000,N/A,"1st place: $3,000"
+https://ethglobal.com/events/sanfrancisco2024,Neon EVM,10000,"Build a developer toolkit, SDK, or library",5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/sanfrancisco2024,Rootstock,10000,Best use of Rootstock Blockchain,4500,N/A,"Winner: $4,000 | Honorable Mention: $500"
+https://ethglobal.com/events/sanfrancisco2024,Rootstock,10000,Best DeFi dApp on Rootstock,5500,N/A,"Winner: $5,000 | Honorable Mention: $500"
+https://ethglobal.com/events/sanfrancisco2024,NEAR Protocol,10000,Control Accounts on Any EVM through NEAR,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,NEAR Protocol,10000,User owned AI is Near,4000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,XMTP,10000,"Messaging Mini apps (Bot, Agents & Frames)",10000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Walrus,10000,Best Use of Walrus,10000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Essential,10000,Best DeFi Application Written in Pint,10000,N/A,"1st Place: $8,000 | Runners Up: $1,000 x 2"
+https://ethglobal.com/events/sanfrancisco2024,Dynamic,8000,Best Immersive Gaming Experience,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Dynamic,8000,Best Mobile Experience - Viral Potential,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Dynamic,8000,Crypto Everywhere,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Dynamic,8000,Behind The Curtains,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Zircuit,5000,Best Project on Zircuit,2500,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Zircuit,5000,Best Zircuit Integration,1250,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Zircuit,5000,Best DeFi Project on Zircuit,1250,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Blockless,5000,Best dApp Built on Blockless,1650,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Blockless,5000,Best Platform Enhancement,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Blockless,5000,Best Tooling for the Blockless Network,1350,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Unlimit,5000,Crypto Checkouts,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Unlimit,5000,NFT Checkouts,2000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Unlimit,5000,Name Extensions Wallet Identifiers,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Phala Network,5000,Best use of dstack or Agent Contract,5000,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/sanfrancisco2024,Alchemy,5000,Best consumer application built with Alchemy Account Kit,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,NounsDAO,5000,Public Infrastructure,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sanfrancisco2024,Privy,1000,Best consumer app experience,1000,N/A,N/A
+https://ethglobal.com/events/sanfrancisco2024,Stackr,350,Best Innovative use-case built using Micro-Rollups,1000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Sign Protocol,20000,Best Overall Application,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Sign Protocol,20000,Best Consumer Application,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Sign Protocol,20000,Best Technical Integration of Schema Hooks,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Sign Protocol,20000,Most Creative Schema,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Sign Protocol,20000,Most Creative App for Community Engagement,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Airdao,20000,Multisig / DAO Infra on AirDAO,4000,N/A,"1st place: $2,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Airdao,20000,Telegram Bot Integration for AirDAO,4000,N/A,"1st place: $2,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Airdao,20000,Prediction Market on AirDAO,4000,N/A,"1st place: $2,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Airdao,20000,Soul Bound Tokens (SBTs) on AirDAO,4000,N/A,"1st place: $2,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Airdao,20000,Token Gated Communities on AirDAO,4000,N/A,"1st place: $2,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Worldcoin,20000,Best Use of World ID,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000 | 4th place: $500 x 2"
+https://ethglobal.com/events/singapore2024,Worldcoin,20000,Most Creative Use Case,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Worldcoin,20000,Best Governance App,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Worldcoin,20000,Best Public Goods Use Case,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Worldcoin,20000,Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,1inch,20000,Integrate Fusion+ into your project,8000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/singapore2024,1inch,20000,Use the Dev Portal APIs in your dApp,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,1inch,20000,Innovate with 1inch's ERC20 Token Plugins,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Uniswap Foundation,20000,"Hooks, Hooks, and Hooks",10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000 | 4th place: $1,000"
+https://ethglobal.com/events/singapore2024,Uniswap Foundation,20000,Integrations & Periphery,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Uniswap Foundation,20000,Research & Experimentation,4000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/singapore2024,Mina Protocol,20000,Best Mina application or library built using Protokit,14000,N/A,"1st place: $7,000 | 2nd place: $4,000 | 3rd place: $3,000"
+https://ethglobal.com/events/singapore2024,Mina Protocol,20000,zkGaming on Mina,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Nethermind,10000,Best AI x Blockchain Data Project,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Nethermind,10000,Build Starknet.anything,5000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Nethermind,10000,Build MEV infrastructure product,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gnosis Chain,10000,Build with Shutter enabled Gnosis Chain using encrypted transactions,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gnosis Chain,10000,Build with Dappnode and Shutter Network on Gnosis Chain,2750,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gnosis Chain,10000,Best Build with Circles on Gnosis Chain,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gnosis Chain,10000,Build with dApps with partner integrations on Gnosis Chain,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gnosis Chain,10000,Build cross-chain application with Hashi,1250,N/A,N/A
+https://ethglobal.com/events/singapore2024,Dynamic,10000,Most Innovative Integration,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Dynamic,10000,Best Consumer Crypto Project,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Dynamic,10000,Best Game,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Dynamic,10000,Most Novel UI,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Dynamic,10000,Best Telegram Mini App Implementation,1000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hyperlane,10000,Best Use of Hyperlane,3000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hyperlane,10000,Best Infrastructure,3000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hyperlane,10000,Most Creative use of Hyperlane,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hyperlane,10000,Best Application,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hedera,10000,EVM Starter Bounty,3000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hedera,10000,Hedera-Native Services Starter Bounty,3000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Hedera,10000,Ecosystem Builder Bounty,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Circle,10000,Build with USDC/EURC,1500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Circle,10000,Build with Circle's Cross-Chain Transfer Protocol,2500,N/A,N/A
+https://ethglobal.com/events/singapore2024,Circle,10000,Build with Circle's Web3 Services,6000,N/A,"1st place: $2,500 | 2nd place: $2,000 | 3rd place: $1,500"
+https://ethglobal.com/events/singapore2024,The Graph,10000,Best New Subgraph,3750,N/A,"Grand Prize: $2,500"
+https://ethglobal.com/events/singapore2024,The Graph,10000,Best Use of Subgraph,3750,N/A,"Grand Prize: $2,500 | Runner-Up: $1,250"
+https://ethglobal.com/events/singapore2024,The Graph,10000,Best Substream,3750,N/A,"Grand Prize: $2,500 | Runner Up: $1,250"
+https://ethglobal.com/events/singapore2024,Rootstock,10000,Best DeFi dApp on Rootstock,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Rootstock,10000,Best Runes or Ordinals project on Rootstock,2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Rootstock,10000,Best use of Rootstock Blockchain,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Flow,10000,Most Killer App Potential,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Flow,10000,Best DeFi App on Flow,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,ENS,10000,Best feedback on ENS documentation,1000,N/A,N/A
+https://ethglobal.com/events/singapore2024,ENS,10000,Best use of ENS,9000,N/A,"1st place: $3,500 | 2nd place: $3,000 | 3rd place: $2,500"
+https://ethglobal.com/events/singapore2024,Chainlink,10000,Best use of Chainlink CCIP,6000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Chainlink,10000,Connect the World with Chainlink,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,NEAR Protocol,10000,Control Accounts on Any EVM through NEAR,6000,N/A,N/A
+https://ethglobal.com/events/singapore2024,NEAR Protocol,10000,User owned AI is Near,4000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Oasis Protocol,10000,Best use of Sapphire and/or ROFL,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $1,500 | 4th place: $1,000 | 5th place: $500"
+https://ethglobal.com/events/singapore2024,Ethereum Foundation,7500,Best Overall Use of MACI,7500,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,250 | 4th place: $750 | 5th place: $500"
+https://ethglobal.com/events/singapore2024,Avail,5000,Build with Avail,1000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Avail,5000,Best use of any rollup SDK with AvailDA,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Avail,5000,Best Core Tooling project,1000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Pyth Network,5000,Most Innovative use of Pyth Entropy,3000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Pyth Network,5000,Most Innovative use of Pyth Pull Oracle (Price Feeds),2000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Gaia,5000,Build a Public Good Integration with web3 AI,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Ledger,5000,Best Ledger Hardware Integration,5000,N/A,"1st place: $2,500"
+https://ethglobal.com/events/singapore2024,NounsDAO,5000,Expand Public Goods,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/singapore2024,Metamask,5000,Best Project Deployed on Linea and MetaMask (Optional),5000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Phala Network,5000,Best use of Agent Contract,5000,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/singapore2024,Morph,5000,Best Consumer Applications build on Morph,5000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Reown,5000,Best projects building with Reown's AppKit,5000,N/A,N/A
+https://ethglobal.com/events/singapore2024,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $750 x 2 | 3rd place: $500 x 2"
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Sign Everything Pool Prize,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Best Technical Integration of Schema Hooks,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Best ZK Attestation Verifier With Schema Hooks,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Most Creative App for Community Engagement,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Best Use Case to Enhance Memecoin Transparency,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Sign Protocol,20000,Best Consumer Application for General Business,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Mina Protocol,20000,Best Mina application or library built using Protokit,14000,N/A,"1st place: $7,000 | 2nd place: $4,000 | 3rd place: $2,000 | 4th place: $1,000"
+https://ethglobal.com/events/ethonline2024,Mina Protocol,20000,zkGaming on Mina,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/ethonline2024,Galadriel,10000,Best Multi-Agent System,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Galadriel,10000,Multi-Agent / Agent Swarm,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Galadriel,10000,AI x Creator,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Galadriel,10000,AI x Social,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Galadriel,10000,Most Unique / Team Favorite,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,SSV Network,10000,Best use of SSV Data,1,N/A,N/A
+https://ethglobal.com/events/ethonline2024,SSV Network,10000,Best enhancement to SSV tooling,1,N/A,N/A
+https://ethglobal.com/events/ethonline2024,SSV Network,10000,Best use of SSV for Restaking,1500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Lit Protocol,10000,Best Compute Over Private Data Application / Protocol,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Lit Protocol,10000,Best Signing Automation Application / Protocol,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Lit Protocol,10000,Best Telegram Mini Apps,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Lit Protocol,10000,Participation Trophy,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Kinto,10000,Best Kinto App Overall,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Kinto,10000,Kinto Smart Contract APIs,2500,N/A,"1st place: $1,500 | 2nd place: $1,000"
+https://ethglobal.com/events/ethonline2024,Kinto,10000,Kinto Wallet Connector,2500,N/A,"1st place: $1,500 | 2nd place: $1,000"
+https://ethglobal.com/events/ethonline2024,Rootstock,10000,Best DeFi dApp on Rootstock,4000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Rootstock,10000,Best Runes or Ordinals project on Rootstock,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Rootstock,10000,Best use of Rootstock Blockchain,4000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Hedera,10000,Ecosystem Builder Bounty,6000,N/A,"1st place: $4,000 | 2nd place: $2,000"
+https://ethglobal.com/events/ethonline2024,Hedera,10000,EVM Starter Bounty,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Hedera,10000,Hedera-Native Services Starter Bounty,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Chainlink,10000,Best use of Chainlink CCIP,6000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Chainlink,10000,Connect the World with Chainlink,4000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,XMTP,10000,"Messaging Mini apps (Bot, Agents & Frames)",7000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,XMTP,10000,Best use of XMTP,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Chiliz,10000,Fan Utility Projects,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/ethonline2024,Chiliz,10000,SportFi Projects,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/ethonline2024,DIMO,5000,Most Breakthrough Mobility Solution,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,DIMO,5000,Best Car Nerd Solution,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,DIMO,5000,Best Gig Economy Solution,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,DIMO,5000,Most Humanitarian Solution,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,DIMO,5000,Team Favorite,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Envio,5000,Best Use of HyperIndex,1500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Envio,5000,Best Use of HyperSync,1500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Envio,5000,Best Runner-Up for Use of HyperIndex or HyperSync,500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Envio,5000,Most Creative Application of Envios Features,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Envio,5000,Best Overall Project,500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Web3Auth,5000,Best Use of Web3Auth Web SDKs,1500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Web3Auth,5000,Best Use of Web3Auth Mobile/Gaming SDKs,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Web3Auth,5000,Best use of Web3Auth MPC Core Kit SDK,1500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Web3Auth,5000,Grand Prize for Overall Best Web3Auth Integration,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Nillion,5000,Best Blind App on Nillion,3000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Nillion,5000,Nillion Feedback Award,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Nillion,5000,Best Nillion Developer Tool,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Stackr Labs,5000,"Best ""Proof of Gameplay"" Implementation with Micro-Rollups",2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Stackr Labs,5000,Best DeFi use-case with Micro-Rollups,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Stackr Labs,5000,Best Innovative use-case built using Micro-Rollups,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Avail,5000,Build with Avail,1000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Avail,5000,Best use of any rollup SDK with AvailDA,2500,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/ethonline2024,Avail,5000,Best Core Tooling project,500,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Blockless,5000,Best dApp Built on Blockless,1650,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Blockless,5000,Best Platform Enhancement,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Blockless,5000,Best Tooling for the Blockless Network,1350,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/ethonline2024,Tableland,5000,Best use of Basin (object storage),5000,N/A,"1st place: $1,500 | 2nd place: $1,250 | Runner ups: $750 x 3"
+https://ethglobal.com/events/ethonline2024,Morph,5000,Consumer Centric Track,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2024,Nethermind,1000,Build Starknet.anything,1000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Worldcoin,20000,Best Use of World ID,10000,N/A,"1st Prize: $4,000 | 2nd Prize: $3,000 | 3rd Prize: $2,000 | Honorable Mention: $1,000"
+https://ethglobal.com/events/superhack2024,Worldcoin,20000,Gas Subsidy with World ID & Reth,4000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Worldcoin,20000,Transaction Priority with World ID & Reth,4000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Worldcoin,20000,Pool Prize,2000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Base,20000,Best apps built for creators on Base,5000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Base,20000,Best apps built for payments on Base,5000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Base,20000,Best apps built for social on Base,5000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Base,20000,Best apps built for trading on Base,5000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Optimism,20000,Fork it!,8000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Optimism,20000,Vote!,7000,N/A,"1st place: $4,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/superhack2024,Optimism,20000,Just [improve] it,7000,N/A,"1st place: $4,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/superhack2024,Optimism,20000,Superchain Maxis,2500,N/A,N/A
+https://ethglobal.com/events/superhack2024,Metal L2,10000,Passkeys Integration,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/superhack2024,Metal L2,10000,Trustless Bridge,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/superhack2024,Metal L2,10000,Identity Management,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/superhack2024,Metal L2,10000,Most interesting smart contract deployed on Metal L2,1000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Celo,10000,Best dApps Built for MiniPay (mobile consumer dApp),6500,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $500"
+https://ethglobal.com/events/superhack2024,Celo,10000,Best Onchain Funding dApp,1500,N/A,"1st place: $1,000 | 2nd place: $500 | 3rd place: $500"
+https://ethglobal.com/events/superhack2024,Celo,10000,Deploy on our new Cel2 Testnet Dango and provide feedback,2000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Superform,10000,Best ERC-4626 vault implementation,7500,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,000 | 4th place: $700 | 5th place: $300"
+https://ethglobal.com/events/superhack2024,Superform,10000,Best ERC-7540 vault implementation,2500,N/A,"1st place: $2,500 | 2nd place: $0"
+https://ethglobal.com/events/superhack2024,EAS,10000,Best Real World Use Cases for Attestations,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/superhack2024,EAS,10000,Best Attestation Developer Tool,4000,N/A,"1st place: $2,000 | 2nd place: $1,250 | 3rd place: $750"
+https://ethglobal.com/events/superhack2024,Pyth,10000,Most Innovative use of Pyth pull oracle (Entropy),2500,N/A,N/A
+https://ethglobal.com/events/superhack2024,Pyth,10000,Most Innovative use of Pyth pull oracle (Price Feeds),7500,N/A,"1st place: $1,500 | 2nd place: $1,500 | 3rd place: $1,500 | 4th place: $1,500 | 5th place: $1,500"
+https://ethglobal.com/events/superhack2024,Fraxtal,10000,Frax Share,10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/superhack2024,Conduit,10000,Best Rollup on Conduit,10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/superhack2024,Mode,5000,Best DeFi innovation,2000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Mode,5000,Best AI & DeFi integration,2500,N/A,N/A
+https://ethglobal.com/events/superhack2024,Mode,5000,Best UX/UI in DeFi,500,N/A,N/A
+https://ethglobal.com/events/superhack2024,thirdweb,5000,Build an onchain game using thirdweb.,2500,N/A,N/A
+https://ethglobal.com/events/superhack2024,thirdweb,5000,Build the next big consumer crypto app,2500,N/A,N/A
+https://ethglobal.com/events/superhack2024,Goldsky,5000,Best use of Goldsky,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/superhack2024,Tenderly,5000,Build a dapp with Virtual TestNets,5000,N/A,N/A
+https://ethglobal.com/events/superhack2024,Farcaster,5000,Best use of Frames on the Superchain,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/superhack2024,Alchemy,5000,Best Consumer App Built with Alchemy Embedded Accounts,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/superhack2024,Chainlink,5000,Best use of Chainlink CCIP,5000,N/A,N/A
+https://ethglobal.com/events/brussels,Worldcoin,20000,Best Use of World ID,10000,N/A,"1st Prize: $4,000 | 2nd Prize: $3,000 | 3rd Prize: $2,000 | Honorable Mention: $1,000"
+https://ethglobal.com/events/brussels,Worldcoin,20000,Most Creative Use Case,2500,N/A,N/A
+https://ethglobal.com/events/brussels,Worldcoin,20000,Best Governance App,2500,N/A,N/A
+https://ethglobal.com/events/brussels,Worldcoin,20000,Best Public Goods Use Case,2500,N/A,N/A
+https://ethglobal.com/events/brussels,Worldcoin,20000,Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/brussels,Arbitrum,20000,Stylus Project,7000,N/A,"1st place: $3,500 | 2nd place: $2,000 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,Arbitrum,20000,Best Orbit Chain Project,7000,N/A,"1st place: $3,500 | 2nd place: $2,000 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,Arbitrum,20000,Best General Project Built on Arbitrum Technology,6000,N/A,N/A
+https://ethglobal.com/events/brussels,PancakeSwap,20000,Best use of Hook return delta,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,PancakeSwap,20000,Innovative DeFi apps,8000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,PancakeSwap,20000,Most creative hook ideas,8000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,Uniswap Foundation,20000,"Hooks, Hooks, and Hooks",10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/brussels,Uniswap Foundation,20000,Integrations,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Uniswap Foundation,20000,Research and Experimentation,4000,N/A,"1st place: $2,000 | 2nd place: $1,250 | 3rd place: $750"
+https://ethglobal.com/events/brussels,Polygon,20000,Best ZK dApp,8000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,500 | 4th place: $500 x 2 | 5th place: $250 x 2"
+https://ethglobal.com/events/brussels,Polygon,20000,Unified Bridge zkEVM Extension,4000,N/A,"1st place: $2,000 | 2nd place: $1,200 | 3rd place: $400 x 2"
+https://ethglobal.com/events/brussels,Polygon,20000,Best Use of Polygon CDK,8000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,500 | 4th place: $1,000 | 5th place: $500"
+https://ethglobal.com/events/brussels,Blockscout,20000,Best use of Blockscout Block Explorer,10000,N/A,"1st place: $2,500 | 2nd place: $2,000 | 3rd place: $2,000 | 4th place: $2,000 | 5th place: $1,500"
+https://ethglobal.com/events/brussels,Avail,15000,Best use of Polygon CDK / Arbitrum Orbit / Stackr SDK with Avail DA,7500,N/A,"1st place: $3,000 | 1st place: $2,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Avail,15000,Build with Avail,5500,N/A,N/A
+https://ethglobal.com/events/brussels,Avail,15000,Best project to deploy on Avail powered Rollup (OP) Testnet,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Avail,15000,Best Core Tooling project,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Dynamic,10000,Best Cross Chain Experience,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Dynamic,10000,Abstract Away Crypto,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Dynamic,10000,Best SocialFi Project,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Dynamic,10000,Best Integration,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Dynamic,10000,Most Entertaining/Fun Experience,2000,N/A,N/A
+https://ethglobal.com/events/brussels,1inch,10000,Innovative Application on top of 1inch Network's Fusion 2.0 API,3500,N/A,N/A
+https://ethglobal.com/events/brussels,1inch,10000,Enhance your app with 1inch Developer Portal APIs,4500,N/A,N/A
+https://ethglobal.com/events/brussels,1inch,10000,Innovative Solutions on top of 1inch Network's Token Plugins,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Zircuit,10000,Best Project on Zircuit,2500,N/A,N/A
+https://ethglobal.com/events/brussels,Zircuit,10000,Best Zircuit Integration or Analytics,1875,N/A,N/A
+https://ethglobal.com/events/brussels,Zircuit,10000,Best DeFi Project on Zircuit,1875,N/A,N/A
+https://ethglobal.com/events/brussels,Zircuit,10000,"Best Gaming, NFT, or Social Project on Zircuit",1875,N/A,N/A
+https://ethglobal.com/events/brussels,Zircuit,10000,Most Creative Project Deployed on Zircuit,1875,N/A,N/A
+https://ethglobal.com/events/brussels,Rootstock,10000,Best DeFi dApp on Rootstock,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Rootstock,10000,Best Runes or Ordinals project on Rootstock,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Rootstock,10000,Best use of Rootstock Blockchain,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Rootstock,10000,Best Cross-chain Interoperability project,1500,N/A,N/A
+https://ethglobal.com/events/brussels,Rootstock,10000,Best Freestyle use on Rootstock,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Web3Auth,10000,Best Use of Web3Auth Single Factor Auth Web SDKs,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Web3Auth,10000,Best Use of Web3Auth Plug and Play Web SDKs,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Web3Auth,10000,Best Use of Web3Auth Mobile/ Gaming SDKs,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Web3Auth,10000,Grand Prize for Overall Best Web3Auth Integration,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Web3Auth,10000,Best Use of Web3Auth Global Account,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Hyperlane,10000,Best Use of Hyperlane,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Hyperlane,10000,Best Infrastructure,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Hyperlane,10000,Most Creative use of Hyperlane,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Hyperlane,10000,Best Application,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Circle,10000,Best Application for Cross-Border Payments,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Circle,10000,Best Application for Dollar Access,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Circle,10000,Best Application for Crypto Capital Markets,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Circle,10000,Best Applications for Emerging Use Cases,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,Nethermind,10000,Best zkML project,1750,N/A,N/A
+https://ethglobal.com/events/brussels,Nethermind,10000,Best Security Driven Development,2750,N/A,N/A
+https://ethglobal.com/events/brussels,Nethermind,10000,Preconfirmations Innovation,4500,N/A,N/A
+https://ethglobal.com/events/brussels,Nethermind,10000,Large Scale Compute,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Base,10000,Best use of Smart Wallet,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Base,10000,Based and Consumed - Best Consumer App UX,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Base,10000,Based and Institutionalized - best corporate/business app UX,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Safe,10000,Best app integrating ERC-7579 Safe Smart Accounts,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,Safe,10000,Best app integrating Passkeys with the Safe Smart Account,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,Safe,10000,Best app integrating Safe (wildcard),2000,N/A,N/A
+https://ethglobal.com/events/brussels,The Graph,10000,Best New Subgraph,5400,N/A,"3rd place: $1,300 | 1st place: $2,400 | 2nd place: $1,700"
+https://ethglobal.com/events/brussels,The Graph,10000,Best Use of Subgraph,3800,N/A,"1st place: $2,300 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,The Graph,10000,Best Use of Substreams,800,N/A,N/A
+https://ethglobal.com/events/brussels,Circles,10000,Build with Circles SDK,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Circles,10000,Build with AI Agents,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Circles,10000,Best innovative use case for Circles + AI integrated together,2000,N/A,N/A
+https://ethglobal.com/events/brussels,ApeCoin,10000,Best Infra project built on ApeChain,4000,N/A,N/A
+https://ethglobal.com/events/brussels,ApeCoin,10000,Best Dapp,4000,N/A,N/A
+https://ethglobal.com/events/brussels,ApeCoin,10000,Honorable Mention,2000,N/A,N/A
+https://ethglobal.com/events/brussels,Chronicle Protocol,10000,DeFi Track,4700,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $700"
+https://ethglobal.com/events/brussels,Chronicle Protocol,10000,Innovation Track,4700,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $700"
+https://ethglobal.com/events/brussels,Chronicle Protocol,10000,Education Track,600,N/A,1st place: $350 | 2nd place: $250
+https://ethglobal.com/events/brussels,Pyth Network,10000,Contribution Track,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Pyth Network,10000,Most Innovative use of Pyth pull oracle (Price Feeds),7000,N/A,"1st place: $4,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Pyth Network,10000,Most Innovative use of Pyth pull oracle (Entropy),2000,N/A,N/A
+https://ethglobal.com/events/brussels,Inco Network,10000,Best Gaming dApp,6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Inco Network,10000,Open Innovation,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/brussels,Chainlink,10000,Best use of Chainlink CCIP,6000,N/A,N/A
+https://ethglobal.com/events/brussels,Chainlink,10000,Connect the World with Chainlink,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Celo,10000,Best dApps Built for MiniPay,7500,N/A,"1st place: $3,500 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,Celo,10000,"Best use of stable gas currency (USDC, USDT, cUSD)",2500,N/A,"1st place: $1,500 | 2nd place: $1,000"
+https://ethglobal.com/events/brussels,Scroll,10000,Best Build Reading L1 State with L1SLOAD,4000,N/A,N/A
+https://ethglobal.com/events/brussels,Scroll,10000,Best Project on Scroll,6000,N/A,"Winner: $3,000 | Runner-up: $1,500 x 2"
+https://ethglobal.com/events/brussels,Morph,10000,Consumer Centric Track,7000,N/A,"1st place: $3,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/brussels,Morph,10000,Innovation Track,3000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/brussels,Galadriel,10000,Best on-chain AI agent(s),6000,N/A,"1st place: $3,000 | 2nd place: $2,000 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Galadriel,10000,Multi Agent System Bounty,4000,N/A,N/A
+https://ethglobal.com/events/brussels,NEAR Protocol,10000,Chain Signatures: Cross-Chain Without Bridges,5000,N/A,N/A
+https://ethglobal.com/events/brussels,NEAR Protocol,10000,User owned AI is Near,5000,N/A,N/A
+https://ethglobal.com/events/brussels,Flare Network,10000,Best DApp utilizing Flare's enshrined price oracle & LayerZero V2,7000,N/A,N/A
+https://ethglobal.com/events/brussels,Flare Network,10000,Most Innovative Application using Flares Data Protocols,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/brussels,Zerion,10000,Best build on ZER Network or Zerion API,10000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $1,500 x 2"
+https://ethglobal.com/events/brussels,ENS,10000,Best use of ENS,10000,N/A,"1st place: $3,000 | 2nd place: $2,500 | 3rd place: $2,000 | 4th place: $1,500 | 5th place: $1,000"
+https://ethglobal.com/events/brussels,Ethereum Foundation,6713,Best Overall Use Case of TLSNotary,1677,N/A,N/A
+https://ethglobal.com/events/brussels,Ethereum Foundation,6713,Prize Pool for Plugin Developers,1036,N/A,N/A
+https://ethglobal.com/events/brussels,Ethereum Foundation,6713,Best Overall Use Case or Research with ZK Email,4000,N/A,"1st place: $1,500 | 2nd place: $750 x 2 | 3rd place: $500 x 2"
+https://ethglobal.com/events/brussels,Nillion,5000,Best Blind AI project on Nillion,3000,N/A,N/A
+https://ethglobal.com/events/brussels,Nillion,5000,Best Blind App on Nillion,1000,N/A,N/A
+https://ethglobal.com/events/brussels,Nillion,5000,Best Nillion Tool or Blockchain Integration,1000,N/A,N/A
+https://ethglobal.com/events/brussels,WalletConnect,5000,Best project building with WalletConnect's AppKit,1,N/A,N/A
+https://ethglobal.com/events/brussels,WalletConnect,5000,Best projects building with WalletConnect's AppKit,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Neon EVM,5000,Best Use Case of Neon EVM Composability Feature,3500,N/A,"1st place: $2,200 | 2nd place: $1,300 | 3rd place: $500"
+https://ethglobal.com/events/brussels,Neon EVM,5000,Best Use Case of Neon EVM,1500,N/A,N/A
+https://ethglobal.com/events/brussels,NounsDAO,5000,Build with $nouns,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/brussels,MetaMask & Linea,5000,Best use of Linea and MetaMask,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,INTMAX,5000,Rewarding contributions to privacy,5000,N/A,N/A
+https://ethglobal.com/events/brussels,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/brussels,Privy,1000,Most engaging consumer app experience,1000,N/A,N/A
+https://ethglobal.com/events/starkhack,Starknet Foundation,20000,Seed Grant Program,25000,N/A,N/A
+https://ethglobal.com/events/starkhack,Cartridge,15000,Starkware General Dojo Prize!,10000,N/A,N/A
+https://ethglobal.com/events/starkhack,Cartridge,15000,Deploy with Slot!,2500,N/A,N/A
+https://ethglobal.com/events/starkhack,Cartridge,15000,Onboard with Controller,2500,N/A,N/A
+https://ethglobal.com/events/starkhack,Voyager,6000,Voyager API,6000,N/A,N/A
+https://ethglobal.com/events/starkhack,Dynamic,5000,Best cross chain project utilizing Dynamic,1000,N/A,N/A
+https://ethglobal.com/events/starkhack,Dynamic,5000,Best implementation of Dynamic,1000,N/A,N/A
+https://ethglobal.com/events/starkhack,Dynamic,5000,Pool for projects which use Dynamic,3000,N/A,N/A
+https://ethglobal.com/events/starkhack,Herodotus,5000,Best Storage Proof Tooling,1500,N/A,N/A
+https://ethglobal.com/events/starkhack,Herodotus,5000,Best Use of Storage Proof API,1500,N/A,N/A
+https://ethglobal.com/events/starkhack,Herodotus,5000,Prove Bitcoin Balance on StarkNet,2000,N/A,N/A
+https://ethglobal.com/events/starkhack,Nethermind,4000,Best use of AI in onchain games,2000,N/A,N/A
+https://ethglobal.com/events/starkhack,Nethermind,4000,Best integration of AI in transaction simulation,2000,N/A,N/A
+https://ethglobal.com/events/starkhack,Nethermind,4000,Best Runner Up Integration of AI in transaction simulation,2000,N/A,N/A
+https://ethglobal.com/events/starkhack,Argent,1000,The future of web3 is mobile,500,N/A,N/A
+https://ethglobal.com/events/starkhack,Argent,1000,One multisig to rule them all,2000,N/A,N/A
+https://ethglobal.com/events/starkhack,Argent,1000,Innovative idea built on top of Argent,500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Best use of Filecoin or the FVM,24000,N/A,"1st place: $10,000 | 2nd place: $8,000 | 3rd place: $3,000 x 2"
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Honorable Mentions,6000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Data dApps,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Stablecoin Payments for Paid Storage Deals,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Storage & Retrieval Provider Tooling,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,AI Related Tools,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Filecoin,40000,Privacy Tools,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Lit Protocol,10000,Best Use of Sign/Decrypt Within a Lit Action,8000,N/A,"1st place: $5,000 | 2nd place: $3,000"
+https://ethglobal.com/events/hackfs2024,Lit Protocol,10000,Participation Prize,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Fluence,10000,Best Contributions To Improving The Fluence Marketplace,3000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Fluence,10000,Best Use Of Fluence Compute,7000,N/A,"1st place: $3,000 | 2nd place: $2,500 | 3rd place: $1,500"
+https://ethglobal.com/events/hackfs2024,Galadriel,10000,The best on-chain AI agent(s) built on Galadriel Devnet,10000,N/A,"1st place: $5,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/hackfs2024,Mona,10000,Best implementation of MONAs SDK for a gaming environment.,10000,N/A,"Grand Prize: $5,000 | Top Prize: $3,000 | Honorable Mention: $2,000"
+https://ethglobal.com/events/hackfs2024,Powerloom,5000,IPFS Power-Up: Snapshotter Node Library Enhancement,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Powerloom,5000,Best Data Archival Project,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Powerloom,5000,Powerloom DataStar,1000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,CoopHive,5000,Best Use of Public Datasets on Filecoin or IPFS,1000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,CoopHive,5000,Best Use of CoopHive for AI Applications,1500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,CoopHive,5000,Best Uses Cases Utilizing Latent Computing Power,2500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Huddle01,5000,SocialFi,1500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Huddle01,5000,AI Track,2000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Huddle01,5000,Open Innovation,1500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Fleek,5000,Best use of Fleek,4500,N/A,"1st place: $2,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/hackfs2024,Fleek,5000,Pool Prize,500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,ENS,5000,Best use of ENS,3500,N/A,"1st place: $2,000 | 2nd place: $1,500"
+https://ethglobal.com/events/hackfs2024,ENS,5000,Best decentralised website,1500,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Starknet,5000,Starknet Application Innovation Award,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/hackfs2024,Zondax,5000,Best Use of Beryx,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $500 x 2"
+https://ethglobal.com/events/hackfs2024,Squid Router,5000,Best use of Squid,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/hackfs2024,Lilypad,5000,Best Lilypad Tooling or Use of Lilypad,5500,N/A,"4th place: $500 | 1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/hackfs2024,Chainsafe,2500,Best SDK Extension,1000,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Chainsafe,2500,Best Marketplace Implementation,750,N/A,N/A
+https://ethglobal.com/events/hackfs2024,Chainsafe,2500,Best Lootbox Implementation,750,N/A,N/A
+https://ethglobal.com/events/sydney,Worldcoin,20000,Best World ID Usage,10000,N/A,"1st Prize: $4,000 | 2nd Prize: $3,000 | 3rd Prize: $2,000 | Honorable Mention: $1,000"
+https://ethglobal.com/events/sydney,Worldcoin,20000,Most Creative Use Case,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Worldcoin,20000,Best Governance App,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Worldcoin,20000,Best Public Goods Use Case,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Worldcoin,20000,Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Mantle,10000,DEFI,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Mantle,10000,"Best NFT, Gaming or Social Project",2500,N/A,N/A
+https://ethglobal.com/events/sydney,Mantle,10000,Best Infra and Tooling Project,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Mantle,10000,Best UX Project,2500,N/A,N/A
+https://ethglobal.com/events/sydney,Chainlink,10000,Best use of Chainlink CCIP,5000,N/A,N/A
+https://ethglobal.com/events/sydney,Chainlink,10000,Connect the World with Chainlink,5000,N/A,N/A
+https://ethglobal.com/events/sydney,Unlimit,10000,Best Use Case of Unlimit Crypto,10000,N/A,N/A
+https://ethglobal.com/events/sydney,Nethermind,5000,AI integration in blockchain,2000,N/A,N/A
+https://ethglobal.com/events/sydney,Nethermind,5000,Zero-Knowledge (ZK) innovations,2000,N/A,N/A
+https://ethglobal.com/events/sydney,Nethermind,5000,Data Availability and Blobspace,1000,N/A,N/A
+https://ethglobal.com/events/sydney,dabl.club,5000,Launch an MVP on Polygon Cardona,2500,N/A,"1st place: $1,250 | 2nd place: $750 | 3rd place: $500"
+https://ethglobal.com/events/sydney,dabl.club,5000,Zero Knowledge Bounty,2500,N/A,"1st place: $1,250 | 2nd place: $750 | 3rd place: $500"
+https://ethglobal.com/events/sydney,Base,5000,Build an Onchain Product,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500"
+https://ethglobal.com/events/sydney,Base,5000,Best use of 4337 Account Abstraction,2000,N/A,"1st place: $1,500 | 2nd place: $500"
+https://ethglobal.com/events/sydney,Avail,5000,Best dApp deployed on Avail-powered Rollup,3000,N/A,N/A
+https://ethglobal.com/events/sydney,Avail,5000,Best appchain/rollup/project built with Avail DA,2000,N/A,N/A
+https://ethglobal.com/events/sydney,NounsDAO,5000,Best Nounish Public Goods,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/sydney,Openmesh Network,2500,Contribution Award,1000,N/A,N/A
+https://ethglobal.com/events/sydney,Openmesh Network,2500,Challenge 2: Chainlink Node Nix package for Xnode,750,N/A,N/A
+https://ethglobal.com/events/sydney,Openmesh Network,2500,Challenge 3: The Graph Node Nix package for Xnode,750,N/A,N/A
+https://ethglobal.com/events/sydney,Lilypad,2000,Best Lilypad Tooling or Use of Lilypad,2000,N/A,1st place: $900 | 2nd place: $700 | 3rd place: $400
+https://ethglobal.com/events/scaling2024,Arbitrum,20000,Stylus Project,6000,N/A,"1st place: $4,000 | 2nd place: $2,000"
+https://ethglobal.com/events/scaling2024,Arbitrum,20000,Best Use of Arbitrum Tech/Best Infrastructure,6000,N/A,"1st place: $4,000 | 2nd place: $2,000"
+https://ethglobal.com/events/scaling2024,Arbitrum,20000,DeSoc,3000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/scaling2024,Arbitrum,20000,Most Original,2000,N/A,"1st place: $1,500 | 2nd place: $500"
+https://ethglobal.com/events/scaling2024,Arbitrum,20000,Qualifying Arbitrum Submissions,3000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Sign Protocol,20000,Most Creative Use Case,4100,N/A,"1st place: $1,400 | 2nd place: $1,100 | 3rd place: $900 | 4th place: $700"
+https://ethglobal.com/events/scaling2024,Sign Protocol,20000,Best UX (User Experience),4100,N/A,"1st place: $1,400 | 2nd place: $1,100 | 3rd place: $900 | 4th place: $700"
+https://ethglobal.com/events/scaling2024,Sign Protocol,20000,Technical Excellence,4100,N/A,"1st place: $1,400 | 2nd place: $1,100 | 3rd place: $900 | 4th place: $700"
+https://ethglobal.com/events/scaling2024,Sign Protocol,20000,Overall Best Project,7700,N/A,"1st place: $2,200 | 2nd place: $1,800 | 3rd place: $1,500 | 4th place: $1,200 | 5th place: $1,000"
+https://ethglobal.com/events/scaling2024,Filecoin,15000,Most meaningful use of Interplanetary Consensus for scalability,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/scaling2024,Filecoin,15000,Most Meaningful Use of IPC for Scalability - Runner Ups,2500,N/A,N/A
+https://ethglobal.com/events/scaling2024,Filecoin,15000,Decentralize your dApps with Filecoin,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $750 | 3rd place: $1,000"
+https://ethglobal.com/events/scaling2024,Filecoin,15000,Decentralize your dApps with Filecoin - Runner Ups,2500,N/A,N/A
+https://ethglobal.com/events/scaling2024,Gnosis Chain,11000,Build new consumer experiences on Farcaster/Lens/dApps with Fileverse,1000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Gnosis Chain,11000,Build consumer focused products on Gnosis Chain for web3 users,4500,N/A,"1st place: $2,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/scaling2024,Gnosis Chain,11000,Build An Integration With Gnosis Pay,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Gnosis Chain,11000,Build developer tool/library/integration,1500,N/A,N/A
+https://ethglobal.com/events/scaling2024,Gnosis Chain,11000,Build cross chain application using Hashi,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,RISC Zero,10000,ZK Coprocessor Bounty,5000,N/A,N/A
+https://ethglobal.com/events/scaling2024,RISC Zero,10000,Best zkVM Application,3000,N/A,N/A
+https://ethglobal.com/events/scaling2024,RISC Zero,10000,On-chain Identity Bounty,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Morph,5000,Consumer Centric Track,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Morph,5000,Innovation Track,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Morph,5000,Runner Ups,1000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Neon EVM,5000,Best Use Case of Neon EVM,3000,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $500 | 3rd place: $500"
+https://ethglobal.com/events/scaling2024,Neon EVM,5000,Use of Neon Transfer SDK,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Avail,5000,Best dApp deployed on Avail-powered Rollup,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Avail,5000,Best appchain/rollup/project built with Avail DA,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Nillion,5000,Best novel use case of blind computation with Nillion,3000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Nillion,5000,Best application integrating Nillions tech,2000,N/A,N/A
+https://ethglobal.com/events/scaling2024,PowerLoom,5000,Best Use of Powerloom,5000,N/A,"1st place: $1,000"
+https://ethglobal.com/events/scaling2024,Witness,1000,Best Use of Witness Protocol,1000,N/A,N/A
+https://ethglobal.com/events/scaling2024,Curvegrid,1000,The Curvegrid Prize,1000,N/A,1st place: $500 | 2nd place: $300 | 3rd place: $200
+https://ethglobal.com/events/frameworks,Pinata,10000,Best Use of Pinata Farcaster API in a Frame,5000,N/A,N/A
+https://ethglobal.com/events/frameworks,Pinata,10000,Best Use of Pinata's Frame Analytics in a Frame,2500,N/A,N/A
+https://ethglobal.com/events/frameworks,Pinata,10000,Best Client for Frames,2500,N/A,N/A
+https://ethglobal.com/events/frameworks,XMTP,10000,Open Frames Bounty,7400,N/A,N/A
+https://ethglobal.com/events/frameworks,Dynamic,5000,$100 and 3 months advanced plan,2000,N/A,N/A
+https://ethglobal.com/events/frameworks,Dynamic,5000,Future of commerce,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Dynamic,5000,Most innovative use of frames,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Dynamic,5000,Best Integration,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Base,5000,Best AA Frame dev tool,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Base,5000,Best No Code Frame tool,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Base,5000,Most Creative Frame,3000,N/A,N/A
+https://ethglobal.com/events/frameworks,Optimism,5000,Super Frame Discovery,2500,N/A,N/A
+https://ethglobal.com/events/frameworks,Optimism,5000,Seamless Bridge Frame,2500,N/A,N/A
+https://ethglobal.com/events/frameworks,Livepeer,5000,Video Frames,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/frameworks,The Graph,5000,Best use of The Graph Network,5000,N/A,"Grand Prize: $1,700 | Runner Up: $1,200 | Pool: $700 x 3"
+https://ethglobal.com/events/frameworks,frames.js,4269,Best Frame using Frames.js,4269,N/A,"1st place: $2,048 | 2nd place: $1,337 | 3rd place: $884"
+https://ethglobal.com/events/frameworks,Privy,4000,Most engaging use of frames,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Privy,4000,Headless frame apps,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Privy,4000,Infrastructure wizard,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Privy,4000,Honorable Mentions,1000,N/A,N/A
+https://ethglobal.com/events/frameworks,Airstack,3500,Best use of Airstack,3500,N/A,N/A
+https://ethglobal.com/events/frameworks,Karma3Labs,3000,Best use of OpenRank APIs,500,N/A,N/A
+https://ethglobal.com/events/frameworks,Karma3Labs,3000,Top 3 Clients or Apps built using OpenRank APIs,1500,N/A,N/A
+https://ethglobal.com/events/frameworks,Karma3Labs,3000,Top 3 Frames using OpenRank APIs,1500,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Zero-Knowledge (ZK) innovations,1500,N/A,"1st place: $1,000 | 2nd place: $500"
+https://ethglobal.com/events/london2024,Nethermind,20000,Maximal Extractable Value (MEV) innovations,1500,N/A,"1st place: $1,000 | 2nd place: $500"
+https://ethglobal.com/events/london2024,Nethermind,20000,Data availability solutions,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,User security enhancements,500,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Blockchain infrastructure tools,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Account abstraction & user experience,1500,N/A,"1st place: $1,000 | 2nd place: $500"
+https://ethglobal.com/events/london2024,Nethermind,20000,Metaverse Development,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Institutional Blockchain Solutions,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Staking/restaking innovations,1500,N/A,"1st place: $1,000 | 2nd place: $500"
+https://ethglobal.com/events/london2024,Nethermind,20000,AI integration in blockchain,2000,N/A,"1st place: $1,000 | 2nd place: $500 x 2"
+https://ethglobal.com/events/london2024,Nethermind,20000,Best projects building on Starknet,5500,N/A,N/A
+https://ethglobal.com/events/london2024,Nethermind,20000,Best Web3 Social,2000,N/A,"1st place: $1,000 | 2nd place: $500 x 2"
+https://ethglobal.com/events/london2024,Arbitrum,20000,Stylus Project,6000,N/A,"1st place: $4,000 | 2nd place: $2,000"
+https://ethglobal.com/events/london2024,Arbitrum,20000,Best Library / Framework (Best Use of Arbitrum Library),6000,N/A,"1st place: $4,000 | 2nd place: $2,000"
+https://ethglobal.com/events/london2024,Arbitrum,20000,DeSoc,3000,N/A,"1st place: $2,000 | 2nd place: $1,000"
+https://ethglobal.com/events/london2024,Arbitrum,20000,Most Original,2000,N/A,"1st place: $1,500 | 2nd place: $500"
+https://ethglobal.com/events/london2024,Arbitrum,20000,Qualifying Arbitrum Submissions,3000,N/A,N/A
+https://ethglobal.com/events/london2024,Worldcoin,20000,Best World ID Usage,10000,N/A,"1st Prize: $4,000 | 2nd Prize: $3,000 | 3rd Prize: $2,000 | Honorable Mention: $1,000"
+https://ethglobal.com/events/london2024,Worldcoin,20000,Most Creative Use Case,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Worldcoin,20000,Best Governance App,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Worldcoin,20000,Best Public Goods Use Case,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Worldcoin,20000,Pool Prize,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Filecoin,20000,Build Data Economies & Tools Together with Filecoin,10000,N/A,"Runners Up: $500 x 5 | 1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,000 | 4th place: $750 | Pool Prize: $625 x 4 | 5th place: $750"
+https://ethglobal.com/events/london2024,Filecoin,20000,Most meaningful use of Interplanetary Consensus for scalability,10000,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,000 | Runners Up: $500 x 5"
+https://ethglobal.com/events/london2024,Chiliz,20000,Fan Utility Projects,7500,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Chiliz,20000,SportFi Projects,7500,N/A,"1st place: $4,000 | 2nd place: $2,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Chiliz,20000,Pool Prize,5000,N/A,N/A
+https://ethglobal.com/events/london2024,Circle,10000,Best Application for Cross Border Payments,2500,N/A,"1st place: $1,500 | 2nd place: $1,000"
+https://ethglobal.com/events/london2024,Circle,10000,Best Application for Dollar Access,2500,N/A,"1st place: $1,500 | 2nd place: $1,000"
+https://ethglobal.com/events/london2024,Circle,10000,Best Application for Crypto Capital Markets,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Circle,10000,Best Applications for Emerging Use Cases with Circle Products,4000,N/A,"1st place: $2,500 | 2nd place: $1,500"
+https://ethglobal.com/events/london2024,Hyperlane,10000,Best Use of Hyperlane,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Hyperlane,10000,Best Permissionless Use of Hyperlane,3000,N/A,N/A
+https://ethglobal.com/events/london2024,Hyperlane,10000,Most Creative use of Hyperlane,1500,N/A,N/A
+https://ethglobal.com/events/london2024,Hyperlane,10000,Best Modular Use of Hyperlane,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Hyperlane,10000,Most Ambitious Use of Hyperlane,1000,N/A,N/A
+https://ethglobal.com/events/london2024,PancakeSwap,10000,Innovate with PancakeSwap!,10000,N/A,N/A
+https://ethglobal.com/events/london2024,PancakeSwap,10000,Creative Hook Ideas,1500,N/A,N/A
+https://ethglobal.com/events/london2024,PancakeSwap,10000,Innovation & Integration,1500,N/A,N/A
+https://ethglobal.com/events/london2024,PancakeSwap,10000,Tooling & UX improvements,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Gnosis,10000,Decentralized Application (DApp) Interaction with Gnosis Pay,2500,N/A,"1st place: $1,500 | 2nd place: $1,000 | 3rd place: $300"
+https://ethglobal.com/events/london2024,Gnosis,10000,Yield Bearing Tokens Integration with Gnosis Pay,4500,N/A,"1st place: $2,000 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Gnosis,10000,Other Innovative Use Cases on Top of Gnosis Pay,3000,N/A,N/A
+https://ethglobal.com/events/london2024,Uniswap Foundation,10000,Best Use of Hook Features,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Uniswap Foundation,10000,Hooks & External Integrations,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Uniswap Foundation,10000,"Open Track - Pool Operators, Public Goods, Research",2500,N/A,N/A
+https://ethglobal.com/events/london2024,Base,10000,Build an Onchain Product,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Base,10000,Best use of 4337 Account Abstraction,5000,N/A,"1st place: $3,000 | 2nd place: $2,000"
+https://ethglobal.com/events/london2024,ENS,10000,Best contribution to an open source library,1000,N/A,N/A
+https://ethglobal.com/events/london2024,ENS,10000,Best use of ENS,9000,N/A,"1st place: $3,000 | 2nd place: $2,750 | 3rd place: $2,250 | 4th place: $1,000"
+https://ethglobal.com/events/london2024,ApeCoin,10000,Best use of Apecoin in a gaming use case,5000,N/A,N/A
+https://ethglobal.com/events/london2024,ApeCoin,10000,Most creative consumer use case,5000,N/A,N/A
+https://ethglobal.com/events/london2024,Celo,10000,Best Dapp for MiniPay,9000,N/A,"1st place: $4,000 | 2nd place: $3,000 | 3rd place: $2,000"
+https://ethglobal.com/events/london2024,Celo,10000,Best use of Mento stables,1000,N/A,N/A
+https://ethglobal.com/events/london2024,NEAR Protocol,10000,Best Use of Chain Signatures: Cross-Chain Apps Without Bridges,5000,N/A,N/A
+https://ethglobal.com/events/london2024,Safe,10000,Best app integrating the Safe 4337 Module,8000,N/A,"1st place: $2,500 | 2nd place: $2,200 | 3rd place: $1,800 | 4th place: $1,500"
+https://ethglobal.com/events/london2024,Safe,10000,Best Safe Farcaster frame,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Ethereum Foundation,6000,Best use of MACI,6000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000 | 4th place: $500 x 2"
+https://ethglobal.com/events/london2024,Dynamic,5000,Best onboarding UX,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Dynamic,5000,Best crypto enabled app,1500,N/A,N/A
+https://ethglobal.com/events/london2024,Dynamic,5000,Integration magic,1500,N/A,N/A
+https://ethglobal.com/events/london2024,Dynamic,5000,Runner Up,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Avail,5000,Best Project built with Avail,5000,N/A,"1st place: $1,500 | 2nd place: $1,000 x 2 | 3rd place: $500 x 3"
+https://ethglobal.com/events/london2024,Avail,5000,Best Visualizer for Pre & Post EIP-4844 Comparison,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Aztec,5000,Best overall Aztec Sandbox dapp,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Aztec,5000,Runner up (Aztec or Noir App),1000,N/A,N/A
+https://ethglobal.com/events/london2024,Aztec,5000,Best Noir App,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Flashbots,5000,Offchain Auction Protocol,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Flashbots,5000,Most Unique Offchain App,2000,N/A,N/A
+https://ethglobal.com/events/london2024,Flashbots,5000,Chain Abstraction PoC,1000,N/A,N/A
+https://ethglobal.com/events/london2024,Chainlink,5000,Chainlink CCIP,4000,N/A,N/A
+https://ethglobal.com/events/london2024,Chainlink,5000,Connect the world with Chainlink,1000,N/A,N/A
+https://ethglobal.com/events/london2024,LayerZero,5000,Best OApp Implementation,2500,N/A,N/A
+https://ethglobal.com/events/london2024,LayerZero,5000,Best OFT Implementation,2500,N/A,N/A
+https://ethglobal.com/events/london2024,Fhenix,5000,Best use of Fhenix Stack,5000,N/A,"1st place: $2,500 | 2nd place: $1,500 | 3rd place: $1,000"
+https://ethglobal.com/events/london2024,Nouns DAO,5000,Best UX/UI implementationof NounsArt,5000,N/A,"1st: $2,500 | 2nd: $1,500 | 3rd: $1,000"
+https://ethglobal.com/events/london2024,Galadriel,5000,Most unique on-chain AI application built on Galadriel,5000,N/A,"1st place: $3,000 | 2nd place: $1,500 | 3rd place: $500"
+https://ethglobal.com/events/london2024,Morpho Labs,1000,Best Morpho Blue or MetaMorpho integration,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Scroll,10000,Best ZK Usage for Privacy on Scroll,5000,N/A,"Winner: $3,500 | Runner-Up: $1,500"
+https://ethglobal.com/events/circuitbreaker,Scroll,10000,Best ZK Usage for Scalability on Scroll,5000,N/A,"Winner: $3,500 | Runner-Up: $1,500"
+https://ethglobal.com/events/circuitbreaker,Privacy + Scaling Explorations,5000,Proof of Email,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Privacy + Scaling Explorations,5000,Bandada,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Privacy + Scaling Explorations,5000,Semaphore,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Privacy + Scaling Explorations,5000,Anon Aadhaar,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Privacy + Scaling Explorations,5000,MACI,1000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Sindri,5000,Most unique use of Sindri,2500,N/A,"1st place: $2,000 | Runner-up: $500"
+https://ethglobal.com/events/circuitbreaker,Sindri,5000,Best use of Sindri in a ML x Web3 context,2500,N/A,"1st place: $2,000 | 2nd place: $500"
+https://ethglobal.com/events/circuitbreaker,Avail,5000,Build with Avail,3000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Avail,5000,Best use case with Avail Light Client embedded,2000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Iron Fish,5000,Best use of the Iron Fish protocol with interaction from an EVM chain,5000,N/A,N/A
+https://ethglobal.com/events/circuitbreaker,Aztec,5000,Best Noir App,5000,N/A,"1st place: $1,667 | 2nd place: $1,667 | 3rd place: $1,666"
+https://ethglobal.com/events/lfgho,Aave,50000,Payments,17000,N/A,"1st place: $10,000 | 2nd place: $7,000"
+https://ethglobal.com/events/lfgho,Aave,50000,Vaults,11500,N/A,"1st place: $7,000 | 2nd place: $4,500"
+https://ethglobal.com/events/lfgho,Aave,50000,Facilitators,11500,N/A,"1st place: $7,000 | 2nd place: $4,500"
+https://ethglobal.com/events/lfgho,Aave,50000,Integration Prize,10000,N/A,N/A
+https://ethglobal.com/events/lfgho,Chainlink,5000,Best Projects Built with CCIP and GHO,5000,N/A,N/A
+https://ethglobal.com/events/lfgho,Family,5000,Pool Prize,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Best Overall,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Most Creative,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Best Governance App,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Best AI Use Case,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Best Sign In with Worldcoin App,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Honorable Mentions,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Worldcoin,20000,Pool Prize,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,Anti-sybil Service Prize,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,EVM Migration Tool Prize,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,NFT Infrastructure Prize,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,Most outstanding prizes using Hashi,1000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,Best Powerpool Finance Integration,5000,N/A,"1st Place: $2,000 | 2nd Place: $1,500 | 3rd Place: $500 | Azuro challenge: $1,000"
+https://ethglobal.com/events/istanbul,Gnosis Chain,20000,Innovate on Gnosis Chain,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Lens Protocol,20000,Best Smart Post,10000,N/A,"1st Place: $5,000 | 2nd Place: $3,000 | 3rd Place: $2,000"
+https://ethglobal.com/events/istanbul,Lens Protocol,20000,Best Social Experience with Lens,4000,N/A,N/A
+https://ethglobal.com/events/istanbul,Lens Protocol,20000,Most Novel Social Experience with Lens,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Lens Protocol,20000,Best Monetization with Lens,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Lens Protocol,20000,Best Lens Integration,1000,N/A,1st Place: $500 | 2nd Place: $500
+https://ethglobal.com/events/istanbul,Arbitrum,20000,Pool Prize,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Arbitrum,20000,Best Library / Framework,5000,N/A,"🥇 Winner: $4,000 | Runner-up: $1,000"
+https://ethglobal.com/events/istanbul,Arbitrum,20000,Best Stylus Project,5000,N/A,"🥇 Winner: $4,000 | Runner-up: $1,000"
+https://ethglobal.com/events/istanbul,Arbitrum,20000,Most Original,2500,N/A,"🥇 Winner: $2,000 | Runner-up: $500"
+https://ethglobal.com/events/istanbul,Arbitrum,20000,Best Technology,2500,N/A,"🥇 Winner: $2,000 | Runner-up: $500"
+https://ethglobal.com/events/istanbul,1inch Network,20000,Most Innovative Application on top of 1inch Network's Fusion API,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,1inch Network,20000,Most Innovative Solution on top of 1inch Network's Token Plugins,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,1inch Network,20000,Enhance your app with 1inch Developer Portal APIs,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,1inch Network,20000,Open Track,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Polygon,20000,Best use of Polygon zkEVM,7500,N/A,N/A
+https://ethglobal.com/events/istanbul,Polygon,20000,Polygon zkEVM DeFi Challenge,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Polygon,20000,Cross-chain / LxLy Bridge implementation,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Polygon,20000,Best use of Polygon ID to preserve user privacy,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,WalletConnect,20000,Innovation Pool Prize,7000,N/A,N/A
+https://ethglobal.com/events/istanbul,WalletConnect,20000,Best integration of the Web3Inbox SDK in an app,7000,N/A,"1st Place: $3,500 | 2nd Place: $2,000 | 3rd Place: $1,500"
+https://ethglobal.com/events/istanbul,WalletConnect,20000,Best integration of the Web3Modal Mobile SDKS,6000,N/A,"1st Place: $2,500 | 2nd Place: $2,000 | 3rd Place: $1,500"
+https://ethglobal.com/events/istanbul,Chiliz,20000,Fan Utility Tokens,7500,N/A,"1st Place: $4,000 | 2nd Place: $2,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Chiliz,20000,Sportfi Project,7500,N/A,"1st Place: $4,000 | 2nd Place: $2,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Chiliz,20000,Pool Prize,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Spark,20000,Best use of SparkLend,6500,N/A,"1st Place: $4,000 | 2nd Place: $2,000 | 3rd Place: $500"
+https://ethglobal.com/events/istanbul,Spark,20000,Best use of sDAI,6500,N/A,"1st Place: $4,000 | 2nd Place: $2,000 | 3rd Place: $500"
+https://ethglobal.com/events/istanbul,Spark,20000,Best use of SparkConduits`,7000,N/A,"1st Place: $4,000 | 2nd Place: $2,000 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,zkSync,20000,Validiums Research on zkSync,6000,N/A,N/A
+https://ethglobal.com/events/istanbul,zkSync,20000,Best Wallets & Smart Accounts on zkSync,7000,N/A,N/A
+https://ethglobal.com/events/istanbul,zkSync,20000,Best use of zkSync,10000,N/A,N/A
+https://ethglobal.com/events/istanbul,IPFS & Filecoin,20000,Grand Prizes,9000,N/A,N/A
+https://ethglobal.com/events/istanbul,IPFS & Filecoin,20000,Pool Prize,11000,N/A,N/A
+https://ethglobal.com/events/istanbul,Scroll,20000,Deploy on Scroll,7000,N/A,N/A
+https://ethglobal.com/events/istanbul,Scroll,20000,Best on Scroll,10000,N/A,N/A
+https://ethglobal.com/events/istanbul,Chronicle Protocol,20000,Most Innovative Chronicle Oracle Integration,7000,N/A,"1st Place: $4,500 | 2nd Place: $2,500"
+https://ethglobal.com/events/istanbul,Chronicle Protocol,20000,Integrate a Chronicle Oracle,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,Mina Protocol,20000,zkApps built on Mina Protocol or Protokit,20000,N/A,"1st Place: $8,000 | 2nd Place: $6,000 | 3rd Place: $2,000 | 🏅 4th Place: $1,000 x 4"
+https://ethglobal.com/events/istanbul,Flashbots,10000,Best Use of SUAVE,1,N/A,N/A
+https://ethglobal.com/events/istanbul,Flashbots,10000,Best Use of UniV4,1,N/A,N/A
+https://ethglobal.com/events/istanbul,Flashbots,10000,Best Intent UniSUAVE Design and PoC,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Flashbots,10000,Best PFOF Design and PoC,1500,N/A,N/A
+https://ethglobal.com/events/istanbul,Flashbots,10000,Best UniSUAVE LVR Design and PoC,1500,N/A,1st Place: $800 | 2nd Place: $500 | 3rd Place: $200
+https://ethglobal.com/events/istanbul,Axiom,10000,Best overall use of Axiom,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Axiom,10000,Most Collaborative,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Axiom,10000,Best use of Axiom for on-chain identity and reputation,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Axiom,10000,Best use of Axiom for DeFi,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Axiom,10000,Best use of Axiom for on-chain incentivization,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Waku,10000,Best Overall use of Waku,4000,N/A,N/A
+https://ethglobal.com/events/istanbul,Waku,10000,Best network state goods using Waku,1500,N/A,N/A
+https://ethglobal.com/events/istanbul,Waku,10000,Most creative use of Waku,1500,N/A,N/A
+https://ethglobal.com/events/istanbul,Waku,10000,Best privacy-focused project using Waku,1500,N/A,N/A
+https://ethglobal.com/events/istanbul,Waku,10000,Best game or marketplace using Waku,1500,N/A,N/A
+https://ethglobal.com/events/istanbul,CoW Protocol,10000,Creative CoW Hooks,4000,N/A,"1st Place: $2,750 | 2nd Place: $1,250 | 3rd Place: $500"
+https://ethglobal.com/events/istanbul,CoW Protocol,10000,CoW Programmatic Framework,4000,N/A,"1st Place: $2,750 | 2nd Place: $1,250 | 3rd Place: $500"
+https://ethglobal.com/events/istanbul,CoW Protocol,10000,Wonderful Widgets,1000,N/A,N/A
+https://ethglobal.com/events/istanbul,CoW Protocol,10000,MEV Blocker Madness,400,N/A,N/A
+https://ethglobal.com/events/istanbul,Hyperlane,10000,Best Use of Hyperlane,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,Hyperlane,10000,Best Hyperlane Infrastructure,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Hyperlane,10000,Best Use of Hyperlane Hooks,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Hyperlane,10000,Best Interchain Application,3000,N/A,"1st Place: $2,000 | 2nd Place: $1,000 x 4"
+https://ethglobal.com/events/istanbul,Mantle,10000,Best DeFi Project,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Mantle,10000,"Best NFT, Social, or Gaming Project",2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Mantle,10000,Best UX,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Mantle,10000,Best Infrastructure & Tooling Project,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Push Protocol,10000,Merhaba Push Protocol,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Push Protocol,10000,Turkish Ice Cream - Creative Bounty,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Push Protocol,10000,Push Chat Conditional Gating Integration for DApps,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Push Protocol,10000,Cappadocia Hot air Balloon,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,ENS,10000,Best Use of EVM Gateway,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,ENS,10000,Best Use of Thorin,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,ENS,10000,Honorary Mention,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,ENS,10000,Best use of subname,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,API3,10000,Best use of dAPI price feeds,4000,N/A,N/A
+https://ethglobal.com/events/istanbul,API3,10000,Best use of API3 QRNG,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,API3,10000,API3 Runners up,3000,N/A,N/A
+https://ethglobal.com/events/istanbul,Aave Grants DAO,10000,Best GHO stablecoin integration,5000,N/A,"1st Place: $3,000 | 2nd Place: $2,000"
+https://ethglobal.com/events/istanbul,Aave Grants DAO,10000,Best Aave DAO tooling,5000,N/A,"1st Place: $3,000 | 2nd Place: $2,000"
+https://ethglobal.com/events/istanbul,Chainlink,10000,Chainlink CCIP,4000,N/A,"Winner: $2,500 | Runner-up: $1,500"
+https://ethglobal.com/events/istanbul,Chainlink,10000,Chainlink Functions,4000,N/A,"Winner: $2,500 | Runner-up: $1,500"
+https://ethglobal.com/events/istanbul,Chainlink,10000,Other Chainlink Services,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gearbox,10000,Best use of Credit Accounts + GearBot intents,8000,N/A,"Genius Gearbot: $5,000 | Sensei's Favorite: $3,000"
+https://ethglobal.com/events/istanbul,Gearbox,10000,Upcoming Senpai,1000,N/A,N/A
+https://ethglobal.com/events/istanbul,Gearbox,10000,GearBot's Apprentice,1000,N/A,N/A
+https://ethglobal.com/events/istanbul,CELO,10000,Best dApps on Celo Blockchain,6000,N/A,"1st Place: $3,000 | 2nd Place: $2,000 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,CELO,10000,Best Mobile dApp on Celo,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,CELO,10000,Best dApp utilizing Account Abstraction or SocialConnect on Celo,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,ApeCoin DAO,10000,Best Consumer Use Case,5000,N/A,"1st Place: $3,000 | 2nd Place: $2,000"
+https://ethglobal.com/events/istanbul,ApeCoin DAO,10000,Most innovative,5000,N/A,"1st Place: $3,000 | 2nd Place: $2,000"
+https://ethglobal.com/events/istanbul,Celestia,10000,Modularizoor,8000,N/A,"🥇 Best Project: $2,000 x 2 | 2nd Place: $1,000 x 4 | 3rd Place: $500 | 3rd Place: $500 x 3"
+https://ethglobal.com/events/istanbul,Celestia,10000,Rock N Rollup Rumble,2000,N/A,"1st Place: $1,500 | 2nd Place: $500"
+https://ethglobal.com/events/istanbul,UNICEF Innovation,10000,Most creative use of Web3 to address climate change,6000,N/A,N/A
+https://ethglobal.com/events/istanbul,UNICEF Innovation,10000,Most novel solution solving for cryptocurrencies in cash assistance,4000,N/A,N/A
+https://ethglobal.com/events/istanbul,Base,10000,Build a Consumer Product,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Base,10000,Best use of Account Abstraction and Base Paymaster,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Starknet,10000,Madara's special prize,2500,N/A,N/A
+https://ethglobal.com/events/istanbul,Starknet,10000,Grand Prize,7500,N/A,"1st Place: $3,000 | 2nd Place: $2,000 | 3rd Place: $1,250 x 2"
+https://ethglobal.com/events/istanbul,Safe,10000,SAFE{CORE} PROTOCOL,5000,N/A,"1st Place: $2,000 | 2nd Place: $1,500 | 3rd Place: $1,000 | 3rd Place: $1,000 | 4th Place: $500 | 4th Place: $500 | 5th Place: $1,000"
+https://ethglobal.com/events/istanbul,Safe,10000,SAFE{CORE} ACCOUNT ABSTRACTION SDK,5000,N/A,"1st Place: $2,000 | 2nd Place: $1,500 | 3rd Place: $1,000 | 4th place: $500"
+https://ethglobal.com/events/istanbul,UMA,10000,Best use of UMA & Across,10000,N/A,"3rd Place: $1,000 x 3 | 1st Place: $5,000 | 2nd Place: $2,000 | 3rd Place: $1,000 x 3"
+https://ethglobal.com/events/istanbul,XDC Network,10000,Best Use or Extension of Fathom Protocol,10000,N/A,"1st Place: $4,000 | 2nd Place: $3,500 | 3rd Place: $2,500 | Runner-up: $1,000 x 2"
+https://ethglobal.com/events/istanbul,Cartesi,10000,Launch MVP locally or on Testnet/Mainnet,10000,N/A,"1st Place: $5,000 | 2nd Place: $3,000 | 3rd Place: $1,000 x 2"
+https://ethglobal.com/events/istanbul,NEAR Protocol,10000,Best Frontend Component Built with BOS,10000,N/A,"1st Place: $3,000 | 2nd Place: $2,000 x 3 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Aleo,10000,Grand Prize,10000,N/A,N/A
+https://ethglobal.com/events/istanbul,The Graph,7500,Best New Subgraph,3000,N/A,"🥇 Grand Prize: $2,000 | Runner-up: $1,000"
+https://ethglobal.com/events/istanbul,The Graph,7500,Best Use of Subgraph,2500,N/A,"🥇 Grand Prize: $1,700 | Runner-up: $800"
+https://ethglobal.com/events/istanbul,The Graph,7500,Best Use of Substreams,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Neon EVM,7000,Best Neon EVM use case,5500,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000 | 4th place: $500"
+https://ethglobal.com/events/istanbul,Neon EVM,7000,Most Transactions on Neon EVM,1500,N/A,"1st Place: $1,000 | 2nd Place: $500"
+https://ethglobal.com/events/istanbul,Aztec,5000,Best overall Noir application or library,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Aztec,5000,Best overall developer tool for the Noir ecosystem,2000,N/A,N/A
+https://ethglobal.com/events/istanbul,Aztec,5000,Best overall Aztec Sandbox dapp,1000,N/A,N/A
+https://ethglobal.com/events/istanbul,Curvegrid,5000,The Curvegrid Prize,5000,N/A,"1st Place: $2,000 | 2nd Place: $1,750 | 3rd Place: $1,250"
+https://ethglobal.com/events/istanbul,Certora,5000,Best formal specification of a project,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Arx,5000,Best HaLo Use,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $500 x 2"
+https://ethglobal.com/events/istanbul,Nouns DAO,5000,Best Public Goods,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/istanbul,Threshold Network,5000,Best use of Threshold,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Ethereum Foundation,5000,Build something with Fe,5000,N/A,N/A
+https://ethglobal.com/events/istanbul,Ethereum Attestation Service,5000,Best Use of Attestations,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Spark,20000,Spark,20000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Scroll,20000,Scroll,20000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Mask Network,10000,Mask Network,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Wormhole,10000,Wormhole,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,ApeCoin,10000,ApeCoin,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Mantle,10000,Mantle,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,UMA,10000,UMA,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Filecoin,10000,Filecoin,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Polygon,10000,Polygon,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Safe,10000,Safe,10000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Aztec,5000,Aztec,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Aztec,5000,Best overall Noir application or library,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Aztec,5000,Best overall Aztec Sandbox dapp,2000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Chainlink,5000,Chainlink,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,The Graph,5000,The Graph,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Push Protocol,5000,Push Protocol,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Compound Grants,5000,Compound Grants,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Axelar,5000,Axelar,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,XMTP,5000,XMTP,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Uniswap Foundation,5000,Uniswap Foundation,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Tableland,5000,Tableland,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Connext,5000,Connext,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Cometh,5000,Cometh,5000,N/A,N/A
+https://ethglobal.com/events/ethonline2023,Sismo,5000,Sismo,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Arbitrum,20000,Arbitrum,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Uniswap Foundation,20000,Uniswap Foundation,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Polygon,20000,Polygon,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,WalletConnect,20000,WalletConnect,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,IPFS / Filecoin,20000,"Filecoin, IPFS & more",20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,1inch,20000,1inch Network,20000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Scroll,16000,Scroll,16000,N/A,N/A
+https://ethglobal.com/events/newyork2023,UMA,10000,UMA,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Biconomy,10000,Biconomy,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Starknet,10000,Starknet,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Base,10000,Base,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Celo,10000,Celo,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,XMTP,10000,XMTP,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,MetaMask,10000,MetaMask & Linea,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Mantle,10000,Mantle,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,XDC Foundation,10000,XDC Foundation,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Axiom,10000,Axiom,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,ApeCoin,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Aave Grants DAO,10000,Aave Grants DAO,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Cartesi,10000,Cartesi,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Lens Protocol,10000,Lens Protocol,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Airstack,10000,Airstack,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Next.ID,10000,Next.ID / Mask Network,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,NEAR Protocol,10000,NEAR Protocol,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,UNLIMIT,10000,UNLIMIT,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,ENS,10000,ENS,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Neon EVM,10000,Neon EVM,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Safe,10000,Safe,10000,N/A,N/A
+https://ethglobal.com/events/newyork2023,The Graph,7500,The Graph,7500,N/A,N/A
+https://ethglobal.com/events/newyork2023,Axelar,5000,Axelar,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Sunscreen,5000,Sunscreen,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Unlock Protocol,5000,Unlock Protocol,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Alliance,5000,Alliance,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Privy,5000,Privy,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Mona,5000,Mona,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Nouns DAO,5000,Nouns DAO,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,QuickNode,5000,QuickNode,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Fuel Network,5000,Fuel,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Ethereum Foundation,5000,Ethereum Foundation,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Aleo,5000,Aleo,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Flashbots,5000,Flashbots,5000,N/A,N/A
+https://ethglobal.com/events/newyork2023,Compound Grants,5000,Compound Grants,5000,N/A,N/A
+https://ethglobal.com/events/superhack,Optimism,24000,Optimism,24000,N/A,N/A
+https://ethglobal.com/events/superhack,Base,20000,Base,20000,N/A,N/A
+https://ethglobal.com/events/superhack,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/superhack,Zora,20000,ZORA,20000,N/A,N/A
+https://ethglobal.com/events/superhack,Chainlink,10000,Chainlink,10000,N/A,N/A
+https://ethglobal.com/events/superhack,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/superhack,LayerZero,10000,LayerZero,10000,N/A,N/A
+https://ethglobal.com/events/superhack,Mode Network,10000,Mode,10000,N/A,N/A
+https://ethglobal.com/events/superhack,The Graph,5000,The Graph,5000,N/A,N/A
+https://ethglobal.com/events/superhack,Covalent,5000,Covalent,5000,N/A,N/A
+https://ethglobal.com/events/superhack,Safe,5000,Safe,5000,N/A,N/A
+https://ethglobal.com/events/superhack,Ethereum Attestation Service,5000,Ethereum Attestation Service,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,Mina Protocol,20000,Mina Protocol,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,MakerDAO,20000,MakerDAO,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,Polygon,20000,Polygon,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,Filecoin,20000,"Filecoin, IPFS & more",20000,N/A,N/A
+https://ethglobal.com/events/paris2023,WalletConnect,20000,WalletConnect,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,1inch Network,20000,1inch Network,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,MetaMask,20000,MetaMask & Linea,20000,N/A,N/A
+https://ethglobal.com/events/paris2023,Neon EVM,10000,Neon EVM,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Neon EVM,10000,Best Neon EVM use case,5000,N/A,"1st Place: $2,500 | 2nd Place: $1,500 | 3rd Place: $1,000"
+https://ethglobal.com/events/paris2023,Neon EVM,10000,Most Transactions on Neon EVM,1500,N/A,"1st Place: $1,000 | 2nd Place: $500"
+https://ethglobal.com/events/paris2023,Mantle,10000,Mantle,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Ethereum Foundation,10000,Ethereum Foundation,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,ApeCoin,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,NEAR Protocol,10000,NEAR,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Sismo,10000,Sismo,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Safe,10000,Safe,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Next.ID,10000,Next.ID & Mask Network,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,ZetaChain,10000,ZetaChain,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Chainlink,10000,Chainlink,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Ethereum Attestation Service,10000,EAS,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Biconomy,10000,Biconomy,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Push Protocol,10000,Push Protocol,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Airstack,10000,Airstack,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Starknet,10000,Starknet,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,UMA,10000,UMA,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Celo,10000,Celo,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,XMTP,10000,XMTP,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,zkSync,10000,zkSync,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,Cartesi,10000,Cartesi,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,zkBob,10000,zkBob,10000,N/A,N/A
+https://ethglobal.com/events/paris2023,The Graph,7500,The Graph,7500,N/A,N/A
+https://ethglobal.com/events/paris2023,Flashbots,5000,Flashbots,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,NounsDAO,5000,NounsDAO,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,Axelar,5000,Axelar,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,Dfns,5000,Dfns,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,Aragon,5000,Aragon,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,QuickNode,5000,QuickNode,5000,N/A,N/A
+https://ethglobal.com/events/paris2023,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Airstack,10000,Airstack,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Tokenbound,10000,Tokenbound & ERC-6551,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,UMA,10000,UMA,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Filecoin,10000,IPFS & Filecoin,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,NEAR Protocol,10000,NEAR Protocol,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Polygon,10000,Polygon,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Sismo,10000,Sismo,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,ApeCoin DAO,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,XDC Foundation,10000,XDC Foundation,10000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,DELV,7500,DELV,7500,N/A,N/A
+https://ethglobal.com/events/waterloo2023,The Graph,7500,The Graph,7500,N/A,N/A
+https://ethglobal.com/events/waterloo2023,XMTP,5000,XMTP,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,MakerDAO,5000,MakerDAO,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Quantstamp,5000,Quantstamp,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,QuickNode,5000,QuickNode,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,MetaMask,5000,MetaMask / Linea,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Compound Grants Program,5000,Compound Grants Program,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,unshETH.xyz,5000,unshETH,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Ethereum Attestation Service,5000,Ethereum Attestation Service,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Risc Zero,5000,Risc Zero,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Highlight,5000,Highlight,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,NounsDAO,5000,NounsDAO,5000,N/A,N/A
+https://ethglobal.com/events/waterloo2023,Unlock Protocol,5000,Unlock Protocol,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Filecoin,22000,Filecoin Virtual Machine,22000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Bacalhau,12000,Bacalhau,12000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,ApeCoin,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,IPFS,5000,IPFS,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,DataverseOS,5000,DataverseOS,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,libp2p,5000,libp2p,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Spheron,5000,Spheron,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,ENS,5000,ENS,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Push Protocol,5000,Push Protocol,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Consensus Lab,5000,InterPlanetary Consensus,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Huddle01,5000,Huddle01,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Livepeer,5000,Livepeer,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Polybase,5000,Polybase,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Tableland,5000,Tableland,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Saturn,5000,Filecoin Saturn,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Ceramic,5000,Ceramic,5000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Chainsafe,3500,ChainSafe Gaming SDK,3500,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Mona,3000,Mona,3000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,nft.storage,3000,NFT.storage and Web3.storage,3000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Estuary,3000,Filecoin Data Tools,3000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Lighthouse Storage,2500,Lighthouse Storage,2500,N/A,N/A
+https://ethglobal.com/events/hackfs2023,drand,2000,drand (distributed randomness),2000,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Beryx,1500,Beryx,1500,N/A,N/A
+https://ethglobal.com/events/hackfs2023,Fission,1000,Fission,1000,N/A,N/A
+https://ethglobal.com/events/autonomous,Optimism,10000,Optimism,10000,N/A,N/A
+https://ethglobal.com/events/autonomous,0xPARC,5000,0xPARC,5000,N/A,N/A
+https://ethglobal.com/events/autonomous,Lattice,5000,Lattice,5000,N/A,N/A
+https://ethglobal.com/events/autonomous,NFT.Storage,5000,NFT.Storage,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/lisbon,1inch Network,20000,1inch Network,20000,N/A,N/A
+https://ethglobal.com/events/lisbon,Polygon,20000,Polygon,20000,N/A,N/A
+https://ethglobal.com/events/lisbon,Optimism,20000,Optimism,20000,N/A,N/A
+https://ethglobal.com/events/lisbon,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/lisbon,ApeCoin,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,zkBob,10000,zkBob,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Safe,10000,Safe,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Airstack,10000,Airstack,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Ethereum Foundation,10000,Ethereum Foundation,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Cartesi,10000,Cartesi,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,UMA,10000,UMA,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,MetaMask,10000,MetaMask & Linea,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Filecoin & IPFS,10000,Filecoin Virtual Machine (FVM),10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Lens Protocol,10000,Lens Protocol,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Uniswap Foundation,10000,Uniswap Foundation,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,Aave Grants DAO,10000,Aave Grants DAO,10000,N/A,N/A
+https://ethglobal.com/events/lisbon,The Graph,7500,The Graph,7500,N/A,N/A
+https://ethglobal.com/events/lisbon,Fuel,7000,Fuel,7000,N/A,N/A
+https://ethglobal.com/events/lisbon,Sismo,5000,Sismo,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,Neon EVM,5000,Neon Foundation,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,Scroll,5000,Scroll,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,Chainlink,5000,Chainlink,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,NounsDAO,5000,Nouns DAO,5000,N/A,N/A
+https://ethglobal.com/events/lisbon,Mantle,5000,Mantle,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Worldcoin,20000,Worldcoin,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Polygon,20000,Polygon,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Ethereum Foundation,20000,Ethereum Foundation,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,1inch,20000,1inch Network,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Mina Protocol,20000,Mina Protocol,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Lens Protocol,20000,Lens Protocol,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,Taiko,20000,Taiko,20000,N/A,N/A
+https://ethglobal.com/events/tokyo,MetaMask,15000,MetaMask,15000,N/A,N/A
+https://ethglobal.com/events/tokyo,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,zkBob,10000,zkBob,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,IPFS & Filecoin,10000,Filecoin Virtual Machine (FVM),10000,N/A,N/A
+https://ethglobal.com/events/tokyo,Celo,10000,Celo,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,ApeCoin,10000,ApeCoin DAO,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,UMA & Across,10000,UMA & Across,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,Airstack,10000,Airstack,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,Safe,10000,Safe,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,Aave Grants DAO,10000,Aave Grants DAO,10000,N/A,N/A
+https://ethglobal.com/events/tokyo,The Graph,7500,The Graph,7500,N/A,N/A
+https://ethglobal.com/events/tokyo,Bunzz,5000,Bunzz,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Reazon Holdings,5000,Reazon Holdings,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,NETH,5000,Wellbeing NETH Prize -,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Scroll,5000,Scroll,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Quantstamp,5000,Quantstamp,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Livepeer,5000,Livepeer,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Sismo,5000,Sismo,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Uniswap Foundation,5000,Uniswap Foundation,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Huddle01,5000,Huddle01,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Intmax,5000,Intmax,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,QuickNode,5000,QuickNode,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Superfluid,5000,Superfluid,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Push Protocol,5000,Push Protocol,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Secured Finance,5000,Secured Finance,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Lit Protocol,5000,Lit Protocol,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Mantle,5000,Mantle,5000,N/A,N/A
+https://ethglobal.com/events/tokyo,Curvegrid,2000,Curvegrid,2000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Optimism,25000,Optimism,25000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Gnosis Chain,20000,Gnosis Chain,20000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Scroll,20000,Scroll,20000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Polygon,20000,Polygon,20000,N/A,N/A
+https://ethglobal.com/events/scaling2023,UMA,10000,UMA & Across,10000,N/A,N/A
+https://ethglobal.com/events/scaling2023,IPFS & Filecoin,10000,Filecoin Virtual Machine (FVM),10000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Hyperlane,10000,Hyperlane,10000,N/A,N/A
+https://ethglobal.com/events/scaling2023,ApeCoin,10000,ApeCoin,10000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Fuel,7000,Fuel Labs,7000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Taiko,5000,Taiko,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,The Graph,5000,The Graph,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Intmax,5000,Intmax,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Mantle,5000,Mantle,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Push Protocol,5000,Push Protocol,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,zkSync,5000,zkSync Era | Account Abstraction & Security,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Polybase,5000,Polybase,5000,N/A,N/A
+https://ethglobal.com/events/scaling2023,Connext,5000,Connext,5000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin,101010,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin FVM Spaceships,30000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin FVM Jetpacks,17010,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin DeFi Rockets,18000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin Discovery tools,18000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Filecoin,30000,Filecoin Docking Modules,18000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Lighthouse,2500,Lighthouse,2500,N/A,N/A
+https://ethglobal.com/events/spacewarp,Livepeer,2000,Livepeer,2000,N/A,N/A
+https://ethglobal.com/events/spacewarp,"GRAPHENE 01, INC.",2000,Huddle01,2000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Push Protocol,2000,Push Protocol,2000,N/A,N/A
+https://ethglobal.com/events/spacewarp,Spheron,2000,Spheron Network,2000,N/A,N/A

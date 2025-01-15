@@ -56,4 +56,5 @@ export default defineConfig({
       'mini-svg-data-uri',
     ],
   },
+  assetsInclude: ['**/*.csv'],
 })

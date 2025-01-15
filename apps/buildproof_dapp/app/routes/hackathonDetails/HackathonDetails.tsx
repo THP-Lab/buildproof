@@ -5,8 +5,46 @@ import {
   Icon,
   IconName,
 } from '@0xintuition/buildproof_ui';
+import csvData from '../../assets/data/ethglobal_prizes_clean.csv';
+
+interface PrizeData {
+  event_url: string;
+  partner_name: string;
+  total_partner_amount: number;
+  prize_title: string;
+  prize_amount: number;
+  description: string;
+  prize_breakdown: string;
+}
 
 export function HackathonDetails() {
+  const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
+  const [prizes, setPrizes] = React.useState<PrizeData[]>([]);
+
+  React.useEffect(() => {
+    // Parse CSV data when component mounts
+    const parsedData = csvData
+      .split('\n')
+      .slice(1) // Skip header row
+      .filter(line => line.trim() !== '')
+      .map(line => {
+        const [event_url, partner_name, total_partner_amount, prize_title, prize_amount, description, prize_breakdown] = line.split(',');
+        return {
+          event_url,
+          partner_name,
+          total_partner_amount: Number(total_partner_amount),
+          prize_title,
+          prize_amount: Number(prize_amount),
+          description: description === 'N/A' ? '' : description,
+          prize_breakdown: prize_breakdown === 'N/A' ? '' : prize_breakdown,
+        };
+      });
+
+    // Group by event URL
+    const eventPrizes = parsedData.filter(prize => prize.event_url === selectedEvent);
+    setPrizes(eventPrizes);
+  }, [selectedEvent]);
+
   return (
     <div className="p-6 w-full max-w-3xl mx-auto">
       <div className="space-y-6">
@@ -20,89 +58,73 @@ export function HackathonDetails() {
           </Button>
         </div>
 
+        {/* Event Selection */}
         <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
           <Text variant="h3" weight="semibold" className="mb-2">
-            Partner Information
+            Select Event
           </Text>
-          <div className="space-y-4">
-            <div>
-              <Text variant="body" weight="medium" className="text-muted-foreground">
-                Partner Name
-              </Text>
-              <Text variant="body">Example Partner</Text>
-            </div>
-          </div>
+          <select
+            className="form-select theme-border rounded-md p-2"
+            onChange={(e) => setSelectedEvent(e.target.value)}
+            value={selectedEvent || ''}
+          >
+            <option value="">Select an event...</option>
+            {Array.from(new Set(csvData.split('\n').slice(1).map(line => line.split(',')[0])))
+              .filter(Boolean)
+              .map((eventUrl) => (
+                <option key={eventUrl} value={eventUrl}>
+                  {eventUrl.split('/').pop()}
+                </option>
+              ))}
+          </select>
         </div>
 
-        <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
-          <Text variant="h3" weight="semibold" className="mb-2">
-            Hackathon Information
-          </Text>
-          <div className="space-y-4">
-            <div>
-              <Text variant="body" weight="medium" className="text-muted-foreground">
-                Title
+        {selectedEvent && prizes.length > 0 && (
+          <>
+            {/* Prize Distribution */}
+            <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
+              <Text variant="h3" weight="semibold" className="mb-2">
+                Prize Distribution
               </Text>
-              <Text variant="body">Example Hackathon</Text>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 gap-4">
+                  {prizes.map((prize, index) => (
+                    <div key={index} className="p-4 bg-muted rounded-lg">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <Text variant="body" weight="medium">
+                            {prize.partner_name}
+                          </Text>
+                          <Text variant="body" className="text-muted-foreground">
+                            {prize.prize_title}
+                          </Text>
+                        </div>
+                        <Text variant="h4" className="text-success">
+                          ${prize.prize_amount.toLocaleString()}
+                        </Text>
+                      </div>
+                      {prize.prize_breakdown && (
+                        <Text variant="small" className="text-muted-foreground">
+                          {prize.prize_breakdown}
+                        </Text>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div>
-              <Text variant="body" weight="medium" className="text-muted-foreground">
-                Description
+            {/* Total Prize Pool */}
+            <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
+              <Text variant="h3" weight="semibold" className="mb-2">
+                Total Prize Pool
               </Text>
-              <Text variant="body" className="whitespace-pre-wrap">
-                Example description of the hackathon...
+              <Text variant="h4" className="text-success">
+                ${prizes.reduce((sum, prize) => sum + prize.prize_amount, 0).toLocaleString()}
               </Text>
             </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Text variant="body" weight="medium" className="text-muted-foreground">
-                  Start Date
-                </Text>
-                <Text variant="body">2024-03-20</Text>
-              </div>
-              <div>
-                <Text variant="body" weight="medium" className="text-muted-foreground">
-                  End Date
-                </Text>
-                <Text variant="body">2024-04-20</Text>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
-          <Text variant="h3" weight="semibold" className="mb-2">
-            Prize Distribution
-          </Text>
-          <div className="space-y-4">
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <Text variant="body" weight="medium" className="text-muted-foreground">
-                  Total Prize Pool
-                </Text>
-                <Text variant="h4" className="text-success">
-                  $10,000
-                </Text>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                <Text variant="body" weight="medium">First Place</Text>
-                <Text variant="body" className="text-success">$5,000</Text>
-              </div>
-              <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                <Text variant="body" weight="medium">Second Place</Text>
-                <Text variant="body" className="text-success">$3,000</Text>
-              </div>
-              <div className="flex justify-between items-center p-3 bg-muted rounded-lg">
-                <Text variant="body" weight="medium">Third Place</Text>
-                <Text variant="body" className="text-success">$2,000</Text>
-              </div>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );
