@@ -1,4 +1,4 @@
-import { Text } from '@0xintuition/1ui'
+import { Text } from '@0xintuition/buildproof_ui'
 import {
   fetcher,
   GetAtomsDocument,

@@ -1,4 +1,4 @@
-import { isTheme, Theme } from '@0xintuition/1ui'
+import { isTheme, Theme } from '@0xintuition/buildproof_ui'
 
 import { useHints } from '@lib/utils/client-hints'
 import { useRequestInfo } from '@lib/utils/request-info'

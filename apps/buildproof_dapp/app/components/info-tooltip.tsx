@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@0xintuition/1ui'
+} from '@0xintuition/buildproof_ui'
 
 export const InfoTooltip = ({
   title,

@@ -1,10 +1,11 @@
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@0xintuition/1ui'
+} from '@0xintuition/buildproof_ui'
 
 export interface SortOption<T> {
   value: string

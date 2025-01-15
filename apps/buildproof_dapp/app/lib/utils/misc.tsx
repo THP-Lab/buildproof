@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Icon, IconName, Text, Theme } from '@0xintuition/1ui'
+import { Icon, IconName, Text, Theme } from '@0xintuition/buildproof_ui'
 
 import { SubmitFunction } from '@remix-run/react'
 import { clsx, type ClassValue } from 'clsx'

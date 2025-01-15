@@ -1,4 +1,4 @@
-import { Button, Text } from '@0xintuition/1ui'
+import { Button, Text } from '@0xintuition/buildproof_ui'
 
 import derpFace1 from '@assets/derp-face-1.png'
 import derpFace2 from '@assets/derp-face-2.png'

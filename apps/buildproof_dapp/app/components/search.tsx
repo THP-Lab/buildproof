@@ -1,4 +1,13 @@
-import { Input } from '@0xintuition/1ui'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  Input,
+} from '@0xintuition/buildproof_ui'
 
 interface SearchProps {
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void
