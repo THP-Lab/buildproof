@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ButtonVariant, ButtonSize, Input, Textarea } from '@0xintuition/buildproof_ui';
-import PrizeDistribution from '../../components/prizeDistribution.tsx';
-import { Prize } from '../../components/prizeDistribution.tsx';
+import PrizeDistribution from '../../components/prize-distribution.tsx';
+import { Prize } from '../../components/prize-distribution.tsx';
 
 
 const SubmitHackathon = () => {
@@ -23,7 +23,7 @@ const SubmitHackathon = () => {
   const addPrize = () => {
     const prizeOrder = ['Second Place', 'Third Place', 'Other'];
     const nextPrize = prizeOrder[prizes.length - 1] || 'Other';
-    setPrizes([...prizes, { name: nextPrize, amount: 0}]);
+    setPrizes([...prizes, { name: nextPrize, amount: 0 }]);
   };
 
   const removePrize = (index: number) => {
@@ -70,12 +70,12 @@ const SubmitHackathon = () => {
 
   // Ajoute cette fonction pour vérifier si le formulaire est valide
   const isFormValid = () => {
-    const isAllFieldsFilled = 
-      partnerName !== '' && 
-      hackathonTitle !== '' && 
-      description !== '' && 
-      startDate !== '' && 
-      endDate !== '' && 
+    const isAllFieldsFilled =
+      partnerName !== '' &&
+      hackathonTitle !== '' &&
+      description !== '' &&
+      startDate !== '' &&
+      endDate !== '' &&
       totalCashPrize > 0;
 
     const isTotalCorrect = totalPrizeAmount === totalCashPrize;
@@ -134,11 +134,11 @@ const SubmitHackathon = () => {
         endAdornment="$"
       />
       {prizes.map((prize, index) => (
-        <PrizeDistribution 
-          key={index} 
+        <PrizeDistribution
+          key={index}
           prize={prize}
-          index={index} 
-          removePrize={removePrize} 
+          index={index}
+          removePrize={removePrize}
           updatePrize={updatePrize}
           availableOptions={getAvailablePrizeOptions()}
           totalCashPrize={totalCashPrize || 0}
@@ -152,24 +152,24 @@ const SubmitHackathon = () => {
         )}
       </div>
       <div className="flex justify-between">
-      <Button 
-        variant={ButtonVariant.successOutline}
-        size={ButtonSize.md}
-        type="button" 
-        onClick={addPrize} 
-        className="px-4 py-2"
-    >
-        Add Prize
-    </Button>
-      <Button 
-        variant={ButtonVariant.accentOutline}
-        size={ButtonSize.md}
-        type="submit" 
-        disabled={!isFormValid()}
-        className="px-4 py-2"
-    >
-        Submit
-    </Button>
+        <Button
+          variant={ButtonVariant.successOutline}
+          size={ButtonSize.md}
+          type="button"
+          onClick={addPrize}
+          className="px-4 py-2"
+        >
+          Add Prize
+        </Button>
+        <Button
+          variant={ButtonVariant.accentOutline}
+          size={ButtonSize.md}
+          type="submit"
+          disabled={!isFormValid()}
+          className="px-4 py-2"
+        >
+          Submit
+        </Button>
       </div>
     </form>
   );
