@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Button, ButtonVariant, ButtonSize, Input, Textarea, Select, SelectItem, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel } from '../../../../../packages/buildproof_ui/src/components';
-import PrizeDistribution from '../../components/prizeDistribution.tsx';
-import { Prize } from '../../components/prizeDistribution.tsx';
+import React, { useState } from 'react';
+import { Button, ButtonVariant, ButtonSize, Input, Textarea } from '@0xintuition/buildproof_ui';
+import PrizeDistribution from '../../components/prize-distribution.tsx';
+import { Prize } from '../../components/prize-distribution.tsx';
 
 
 const SubmitHackathon = () => {
@@ -21,7 +21,7 @@ const SubmitHackathon = () => {
   const addPrize = () => {
     const prizeOrder = ['Second Place', 'Third Place', 'Other'];
     const nextPrize = prizeOrder[prizes.length - 1] || 'Other';
-    setPrizes([...prizes, { name: nextPrize, amount: 0}]);
+    setPrizes([...prizes, { name: nextPrize, amount: 0 }]);
   };
 
   const removePrize = (index: number) => {
@@ -52,6 +52,37 @@ const SubmitHackathon = () => {
   const getAvailablePrizeOptions = () => {
     const usedPrizes = prizes.map(prize => prize.name);
     return prizeOptions.filter(option => option.value === 'other' || !usedPrizes.includes(option.value));
+  };
+
+  const updatePrize = (index: number, updatedPrize: Prize) => {
+    const newPrizes = [...prizes];
+    newPrizes[index] = updatedPrize;
+    setPrizes(newPrizes);
+  };
+
+  const handleTotalCashPrizeChange = (value: number) => {
+    setTotalCashPrize(value);
+    // Recalcule les pourcentages pour tous les prix
+    const updatedPrizes = prizes.map(prize => ({
+      ...prize,
+      percent: value > 0 ? (prize.amount / value) * 100 : 0
+    }));
+    setPrizes(updatedPrizes);
+  };
+
+  // Ajoute cette fonction pour vérifier si le formulaire est valide
+  const isFormValid = () => {
+    const isAllFieldsFilled =
+      partnerName !== '' &&
+      hackathonTitle !== '' &&
+      description !== '' &&
+      startDate !== '' &&
+      endDate !== '' &&
+      totalCashPrize > 0;
+
+    const isTotalCorrect = totalPrizeAmount === totalCashPrize;
+
+    return isAllFieldsFilled && isTotalCorrect;
   };
 
   return (
@@ -105,17 +136,12 @@ const SubmitHackathon = () => {
         endAdornment="$"
       />
       {prizes.map((prize, index) => (
-        <PrizeDistribution 
-          key={index} 
+        <PrizeDistribution
+          key={index}
           prize={prize}
-          prizesNumber={prizes.length}
-          index={index} 
-          removePrize={removePrize} 
-          updatePrize={(index, updatedPrize) => {
-            const newPrizes = [...prizes];
-            newPrizes[index] = updatedPrize;
-            setPrizes(newPrizes);
-          }}
+          index={index}
+          removePrize={removePrize}
+          updatePrize={updatePrize}
           availableOptions={getAvailablePrizeOptions()}
           totalCashPrize={totalCashPrize || 0}
         />
@@ -126,24 +152,24 @@ const SubmitHackathon = () => {
         )}
       </div>
       <div className="flex justify-between">
-      <Button 
-        variant={ButtonVariant.successOutline}
-        size={ButtonSize.md}
-        type="button" 
-        onClick={addPrize} 
-        className="px-4 py-2"
-    >
-        Add Prize
-    </Button>
-      <Button 
-        variant={ButtonVariant.accentOutline}
-        size={ButtonSize.md}
-        type="submit" 
-        disabled={totalPrizeAmount > totalCashPrize} 
-        className="px-4 py-2"
-    >
-        Submit
-    </Button>
+        <Button
+          variant={ButtonVariant.successOutline}
+          size={ButtonSize.md}
+          type="button"
+          onClick={addPrize}
+          className="px-4 py-2"
+        >
+          Add Prize
+        </Button>
+        <Button
+          variant={ButtonVariant.accentOutline}
+          size={ButtonSize.md}
+          type="submit"
+          disabled={!isFormValid()}
+          className="px-4 py-2"
+        >
+          Submit
+        </Button>
       </div>
     </form>
   );
