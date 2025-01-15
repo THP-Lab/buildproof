@@ -2,7 +2,7 @@ import { SidebarLayout, SidebarLayoutProvider, SidebarLayoutNav, SidebarLayoutNa
 import { Link } from '@remix-run/react'
 
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
-import { Home } from '../../pages/Home'
+import { Home } from '../home/Home'
 
 export default function App() {
   return (
