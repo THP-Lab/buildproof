@@ -5,7 +5,7 @@ import {
   Icon,
   IconName,
 } from '@0xintuition/buildproof_ui';
-import csvData from '../../assets/data/ethglobal_prizes_clean.csv';
+import rawCsvData from '../../assets/data/ethglobal_prizes_clean.csv?raw';
 
 interface PrizeData {
   event_url: string;
@@ -20,10 +20,24 @@ interface PrizeData {
 export function HackathonDetails() {
   const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
   const [prizes, setPrizes] = React.useState<PrizeData[]>([]);
+  const [events, setEvents] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    // Parse CSV data when component mounts
-    const parsedData = csvData
+    // Parse CSV data and extract unique events when component mounts
+    const lines = rawCsvData.split('\n').filter(line => line.trim());
+    const uniqueEvents = Array.from(new Set(
+      lines.slice(1) // Skip header
+        .map(line => line.split(',')[0])
+        .filter(Boolean)
+    ));
+    setEvents(uniqueEvents);
+  }, []);
+
+  React.useEffect(() => {
+    if (!selectedEvent) return;
+
+    // Parse CSV data when event is selected
+    const parsedData = rawCsvData
       .split('\n')
       .slice(1) // Skip header row
       .filter(line => line.trim() !== '')
@@ -40,10 +54,18 @@ export function HackathonDetails() {
         };
       });
 
-    // Group by event URL
+    // Filter prizes for selected event
     const eventPrizes = parsedData.filter(prize => prize.event_url === selectedEvent);
     setPrizes(eventPrizes);
   }, [selectedEvent]);
+
+  const formatEventName = (url: string) => {
+    const eventName = url.split('/').pop() || '';
+    return eventName
+      .replace(/([A-Z])/g, ' $1') // Add space before capital letters
+      .replace(/^\w/, c => c.toUpperCase()) // Capitalize first letter
+      .trim();
+  };
 
   return (
     <div className="p-6 w-full max-w-3xl mx-auto">
@@ -64,18 +86,16 @@ export function HackathonDetails() {
             Select Event
           </Text>
           <select
-            className="form-select theme-border rounded-md p-2"
+            className="form-select theme-border rounded-md p-2 bg-background text-foreground hover:cursor-pointer"
             onChange={(e) => setSelectedEvent(e.target.value)}
             value={selectedEvent || ''}
           >
-            <option value="">Select an event...</option>
-            {Array.from(new Set(csvData.split('\n').slice(1).map(line => line.split(',')[0])))
-              .filter(Boolean)
-              .map((eventUrl) => (
-                <option key={eventUrl} value={eventUrl}>
-                  {eventUrl.split('/').pop()}
-                </option>
-              ))}
+            <option value="" className="text-muted-foreground">Select an event...</option>
+            {events.map((eventUrl) => (
+              <option key={eventUrl} value={eventUrl} className="text-foreground">
+                {formatEventName(eventUrl)}
+              </option>
+            ))}
           </select>
         </div>
 
