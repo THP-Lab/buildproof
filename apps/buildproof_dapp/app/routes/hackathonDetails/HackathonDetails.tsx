@@ -18,31 +18,45 @@ interface PrizeData {
 }
 
 export function HackathonDetails() {
-  const [selectedEvent, setSelectedEvent] = React.useState<string | null>(null);
   const [prizes, setPrizes] = React.useState<PrizeData[]>([]);
-  const [events, setEvents] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    // Parse CSV data and extract unique events when component mounts
-    const lines = rawCsvData.split('\n').filter(line => line.trim());
-    const uniqueEvents = Array.from(new Set(
-      lines.slice(1) // Skip header
-        .map(line => line.split(',')[0])
-        .filter(Boolean)
-    ));
-    setEvents(uniqueEvents);
-  }, []);
-
-  React.useEffect(() => {
-    if (!selectedEvent) return;
-
-    // Parse CSV data when event is selected
+    // Parse CSV data when component mounts
     const parsedData = rawCsvData
       .split('\n')
       .slice(1) // Skip header row
       .filter(line => line.trim() !== '')
       .map(line => {
-        const [event_url, partner_name, total_partner_amount, prize_title, prize_amount, description, prize_breakdown] = line.split(',');
+        // Use a more robust CSV parsing approach
+        let values = [];
+        let currentValue = '';
+        let insideQuotes = false;
+        
+        for (let char of line) {
+          if (char === '"') {
+            insideQuotes = !insideQuotes;
+          } else if (char === ',' && !insideQuotes) {
+            values.push(currentValue.trim());
+            currentValue = '';
+          } else {
+            currentValue += char;
+          }
+        }
+        values.push(currentValue.trim());
+
+        const [event_url, partner_name, total_partner_amount, prize_title, prize_amount, description, prize_breakdown] = values;
+
+        // Format prize breakdown to ensure proper number formatting
+        let formattedPrizeBreakdown = prize_breakdown;
+        if (prize_breakdown !== 'N/A') {
+          formattedPrizeBreakdown = prize_breakdown
+            .replace(/"/g, '')
+            .replace(/\$(\d+),?(\d+)?/g, (match, p1, p2) => {
+              const amount = p2 ? `${p1}${p2}` : p1;
+              return `$${Number(amount).toLocaleString()}`;
+            });
+        }
+
         return {
           event_url,
           partner_name,
@@ -50,22 +64,12 @@ export function HackathonDetails() {
           prize_title,
           prize_amount: Number(prize_amount),
           description: description === 'N/A' ? '' : description,
-          prize_breakdown: prize_breakdown === 'N/A' ? '' : prize_breakdown,
+          prize_breakdown: formattedPrizeBreakdown === 'N/A' ? '' : formattedPrizeBreakdown,
         };
       });
 
-    // Filter prizes for selected event
-    const eventPrizes = parsedData.filter(prize => prize.event_url === selectedEvent);
-    setPrizes(eventPrizes);
-  }, [selectedEvent]);
-
-  const formatEventName = (url: string) => {
-    const eventName = url.split('/').pop() || '';
-    return eventName
-      .replace(/([A-Z])/g, ' $1') // Add space before capital letters
-      .replace(/^\w/, c => c.toUpperCase()) // Capitalize first letter
-      .trim();
-  };
+    setPrizes(parsedData);
+  }, []);
 
   return (
     <div className="p-6 w-full max-w-3xl mx-auto">
@@ -80,71 +84,70 @@ export function HackathonDetails() {
           </Button>
         </div>
 
-        {/* Event Selection */}
+        {/* Prize Distribution */}
         <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
           <Text variant="h3" weight="semibold" className="mb-2">
-            Select Event
+            Prize Distribution
           </Text>
-          <select
-            className="form-select theme-border rounded-md p-2 bg-background text-foreground hover:cursor-pointer"
-            onChange={(e) => setSelectedEvent(e.target.value)}
-            value={selectedEvent || ''}
-          >
-            <option value="" className="text-muted-foreground">Select an event...</option>
-            {events.map((eventUrl) => (
-              <option key={eventUrl} value={eventUrl} className="text-foreground">
-                {formatEventName(eventUrl)}
-              </option>
-            ))}
-          </select>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-4">
+              {prizes.map((prize, index) => (
+                <div key={index} className="p-6 bg-muted rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                  {/* Event Name */}
+                  <Text variant="small" className="text-muted-foreground mb-2">
+                    {prize.event_url.split('/').pop()}
+                  </Text>
+
+                  {/* Header: Partner Name and Prize Amount */}
+                  <div className="flex justify-between items-start mb-4">
+                    <Text variant="h4" weight="semibold" className="text-primary">
+                      {prize.partner_name}
+                    </Text>
+                    <Text variant="h4" className="text-success font-mono">
+                      ${prize.prize_amount.toLocaleString()}
+                    </Text>
+                  </div>
+
+                  {/* Prize Title or Description */}
+                  <Text variant="body" className="mb-3 text-foreground">
+                    {prize.prize_title || prize.description || 'No description available'}
+                  </Text>
+
+                  {/* Prize Breakdown */}
+                  {prize.prize_breakdown && (
+                    <div className="mt-4 space-y-2">
+                      <Text variant="small" weight="medium" className="text-muted-foreground mb-2">
+                        Prize Distribution:
+                      </Text>
+                      {prize.prize_breakdown.split('|').map((breakdown, idx) => {
+                        const cleanBreakdown = breakdown.trim();
+                        if (!cleanBreakdown) return null;
+                        return (
+                          <div key={idx} className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-primary opacity-75" />
+                            <Text variant="small" className="text-muted-foreground">
+                              {cleanBreakdown}
+                            </Text>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {selectedEvent && prizes.length > 0 && (
-          <>
-            {/* Prize Distribution */}
-            <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
-              <Text variant="h3" weight="semibold" className="mb-2">
-                Prize Distribution
-              </Text>
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 gap-4">
-                  {prizes.map((prize, index) => (
-                    <div key={index} className="p-4 bg-muted rounded-lg">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <Text variant="body" weight="medium">
-                            {prize.partner_name}
-                          </Text>
-                          <Text variant="body" className="text-muted-foreground">
-                            {prize.prize_title}
-                          </Text>
-                        </div>
-                        <Text variant="h4" className="text-success">
-                          ${prize.prize_amount.toLocaleString()}
-                        </Text>
-                      </div>
-                      {prize.prize_breakdown && (
-                        <Text variant="small" className="text-muted-foreground">
-                          {prize.prize_breakdown}
-                        </Text>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Total Prize Pool */}
-            <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
-              <Text variant="h3" weight="semibold" className="mb-2">
-                Total Prize Pool
-              </Text>
-              <Text variant="h4" className="text-success">
-                ${prizes.reduce((sum, prize) => sum + prize.prize_amount, 0).toLocaleString()}
-              </Text>
-            </div>
-          </>
-        )}
+        {/* Total Prize Pool */}
+        <div className="flex flex-col gap-4 theme-border rounded-lg p-6">
+          <Text variant="h3" weight="semibold" className="mb-2">
+            Total Prize Pool
+          </Text>
+          <Text variant="h4" className="text-success">
+            ${prizes.reduce((sum, prize) => sum + prize.prize_amount, 0).toLocaleString()}
+          </Text>
+        </div>
       </div>
     </div>
   );
