@@ -34,8 +34,8 @@ export default function App() {
             </Link>
             {authenticated && (
               <>
-                <Link to="/app/hackathons">
-                  <SidebarNavItem iconName={IconName.medal} label="Hackathons" />
+                <Link to="/app/submit-project">
+                  <SidebarNavItem iconName={IconName.medal} label="Submit Project" />
                 </Link>
                 <Link to="/app/profile">
                   <SidebarNavItem iconName={IconName.personCircle} label="Profile" />
@@ -48,15 +48,7 @@ export default function App() {
           </SidebarLayoutNavBody>
         </SidebarLayoutNav>
         <SidebarLayoutContent>
-          {authenticated ? (
-            <Home />
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full">
-              <h1 className="text-2xl font-bold mb-4">Welcome to BuildProof</h1>
-              <p className="text-gray-500 mb-8">Connect your wallet to get started</p>
-              <AuthButton />
-            </div>
-          )}
+          <Home />
         </SidebarLayoutContent>
       </SidebarLayout>
     </SidebarLayoutProvider>
