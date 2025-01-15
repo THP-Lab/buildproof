@@ -21,7 +21,7 @@ export const BasicUsage: Story = {
     endDate: '10/01/2023',
     winners: ['John', 'Jane'],
     isLiked: false,
-    status: 'completed',
+    status: 'past',
   },
 };
 
@@ -55,7 +55,7 @@ export const Ongoing: Story = {
   },
 };
 
-export const Completed: Story = {
+export const Past: Story = {
   args: {
     title: 'Past Hackathon',
     description: 'This hackathon project is currently in progress.',
