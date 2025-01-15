@@ -61,7 +61,7 @@ const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
               max={100}
               min={-100}
               step={1}
-              onValueChange={(value) => handleValueChange(slider.onChange, slider.id)(value)}
+              onValueChange={(value: number[]) => handleValueChange(slider.onChange, slider.id)(value)}
             >
               <SliderPrimitive.Track className="relative h-[6px] grow rounded-full">
                 <div className="absolute w-full h-full rounded-full bg-border/20" />
