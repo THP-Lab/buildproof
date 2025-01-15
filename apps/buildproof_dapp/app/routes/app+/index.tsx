@@ -17,7 +17,7 @@ export default function App() {
     )
   }
 
-  return (
+return (
     <SidebarLayoutProvider>
       <SidebarLayout>
         <SidebarLayoutNav>
@@ -54,3 +54,4 @@ export default function App() {
     </SidebarLayoutProvider>
   )
 }
+
