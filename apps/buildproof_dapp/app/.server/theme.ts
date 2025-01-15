@@ -1,4 +1,4 @@
-import { Theme, themesList } from '@0xintuition/1ui'
+import { Theme, themesList } from '@0xintuition/buildproof_ui'
 
 import * as cookie from 'cookie'
 

@@ -11,7 +11,7 @@ import {
   PaginationPrevious,
   PaginationRowSelection,
   PaginationSummary,
-} from '@0xintuition/1ui'
+} from '@0xintuition/buildproof_ui'
 
 interface PaginationComponentProps {
   totalEntries: number
