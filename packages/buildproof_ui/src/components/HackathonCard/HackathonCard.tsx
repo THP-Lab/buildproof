@@ -12,7 +12,7 @@ interface HackathonCardProps {
   winners?: string[];
   isLiked?: boolean;
   onLikeToggle?: () => void;
-  status: 'upcoming' | 'ongoing' | 'completed';
+  status: 'upcoming' | 'ongoing' | 'past';
 }
 
 const HackathonCard: React.FC<HackathonCardProps> = ({
@@ -38,7 +38,7 @@ const HackathonCard: React.FC<HackathonCardProps> = ({
   const statusStyles = {
     upcoming: 'text-blue-500',
     ongoing: 'text-green-500',
-    completed: 'text-gray-500',
+    past: 'text-gray-500',
   };
 
   return (
