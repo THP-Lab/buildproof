@@ -37,6 +37,9 @@ export default function App() {
                 <Link to="/app/submit-project">
                   <SidebarNavItem iconName={IconName.medal} label="Submit Project" />
                 </Link>
+                <Link to="/app/submit-hackathon">
+                  <SidebarNavItem iconName={IconName.medal} label="Submit Hackathon" />
+                </Link>
                 <Link to="/app/profile">
                   <SidebarNavItem iconName={IconName.personCircle} label="Profile" />
                 </Link>
