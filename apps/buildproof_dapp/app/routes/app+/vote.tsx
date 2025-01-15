@@ -1,28 +1,28 @@
 import { useState } from 'react';
-import { 
+import {
     ClaimRow,
     Claim,
     SegmentedControl,
     SegmentedControlItem,
     EmptyStateCard,
-    Pagination, 
-    PaginationContent, 
-    PaginationItem, 
-    PaginationNext, 
-    PaginationPrevious, 
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious,
     PaginationSummary,
     PaginationRowSelection,
     PaginationPageCounter,
     PaginationFirst,
     PaginationLast,
     ClaimPosition
-} from '@0xintuition/buildproof-ui';
+} from '@0xintuition/buildproof_ui';
 
 const VotingPage = () => {
     const [selectedTab, setSelectedTab] = useState('voting');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    
+
     // Calculer les indices pour la pagination
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
@@ -120,49 +120,49 @@ const VotingPage = () => {
                         />
                     </ClaimRow>
                 ))}
-                        </div>
+            </div>
 
             <Pagination className="flex w-[800px] justify-between">
                 <PaginationSummary totalEntries={data.length} label="claims" />
                 <div className="flex">
-                    <PaginationRowSelection 
-                        defaultValue={rowsPerPage.toString()} 
+                    <PaginationRowSelection
+                        defaultValue={rowsPerPage.toString()}
                         onValueChange={(value) => setRowsPerPage(Number(value))}
                     />
                     <PaginationPageCounter currentPage={currentPage} totalPages={totalPages} />
                     <PaginationContent>
                         <PaginationItem>
-                            <PaginationFirst 
-                                href="#" 
+                            <PaginationFirst
+                                href="#"
                                 disabled={currentPage === 1}
                                 onClick={() => setCurrentPage(1)}
                             />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationPrevious 
-                                href="#" 
+                            <PaginationPrevious
+                                href="#"
                                 disabled={currentPage === 1}
                                 onClick={() => setCurrentPage(currentPage - 1)}
                             />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationNext 
-                                href="#" 
+                            <PaginationNext
+                                href="#"
                                 disabled={currentPage === totalPages}
                                 onClick={() => setCurrentPage(currentPage + 1)}
                             />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLast 
-                                href="#" 
+                            <PaginationLast
+                                href="#"
                                 disabled={currentPage === totalPages}
                                 onClick={() => setCurrentPage(totalPages)}
                             />
                         </PaginationItem>
                     </PaginationContent>
-                        </div>
+                </div>
             </Pagination>
-                    </div>
+        </div>
     );
 };
 
