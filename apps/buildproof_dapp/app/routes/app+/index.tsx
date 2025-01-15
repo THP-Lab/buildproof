@@ -1,7 +1,6 @@
 import { SidebarLayout, SidebarLayoutProvider, SidebarLayoutNav, SidebarLayoutNavBody, SidebarLayoutContent, SidebarLayoutNavHeader, SidebarLayoutNavHeaderButton, SidebarNavItem, IconName } from '@0xintuition/buildproof_ui'
 import { usePrivy } from '@privy-io/react-auth'
 import { Link } from '@remix-run/react'
-
 import { AuthButton } from '../../components/auth-button'
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
 import { Home } from '../../components/home/home'
@@ -20,6 +19,9 @@ export default function App() {
   return (
     <SidebarLayoutProvider>
       <SidebarLayout>
+        <div className="absolute top-4 right-4 z-50">
+          <AuthButton />
+        </div>
         <SidebarLayoutNav>
           <SidebarLayoutNavHeader>
             <SidebarLayoutNavHeaderButton
@@ -45,9 +47,6 @@ export default function App() {
                 </Link>
               </>
             )}
-            <div className="mt-auto pb-4">
-              <AuthButton />
-            </div>
           </SidebarLayoutNavBody>
         </SidebarLayoutNav>
         <SidebarLayoutContent>
