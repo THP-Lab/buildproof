@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, ButtonVariant, ButtonSize, Input, Textarea } from '@0xintuition/buildproof_ui';
+import { usePrivy } from '@privy-io/react-auth';
+import { useNavigate } from '@remix-run/react';
+import { useBatchCreateTriple } from '../../lib/hooks/useBatchCreateTriple';
 import PrizeDistribution from '../../components/prize-distribution.tsx';
-import { Prize } from '../../components/prize-distribution.tsx';
-import { usePrivy } from '@privy-io/react-auth'
-import { useNavigate } from '@remix-run/react'
+import type { Prize } from '../../components/prize-distribution.tsx';
 
 const SubmitHackathon = () => {
   const { authenticated, ready } = usePrivy()
@@ -17,6 +18,8 @@ const SubmitHackathon = () => {
   const [prizes, setPrizes] = useState<Prize[]>([
     { name: 'First Place', amount: 0, percent: 0 }
   ]);
+
+  const { writeContractAsync: createTriples } = useBatchCreateTriple();
 
   useEffect(() => {
     if (ready && !authenticated) {
@@ -32,9 +35,61 @@ const SubmitHackathon = () => {
     )
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique de soumission ici
+
+    // Création des triples principaux
+    const mainTriples = [
+      // Hackathon -> Total Cash Prize
+      {
+        subjectId: BigInt(1), // ID du hackathon
+        predicateId: BigInt(2), // ID du prédicat "total cash prize"
+        objectId: BigInt(totalCashPrize), // Valeur du prix total
+      },
+      // Hackathon -> Start Date
+      {
+        subjectId: BigInt(1), // ID du hackathon
+        predicateId: BigInt(3), // ID du prédicat "start on"
+        objectId: BigInt(new Date(startDate).getTime()), // Date de début
+      },
+      // Hackathon -> End Date
+      {
+        subjectId: BigInt(1), // ID du hackathon
+        predicateId: BigInt(4), // ID du prédicat "ends on"
+        objectId: BigInt(new Date(endDate).getTime()), // Date de fin
+      },
+    ];
+
+    // Création des triples pour les prix
+    const prizeTriples = prizes.map((prize, index) => ({
+      subjectId: BigInt(5 + index), // ID unique pour chaque place
+      predicateId: BigInt(6), // ID du prédicat "is"
+      objectId: BigInt(prize.amount), // Montant du prix
+    }));
+
+    // Création des triples de composition
+    const compositionTriples = prizes.map((prize, index) => ({
+      subjectId: BigInt(1), // ID du hackathon
+      predicateId: BigInt(7), // ID du prédicat "is composed of"
+      objectId: BigInt(5 + index), // ID de la place correspondante
+    }));
+
+    // Combinaison de tous les triples
+    const allTriples = [...mainTriples, ...prizeTriples, ...compositionTriples];
+
+    try {
+      // Création des triples via le contrat
+      // await createTriples({
+      //   args: [allTriples],
+      //   value: BigInt(0), // Valeur en ETH si nécessaire
+      // });
+
+      // Redirection vers la liste des hackathons
+      navigate('/app/hackathons');
+    } catch (error) {
+      console.error('Error creating triples:', error);
+      // Gérer l'erreur
+    }
   };
 
   const addPrize = () => {
@@ -187,6 +242,7 @@ const SubmitHackathon = () => {
         >
           Submit
         </Button>
+        {/* <button onClick={() => handleSubmit(e: React.FormEvent)}>test</button> */}
       </div>
     </form>
   );
