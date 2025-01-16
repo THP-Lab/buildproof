@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
 import { cn } from '../../styles'
 
@@ -15,12 +15,23 @@ interface MultiSliderProps extends React.HTMLAttributes<HTMLDivElement> {
   sliders: SliderItem[]
 }
 
-const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
+const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSliderProps) => {
+  const [sortedSliders, setSortedSliders] = useState(initialSliders)
+
+  // Mettre à jour les valeurs des sliders quand elles changent
+  useEffect(() => {
+    const updatedSliders = sortedSliders.map(sortedSlider => {
+      const updatedSlider = initialSliders.find(s => s.id === sortedSlider.id)
+      return updatedSlider || sortedSlider
+    })
+    setSortedSliders(updatedSliders)
+  }, [initialSliders])
+
   const handleValueChange = (onChange: (value: number) => void, currentId: string) => (value: number[]) => {
     const newValue = value[0]
     
     // Calculer la somme des valeurs absolues des autres sliders
-    const otherValuesSum = sliders
+    const otherValuesSum = sortedSliders
       .filter(slider => slider.id !== currentId)
       .reduce((sum, slider) => sum + Math.abs(slider.value), 0)
     
@@ -35,11 +46,26 @@ const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
     }
   }
 
+  const handlePointerUp = () => {
+    // Trier les sliders du plus grand au plus petit
+    const newSortedSliders = [...sortedSliders].sort((a, b) => {
+      // Si l'un est positif et l'autre négatif, le positif va en premier
+      if ((a.value >= 0 && b.value < 0) || (a.value < 0 && b.value >= 0)) {
+        return b.value - a.value
+      }
+      
+      // Si les deux sont positifs ou les deux sont négatifs,
+      // on trie par valeur absolue décroissante
+      return Math.abs(b.value) - Math.abs(a.value)
+    })
+    setSortedSliders(newSortedSliders)
+  }
+
   const formatEth = (eth: number) => eth.toFixed(3)
 
   return (
     <div className={cn('flex flex-col gap-4', className)} {...props}>
-      {sliders.map((slider) => (
+      {sortedSliders.map((slider) => (
         <div key={slider.id} className="flex items-center gap-4 w-full">
           <div className="flex items-center gap-2 min-w-[120px]">
             <span className="text-sm font-medium">{slider.projectName}</span>
@@ -62,6 +88,7 @@ const MultiSlider = ({ sliders, className, ...props }: MultiSliderProps) => {
               min={-100}
               step={1}
               onValueChange={(value: number[]) => handleValueChange(slider.onChange, slider.id)(value)}
+              onPointerUp={handlePointerUp}
             >
               <SliderPrimitive.Track className="relative h-[6px] grow rounded-full">
                 <div className="absolute w-full h-full rounded-full bg-border/20" />
