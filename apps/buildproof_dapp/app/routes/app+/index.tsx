@@ -34,6 +34,9 @@ export default function App() {
             <Link to="/app">
               <SidebarNavItem iconName={IconName.layoutGrid} label="Home" />
             </Link>
+            <Link to="/app/vote">
+              <SidebarNavItem iconName={IconName.medal} label="Vote" />
+            </Link>
             {authenticated && (
               <>
                 <Link to="/app/submit-project">
