@@ -96,7 +96,7 @@ const SubmitHackathon = () => {
             triple.predicateId,
             triple.objectId
           ],
-          value: BigInt(0)
+          value: BigInt(230000002000000)
         });
         console.log("Transaction hash:", hash);
       }
@@ -271,7 +271,7 @@ const SubmitHackathon = () => {
         <Input
           startAdornment="Total Cash Prize"
           type="number"
-          value={totalCashPrize}
+          value={totalCashPrize.toString()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleTotalCashPrizeChange(parseInt(e.target.value))}
           placeholder="Enter total cash prize amount"
           required

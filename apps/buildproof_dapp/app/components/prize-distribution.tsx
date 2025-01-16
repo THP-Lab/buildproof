@@ -61,7 +61,7 @@ const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, rem
         <Input
           startAdornment="Amount"
           type="number"
-          value={prize.amount}
+          value={prize.amount.toString()}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAmountChange(parseInt(e.target.value))}
            endAdornment="$"
         />
