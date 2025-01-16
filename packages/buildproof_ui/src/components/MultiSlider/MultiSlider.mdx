@@ -1,0 +1,39 @@
+import { Canvas, Controls, Meta, Source, Title } from '@storybook/blocks'
+import * as Stories from './MultiSlider.stories'
+
+<Meta of={Stories} />
+
+<Title />
+
+## A component with multiple sliders ranging from -100% to +100%
+
+The MultiSlider component allows you to display multiple sliders with:
+- A value range from -100% to +100%
+- A color code: red for negative values and blue for positive values
+- A label and a displayed value for each slider
+
+<Source
+  dark
+  language="tsx"
+  code={`
+import { MultiSlider } from './MultiSlider'
+
+const sliders = [
+  {
+    id: 'slider1',
+    label: 'Confidence',
+    value: 25,
+    onChange: (value) => console.log(value)
+  },
+  {
+    id: 'slider2',
+    label: 'Credibility',
+    value: -50,
+    onChange: (value) => console.log(value)
+  }
+]
+
+<MultiSlider sliders={sliders} />
+`} />
+
+<Canvas of={Stories.BasicUsage} />
