@@ -23,7 +23,11 @@ const SubmitHackathon = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [triples, setTriples] = useState<any[]>([]);
 
-  const { writeContractAsync: createTriples } = useBatchCreateTriple();
+  const {
+    writeContractAsync: writeBatchCreateTriple,
+    awaitingWalletConfirmation,
+    awaitingOnChainConfirmation,
+  } = useBatchCreateTriple()
 
   useEffect(() => {
     if (ready && !authenticated) {
@@ -42,34 +46,35 @@ const SubmitHackathon = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Création des triples ici
     const mainTriples = [
       {
-        subjectId: BigInt(1),
-        predicateId: BigInt(2),
-        objectId: BigInt(totalCashPrize || 0),
+        subjectId: 1,
+        predicateId: 2,
+        objectId: (totalCashPrize || 0),
       },
       {
-        subjectId: BigInt(1),
-        predicateId: BigInt(3),
-        objectId: BigInt(new Date(startDate).getTime() || 0),
+        subjectId: 1,
+        predicateId: 3,
+        objectId: 8,
+        displayValue: new Date(startDate),
       },
       {
-        subjectId: BigInt(1),
-        predicateId: BigInt(4),
-        objectId: BigInt(new Date(endDate).getTime() || 0),
+        subjectId: 1,
+        predicateId: 4,
+        objectId: 9,
+        displayValue: new Date(endDate),
       },
     ];
 
     const prizeTriples = prizes.map((prize, index) => ({
       subjectId: BigInt(5 + index),
-      predicateId: BigInt(6),
-      objectId: BigInt(prize.amount || 0),
+      predicateId: 6,
+      objectId: (prize.amount || 0),
     }));
 
     const compositionTriples = prizes.map((prize, index) => ({
-      subjectId: BigInt(1),
-      predicateId: BigInt(7),
+      subjectId: 1,
+      predicateId: 7,
       objectId: BigInt(5 + index),
     }));
 
@@ -85,22 +90,19 @@ const SubmitHackathon = () => {
         return;
       }
 
-      // Créer les triples un par un
-      for (const triple of triples) {
-        const hash = await createTriples({
-          address: MULTIVAULT_CONTRACT_ADDRESS,
-          abi: multivaultAbi,
-          functionName: 'createTriple',
-          args: [
-            triple.subjectId,
-            triple.predicateId,
-            triple.objectId
-          ],
-          value: BigInt(230000002000000)
-        });
-        console.log("Transaction hash:", hash);
-      }
+      const hash = await writeBatchCreateTriple({
+        address: MULTIVAULT_CONTRACT_ADDRESS,
+        abi: multivaultAbi,
+        functionName: 'batchCreateTriple',
+        args: [
+          triples.map(t => t.subjectId),
+          triples.map(t => t.predicateId), 
+          triples.map(t => t.objectId)
+        ],
+        value: BigInt(230000002000000 * triples.length)
+      });
 
+      console.log("Transaction hash:", hash);
       setShowConfirmation(false);
       navigate('/app/hackathons');
     } catch (error) {
@@ -189,7 +191,7 @@ const SubmitHackathon = () => {
       switch (predicateId) {
         case "2": return `$${objectId}`; // Cash prize
         case "3": 
-        case "4": return new Date(parseInt(objectId)).toLocaleDateString(); // Dates
+        case "4": return triple.displayValue?.toLocaleDateString() || objectId; // Utilise displayValue si disponible
         case "6": return `$${objectId}`; // Prize amounts
         case "7": {
           // Pour "is composed of", on récupère le prix correspondant
