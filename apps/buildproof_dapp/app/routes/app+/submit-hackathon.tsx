@@ -3,10 +3,13 @@ import { Button, ButtonVariant, ButtonSize, Input, Textarea, Dialog, DialogConte
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from '@remix-run/react';
 import { useBatchCreateTriple } from '../../lib/hooks/useBatchCreateTriple';
-import PrizeDistribution from '../../components/prize-distribution.tsx';
-import type { Prize } from '../../components/prize-distribution.tsx';
+import { useBatchCreateAtom } from '../../lib/hooks/useBatchCreateAtom';
+import PrizeDistribution from '../../components/prize-distribution';
+import type { Prize } from '../../components/prize-distribution';
 import { multivaultAbi } from '@lib/abis/multivault';
 import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts';
+import { usePublicClient } from 'wagmi';
+import { keccak256, toHex } from 'viem';
 
 const SubmitHackathon = () => {
   const { authenticated, ready, login } = usePrivy()
@@ -22,6 +25,9 @@ const SubmitHackathon = () => {
   ]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [triples, setTriples] = useState<any[]>([]);
+  const [validatedTriples, setValidatedTriples] = useState<any[]>([]);
+  const publicClient = usePublicClient();
+  const { writeContractAsync: writeBatchCreateAtom } = useBatchCreateAtom();
 
   const {
     writeContractAsync: writeBatchCreateTriple,
@@ -43,43 +49,90 @@ const SubmitHackathon = () => {
     )
   }
 
+  const checkAtomExists = async (value: string): Promise<bigint | null> => {
+    if (!publicClient) return null;
+    
+    try {
+      const atomHash = keccak256(toHex(value));
+      const atomId = await publicClient.readContract({
+        address: MULTIVAULT_CONTRACT_ADDRESS,
+        abi: multivaultAbi,
+        functionName: 'atomsByHash',
+        args: [atomHash]
+      });
+      return BigInt(atomId as number);
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const createMissingAtoms = async (atomValues: string[]) => {
+    if (atomValues.length === 0) return null;
+    
+    try {
+      const valuePerAtom = BigInt("1000000000000000"); // 0.001 ETH par atome
+      const hash = await writeBatchCreateAtom({
+        address: MULTIVAULT_CONTRACT_ADDRESS,
+        abi: multivaultAbi,
+        functionName: 'batchCreateAtom',
+        args: [atomValues.map(v => toHex(v))],
+        value: valuePerAtom * BigInt(atomValues.length)
+      });
+      
+      return hash;
+    } catch (error) {
+      console.error('Error creating atoms:', error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const mainTriples = [
-      {
-        subjectId: 1,
-        predicateId: 2,
-        objectId: (totalCashPrize || 0),
-      },
-      {
-        subjectId: 1,
-        predicateId: 3,
-        objectId: 8,
-        displayValue: new Date(startDate),
-      },
-      {
-        subjectId: 1,
-        predicateId: 4,
-        objectId: 9,
-        displayValue: new Date(endDate),
-      },
+    // Préparer les données pour la validation
+    const atomsToCheck = [
+      hackathonTitle,
+      'starts_on',
+      'ends_on',
+      'has_prize',
+      ...prizes.map(prize => prize.name)
     ];
 
-    const prizeTriples = prizes.map((prize, index) => ({
-      subjectId: BigInt(5 + index),
-      predicateId: 6,
-      objectId: (prize.amount || 0),
-    }));
+    // Vérifier l'existence des atomes
+    const atomResults = await Promise.all(
+      atomsToCheck.map(async (value) => ({
+        value,
+        id: await checkAtomExists(value)
+      }))
+    );
 
-    const compositionTriples = prizes.map((prize, index) => ({
-      subjectId: 1,
-      predicateId: 7,
-      objectId: BigInt(5 + index),
-    }));
+    // Identifier les atomes manquants
+    const missingAtoms = atomResults.filter(result => !result.id).map(result => result.value);
 
-    const allTriples = [...mainTriples, ...prizeTriples, ...compositionTriples];
-    setTriples(allTriples);
+    // Créer les triples à valider
+    const triplesToValidate = [
+      {
+        subject: hackathonTitle,
+        predicate: 'starts_on',
+        object: startDate,
+        displayValue: new Date(startDate).toLocaleDateString()
+      },
+      {
+        subject: hackathonTitle,
+        predicate: 'ends_on',
+        object: endDate,
+        displayValue: new Date(endDate).toLocaleDateString()
+      },
+      ...prizes.map(prize => ({
+        subject: hackathonTitle,
+        predicate: 'has_prize',
+        object: prize.name,
+        displayValue: `${prize.name} ($${prize.amount})`
+      }))
+    ];
+
+    setTriples(triplesToValidate);
+    setValidatedTriples(triplesToValidate);
     setShowConfirmation(true);
   };
 
@@ -90,23 +143,99 @@ const SubmitHackathon = () => {
         return;
       }
 
-      const hash = await writeBatchCreateTriple({
+      // 1. Créer d'abord les atomes manquants
+      const atomsToCreate = [
+        hackathonTitle,
+        'starts_on',
+        'ends_on',
+        'has_prize',
+        ...prizes.map(prize => prize.name)
+      ];
+
+      // Première vérification des atomes existants
+      const existingAtomIds = await Promise.all(
+        atomsToCreate.map(value => checkAtomExists(value))
+      );
+
+      const missingAtoms = atomsToCreate.filter((_, index) => !existingAtomIds[index]);
+      
+      if (missingAtoms.length > 0) {
+        console.log('Creating missing atoms:', missingAtoms);
+        const atomsHash = await createMissingAtoms(missingAtoms);
+        if (atomsHash) {
+          await publicClient?.waitForTransactionReceipt({ hash: atomsHash });
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+
+      // 2. Vérifier que tous les atomes existent maintenant
+      let retryCount = 0;
+      let allAtomsExist = false;
+      let atomIds: (bigint | null)[] = [];
+
+      while (retryCount < 3 && !allAtomsExist) {
+        atomIds = await Promise.all(
+          atomsToCreate.map(value => checkAtomExists(value))
+        );
+        
+        allAtomsExist = atomIds.every(id => id !== null);
+        if (!allAtomsExist) {
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          retryCount++;
+        }
+      }
+
+      const [titleId, startsOnId, endsOnId, hasPrizeId, ...prizeIds] = atomIds;
+
+      if (!titleId || !startsOnId || !endsOnId || !hasPrizeId) {
+        throw new Error('Failed to create or retrieve required atoms. Please try again.');
+      }
+
+      // 3. Créer les triples avec des dates simplifiées
+      const triplesToCreate = [
+        {
+          subjectId: titleId,
+          predicateId: startsOnId,
+          objectId: BigInt(new Date(startDate).getDate()) // Juste le jour du mois
+        },
+        {
+          subjectId: titleId,
+          predicateId: endsOnId,
+          objectId: BigInt(new Date(endDate).getDate()) // Juste le jour du mois
+        },
+        ...prizes.map((prize, index) => {
+          const prizeId = prizeIds[index];
+          if (!prizeId) throw new Error(`Prize ID not found for ${prize.name}`);
+          return {
+            subjectId: titleId,
+            predicateId: hasPrizeId,
+            objectId: prizeId
+          };
+        })
+      ];
+
+      console.log('Creating triples:', triplesToCreate);
+
+      // 4. Créer les triples en une seule transaction avec une valeur plus élevée
+      const valuePerTriple = BigInt("1000000000000000"); // 0.001 ETH par triple
+      const triplesHash = await writeBatchCreateTriple({
         address: MULTIVAULT_CONTRACT_ADDRESS,
         abi: multivaultAbi,
         functionName: 'batchCreateTriple',
         args: [
-          triples.map(t => t.subjectId),
-          triples.map(t => t.predicateId), 
-          triples.map(t => t.objectId)
+          triplesToCreate.map(t => t.subjectId),
+          triplesToCreate.map(t => t.predicateId),
+          triplesToCreate.map(t => t.objectId)
         ],
-        value: BigInt(230000002000000 * triples.length)
+        value: valuePerTriple * BigInt(triplesToCreate.length)
       });
 
-      console.log("Transaction hash:", hash);
+      await publicClient?.waitForTransactionReceipt({ hash: triplesHash });
       setShowConfirmation(false);
       navigate('/app/hackathons');
     } catch (error) {
       console.error('Transaction error:', error);
+      alert(error instanceof Error ? error.message : 'Transaction failed. Please try again.');
     }
   };
 
@@ -173,58 +302,10 @@ const SubmitHackathon = () => {
 
   // Ajoutez cette fonction helper
   const formatTriplesForDisplay = (triples: any[]) => {
-    const getPredicateName = (id: string) => {
-      switch (id) {
-        case "2": return "total cash prize";
-        case "3": return "starts on";
-        case "4": return "ends on";
-        case "6": return "is";
-        case "7": return "is composed of";
-        default: return id;
-      }
-    };
-
-    const getObjectValue = (triple: any) => {
-      const predicateId = triple.predicateId.toString();
-      const objectId = triple.objectId.toString();
-
-      switch (predicateId) {
-        case "2": return `$${objectId}`; // Cash prize
-        case "3": 
-        case "4": return triple.displayValue?.toLocaleDateString() || objectId; // Utilise displayValue si disponible
-        case "6": return `$${objectId}`; // Prize amounts
-        case "7": {
-          // Pour "is composed of", on récupère le prix correspondant
-          const prizeIndex = parseInt(objectId) - 5;
-          const prize = prizes[prizeIndex];
-          if (prize) {
-            const prizeName = prize.name === 'Other' ? prize.otherName : prize.name;
-            return `${prizeName} is $${prize.amount}`;
-          }
-          return objectId;
-        }
-        default: return objectId;
-      }
-    };
-
-    const getSubjectName = (triple: any) => {
-      const subjectId = triple.subjectId.toString();
-      if (subjectId === "1") return hackathonTitle;
-      if (parseInt(subjectId) >= 5) {
-        const prize = prizes[parseInt(subjectId) - 5];
-        // Si c'est un "Other" prize, on utilise le nom personnalisé
-        if (prize?.name === 'Other') {
-          return prize.otherName || "Other";
-        }
-        return prize?.name || subjectId;
-      }
-      return subjectId;
-    };
-
     return triples.map(triple => ({
-      subject: getSubjectName(triple),
-      predicate: getPredicateName(triple.predicateId.toString()),
-      object: getObjectValue(triple)
+      subject: triple.subject,
+      predicate: triple.predicate,
+      object: triple.displayValue || triple.object
     }));
   };
 
