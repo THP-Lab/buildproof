@@ -32,6 +32,7 @@ import { getChainEnvConfig } from '@lib/utils/environment'
 import { CURRENT_ENV } from 'app/consts'
 import { ClientOnly } from 'remix-utils/client-only'
 import { useAccount, useSwitchChain } from 'wagmi'
+import RootLayout from './layouts/root-layout'
 
 // Configure GraphQL client at module initialization using the URLs from the package
 // This can be updated to use the same environment approach that we use in Portal in the future, or leave up to the template user to configure however makes sense for their use case
@@ -150,8 +151,11 @@ export function AppLayout() {
       })
     }
   }, [chain, switchChain])
-
-  return <Outlet />
+  return (
+    <RootLayout>
+      <Outlet />
+    </RootLayout>
+  )
 }
 
 export function ErrorBoundary() {
