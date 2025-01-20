@@ -27,6 +27,8 @@ import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql';
 // Constants
 const TAG_PREDICATE_ID = 4; // for dev environment
 const DEFAULT_PAGE_SIZE = 50;
+const DEADHEAD_LABEL = "Deadhead";
+const TOP_WEB3_TOOLING_LABEL = "Top Web3 Developer Tooling";
 
 interface VoteItem {
     id: string;
@@ -125,15 +127,45 @@ const VotingPage = () => {
         {
             limit: DEFAULT_PAGE_SIZE,
             where: {
-                predicate_id: { _eq: predicateId }
+                _and: [
+                    { predicate_id: { _eq: predicateId } },
+                    { object: { label: { _eq: TOP_WEB3_TOOLING_LABEL } } }
+                ]
             },
             address: userAddress!
         },
         {
-            queryKey: ['get-triples-with-positions', predicateId, userAddress],
+            queryKey: ['get-triples-with-positions', predicateId, TOP_WEB3_TOOLING_LABEL, userAddress],
             enabled: !!userAddress && !!predicateId
         }
     );
+
+    console.log('Query parameters:', {
+        predicateId,
+        objectLabel: TOP_WEB3_TOOLING_LABEL,
+        userAddress,
+        limit: DEFAULT_PAGE_SIZE
+    });
+
+    console.log('Query where clause:', {
+        _and: [
+            { predicate_id: { _eq: predicateId } },
+            { object: { label: { _eq: TOP_WEB3_TOOLING_LABEL } } }
+        ]
+    });
+
+    console.log('Triples data received:', triplesData);
+    console.log('Triples array:', triplesData?.triples);
+    if (triplesData?.triples) {
+        console.log('Found claims:', triplesData.triples.map(t => ({
+            id: t.id,
+            subject: { id: t.subject.id, label: t.subject.label },
+            object: { id: t.object.id, label: t.object.label },
+            vault_id: t.vault_id,
+            voteCount: t.vault?.position_count || 0,
+            totalShares: t.vault?.total_shares || '0'
+        })));
+    }
 
     // Loading state
     if (isLoading) {
