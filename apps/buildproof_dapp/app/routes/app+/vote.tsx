@@ -18,69 +18,169 @@ import {
     ClaimPosition,
     MultiSlider
 } from '@0xintuition/buildproof_ui';
+import { useQuery } from '@tanstack/react-query';
+import { json, LoaderFunctionArgs } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
+import { requireUser } from '@server/auth';
+import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql';
+
+// Constants
+const TAG_PREDICATE_ID = 4; // for dev environment
+const DEFAULT_PAGE_SIZE = 50;
+
+interface VoteItem {
+    id: string;
+    numPositionsFor: number;
+    numPositionsAgainst: number;
+    totalTVL: string;
+    tvlFor: string;
+    tvlAgainst: string;
+    currency: string;
+    subject: string;
+    predicate: string;
+    object: string;
+    votesCount: number;
+    totalEth: number;
+    userPosition?: string;
+    positionDirection?: "for" | "against";
+}
+
+interface Triple {
+    id: string;
+    vault_id: string;
+    counter_vault_id: string;
+    subject: {
+        id: string;
+        vault_id: string;
+        label: string | null;
+        image: string | null;
+    };
+    predicate: {
+        id: string;
+        vault_id: string;
+        label: string | null;
+        image: string | null;
+    };
+    object: {
+        id: string;
+        vault_id: string;
+        label: string | null;
+        image: string | null;
+    };
+    vault: {
+        total_shares: string;
+        position_count: number;
+        positions: Array<{
+            account: {
+                id: string;
+                label: string | null;
+                image: string | null;
+            };
+            shares: string;
+        }>;
+    } | null;
+    counter_vault: {
+        total_shares: string;
+        position_count: number;
+        positions: Array<{
+            account: {
+                id: string;
+                label: string | null;
+                image: string | null;
+            };
+            shares: string;
+        }>;
+    } | null;
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+    try {
+        // Ensure user is authenticated
+        const user = await requireUser(request);
+        console.log('User authenticated:', user.wallet?.address);
+
+        return json({
+            userAddress: user.wallet?.address,
+            predicateId: TAG_PREDICATE_ID
+        });
+    } catch (error) {
+        console.error('Error in vote loader:', error);
+        throw error;
+    }
+}
 
 const VotingPage = () => {
+    const { userAddress, predicateId } = useLoaderData<typeof loader>();
     const [selectedTab, setSelectedTab] = useState('voting');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-
-    // État pour les valeurs des sliders
     const [sliderValues, setSliderValues] = useState<{ [key: string]: number }>({});
 
-    // Calculer les indices pour la pagination
+    // Fetch triples data using GraphQL
+    const {
+        data: triplesData,
+        isLoading,
+        error
+    } = useGetTriplesWithPositionsQuery(
+        {
+            limit: DEFAULT_PAGE_SIZE,
+            where: {
+                predicate_id: { _eq: predicateId }
+            },
+            address: userAddress!
+        },
+        {
+            queryKey: ['get-triples-with-positions', predicateId, userAddress],
+            enabled: !!userAddress && !!predicateId
+        }
+    );
+
+    // Loading state
+    if (isLoading) {
+        return <div className="p-4">Loading triples data...</div>;
+    }
+
+    // Error state
+    if (error) {
+        return (
+            <div className="p-4 text-red-500">
+                Error loading triples: {(error as Error).message}
+            </div>
+        );
+    }
+
+    // Transform the data into the format we need
+    const data: VoteItem[] = triplesData?.triples?.map((triple: any) => {
+        const userVaultPosition = triple.vault?.positions?.[0];
+        const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+
+        return {
+            id: triple.id,
+            numPositionsFor: triple.vault?.position_count ?? 0,
+            numPositionsAgainst: triple.counter_vault?.position_count ?? 0,
+            totalTVL: (Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0)).toString(),
+            tvlFor: triple.vault?.total_shares ?? '0',
+            tvlAgainst: triple.counter_vault?.total_shares ?? '0',
+            currency: 'ETH',
+            subject: triple.subject?.label ?? '',
+            predicate: triple.predicate?.label ?? '',
+            object: triple.object?.label ?? '',
+            votesCount: (triple.vault?.position_count ?? 0) + (triple.counter_vault?.position_count ?? 0),
+            totalEth: Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0),
+            userPosition: userVaultPosition?.shares ?? userCounterVaultPosition?.shares ?? undefined,
+            positionDirection: userVaultPosition ? "for" :
+                userCounterVaultPosition ? "against" :
+                    undefined
+        };
+    }) || [];
+
+    // Calculate pagination indices
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
+    const currentItems = data.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(data.length / rowsPerPage);
 
-    const [data] = useState([
-        {
-            id: '1',
-            numPositionsFor: 69,
-            numPositionsAgainst: 7,
-            totalTVL: '420.69',
-            tvlFor: '240.69',
-            tvlAgainst: '180',
-            currency: 'ETH',
-            userPosition: '3.19',
-            positionDirection: ClaimPosition.claimFor,
-            subject: '0xTeam-A',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 76,
-            totalEth: 420.69
-        },
-        {
-            id: '2',
-            numPositionsFor: 50,
-            numPositionsAgainst: 50,
-            totalTVL: '300.00',
-            tvlFor: '150.00',
-            tvlAgainst: '150.00',
-            currency: 'ETH',
-            subject: '0xTeam-B',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 100,
-            totalEth: 300.00
-        },
-        {
-            id: '3',
-            numPositionsFor: 80,
-            numPositionsAgainst: 120,
-            totalTVL: '500.00',
-            tvlFor: '400.00',
-            tvlAgainst: '100.00',
-            currency: 'ETH',
-            userPosition: '1.50',
-            positionDirection: ClaimPosition.claimAgainst,
-            subject: '0xTeam-C',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 200,
-            totalEth: 500.00
-        },
-    ]);
-
-    // Préparer les données pour le MultiSlider
+    // Prepare slider data
     const sliders = data.map(item => ({
         id: item.id,
         projectName: item.subject,
@@ -95,8 +195,6 @@ const VotingPage = () => {
         }
     }));
 
-    const currentItems = data.slice(startIndex, endIndex);
-    const totalPages = Math.ceil(data.length / rowsPerPage);
     const tabs = [
         { value: 'overview', label: 'Overview' },
         { value: 'voting', label: 'Voting' },
@@ -105,7 +203,6 @@ const VotingPage = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-4 space-y-6">
-            {/* Navigation par onglets */}
             <SegmentedControl>
                 {tabs.map((tab, index) => (
                     <SegmentedControlItem
@@ -118,24 +215,21 @@ const VotingPage = () => {
                 ))}
             </SegmentedControl>
 
-            {/* Carte d'explication */}
             <EmptyStateCard
                 title="How to Vote"
                 message="Use the sliders to allocate your voting power. Positive values support a project, negative values oppose it. The total absolute values cannot exceed 100%."
                 className="mb-6"
             />
 
-            {/* MultiSlider pour le vote */}
             <div className="bg-card rounded-lg p-6 mb-6">
                 <h2 className="text-lg font-semibold mb-4">Vote Distribution</h2>
                 <MultiSlider sliders={sliders} />
             </div>
 
-            {/* Liste des Claims */}
             <div className="space-y-4">
-                {currentItems.map((item, index) => (
+                {currentItems.map((item) => (
                     <ClaimRow
-                        key={startIndex + index}
+                        key={item.id}
                         numPositionsFor={item.numPositionsFor}
                         numPositionsAgainst={item.numPositionsAgainst}
                         totalTVL={item.totalTVL}
