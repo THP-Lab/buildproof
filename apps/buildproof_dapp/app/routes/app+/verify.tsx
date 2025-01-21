@@ -9,6 +9,7 @@ type VerifyResponse = {
     subject: string
     predicate: string
     object: string
+    rawObject?: string
   }
 }
 
@@ -160,11 +161,31 @@ export default function VerifyPage() {
               </span>
             </div>
             {tripleResult.data.exists && tripleResult.data.atoms && (
-              <div className="mt-2 space-y-2">
-                <div>ID: <span className="font-mono">{tripleResult.data.id}</span></div>
-                <div>Sujet: <span className="font-mono break-all">{tripleResult.data.atoms.subject}</span></div>
-                <div>Prédicat: <span className="font-mono">{tripleResult.data.atoms.predicate}</span></div>
-                <div>Objet: <span className="font-mono break-all">{tripleResult.data.atoms.object}</span></div>
+              <div className="mt-4 space-y-3">
+                <div className="font-medium">ID: {tripleResult.data.id}</div>
+                <div className="break-all">
+                  <span className="font-medium">Sujet:</span> {tripleResult.data.atoms.subject}
+                </div>
+                <div>
+                  <span className="font-medium">Prédicat:</span> {tripleResult.data.atoms.predicate}
+                </div>
+                <div className="break-all">
+                  <span className="font-medium">Objet:</span>{' '}
+                  {tripleResult.data.atoms.predicate === 'stored_at' && tripleResult.data.atoms.rawObject ? (
+                    <a 
+                      href={tripleResult.data.atoms.rawObject.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 underline"
+                    >
+                      {tripleResult.data.atoms.object}
+                    </a>
+                  ) : (
+                    tripleResult.data.atoms.object.startsWith('{') 
+                      ? JSON.stringify(JSON.parse(tripleResult.data.atoms.object), null, 2)
+                      : tripleResult.data.atoms.object
+                  )}
+                </div>
               </div>
             )}
           </div>

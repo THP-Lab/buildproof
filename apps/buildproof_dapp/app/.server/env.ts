@@ -20,6 +20,7 @@ const schema = z.object({
   ORIGIN_URL: z.string(),
   PRIVY_APP_ID: z.string(),
   GTM_TRACKING_ID: z.string(),
+  PINATA_JWT: z.string(),
   featureFlagsSchema,
 })
 
@@ -69,6 +70,7 @@ export function getEnv() {
     ORIGIN_URL: process.env.ORIGIN_URL,
     PRIVY_APP_ID: process.env.PRIVY_APP_ID,
     GTM_TRACKING_ID: process.env.GTM_TRACKING_ID,
+    PINATA_JWT: process.env.PINATA_JWT,
     // Feature flags
     FF_GENERIC_BANNER_ENABLED: process.env.FF_GENERIC_BANNER_ENABLED,
     FF_INCIDENT_BANNER_ENABLED: process.env.FF_INCIDENT_BANNER_ENABLED,

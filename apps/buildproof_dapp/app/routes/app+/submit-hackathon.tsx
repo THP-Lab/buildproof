@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Button, ButtonVariant, ButtonSize, Input, Textarea, Dialog, DialogContent, DialogHeader, DialogTitle } from '@0xintuition/buildproof_ui';
 import { usePrivy } from '@privy-io/react-auth';
-import { useNavigate } from '@remix-run/react';
+import { useNavigate, useLoaderData } from '@remix-run/react';
 import { useBatchCreateTriple } from '../../lib/hooks/useBatchCreateTriple';
 import { useBatchCreateAtom } from '../../lib/hooks/useBatchCreateAtom';
-import PrizeDistribution from '../../components/prize-distribution';
-import type { Prize } from '../../components/prize-distribution';
+import PrizeDistribution from '../../components/submit-hackathon/prize-distribution';
+import type { Prize } from '../../components/submit-hackathon/prize-distribution';
 import { multivaultAbi } from '@lib/abis/multivault';
 import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts';
 import { usePublicClient } from 'wagmi';
 import { keccak256, toHex } from 'viem';
+import { json, LoaderFunctionArgs } from '@remix-run/node';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  // Vérifier si la variable est définie dans l'environnement
+  const pinataJwt = process.env.PINATA_JWT_KEY;
+  
+  // Si la variable n'est pas définie, on retourne quand même mais avec une valeur null
+  // Cela nous permettra de gérer l'erreur côté client de manière plus élégante
+  return json({
+    env: {
+      PINATA_JWT: pinataJwt || null
+    }
+  });
+}
 
 const SubmitHackathon = () => {
+  const { env } = useLoaderData<typeof loader>();
   const { authenticated, ready, login } = usePrivy()
   const navigate = useNavigate()
   const [partnerName, setPartnerName] = useState('');
@@ -34,6 +49,39 @@ const SubmitHackathon = () => {
     awaitingWalletConfirmation,
     awaitingOnChainConfirmation,
   } = useBatchCreateTriple()
+
+  const checkTripleExists = async (subject: string | number | bigint, predicate: string | number | bigint, object: string | number | bigint): Promise<bigint | null> => {
+    if (!publicClient) return null;
+    
+    try {
+      // Convert components to atom IDs if they are strings
+      const subjectId = typeof subject === 'string' ? await checkAtomExists(subject) : BigInt(subject.toString());
+      const predicateId = typeof predicate === 'string' ? await checkAtomExists(predicate) : BigInt(predicate.toString());
+      const objectId = typeof object === 'string' ? await checkAtomExists(object) : BigInt(object.toString());
+
+      if (!subjectId || !predicateId || !objectId) {
+        return null;
+      }
+
+      const exists = await publicClient.readContract({
+        address: MULTIVAULT_CONTRACT_ADDRESS,
+        abi: multivaultAbi,
+        functionName: 'isTriple',
+        args: [subjectId, predicateId, objectId]
+      }) as boolean;
+      
+      if (exists) {
+        // Si le triple existe, on retourne un ID non-null (1n)
+        // L'ID exact n'est pas important puisqu'on vérifie juste l'existence
+        return 1n;
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('Error checking triple:', error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     if (ready && !authenticated) {
@@ -113,22 +161,68 @@ const SubmitHackathon = () => {
     const triplesToValidate = [
       {
         subject: hackathonTitle,
+        predicate: 'Total Cash Prize',
+        object: totalCashPrize
+      },
+      {
+        subject: {
+          subject: hackathonTitle,
+          predicate: 'Total Cash Prize',
+          object: totalCashPrize
+        },
         predicate: 'starts_on',
         object: startDate,
         displayValue: new Date(startDate).toLocaleDateString()
       },
       {
-        subject: hackathonTitle,
+        subject: {
+          subject: hackathonTitle,
+          predicate: 'Total Cash Prize',
+          object: totalCashPrize
+        },
         predicate: 'ends_on',
         object: endDate,
         displayValue: new Date(endDate).toLocaleDateString()
       },
+
       ...prizes.map(prize => ({
-        subject: hackathonTitle,
-        predicate: 'has_prize',
-        object: prize.name,
-        displayValue: `${prize.name} ($${prize.amount})`
-      }))
+        subject: prize.name,
+        predicate: 'is',
+        object: prize.amount
+      })),
+      
+      ...prizes.map(prize => {
+        if (prize.name === 'Other') {
+          // Get the names of the other prizes
+          const otherPrizeNames = prizes
+            .filter(p => p.name !== 'Other')
+            .map(p => p.name);
+
+          return {
+            subject: hackathonTitle,
+            predicate: 'is composed',
+            object: {
+              subject: prize.otherName || otherPrizeNames[0] || 'Other', // Fallback to the first prize name
+              predicate: 'is',
+              object: prize.amount
+            }
+          };
+        } else {
+          return {
+            subject: {
+              subject: hackathonTitle,
+              predicate: 'Total Cash Prize',
+              object: totalCashPrize
+            },
+            predicate: 'is composed',
+            object: {
+              subject: prize.name,
+              predicate: 'is',
+              object: prize.amount
+            }
+          };
+        }
+      })
     ];
 
     setTriples(triplesToValidate);
@@ -143,9 +237,85 @@ const SubmitHackathon = () => {
         return;
       }
 
-      // 1. Créer d'abord les atomes manquants
+      // 0. Vérifier PINATA_JWT
+      if (!env.PINATA_JWT) {
+        throw new Error('PINATA_JWT is not configured. Please contact the administrator.');
+      }
+
+      // 1. D'abord, on stocke les données sur IPFS
+      const hackathonData = {
+        title: hackathonTitle,
+        description,
+        partnerName,
+        totalCashPrize,
+        startDate,
+        endDate,
+        prizes: prizes.map(prize => ({
+          name: prize.name,
+          amount: prize.amount
+        }))
+      };
+
+      // Convertir en JSON et stocker sur IPFS
+      const blob = new Blob([JSON.stringify(hackathonData)], { type: 'application/json' });
+      const formData = new FormData();
+      formData.append('file', blob);
+
+      const response = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.PINATA_JWT}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to upload to IPFS. Please check your PINATA_JWT and try again.');
+      }
+
+      const ipfsResult = await response.json();
+      const ipfsHash = ipfsResult.IpfsHash;
+
+      // 2. Stocker le titre et la description sur IPFS séparément
+      const titleBlob = new Blob([hackathonTitle], { type: 'text/plain' });
+      const titleFormData = new FormData();
+      titleFormData.append('file', titleBlob);
+
+      const descBlob = new Blob([description], { type: 'text/plain' });
+      const descFormData = new FormData();
+      descFormData.append('file', descBlob);
+
+      const [titleResponse, descResponse] = await Promise.all([
+        fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.PINATA_JWT}`
+          },
+          body: titleFormData
+        }),
+        fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.PINATA_JWT}`
+          },
+          body: descFormData
+        })
+      ]);
+
+      if (!titleResponse.ok || !descResponse.ok) {
+        throw new Error('Failed to upload title or description to IPFS');
+      }
+
+      const [titleIpfs, descIpfs] = await Promise.all([
+        titleResponse.json(),
+        descResponse.json()
+      ]);
+
+      // 3. Créer les atoms pour les données IPFS et les autres atoms nécessaires
       const atomsToCreate = [
-        hackathonTitle,
+        titleIpfs.IpfsHash,
+        descIpfs.IpfsHash,
+        ipfsHash,
         'starts_on',
         'ends_on',
         'has_prize',
@@ -168,7 +338,7 @@ const SubmitHackathon = () => {
         }
       }
 
-      // 2. Vérifier que tous les atomes existent maintenant
+      // 4. Vérifier que tous les atomes existent maintenant
       let retryCount = 0;
       let allAtomsExist = false;
       let atomIds: (bigint | null)[] = [];
@@ -185,29 +355,29 @@ const SubmitHackathon = () => {
         }
       }
 
-      const [titleId, startsOnId, endsOnId, hasPrizeId, ...prizeIds] = atomIds;
+      const [titleIpfsId, descIpfsId, dataIpfsId, startsOnId, endsOnId, hasPrizeId, ...prizeIds] = atomIds;
 
-      if (!titleId || !startsOnId || !endsOnId || !hasPrizeId) {
+      if (!titleIpfsId || !descIpfsId || !dataIpfsId || !startsOnId || !endsOnId || !hasPrizeId) {
         throw new Error('Failed to create or retrieve required atoms. Please try again.');
       }
 
-      // 3. Créer les triples avec des dates simplifiées
+      // 5. Créer les triples avec des dates simplifiées
       const triplesToCreate = [
         {
-          subjectId: titleId,
+          subjectId: titleIpfsId,
           predicateId: startsOnId,
-          objectId: BigInt(new Date(startDate).getDate()) // Juste le jour du mois
+          objectId: BigInt(new Date(startDate).getDate())
         },
         {
-          subjectId: titleId,
+          subjectId: titleIpfsId,
           predicateId: endsOnId,
-          objectId: BigInt(new Date(endDate).getDate()) // Juste le jour du mois
+          objectId: BigInt(new Date(endDate).getDate())
         },
         ...prizes.map((prize, index) => {
           const prizeId = prizeIds[index];
           if (!prizeId) throw new Error(`Prize ID not found for ${prize.name}`);
           return {
-            subjectId: titleId,
+            subjectId: titleIpfsId,
             predicateId: hasPrizeId,
             objectId: prizeId
           };
@@ -216,7 +386,7 @@ const SubmitHackathon = () => {
 
       console.log('Creating triples:', triplesToCreate);
 
-      // 4. Créer les triples en une seule transaction avec une valeur plus élevée
+      // 6. Créer les triples en une seule transaction
       const valuePerTriple = BigInt("1000000000000000"); // 0.001 ETH par triple
       const triplesHash = await writeBatchCreateTriple({
         address: MULTIVAULT_CONTRACT_ADDRESS,

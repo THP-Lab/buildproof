@@ -4,6 +4,49 @@ import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
 import { type Abi, type MulticallResponse } from 'viem'
 import { keccak256, toHex } from 'viem'
 
+async function fetchIPFSContent(cid: string): Promise<string> {
+  try {
+    const response = await fetch(`https://gateway.pinata.cloud/ipfs/${cid}`)
+    const text = await response.text()
+    return text
+  } catch (error) {
+    console.error('Error fetching IPFS content:', error)
+    return ''
+  }
+}
+
+async function processIPFSContent(content: string): Promise<{ decoded: string, raw: string | null }> {
+  if (content.startsWith('Qm') || content.startsWith('ipfs://')) {
+    const cid = content.startsWith('ipfs://') ? content.replace('ipfs://', '') : content
+    const ipfsContent = await fetchIPFSContent(cid)
+    if (ipfsContent) {
+      try {
+        if (ipfsContent.trim().startsWith('{')) {
+          const jsonContent = JSON.parse(ipfsContent)
+          return {
+            decoded: jsonContent.name || ipfsContent,
+            raw: content
+          }
+        }
+        return {
+          decoded: ipfsContent,
+          raw: content
+        }
+      } catch (e) {
+        console.error('Failed to parse JSON:', e)
+        return {
+          decoded: ipfsContent,
+          raw: content
+        }
+      }
+    }
+  }
+  return {
+    decoded: content,
+    raw: null
+  }
+}
+
 export async function verifyAtom(value: string): Promise<boolean> {
   try {
     const atomHash = keccak256(toHex(value))
@@ -70,21 +113,25 @@ export async function verifyTriple(
       }),
     ]) as [`0x${string}`, `0x${string}`, `0x${string}`]
 
+    const subject = Buffer.from(subjectData.slice(2), 'hex').toString()
     const predicate = Buffer.from(predicateData.slice(2), 'hex').toString()
     const object = Buffer.from(objectData.slice(2), 'hex').toString()
 
-    // Format date if predicate is starts_on or ends_on
-    const formattedObject = (predicate === 'starts_on' || predicate === 'ends_on') 
-      ? `${object} Mars 2024`
-      : object
+    // Process all IPFS contents in parallel
+    const [processedSubject, processedPredicate, processedObject] = await Promise.all([
+      processIPFSContent(subject),
+      processIPFSContent(predicate),
+      processIPFSContent(object),
+    ])
 
     return {
       exists: true,
       id: tripleId.toString(),
       atoms: {
-        subject: Buffer.from(subjectData.slice(2), 'hex').toString(),
-        predicate,
-        object: formattedObject,
+        subject: processedSubject.decoded,
+        predicate: processedPredicate.decoded,
+        object: processedObject.decoded,
+        rawObject: processedObject.raw
       }
     }
   }
@@ -102,21 +149,31 @@ export async function verifyHackathon(hackathonTitle: string) {
   }
 
   const atomHash = keccak256(toHex(hackathonTitle))
-  const contractConfigs = [
-    {
-      ...multiVaultContract,
-      functionName: 'atomsByHash',
-      args: [atomHash],
-    },
-  ] as const
-
-  const resp: MulticallResponse[] = await publicClient.multicall({
-    contracts: contractConfigs,
+  const atomId = await publicClient.readContract({
+    ...multiVaultContract,
+    functionName: 'atomsByHash',
+    args: [atomHash],
   })
 
-  const atomId = resp[0].result as bigint
+  if (BigInt(atomId as bigint) > 0n) {
+    const atomData = await publicClient.readContract({
+      ...multiVaultContract,
+      functionName: 'atoms',
+      args: [atomId as bigint],
+    }) as `0x${string}`
+
+    const content = Buffer.from(atomData.slice(2), 'hex').toString()
+    
+    return {
+      exists: true,
+      ipfsUrl: content.startsWith('ipfs://') ? content : null,
+      content: await processIPFSContent(content)
+    }
+  }
   
   return {
-    exists: atomId > 0n
+    exists: false,
+    ipfsUrl: null,
+    content: null
   }
 }
