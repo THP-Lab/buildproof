@@ -11,6 +11,7 @@ import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts';
 import { usePublicClient } from 'wagmi';
 import { keccak256, toHex } from 'viem';
 import { json, LoaderFunctionArgs } from '@remix-run/node';
+import { hashDataToIPFS } from '../../utils/ipfs-utils';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   // Vérifier si la variable est définie dans l'environnement
@@ -256,66 +257,18 @@ const SubmitHackathon = () => {
         }))
       };
 
-      // Convertir en JSON et stocker sur IPFS
-      const blob = new Blob([JSON.stringify(hackathonData)], { type: 'application/json' });
-      const formData = new FormData();
-      formData.append('file', blob);
-
-      const response = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${env.PINATA_JWT}`
-        },
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to upload to IPFS. Please check your PINATA_JWT and try again.');
-      }
-
-      const ipfsResult = await response.json();
-      const ipfsHash = ipfsResult.IpfsHash;
-
-      // 2. Stocker le titre et la description sur IPFS séparément
-      const titleBlob = new Blob([hackathonTitle], { type: 'text/plain' });
-      const titleFormData = new FormData();
-      titleFormData.append('file', titleBlob);
-
-      const descBlob = new Blob([description], { type: 'text/plain' });
-      const descFormData = new FormData();
-      descFormData.append('file', descBlob);
-
-      const [titleResponse, descResponse] = await Promise.all([
-        fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${env.PINATA_JWT}`
-          },
-          body: titleFormData
-        }),
-        fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${env.PINATA_JWT}`
-          },
-          body: descFormData
-        })
-      ]);
-
-      if (!titleResponse.ok || !descResponse.ok) {
-        throw new Error('Failed to upload title or description to IPFS');
-      }
-
-      const [titleIpfs, descIpfs] = await Promise.all([
-        titleResponse.json(),
-        descResponse.json()
-      ]);
+      // Utiliser la fonction hashDataToIPFS
+      const { value: titleValue, ipfsHash: titleIpfsHash } = await hashDataToIPFS(hackathonTitle, env.PINATA_JWT);
+      const { value: descValue, ipfsHash: descIpfsHash } = await hashDataToIPFS(description, env.PINATA_JWT);
+      const { ipfsHash } = await hashDataToIPFS(hackathonData, env.PINATA_JWT);
 
       // 3. Créer les atoms pour les données IPFS et les autres atoms nécessaires
       const atomsToCreate = [
-        titleIpfs.IpfsHash,
-        descIpfs.IpfsHash,
-        ipfsHash,
+        titleValue,        // Le titre lisible
+        titleIpfsHash,     // Le lien IPFS du titre
+        descValue,         // La description lisible
+        descIpfsHash,      // Le lien IPFS de la description
+        ipfsHash,          // Le lien IPFS des données complètes
         'starts_on',
         'ends_on',
         'has_prize',
