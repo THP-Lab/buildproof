@@ -50,7 +50,6 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
       if (a.value < 0 && b.value < 0) {
         return a.value - b.value;
       }
-      
       return 0;
     });
     setSortedSliders(newSortedSliders);
@@ -65,16 +64,32 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
             .filter(slider => slider.value !== 0)
             .map((slider) => (
               <div key={slider.id} className="flex items-center gap-4 w-full">
-                {/* Pourcentage à gauche */}
+                {/* Pourcentage avec input intégré */}
                 <div className={cn(
-                  "min-w-[60px] text-center rounded px-2 py-1",
+                  "min-w-[60px] text-center rounded px-2 py-1 flex items-center justify-center",
                   slider.value === 0 ? 'bg-gray-700' :
                   slider.value > 0 ? 'bg-for text-white' : 'bg-against text-white'
                 )}>
-                  <span className="text-sm font-medium">
-                    {slider.value === 0 ? '0%' : 
-                     slider.value > 0 ? `+${slider.value}%` : `${slider.value}%`}
-                  </span>
+                  <div className="flex items-center">
+                    {slider.value > 0 && <span className="text-sm font-medium">+</span>}
+                    <input
+                      type="number"
+                      value={slider.value}
+                      onChange={(e) => {
+                        const value = Math.max(-100, Math.min(100, Number(e.target.value)));
+                        slider.onChange(value);
+                      }}
+                      className={cn(
+                        "w-[40px] bg-transparent text-center text-sm font-medium",
+                        "focus:outline-none",
+                        "text-white placeholder-white/50"
+                      )}
+                      min="-100"
+                      max="100"
+                      placeholder="0"
+                    />
+                    <span className="text-sm font-medium">%</span>
+                  </div>
                 </div>
 
                 {/* Slider */}
@@ -124,12 +139,30 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
             .filter(slider => slider.value === 0)
             .map((slider) => (
               <div key={slider.id} className="flex items-center gap-4 w-full">
-                {/* Pourcentage à gauche */}
+                {/* Pourcentage avec input intégré */}
                 <div className={cn(
-                  "min-w-[60px] text-center rounded px-2 py-1",
+                  "min-w-[60px] text-center rounded px-2 py-1 flex items-center justify-center",
                   'bg-gray-700'
                 )}>
-                  <span className="text-sm font-medium">0%</span>
+                  <div className="flex items-center">
+                    <input
+                      type="number"
+                      value={slider.value}
+                      onChange={(e) => {
+                        const value = Math.max(-100, Math.min(100, Number(e.target.value)));
+                        slider.onChange(value);
+                      }}
+                      className={cn(
+                        "w-[40px] bg-transparent text-center text-sm font-medium",
+                        "focus:outline-none",
+                        "text-white placeholder-white/50"
+                      )}
+                      min="-100"
+                      max="100"
+                      placeholder="0"
+                    />
+                    <span className="text-sm font-medium">%</span>
+                  </div>
                 </div>
 
                 {/* Slider */}
