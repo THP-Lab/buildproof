@@ -25,8 +25,14 @@ import { handleSliderChange, resetSingleSlider, resetAllSliders } from './handle
 import { sortItems } from './sortItems';
 import type { VoteItem } from './types';
 import { VotingPageView } from './VotingPageView';
+import type { GetTriplesWithPositionsQuery } from '@0xintuition/graphql';
 
-export const VotingPage = () => {
+interface VotingPageProps {
+    triplesData: GetTriplesWithPositionsQuery | undefined;
+    userAddress: string | undefined;
+}
+
+export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const [selectedTab, setSelectedTab] = useState('voting');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -38,145 +44,34 @@ export const VotingPage = () => {
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
 
-    const [data] = useState<VoteItem[]>([
-        {
-            id: '1',
-            numPositionsFor: 69,
-            numPositionsAgainst: 42,
-            totalTVL: '420.69',
-            tvlFor: '240.69',
-            tvlAgainst: '180',
-            currency: 'ETH',
-            userPosition: '3.19',
-            positionDirection: ClaimPosition.claimFor,
-            subject: '0xTeam-A',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 76,
-            totalEth: 420.69
-        },
-        {
-            id: '2',
-            numPositionsFor: 50,
-            numPositionsAgainst: 50,
-            totalTVL: '300.00',
-            tvlFor: '150.00',
-            tvlAgainst: '150.00',
-            currency: 'ETH',
-            subject: '0xTeam-B',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 100,
-            totalEth: 300.00
-        },
-        {
-            id: '3',
-            numPositionsFor: 80,
-            numPositionsAgainst: 120,
-            totalTVL: '500.00',
-            tvlFor: '400.00',
-            tvlAgainst: '100.00',
-            currency: 'ETH',
-            userPosition: '1.50',
-            positionDirection: ClaimPosition.claimAgainst,
-            subject: '0xTeam-C',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 200,
-            totalEth: 500.00
-        },
-        {
-            id: '4',
-            numPositionsFor: 69,
-            numPositionsAgainst: 42,
-            totalTVL: '420.69',
-            tvlFor: '240.69',
-            tvlAgainst: '180',
-            currency: 'ETH',
-            userPosition: '3.19',
-            positionDirection: ClaimPosition.claimFor,
-            subject: '0xTeam-D',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 76,
-            totalEth: 420.69
-        },
-        {
-            id: '5',
-            numPositionsFor: 50,
-            numPositionsAgainst: 50,
-            totalTVL: '300.00',
-            tvlFor: '150.00',
-            tvlAgainst: '150.00',
-            currency: 'ETH',
-            subject: '0xTeam-E',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 100,
-            totalEth: 300.00
-        },
-        {
-            id: '6',
-            numPositionsFor: 80,
-            numPositionsAgainst: 120,
-            totalTVL: '500.00',
-            tvlFor: '400.00',
-            tvlAgainst: '100.00',
-            currency: 'ETH',
-            userPosition: '1.50',
-            positionDirection: ClaimPosition.claimAgainst,
-            subject: '0xTeam-F',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 200,
-            totalEth: 500.00
-        },        {
-            id: '7',
-            numPositionsFor: 69,
-            numPositionsAgainst: 42,
-            totalTVL: '420.69',
-            tvlFor: '240.69',
-            tvlAgainst: '180',
-            currency: 'ETH',
-            userPosition: '3.19',
-            positionDirection: ClaimPosition.claimFor,
-            subject: '0xTeam-G',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 76,
-            totalEth: 420.69
-        },
-        {
-            id: '8',
-            numPositionsFor: 50,
-            numPositionsAgainst: 50,
-            totalTVL: '300.00',
-            tvlFor: '150.00',
-            tvlAgainst: '150.00',
-            currency: 'ETH',
-            subject: '0xTeam-H',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 100,
-            totalEth: 300.00
-        },
-        {
-            id: '9',
-            numPositionsFor: 80,
-            numPositionsAgainst: 120,
-            totalTVL: '500.00',
-            tvlFor: '400.00',
-            tvlAgainst: '100.00',
-            currency: 'ETH',
-            userPosition: '1.50',
-            positionDirection: ClaimPosition.claimAgainst,
-            subject: '0xTeam-I',
-            predicate: 'participates',
-            object: 'Hackathon',
-            votesCount: 200,
-            totalEth: 500.00
-        }
-    ]);
+    // Transform the GraphQL data into our VoteItem format
+    const data: VoteItem[] = useMemo(() => {
+        if (!triplesData?.triples) return [];
+        
+        return triplesData.triples.map((triple: any) => {
+            const userVaultPosition = triple.vault?.positions?.[0];
+            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+
+            return {
+                id: triple.id,
+                numPositionsFor: triple.vault?.position_count ?? 0,
+                numPositionsAgainst: triple.counter_vault?.position_count ?? 0,
+                totalTVL: (Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0)).toString(),
+                tvlFor: triple.vault?.total_shares ?? '0',
+                tvlAgainst: triple.counter_vault?.total_shares ?? '0',
+                currency: 'ETH',
+                subject: triple.subject?.label ?? '',
+                predicate: triple.predicate?.label ?? '',
+                object: triple.object?.label ?? '',
+                votesCount: (triple.vault?.position_count ?? 0) + (triple.counter_vault?.position_count ?? 0),
+                totalEth: Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0),
+                userPosition: userVaultPosition?.shares ?? userCounterVaultPosition?.shares ?? undefined,
+                positionDirection: userVaultPosition ? ClaimPosition.claimFor :
+                    userCounterVaultPosition ? ClaimPosition.claimAgainst :
+                        undefined
+            };
+        });
+    }, [triplesData]);
 
     const currentItems = data.slice(startIndex, endIndex);
     const totalPages = Math.ceil(data.length / rowsPerPage);
