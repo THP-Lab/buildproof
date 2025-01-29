@@ -26,6 +26,9 @@ import { sortItems } from './sortItems';
 import type { VoteItem } from './types';
 import { VotingPageView } from './VotingPageView';
 import type { GetTriplesWithPositionsQuery } from '@0xintuition/graphql';
+import { useBatchDepositTriple } from '../../lib/hooks/useBatchDepositTriple'
+import { calculateStakes } from '../../lib/utils/calculateStakes'
+import { parseEther } from 'viem'
 
 interface VotingPageProps {
     triplesData: GetTriplesWithPositionsQuery | undefined;
@@ -82,6 +85,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     ];
 
     const [ethAmount, setEthAmount] = useState('0.001');
+    const { batchDepositTriple, isPending } = useBatchDepositTriple()
 
     // Trier les items en fonction des valeurs des sliders
     const sortedItems = useMemo(() => sortItems(data, sliderValues), [data, sliderValues]);
@@ -95,10 +99,42 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const canSubmit = totalAbsoluteValue === 100;
 
     // Handle submit function
-    const handleSubmit = () => {
-        if (canSubmit) {
-            console.log('Submitting votes:', sliderValues);
-            // TODO: Implement actual vote submission
+    const handleSubmit = async () => {
+        if (!userAddress || !ethAmount || !triplesData?.triples) return
+
+        try {
+            const totalStakeWei = parseEther(ethAmount)
+            
+            // Transform triples to include percentage from sliderValues
+            const triplesWithPercentages = triplesData.triples.map(triple => ({
+                id: triple.id,
+                vault_id: triple.vault_id,
+                counter_vault_id: triple.counter_vault_id,
+                percentage: sliderValues[triple.id] || 0
+            }))
+
+            const stakes = calculateStakes(triplesWithPercentages, totalStakeWei)
+
+            // Use hardcoded attestor address
+            const attestorAddress = "0x64Abd54a86DfeB710eF2943d6304FC7B29f18e36"
+
+            // Submit all stakes in one transaction
+            if (stakes.ids.length > 0) {
+                await batchDepositTriple(
+                    {
+                        receiver: userAddress as `0x${string}`,
+                        ids: stakes.ids,
+                        values: stakes.values,
+                        attestorAddress: attestorAddress as `0x${string}`
+                    },
+                    { value: totalStakeWei }
+                )
+            }
+
+            // Handle success (e.g., show notification, reset form, etc.)
+        } catch (error) {
+            console.error('Error submitting stakes:', error)
+            // Handle error (e.g., show error notification)
         }
     };
 

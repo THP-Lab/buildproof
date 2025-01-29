@@ -3,9 +3,13 @@ import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { requireUser } from '@server/auth';
 import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql';
+import { configureClient } from '@0xintuition/graphql';
 
+configureClient({
+    apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
+});
 // Constants
-const TAG_PREDICATE_ID = 4; // for dev environment
+const TAG_PREDICATE_ID = 3; // for dev environment
 const DEFAULT_PAGE_SIZE = 50;
 const TOP_WEB3_TOOLING_LABEL = "Top Web3 Developer Tooling";
 
