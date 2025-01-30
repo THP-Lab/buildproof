@@ -120,13 +120,8 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
 
     // Effect to sort items when debounced values change
     useEffect(() => {
-        const sortedIds = [...data]
-            .sort((a, b) => {
-                const aValue = Math.abs(debouncedSliderValues[a.id] || 0);
-                const bValue = Math.abs(debouncedSliderValues[b.id] || 0);
-                return bValue - aValue;
-            })
-            .map(item => item.id);
+        const sortedItems = sortItems(data, debouncedSliderValues);
+        const sortedIds = sortedItems.map(item => item.id);
         setSortedItemIds(sortedIds);
     }, [debouncedSliderValues, data]);
 
