@@ -1,5 +1,7 @@
 import { ClaimPosition, ClaimPositionType } from '@0xintuition/buildproof_ui';
 
+export type SupportedCurrency = 'ETH' | 'USDC';
+
 export interface VoteItem {
     id: string;
     numPositionsFor: number;
@@ -7,7 +9,7 @@ export interface VoteItem {
     totalTVL: string;
     tvlFor: string;
     tvlAgainst: string;
-    currency: string;
+    currency: SupportedCurrency;
     userPosition?: string;
     positionDirection?: ClaimPositionType;
     subject: string;

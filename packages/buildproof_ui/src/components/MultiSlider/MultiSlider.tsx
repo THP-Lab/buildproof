@@ -6,6 +6,7 @@ interface SliderItem {
   id: string
   value: number
   onChange: (value: number) => void
+  onChangeEnd?: (value: number) => void
 }
 
 interface MultiSliderProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,11 +18,7 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
 
   // Mettre à jour les valeurs des sliders quand elles changent
   useEffect(() => {
-    const updatedSliders = sortedSliders.map(sortedSlider => {
-      const updatedSlider = initialSliders.find(s => s.id === sortedSlider.id)
-      return updatedSlider || sortedSlider
-    })
-    setSortedSliders(updatedSliders)
+    setSortedSliders(initialSliders)
   }, [initialSliders])
 
   const handleValueChange = (onChange: (value: number) => void, currentId: string) => (value: number[]) => {
@@ -29,30 +26,11 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
     onChange(newValue)
   }
 
-  const handlePointerUp = () => {
-    // Trier les sliders: positifs d'abord, puis négatifs, puis zéros
-    const newSortedSliders = [...sortedSliders].sort((a, b) => {
-      // Si l'un est zéro et l'autre non, le zéro va en dernier
-      if (a.value === 0 && b.value !== 0) return 1;
-      if (a.value !== 0 && b.value === 0) return -1;
-      
-      // Si l'un est positif et l'autre négatif, le positif va en premier
-      if ((a.value > 0 && b.value < 0) || (a.value < 0 && b.value > 0)) {
-        return b.value - a.value;
-      }
-      
-      // Si les deux sont positifs, on trie par ordre décroissant
-      if (a.value > 0 && b.value > 0) {
-        return b.value - a.value;
-      }
-      
-      // Si les deux sont négatifs, on trie par ordre croissant
-      if (a.value < 0 && b.value < 0) {
-        return a.value - b.value;
-      }
-      return 0;
-    });
-    setSortedSliders(newSortedSliders);
+  const handlePointerUp = (slider: SliderItem) => () => {
+    // Call onChangeEnd if provided
+    if (slider.onChangeEnd) {
+      slider.onChangeEnd(slider.value);
+    }
   };
 
   return (
@@ -79,6 +57,12 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
                         const value = Math.max(-100, Math.min(100, Number(e.target.value)));
                         slider.onChange(value);
                       }}
+                      onBlur={(e) => {
+                        const value = Math.max(-100, Math.min(100, Number(e.target.value)));
+                        if (slider.onChangeEnd) {
+                          slider.onChangeEnd(value);
+                        }
+                      }}
                       className={cn(
                         "w-[40px] bg-transparent text-center text-sm font-medium",
                         "focus:outline-none",
@@ -102,7 +86,7 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
                     min={-100}
                     step={1}
                     onValueChange={(value: number[]) => handleValueChange(slider.onChange, slider.id)(value)}
-                    onPointerUp={handlePointerUp}
+                    onPointerUp={handlePointerUp(slider)}
                   >
                     <SliderPrimitive.Track className="relative h-[6px] grow rounded-full">
                       <div className="absolute w-full h-full rounded-full bg-border/20" />
@@ -152,6 +136,12 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
                         const value = Math.max(-100, Math.min(100, Number(e.target.value)));
                         slider.onChange(value);
                       }}
+                      onBlur={(e) => {
+                        const value = Math.max(-100, Math.min(100, Number(e.target.value)));
+                        if (slider.onChangeEnd) {
+                          slider.onChangeEnd(value);
+                        }
+                      }}
                       className={cn(
                         "w-[40px] bg-transparent text-center text-sm font-medium",
                         "focus:outline-none",
@@ -175,7 +165,7 @@ const MultiSlider = ({ sliders: initialSliders, className, ...props }: MultiSlid
                     min={-100}
                     step={1}
                     onValueChange={(value: number[]) => handleValueChange(slider.onChange, slider.id)(value)}
-                    onPointerUp={handlePointerUp}
+                    onPointerUp={handlePointerUp(slider)}
                   >
                     <SliderPrimitive.Track className="relative h-[6px] grow rounded-full">
                       <div className="absolute w-full h-full rounded-full bg-border/20" />

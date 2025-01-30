@@ -12,14 +12,24 @@ import {
     PaginationSummary,
     PaginationRowSelection,
     PaginationPageCounter,
-    PaginationFirst,
-    PaginationLast,
+    PaginationEllipsis,
+    PaginationLink,
     ClaimPosition,
     MultiSlider,
     Button,
     Input
 } from '@0xintuition/buildproof_ui';
-import type { VoteItem } from './types';
+import type { VoteItem, SupportedCurrency } from './types';
+import { formatUnits } from 'viem';
+import { FormattedStakeTVL } from './FormattedStakeTVL';
+import { CurrencyToggle } from './CurrencyToggle';
+
+const formatTVL = (value: string) => {
+    const num = Number(formatUnits(BigInt(value), 18));
+    if (isNaN(num) || num === 0) return '0';
+    if (num > 0 && num < 0.0001) return '<0.0001';
+    return num.toFixed(4);
+};
 
 interface VotingPageViewProps {
     selectedTab: string;
@@ -33,6 +43,7 @@ interface VotingPageViewProps {
     sliderValues: { [key: string]: number };
     resetSingleSlider: (id: string) => void;
     handleSliderChange: (id: string, value: number) => void;
+    handleSliderCommit: (id: string, value: number) => void;
     canSubmit: boolean;
     handleSubmit: () => void;
     currentPage: number;
@@ -41,6 +52,8 @@ interface VotingPageViewProps {
     setRowsPerPage: (value: string) => void;
     setCurrentPage: (page: number) => void;
     data: VoteItem[];
+    currency: SupportedCurrency;
+    onCurrencyToggle: () => void;
 }
 
 export const VotingPageView = ({
@@ -55,6 +68,7 @@ export const VotingPageView = ({
     sliderValues,
     resetSingleSlider,
     handleSliderChange,
+    handleSliderCommit,
     canSubmit,
     handleSubmit,
     currentPage,
@@ -62,8 +76,40 @@ export const VotingPageView = ({
     rowsPerPage,
     setRowsPerPage,
     setCurrentPage,
-    data
+    data,
+    currency,
+    onCurrencyToggle
 }: VotingPageViewProps) => {
+    // Calculer les pages à afficher
+    const getVisiblePages = (current: number, total: number) => {
+        if (total <= 3) return Array.from({ length: total }, (_, i) => i + 1);
+        
+        if (current === 1) {
+            // Première page : afficher 1, 2, 3, ..., total
+            return [1, 2, 3, null, total];
+        }
+        
+        if (current === total) {
+            // Dernière page : afficher 1, ..., total-2, total-1, total
+            return [1, null, total - 2, total - 1, total];
+        }
+        
+        if (current === 2) {
+            // Deuxième page : afficher 1, 2, 3, ..., total
+            return [1, 2, 3, null, total];
+        }
+        
+        if (current === total - 1) {
+            // Avant-dernière page : afficher 1, ..., total-2, total-1, total
+            return [1, null, total - 2, total - 1, total];
+        }
+        
+        // Pages du milieu : afficher 1, ..., current-1, current, current+1, ..., total
+        return [1, null, current - 1, current, current + 1, null, total];
+    };
+
+    const visiblePages = getVisiblePages(currentPage, totalPages);
+
     return (
         <div className="max-w-4xl mx-auto p-4 space-y-6">
             {/* Navigation par onglets */}
@@ -97,9 +143,9 @@ export const VotingPageView = ({
                             onChange={(e) => setEthAmount(e.target.value)}
                             className="h-8 bg-transparent text-white border-white/20"
                             step="0.001"
-                            />
+                        />
                     </div>
-                    <div className="text-sm text-white">ETH</div>
+                    <CurrencyToggle currency={currency} onToggle={onCurrencyToggle} />
                 </div>
                 
                 {/* Progress bar with reset button */}
@@ -114,14 +160,16 @@ export const VotingPageView = ({
                     <div className="text-sm text-white whitespace-nowrap">
                         {totalAbsoluteValue}/100%
                     </div>
-                    <button
-                        onClick={() => resetAllSliders()}
-                        className="ml-2 p-1 rounded-full hover:bg-white/10"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </button>
+                    {totalAbsoluteValue > 0 && (
+                        <button
+                            onClick={() => resetAllSliders()}
+                            className="ml-2 p-1 rounded-full hover:bg-white/10"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        </button>
+                    )}
                 </div>
             </div>
 
@@ -135,20 +183,22 @@ export const VotingPageView = ({
                             const sliderValue = sliderValues[item.id] || 0;
                             return (
                                 <div key={item.id} className="relative">
-                                    <button
-                                        onClick={() => resetSingleSlider(item.id)}
-                                        className="absolute right-2 top-2 p-1 rounded-full hover:bg-white/10 z-10"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
+                                    {sliderValue !== 0 && (
+                                        <button
+                                            onClick={() => resetSingleSlider(item.id)}
+                                            className="absolute right-2 top-2 p-1 rounded-full hover:bg-white/10 z-10"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    )}
                                     <ClaimRow
                                         numPositionsFor={item.numPositionsFor}
                                         numPositionsAgainst={item.numPositionsAgainst}
-                                        totalTVL={item.totalTVL}
-                                        tvlFor={item.tvlFor}
-                                        tvlAgainst={item.tvlAgainst}
+                                        totalTVL={formatTVL(item.totalTVL)}
+                                        tvlFor={formatTVL(item.tvlFor)}
+                                        tvlAgainst={formatTVL(item.tvlAgainst)}
                                         currency={item.currency}
                                         userPosition={item.userPosition}
                                         positionDirection={item.positionDirection}
@@ -167,7 +217,8 @@ export const VotingPageView = ({
                                                         sliders={[{
                                                             id: item.id,
                                                             value: sliderValue,
-                                                            onChange: (value: number) => handleSliderChange(item.id, value)
+                                                            onChange: (value: number) => handleSliderChange(item.id, value),
+                                                            onChangeEnd: (value: number) => handleSliderCommit(item.id, value)
                                                         }]}
                                                     />
                                                 </div>
@@ -187,20 +238,12 @@ export const VotingPageView = ({
                             const sliderValue = sliderValues[item.id] || 0;
                             return (
                                 <div key={item.id} className="relative">
-                                    <button
-                                        onClick={() => resetSingleSlider(item.id)}
-                                        className="absolute right-2 top-2 p-1 rounded-full hover:bg-white/10 z-10"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
                                     <ClaimRow
                                         numPositionsFor={item.numPositionsFor}
                                         numPositionsAgainst={item.numPositionsAgainst}
-                                        totalTVL={item.totalTVL}
-                                        tvlFor={item.tvlFor}
-                                        tvlAgainst={item.tvlAgainst}
+                                        totalTVL={formatTVL(item.totalTVL)}
+                                        tvlFor={formatTVL(item.tvlFor)}
+                                        tvlAgainst={formatTVL(item.tvlAgainst)}
                                         currency={item.currency}
                                         userPosition={item.userPosition}
                                         positionDirection={item.positionDirection}
@@ -219,7 +262,8 @@ export const VotingPageView = ({
                                                         sliders={[{
                                                             id: item.id,
                                                             value: sliderValue,
-                                                            onChange: (value: number) => handleSliderChange(item.id, value)
+                                                            onChange: (value: number) => handleSliderChange(item.id, value),
+                                                            onChangeEnd: (value: number) => handleSliderCommit(item.id, value)
                                                         }]}
                                                     />
                                                 </div>
@@ -255,31 +299,32 @@ export const VotingPageView = ({
                     <PaginationPageCounter currentPage={currentPage} totalPages={totalPages} />
                     <PaginationContent>
                         <PaginationItem>
-                            <PaginationFirst
-                                href="#"
-                                disabled={currentPage === 1}
-                                onClick={() => setCurrentPage(1)}
-                            />
-                        </PaginationItem>
-                        <PaginationItem>
                             <PaginationPrevious
                                 href="#"
                                 disabled={currentPage === 1}
                                 onClick={() => setCurrentPage(currentPage - 1)}
                             />
                         </PaginationItem>
+                        {visiblePages.map((pageNum, idx) => (
+                            <PaginationItem key={idx}>
+                                {pageNum === null ? (
+                                    <PaginationEllipsis />
+                                ) : (
+                                    <PaginationLink
+                                        href="#"
+                                        isActive={pageNum === currentPage}
+                                        onClick={() => setCurrentPage(pageNum)}
+                                    >
+                                        {pageNum}
+                                    </PaginationLink>
+                                )}
+                            </PaginationItem>
+                        ))}
                         <PaginationItem>
                             <PaginationNext
                                 href="#"
                                 disabled={currentPage === totalPages}
                                 onClick={() => setCurrentPage(currentPage + 1)}
-                            />
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLast
-                                href="#"
-                                disabled={currentPage === totalPages}
-                                onClick={() => setCurrentPage(totalPages)}
                             />
                         </PaginationItem>
                     </PaginationContent>

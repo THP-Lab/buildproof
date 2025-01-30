@@ -6,7 +6,6 @@ interface Triple {
 }
 
 interface StakeCalculation {
-  // Utilisation de any[] pour permettre la notation littérale de BigInt (ex: 47n)
   ids: any[]
   values: bigint[]
 }
@@ -28,7 +27,6 @@ export function calculateStakes(
 
     // Use vault_id for positive percentages, counter_vault_id for negative
     const id = triple.percentage > 0 ? triple.vault_id : triple.counter_vault_id
-    // Utiliser eval pour créer un BigInt littéral (ex: 47n)
     stakes.ids.push(eval(id + 'n'))
     stakes.values.push(stakeAmount)
   })
