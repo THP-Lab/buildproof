@@ -21,8 +21,8 @@ export const sortItems = (data: VoteItem[], sliderValues: { [key: string]: numbe
                     return valueB - valueA;
                 }
                 // If percentages are equal, sort by TVL
-                const tvlForA = BigInt(a.tvlFor);
-                const tvlForB = BigInt(b.tvlFor);
+                const tvlForA = Number(a.tvlFor);
+                const tvlForB = Number(b.tvlFor);
                 return tvlForB > tvlForA ? 1 : tvlForB < tvlForA ? -1 : 0;
             }
             
@@ -32,16 +32,16 @@ export const sortItems = (data: VoteItem[], sliderValues: { [key: string]: numbe
                     return valueB - valueA; // This will put more negative values at the bottom
                 }
                 // If percentages are equal, sort by TVL
-                const tvlForA = BigInt(a.tvlFor);
-                const tvlForB = BigInt(b.tvlFor);
+                const tvlForA = Number(a.tvlFor);
+                const tvlForB = Number(b.tvlFor);
                 return tvlForB > tvlForA ? 1 : tvlForB < tvlForA ? -1 : 0;
             }
         }
         
         // If both are zero, sort by tvlFor in descending order
         if (valueA === 0 && valueB === 0) {
-            const tvlForA = BigInt(a.tvlFor);
-            const tvlForB = BigInt(b.tvlFor);
+            const tvlForA = Number(a.tvlFor);
+            const tvlForB = Number(b.tvlFor);
             return tvlForB > tvlForA ? 1 : tvlForB < tvlForA ? -1 : 0;
         }
         

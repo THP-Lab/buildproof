@@ -8,6 +8,7 @@ import { configureClient } from '@0xintuition/graphql';
 configureClient({
     apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
 });
+
 // Constants
 const TAG_PREDICATE_ID = 3; // for dev environment
 const DEFAULT_PAGE_SIZE = 50;
@@ -21,7 +22,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
         return json({
             userAddress: user.wallet?.address,
-            predicateId: TAG_PREDICATE_ID
+            predicateId: TAG_PREDICATE_ID,
         });
     } catch (error) {
         console.error('Error in vote loader:', error);

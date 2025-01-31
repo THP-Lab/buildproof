@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
+import { useFetcher } from '@remix-run/react';
 import {
     ClaimRow,
     Claim,
@@ -39,19 +40,9 @@ interface VotingPageProps {
     userAddress: string | undefined;
 }
 
-const ETH_TO_USDC_RATE = 3190; // Example rate, should be fetched from an oracle in production
-
-const convertValue = (value: string, fromCurrency: SupportedCurrency, toCurrency: SupportedCurrency): string => {
-    if (fromCurrency === toCurrency) return value;
-    const numValue = Number(value);
-    if (isNaN(numValue)) return '0';
-    
-    if (fromCurrency === 'ETH' && toCurrency === 'USDC') {
-        return (numValue * ETH_TO_USDC_RATE).toString();
-    } else {
-        return (numValue / ETH_TO_USDC_RATE).toString();
-    }
-};
+interface EthPriceResponse {
+    price: string;
+}
 
 export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const [selectedTab, setSelectedTab] = useState('voting');
@@ -60,6 +51,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const [currency, setCurrency] = useState<SupportedCurrency>('ETH');
     const [ethAmount, setEthAmount] = useState('0.001');
     const [displayAmount, setDisplayAmount] = useState('0.001');
+    const [ethPrice, setEthPrice] = useState('0');
 
     // État pour les valeurs des sliders
     const [sliderValues, setSliderValues] = useState<{ [key: string]: number }>({});
@@ -68,6 +60,32 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     
     // Create a subject for slider changes
     const sliderSubject = useRef(new Subject<{ id: string; value: number }>());
+
+    // Fetch ETH price
+    const ethPriceFetcher = useFetcher<EthPriceResponse>();
+    
+    useEffect(() => {
+        // Initial fetch only
+        ethPriceFetcher.load('/resources/eth-price');
+    }, []);
+
+    useEffect(() => {
+        if (ethPriceFetcher.data?.price) {
+            setEthPrice(ethPriceFetcher.data.price);
+        }
+    }, [ethPriceFetcher.data]);
+
+    const convertValue = (value: string, fromCurrency: SupportedCurrency, toCurrency: SupportedCurrency): string => {
+        if (fromCurrency === toCurrency) return value;
+        const numValue = Number(value);
+        if (isNaN(numValue)) return '0';
+        
+        if (fromCurrency === 'ETH' && toCurrency === 'USDC') {
+            return (numValue * Number(ethPrice)).toString();
+        } else {
+            return (numValue / Number(ethPrice)).toString();
+        }
+    };
 
     // Transform the GraphQL data into our VoteItem format
     const data: VoteItem[] = useMemo(() => {
@@ -100,7 +118,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
                         undefined
             };
         });
-    }, [triplesData, currency]);
+    }, [triplesData, currency, ethPrice]);
 
     // Set up the subscription when the component mounts
     useEffect(() => {

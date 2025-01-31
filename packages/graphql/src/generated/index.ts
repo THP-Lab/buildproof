@@ -39,7 +39,6 @@ export type Scalars = {
   account_type: { input: any; output: any }
   atom_type: { input: any; output: any }
   bigint: { input: any; output: any }
-  bytea: { input: any; output: any }
   event_type: { input: any; output: any }
   float8: { input: any; output: any }
   jsonb: { input: any; output: any }
@@ -938,7 +937,7 @@ export type Atoms = {
   signals: Array<Signals>
   /** An aggregate relationship */
   signals_aggregate: Signals_Aggregate
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   type: Scalars['atom_type']['output']
   /** An object relationship */
   value?: Maybe<Atom_Values>
@@ -1199,7 +1198,7 @@ export type Atoms_Bool_Exp = {
   label?: InputMaybe<String_Comparison_Exp>
   signals?: InputMaybe<Signals_Bool_Exp>
   signals_aggregate?: InputMaybe<Signals_Aggregate_Bool_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   type?: InputMaybe<Atom_Type_Comparison_Exp>
   value?: InputMaybe<Atom_Values_Bool_Exp>
   value_id?: InputMaybe<Numeric_Comparison_Exp>
@@ -1219,6 +1218,7 @@ export type Atoms_Max_Fields = {
   id?: Maybe<Scalars['numeric']['output']>
   image?: Maybe<Scalars['String']['output']>
   label?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   type?: Maybe<Scalars['atom_type']['output']>
   value_id?: Maybe<Scalars['numeric']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
@@ -1235,6 +1235,7 @@ export type Atoms_Max_Order_By = {
   id?: InputMaybe<Order_By>
   image?: InputMaybe<Order_By>
   label?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   type?: InputMaybe<Order_By>
   value_id?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
@@ -1252,6 +1253,7 @@ export type Atoms_Min_Fields = {
   id?: Maybe<Scalars['numeric']['output']>
   image?: Maybe<Scalars['String']['output']>
   label?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   type?: Maybe<Scalars['atom_type']['output']>
   value_id?: Maybe<Scalars['numeric']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
@@ -1268,6 +1270,7 @@ export type Atoms_Min_Order_By = {
   id?: InputMaybe<Order_By>
   image?: InputMaybe<Order_By>
   label?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   type?: InputMaybe<Order_By>
   value_id?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
@@ -1408,7 +1411,7 @@ export type Atoms_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['numeric']['input']>
   image?: InputMaybe<Scalars['String']['input']>
   label?: InputMaybe<Scalars['String']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   type?: InputMaybe<Scalars['atom_type']['input']>
   value_id?: InputMaybe<Scalars['numeric']['input']>
   vault_id?: InputMaybe<Scalars['numeric']['input']>
@@ -1664,19 +1667,6 @@ export type Books_Var_Samp_Fields = {
 export type Books_Variance_Fields = {
   __typename?: 'books_variance_fields'
   id?: Maybe<Scalars['Float']['output']>
-}
-
-/** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
-export type Bytea_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['bytea']['input']>
-  _gt?: InputMaybe<Scalars['bytea']['input']>
-  _gte?: InputMaybe<Scalars['bytea']['input']>
-  _in?: InputMaybe<Array<Scalars['bytea']['input']>>
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>
-  _lt?: InputMaybe<Scalars['bytea']['input']>
-  _lte?: InputMaybe<Scalars['bytea']['input']>
-  _neq?: InputMaybe<Scalars['bytea']['input']>
-  _nin?: InputMaybe<Array<Scalars['bytea']['input']>>
 }
 
 /** columns and relationships of "cached_image" */
@@ -2263,7 +2253,7 @@ export type Deposits = {
   signals: Array<Signals>
   /** An aggregate relationship */
   signals_aggregate: Signals_Aggregate
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   /** An object relationship */
   vault: Vaults
   vault_id: Scalars['numeric']['output']
@@ -2421,7 +2411,7 @@ export type Deposits_Bool_Exp = {
   shares_for_receiver?: InputMaybe<Numeric_Comparison_Exp>
   signals?: InputMaybe<Signals_Bool_Exp>
   signals_aggregate?: InputMaybe<Signals_Aggregate_Bool_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   vault?: InputMaybe<Vaults_Bool_Exp>
   vault_id?: InputMaybe<Numeric_Comparison_Exp>
 }
@@ -2438,6 +2428,7 @@ export type Deposits_Max_Fields = {
   sender_assets_after_total_fees?: Maybe<Scalars['numeric']['output']>
   sender_id?: Maybe<Scalars['String']['output']>
   shares_for_receiver?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -2452,6 +2443,7 @@ export type Deposits_Max_Order_By = {
   sender_assets_after_total_fees?: InputMaybe<Order_By>
   sender_id?: InputMaybe<Order_By>
   shares_for_receiver?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -2467,6 +2459,7 @@ export type Deposits_Min_Fields = {
   sender_assets_after_total_fees?: Maybe<Scalars['numeric']['output']>
   sender_id?: Maybe<Scalars['String']['output']>
   shares_for_receiver?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -2481,6 +2474,7 @@ export type Deposits_Min_Order_By = {
   sender_assets_after_total_fees?: InputMaybe<Order_By>
   sender_id?: InputMaybe<Order_By>
   shares_for_receiver?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -2639,7 +2633,7 @@ export type Deposits_Stream_Cursor_Value_Input = {
   sender_assets_after_total_fees?: InputMaybe<Scalars['numeric']['input']>
   sender_id?: InputMaybe<Scalars['String']['input']>
   shares_for_receiver?: InputMaybe<Scalars['numeric']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   vault_id?: InputMaybe<Scalars['numeric']['input']>
 }
 
@@ -2766,7 +2760,7 @@ export type Events = {
   /** An object relationship */
   redemption?: Maybe<Redemptions>
   redemption_id?: Maybe<Scalars['String']['output']>
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   /** An object relationship */
   triple?: Maybe<Triples>
   triple_id?: Maybe<Scalars['numeric']['output']>
@@ -2861,7 +2855,7 @@ export type Events_Bool_Exp = {
   id?: InputMaybe<String_Comparison_Exp>
   redemption?: InputMaybe<Redemptions_Bool_Exp>
   redemption_id?: InputMaybe<String_Comparison_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   triple?: InputMaybe<Triples_Bool_Exp>
   triple_id?: InputMaybe<Numeric_Comparison_Exp>
   type?: InputMaybe<Event_Type_Comparison_Exp>
@@ -2877,6 +2871,7 @@ export type Events_Max_Fields = {
   fee_transfer_id?: Maybe<Scalars['String']['output']>
   id?: Maybe<Scalars['String']['output']>
   redemption_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   triple_id?: Maybe<Scalars['numeric']['output']>
   type?: Maybe<Scalars['event_type']['output']>
 }
@@ -2890,6 +2885,7 @@ export type Events_Max_Order_By = {
   fee_transfer_id?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   redemption_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   triple_id?: InputMaybe<Order_By>
   type?: InputMaybe<Order_By>
 }
@@ -2904,6 +2900,7 @@ export type Events_Min_Fields = {
   fee_transfer_id?: Maybe<Scalars['String']['output']>
   id?: Maybe<Scalars['String']['output']>
   redemption_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   triple_id?: Maybe<Scalars['numeric']['output']>
   type?: Maybe<Scalars['event_type']['output']>
 }
@@ -2917,6 +2914,7 @@ export type Events_Min_Order_By = {
   fee_transfer_id?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   redemption_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   triple_id?: InputMaybe<Order_By>
   type?: InputMaybe<Order_By>
 }
@@ -3031,7 +3029,7 @@ export type Events_Stream_Cursor_Value_Input = {
   fee_transfer_id?: InputMaybe<Scalars['String']['input']>
   id?: InputMaybe<Scalars['String']['input']>
   redemption_id?: InputMaybe<Scalars['String']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   triple_id?: InputMaybe<Scalars['numeric']['input']>
   type?: InputMaybe<Scalars['event_type']['input']>
 }
@@ -3121,7 +3119,7 @@ export type Fee_Transfers = {
   /** An object relationship */
   sender?: Maybe<Accounts>
   sender_id: Scalars['String']['output']
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
 }
 
 /** columns and relationships of "fee_transfer" */
@@ -3227,7 +3225,7 @@ export type Fee_Transfers_Bool_Exp = {
   receiver_id?: InputMaybe<String_Comparison_Exp>
   sender?: InputMaybe<Accounts_Bool_Exp>
   sender_id?: InputMaybe<String_Comparison_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
 }
 
 /** aggregate max on columns */
@@ -3239,6 +3237,7 @@ export type Fee_Transfers_Max_Fields = {
   id?: Maybe<Scalars['String']['output']>
   receiver_id?: Maybe<Scalars['String']['output']>
   sender_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
 }
 
 /** order by max() on columns of table "fee_transfer" */
@@ -3249,6 +3248,7 @@ export type Fee_Transfers_Max_Order_By = {
   id?: InputMaybe<Order_By>
   receiver_id?: InputMaybe<Order_By>
   sender_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
 }
 
 /** aggregate min on columns */
@@ -3260,6 +3260,7 @@ export type Fee_Transfers_Min_Fields = {
   id?: Maybe<Scalars['String']['output']>
   receiver_id?: Maybe<Scalars['String']['output']>
   sender_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
 }
 
 /** order by min() on columns of table "fee_transfer" */
@@ -3270,6 +3271,7 @@ export type Fee_Transfers_Min_Order_By = {
   id?: InputMaybe<Order_By>
   receiver_id?: InputMaybe<Order_By>
   sender_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
 }
 
 /** Ordering options when selecting data from "fee_transfer". */
@@ -3364,7 +3366,7 @@ export type Fee_Transfers_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['String']['input']>
   receiver_id?: InputMaybe<Scalars['String']['input']>
   sender_id?: InputMaybe<Scalars['String']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
 }
 
 /** aggregate sum on columns */
@@ -4944,7 +4946,7 @@ export type Redemptions = {
   signals: Array<Signals>
   /** An aggregate relationship */
   signals_aggregate: Signals_Aggregate
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   /** An object relationship */
   vault: Vaults
   vault_id: Scalars['numeric']['output']
@@ -5084,7 +5086,7 @@ export type Redemptions_Bool_Exp = {
   shares_redeemed_by_sender?: InputMaybe<Numeric_Comparison_Exp>
   signals?: InputMaybe<Signals_Bool_Exp>
   signals_aggregate?: InputMaybe<Signals_Aggregate_Bool_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   vault?: InputMaybe<Vaults_Bool_Exp>
   vault_id?: InputMaybe<Numeric_Comparison_Exp>
 }
@@ -5101,6 +5103,7 @@ export type Redemptions_Max_Fields = {
   sender_id?: Maybe<Scalars['String']['output']>
   sender_total_shares_in_vault?: Maybe<Scalars['numeric']['output']>
   shares_redeemed_by_sender?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -5115,6 +5118,7 @@ export type Redemptions_Max_Order_By = {
   sender_id?: InputMaybe<Order_By>
   sender_total_shares_in_vault?: InputMaybe<Order_By>
   shares_redeemed_by_sender?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -5130,6 +5134,7 @@ export type Redemptions_Min_Fields = {
   sender_id?: Maybe<Scalars['String']['output']>
   sender_total_shares_in_vault?: Maybe<Scalars['numeric']['output']>
   shares_redeemed_by_sender?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -5144,6 +5149,7 @@ export type Redemptions_Min_Order_By = {
   sender_id?: InputMaybe<Order_By>
   sender_total_shares_in_vault?: InputMaybe<Order_By>
   shares_redeemed_by_sender?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -5280,7 +5286,7 @@ export type Redemptions_Stream_Cursor_Value_Input = {
   sender_id?: InputMaybe<Scalars['String']['input']>
   sender_total_shares_in_vault?: InputMaybe<Scalars['numeric']['input']>
   shares_redeemed_by_sender?: InputMaybe<Scalars['numeric']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   vault_id?: InputMaybe<Scalars['numeric']['input']>
 }
 
@@ -5395,7 +5401,7 @@ export type Signals = {
   /** An object relationship */
   redemption?: Maybe<Redemptions>
   redemption_id?: Maybe<Scalars['String']['output']>
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   /** An object relationship */
   triple?: Maybe<Triples>
   triple_id?: Maybe<Scalars['numeric']['output']>
@@ -5492,7 +5498,7 @@ export type Signals_Bool_Exp = {
   id?: InputMaybe<String_Comparison_Exp>
   redemption?: InputMaybe<Redemptions_Bool_Exp>
   redemption_id?: InputMaybe<String_Comparison_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   triple?: InputMaybe<Triples_Bool_Exp>
   triple_id?: InputMaybe<Numeric_Comparison_Exp>
 }
@@ -5512,6 +5518,7 @@ export type Signals_Max_Fields = {
   deposit_id?: Maybe<Scalars['String']['output']>
   id?: Maybe<Scalars['String']['output']>
   redemption_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   triple_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -5525,6 +5532,7 @@ export type Signals_Max_Order_By = {
   deposit_id?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   redemption_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   triple_id?: InputMaybe<Order_By>
 }
 
@@ -5539,6 +5547,7 @@ export type Signals_Min_Fields = {
   deposit_id?: Maybe<Scalars['String']['output']>
   id?: Maybe<Scalars['String']['output']>
   redemption_id?: Maybe<Scalars['String']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   triple_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -5552,6 +5561,7 @@ export type Signals_Min_Order_By = {
   deposit_id?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   redemption_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   triple_id?: InputMaybe<Order_By>
 }
 
@@ -5672,7 +5682,7 @@ export type Signals_Stream_Cursor_Value_Input = {
   deposit_id?: InputMaybe<Scalars['String']['input']>
   id?: InputMaybe<Scalars['String']['input']>
   redemption_id?: InputMaybe<Scalars['String']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   triple_id?: InputMaybe<Scalars['numeric']['input']>
 }
 
@@ -6950,7 +6960,7 @@ export type Triples = {
   /** An object relationship */
   subject: Atoms
   subject_id: Scalars['numeric']['output']
-  transaction_hash: Scalars['bytea']['output']
+  transaction_hash: Scalars['String']['output']
   /** An object relationship */
   vault?: Maybe<Vaults>
   vault_id: Scalars['numeric']['output']
@@ -7094,7 +7104,7 @@ export type Triples_Bool_Exp = {
   signals_aggregate?: InputMaybe<Signals_Aggregate_Bool_Exp>
   subject?: InputMaybe<Atoms_Bool_Exp>
   subject_id?: InputMaybe<Numeric_Comparison_Exp>
-  transaction_hash?: InputMaybe<Bytea_Comparison_Exp>
+  transaction_hash?: InputMaybe<String_Comparison_Exp>
   vault?: InputMaybe<Vaults_Bool_Exp>
   vault_id?: InputMaybe<Numeric_Comparison_Exp>
 }
@@ -7110,6 +7120,7 @@ export type Triples_Max_Fields = {
   object_id?: Maybe<Scalars['numeric']['output']>
   predicate_id?: Maybe<Scalars['numeric']['output']>
   subject_id?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -7123,6 +7134,7 @@ export type Triples_Max_Order_By = {
   object_id?: InputMaybe<Order_By>
   predicate_id?: InputMaybe<Order_By>
   subject_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -7137,6 +7149,7 @@ export type Triples_Min_Fields = {
   object_id?: Maybe<Scalars['numeric']['output']>
   predicate_id?: Maybe<Scalars['numeric']['output']>
   subject_id?: Maybe<Scalars['numeric']['output']>
+  transaction_hash?: Maybe<Scalars['String']['output']>
   vault_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -7150,6 +7163,7 @@ export type Triples_Min_Order_By = {
   object_id?: InputMaybe<Order_By>
   predicate_id?: InputMaybe<Order_By>
   subject_id?: InputMaybe<Order_By>
+  transaction_hash?: InputMaybe<Order_By>
   vault_id?: InputMaybe<Order_By>
 }
 
@@ -7291,7 +7305,7 @@ export type Triples_Stream_Cursor_Value_Input = {
   object_id?: InputMaybe<Scalars['numeric']['input']>
   predicate_id?: InputMaybe<Scalars['numeric']['input']>
   subject_id?: InputMaybe<Scalars['numeric']['input']>
-  transaction_hash?: InputMaybe<Scalars['bytea']['input']>
+  transaction_hash?: InputMaybe<Scalars['String']['input']>
   vault_id?: InputMaybe<Scalars['numeric']['input']>
 }
 
@@ -7969,7 +7983,7 @@ export type AtomTxnFragment = {
   __typename?: 'atoms'
   block_number: any
   block_timestamp: any
-  transaction_hash: any
+  transaction_hash: string
   creator_id: string
 }
 
@@ -8161,7 +8175,7 @@ export type EventDetailsFragment = {
   block_number: any
   block_timestamp: any
   type: any
-  transaction_hash: any
+  transaction_hash: string
   atom_id?: any | null
   triple_id?: any | null
   deposit_id?: string | null
@@ -8884,7 +8898,7 @@ export type TripleTxnFragment = {
   __typename?: 'triples'
   block_number: any
   block_timestamp: any
-  transaction_hash: any
+  transaction_hash: string
   creator_id: string
 }
 
@@ -9940,7 +9954,7 @@ export type GetAtomsQuery = {
     wallet_id: string
     block_number: any
     block_timestamp: any
-    transaction_hash: any
+    transaction_hash: string
     creator_id: string
     vault_id: any
     creator?: {
@@ -10140,7 +10154,7 @@ export type GetAtomsWithPositionsQuery = {
     wallet_id: string
     block_number: any
     block_timestamp: any
-    transaction_hash: any
+    transaction_hash: string
     creator_id: string
     vault?: {
       __typename?: 'vaults'
@@ -10223,7 +10237,7 @@ export type GetAtomsWithAggregatesQuery = {
       wallet_id: string
       block_number: any
       block_timestamp: any
-      transaction_hash: any
+      transaction_hash: string
       creator_id: string
       vault_id: any
       creator?: {
@@ -10318,7 +10332,7 @@ export type GetAtomQuery = {
     wallet_id: string
     block_number: any
     block_timestamp: any
-    transaction_hash: any
+    transaction_hash: string
     creator_id: string
     vault_id: any
     creator?: {
@@ -12834,7 +12848,7 @@ export type GetTriplesQuery = {
     object_id: any
     block_number: any
     block_timestamp: any
-    transaction_hash: any
+    transaction_hash: string
     creator_id: string
     vault_id: any
     counter_vault_id: any
@@ -13389,7 +13403,7 @@ export type GetTriplesWithAggregatesQuery = {
       object_id: any
       block_number: any
       block_timestamp: any
-      transaction_hash: any
+      transaction_hash: string
       creator_id: string
       vault_id: any
       counter_vault_id: any
@@ -13948,7 +13962,7 @@ export type GetTripleQuery = {
     object_id: any
     block_number: any
     block_timestamp: any
-    transaction_hash: any
+    transaction_hash: string
     creator_id: string
     vault_id: any
     counter_vault_id: any
