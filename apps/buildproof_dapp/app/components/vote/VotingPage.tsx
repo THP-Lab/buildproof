@@ -24,7 +24,11 @@ import {
     CurrencyType,
     Switch
 } from '@0xintuition/buildproof_ui';
-import { handleSliderChange, resetSingleSlider, resetAllSliders } from './handleSliderChange';
+import {
+    handleSliderChange as handleSliderChangeWithValidation,
+    resetSingleSlider as resetSingleSliderWithValidation,
+    resetAllSliders as resetAllSlidersWithValidation
+} from './handleSliderChange';
 import { sortItems } from './sortItems';
 import type { VoteItem, SupportedCurrency } from './types';
 import { VotingPageView } from './VotingPageView';
@@ -80,7 +84,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         const numValue = Number(value);
         if (isNaN(numValue)) return '0';
         
-        if (fromCurrency === 'ETH' && toCurrency === 'USDC') {
+        if (fromCurrency === 'ETH' && toCurrency === '$') {
             return (numValue * Number(ethPrice)).toString();
         } else {
             return (numValue / Number(ethPrice)).toString();
@@ -178,7 +182,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             setDisplayAmount(value);
         } else {
             setDisplayAmount(value);
-            setEthAmount(convertValue(value, 'USDC', 'ETH'));
+            setEthAmount(convertValue(value, '$', 'ETH'));
         }
     };
 
@@ -192,7 +196,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
 
     const toggleCurrency = () => {
         setCurrency(prev => {
-            const newCurrency = prev === 'ETH' ? 'USDC' : 'ETH';
+            const newCurrency = prev === 'ETH' ? '$' : 'ETH';
             setDisplayAmount(convertValue(ethAmount, 'ETH', newCurrency));
             return newCurrency;
         });
@@ -238,40 +242,6 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         }
     };
 
-    // Handle slider changes - now split into two functions
-    const handleSliderChange = (id: string, value: number) => {
-        // Update only the immediate UI feedback
-        setSliderValues(prev => ({
-            ...prev,
-            [id]: value
-        }));
-    };
-
-    // Handle slider release or input blur
-    const handleSliderCommit = (id: string, value: number) => {
-        // Push the final value to the subject
-        sliderSubject.current.next({ id, value });
-    };
-
-    // Reset functions should update both immediate and debounced values
-    const resetAllSliders = () => {
-        setSliderValues({});
-        setDebouncedSliderValues({});
-    };
-
-    const resetSingleSlider = (id: string) => {
-        setSliderValues(prev => {
-            const newValues = { ...prev };
-            delete newValues[id];
-            return newValues;
-        });
-        setDebouncedSliderValues(prev => {
-            const newValues = { ...prev };
-            delete newValues[id];
-            return newValues;
-        });
-    };
-
     return (
         <VotingPageView
             selectedTab={selectedTab}
@@ -280,23 +250,23 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             ethAmount={displayAmount}
             setEthAmount={handleAmountChange}
             totalAbsoluteValue={totalAbsoluteValue}
-            resetAllSliders={resetAllSliders}
+            resetAllSliders={() => resetAllSlidersWithValidation(setSliderValues)}
             sortedItems={paginatedItems}
             sliderValues={sliderValues}
-            resetSingleSlider={resetSingleSlider}
-            handleSliderChange={handleSliderChange}
-            handleSliderCommit={handleSliderCommit}
+            resetSingleSlider={(id) => resetSingleSliderWithValidation(id, setSliderValues)}
+            handleSliderChange={(id, value) => handleSliderChangeWithValidation(id, value, sliderValues, setSliderValues)}
+            handleSliderCommit={(id, value) => {
+                handleSliderChangeWithValidation(id, value, sliderValues, setSliderValues);
+                sliderSubject.current.next({ id, value });
+            }}
             canSubmit={canSubmit}
             handleSubmit={handleSubmit}
             currentPage={currentPage}
             totalPages={totalPages}
             rowsPerPage={rowsPerPage.toString()}
-            setRowsPerPage={(value) => {
-                setRowsPerPage(Number(value));
-                setCurrentPage(1);
-            }}
+            setRowsPerPage={(value: string) => setRowsPerPage(Number(value))}
             setCurrentPage={setCurrentPage}
-            data={sortedItems}
+            data={data}
             currency={currency}
             onCurrencyToggle={toggleCurrency}
         />

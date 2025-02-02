@@ -1,6 +1,6 @@
 import { ClaimPosition, ClaimPositionType } from '@0xintuition/buildproof_ui';
 
-export type SupportedCurrency = 'ETH' | 'USDC';
+export type SupportedCurrency = 'ETH' | '$';
 
 export interface VoteItem {
     id: string;

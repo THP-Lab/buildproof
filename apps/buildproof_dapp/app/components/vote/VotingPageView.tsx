@@ -17,18 +17,23 @@ import {
     ClaimPosition,
     MultiSlider,
     Button,
-    Input
 } from '@0xintuition/buildproof_ui';
 import type { VoteItem, SupportedCurrency } from './types';
 import { formatUnits } from 'viem';
-import { FormattedStakeTVL } from './FormattedStakeTVL';
+
 import { CurrencyToggle } from './CurrencyToggle';
 
-const formatTVL = (value: string) => {
+const formatTVL = (value: string, currency: SupportedCurrency) => {
     const num = Number(formatUnits(BigInt(value), 18));
     if (isNaN(num) || num === 0) return '0';
-    if (num > 0 && num < 0.0001) return '<0.0001';
-    return num.toFixed(4);
+    
+    if (currency === 'ETH') {
+        if (num > 0 && num < 0.0001) return '<0.0001';
+        return num.toFixed(4);
+    } else {
+        if (num > 0 && num < 0.01) return '<0.01';
+        return num.toFixed(2);
+    }
 };
 
 interface VotingPageViewProps {
@@ -131,47 +136,15 @@ export const VotingPageView = ({
                 message="Use the sliders to allocate your voting power. Positive values support a project, negative values oppose it. The total absolute values cannot exceed 100%."
                 className="mb-6"
             />
-
-            {/* Total stakes input */}
-            <div className="flex items-center justify-between bg-black p-2">
-                <div className="flex items-center gap-4">
-                    <div className="text-sm text-white">Your Total stakes <br/> for this hackathon</div>
-                    <div className="w-[120px]">
-                        <Input
-                            type="number"
-                            value={ethAmount}
-                            onChange={(e) => setEthAmount(e.target.value)}
-                            className="h-8 bg-transparent text-white border-white/20"
-                            step="0.001"
-                        />
-                    </div>
-                    <CurrencyToggle currency={currency} onToggle={onCurrencyToggle} />
-                </div>
-                
-                {/* Progress bar with reset button */}
-                <div className="flex items-center gap-2">
-                    <div className="text-sm text-white">Total Stakes placed:</div>
-                    <div className="w-[300px] bg-white/10 h-2 rounded-sm overflow-hidden">
-                        <div 
-                            className="h-full bg-blue-500 transition-all duration-300"
-                            style={{ width: `${totalAbsoluteValue}%` }}
-                        />
-                    </div>
-                    <div className="text-sm text-white whitespace-nowrap">
-                        {totalAbsoluteValue}/100%
-                    </div>
-                    {totalAbsoluteValue > 0 && (
-                        <button
-                            onClick={() => resetAllSliders()}
-                            className="ml-2 p-1 rounded-full hover:bg-white/10"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                        </button>
-                    )}
-                </div>
-            </div>
+            
+            <CurrencyToggle
+                currency={currency}
+                onToggle={onCurrencyToggle}
+                ethAmount={ethAmount}
+                setEthAmount={setEthAmount}
+                totalAbsoluteValue={totalAbsoluteValue}
+                resetAllSliders={resetAllSliders}
+            />
 
             {/* Liste des Claims */}
             <div className="space-y-8">
@@ -196,10 +169,10 @@ export const VotingPageView = ({
                                     <ClaimRow
                                         numPositionsFor={item.numPositionsFor}
                                         numPositionsAgainst={item.numPositionsAgainst}
-                                        totalTVL={formatTVL(item.totalTVL)}
-                                        tvlFor={formatTVL(item.tvlFor)}
-                                        tvlAgainst={formatTVL(item.tvlAgainst)}
-                                        currency={item.currency}
+                                        totalTVL={formatTVL(item.totalTVL, currency)}
+                                        tvlFor={formatTVL(item.tvlFor, currency)}
+                                        tvlAgainst={formatTVL(item.tvlAgainst, currency)}
+                                        currency={currency}
                                         userPosition={item.userPosition}
                                         positionDirection={item.positionDirection}
                                         onStakeForClick={() => console.log('Vote FOR project', item.subject)}
@@ -241,10 +214,10 @@ export const VotingPageView = ({
                                     <ClaimRow
                                         numPositionsFor={item.numPositionsFor}
                                         numPositionsAgainst={item.numPositionsAgainst}
-                                        totalTVL={formatTVL(item.totalTVL)}
-                                        tvlFor={formatTVL(item.tvlFor)}
-                                        tvlAgainst={formatTVL(item.tvlAgainst)}
-                                        currency={item.currency}
+                                        totalTVL={formatTVL(item.totalTVL, currency)}
+                                        tvlFor={formatTVL(item.tvlFor, currency)}
+                                        tvlAgainst={formatTVL(item.tvlAgainst, currency)}
+                                        currency={currency}
                                         userPosition={item.userPosition}
                                         positionDirection={item.positionDirection}
                                         onStakeForClick={() => console.log('Vote FOR project', item.subject)}
