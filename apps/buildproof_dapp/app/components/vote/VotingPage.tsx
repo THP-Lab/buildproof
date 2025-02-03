@@ -103,23 +103,36 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             const vaultShares = triple.vault?.total_shares ?? '0';
             const counterVaultShares = triple.counter_vault?.total_shares ?? '0';
 
+            // Récupérer les positions de l'utilisateur
+            const userVaultShares = userVaultPosition?.shares ?? '0';
+            const userCounterVaultShares = userCounterVaultPosition?.shares ?? '0';
+
+            // Déterminer la direction et le montant de la position
+            let positionDirection;
+            let userPosition;
+            if (Number(userVaultShares) > 0) {
+                positionDirection = ClaimPosition.claimFor;
+                userPosition = userVaultShares;
+            } else if (Number(userCounterVaultShares) > 0) {
+                positionDirection = ClaimPosition.claimAgainst;
+                userPosition = userCounterVaultShares;
+            }
+
             return {
                 id: triple.id,
                 numPositionsFor: triple.vault?.position_count ?? 0,
                 numPositionsAgainst: triple.counter_vault?.position_count ?? 0,
-                totalTVL: convertValue(totalShares, 'ETH', currency),
-                tvlFor: convertValue(vaultShares, 'ETH', currency),
-                tvlAgainst: convertValue(counterVaultShares, 'ETH', currency),
+                totalTVL: totalShares,
+                tvlFor: vaultShares,
+                tvlAgainst: counterVaultShares,
                 currency: currency,
                 subject: triple.subject?.label ?? '',
                 predicate: triple.predicate?.label ?? '',
                 object: triple.object?.label ?? '',
                 votesCount: (triple.vault?.position_count ?? 0) + (triple.counter_vault?.position_count ?? 0),
-                totalEth: Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0),
-                userPosition: userVaultPosition?.shares ?? userCounterVaultPosition?.shares ?? undefined,
-                positionDirection: userVaultPosition ? ClaimPosition.claimFor :
-                    userCounterVaultPosition ? ClaimPosition.claimAgainst :
-                        undefined
+                totalEth: Number(totalShares),
+                userPosition,
+                positionDirection
             };
         });
     }, [triplesData, currency, ethPrice]);
@@ -242,6 +255,12 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         }
     };
 
+    const handleResetSlider = (id: string) => {
+        resetSingleSliderWithValidation(id, setSliderValues);
+        // Déclencher le tri comme pour les changements de slider
+        sliderSubject.current.next({ id, value: 0 });
+    };
+
     return (
         <VotingPageView
             selectedTab={selectedTab}
@@ -253,7 +272,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             resetAllSliders={() => resetAllSlidersWithValidation(setSliderValues)}
             sortedItems={paginatedItems}
             sliderValues={sliderValues}
-            resetSingleSlider={(id) => resetSingleSliderWithValidation(id, setSliderValues)}
+            resetSingleSlider={handleResetSlider}
             handleSliderChange={(id, value) => handleSliderChangeWithValidation(id, value, sliderValues, setSliderValues)}
             handleSliderCommit={(id, value) => {
                 handleSliderChangeWithValidation(id, value, sliderValues, setSliderValues);
@@ -269,6 +288,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             data={data}
             currency={currency}
             onCurrencyToggle={toggleCurrency}
+            setDebouncedSliderValues={setDebouncedSliderValues}
         />
     );
 }; 

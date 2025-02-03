@@ -47,13 +47,21 @@ const VotePage = () => {
                     { object: { label: { _eq: TOP_WEB3_TOOLING_LABEL } } }
                 ]
             },
-            address: userAddress!
+            address: userAddress?.toLowerCase()
         },
         {
             queryKey: ['get-triples-with-positions', predicateId, TOP_WEB3_TOOLING_LABEL, userAddress],
             enabled: !!userAddress && !!predicateId
         }
     );
+
+    console.log('Query variables:', {
+        predicateId,
+        address: userAddress,
+        TOP_WEB3_TOOLING_LABEL
+    });
+
+    console.log('Response data:', triplesData);
 
     // Loading state
     if (isLoading) {
