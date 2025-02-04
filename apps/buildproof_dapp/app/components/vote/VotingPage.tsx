@@ -35,7 +35,7 @@ import { VotingPageView } from './VotingPageView';
 import type { GetTriplesWithPositionsQuery } from '@0xintuition/graphql';
 import { useBatchDepositTriple } from '../../lib/hooks/useBatchDepositTriple'
 import { calculateStakes } from '../../lib/utils/calculateStakes'
-import { parseEther } from 'viem'
+import { parseEther, formatUnits } from 'viem'
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -53,13 +53,53 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [currency, setCurrency] = useState<SupportedCurrency>('ETH');
-    const [ethAmount, setEthAmount] = useState('0.001');
-    const [displayAmount, setDisplayAmount] = useState('0.001');
+    
+    // Calculate total existing positions and initialize states
+    const [ethAmount, setEthAmount] = useState(() => {
+        if (!triplesData?.triples) return '0.001';
+        
+        const totalPositions = triplesData.triples.reduce((total, triple) => {
+            const userVaultPosition = triple.vault?.positions?.[0];
+            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+            const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+            return total + vaultAmount + counterVaultAmount;
+        }, 0);
+
+        return totalPositions > 0 ? totalPositions.toString() : '0.001';
+    });
+
+    // Calculate initial slider values
+    const initialSliderValues = (() => {
+        if (!triplesData?.triples) return {};
+        
+        const totalEth = Number(ethAmount);
+        if (totalEth === 0) return {};
+
+        return triplesData.triples.reduce((values, triple) => {
+            const userVaultPosition = triple.vault?.positions?.[0];
+            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            
+            const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+            const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+            
+            const totalPosition = vaultAmount + counterVaultAmount;
+            if (totalPosition > 0) {
+                const percentage = Math.round((totalPosition / totalEth) * 100 * 100) / 100;
+                values[triple.id] = vaultAmount > 0 ? percentage : -percentage;
+            }
+            
+            return values;
+        }, {} as { [key: string]: number });
+    })();
+
+    const [sliderValues, setSliderValues] = useState(initialSliderValues);
+    const [debouncedSliderValues, setDebouncedSliderValues] = useState(initialSliderValues);
+
+    const [displayAmount, setDisplayAmount] = useState(ethAmount);
     const [ethPrice, setEthPrice] = useState('0');
 
     // État pour les valeurs des sliders
-    const [sliderValues, setSliderValues] = useState<{ [key: string]: number }>({});
-    const [debouncedSliderValues, setDebouncedSliderValues] = useState<{ [key: string]: number }>({});
     const [sortedItemIds, setSortedItemIds] = useState<string[]>([]);
     
     // Create a subject for slider changes
@@ -78,16 +118,17 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             setEthPrice(ethPriceFetcher.data.price);
         }
     }, [ethPriceFetcher.data]);
-
     const convertValue = (value: string, fromCurrency: SupportedCurrency, toCurrency: SupportedCurrency): string => {
+        if (!value) return '0';
         if (fromCurrency === toCurrency) return value;
         const numValue = Number(value);
-        if (isNaN(numValue)) return '0';
         
         if (fromCurrency === 'ETH' && toCurrency === '$') {
-            return (numValue * Number(ethPrice)).toString();
+            const result = (numValue * Number(ethPrice));
+            return isNaN(result) ? '0' : result.toString();
         } else {
-            return (numValue / Number(ethPrice)).toString();
+            const result = (numValue / Number(ethPrice));
+            return isNaN(result) ? '0' : result.toString();
         }
     };
 
@@ -188,20 +229,67 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         setDisplayAmount(convertValue(ethAmount, 'ETH', currency));
     }, [currency, ethAmount]);
 
+    // Calculate minimum amount from user positions
+    const minimumAmount = useMemo(() => {
+        if (!triplesData?.triples) return 0;
+        
+        return triplesData.triples.reduce((total, triple) => {
+            const userVaultPosition = triple.vault?.positions?.[0];
+            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+            const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+            return total + vaultAmount + counterVaultAmount;
+        }, 0);
+    }, [triplesData]);
+
     // Handle input amount change
     const handleAmountChange = (value: string) => {
+        const newAmount = currency === 'ETH' ? value : convertValue(value, '$', 'ETH');
+        const newAmountNum = Number(newAmount);
+        
+        // Don't allow amount below minimum
+        if (newAmountNum < minimumAmount) {
+            const minAmountStr = minimumAmount.toString();
+            if (currency === 'ETH') {
+                setEthAmount(minAmountStr);
+                setDisplayAmount(minAmountStr);
+            } else {
+                setDisplayAmount(convertValue(minAmountStr, 'ETH', '$'));
+                setEthAmount(minAmountStr);
+            }
+            return;
+        }
+
+        const oldAmount = ethAmount;
+        
+        // Update the amounts
         if (currency === 'ETH') {
             setEthAmount(value);
             setDisplayAmount(value);
         } else {
             setDisplayAmount(value);
-            setEthAmount(convertValue(value, '$', 'ETH'));
+            setEthAmount(newAmount);
+        }
+
+        // If we have existing positions, adjust their percentages proportionally
+        if (Object.keys(sliderValues).length > 0) {
+            const ratio = Number(oldAmount) / newAmountNum;
+            const newSliderValues = Object.entries(sliderValues).reduce((acc, [id, value]) => {
+                // Adjust each percentage proportionally
+                const newValue = Math.round((value * ratio) * 100) / 100;
+                acc[id] = newValue;
+                return acc;
+            }, {} as { [key: string]: number });
+
+            setSliderValues(newSliderValues);
+            setDebouncedSliderValues(newSliderValues);
         }
     };
 
     // Calculate total based on immediate values for UI feedback
     const totalAbsoluteValue = useMemo(() => {
-        return Object.values(sliderValues).reduce((sum, value) => sum + Math.abs(value), 0);
+        const total = Object.values(sliderValues).reduce((sum, value) => sum + Math.abs(value), 0);
+        return Math.round(total * 100) / 100;
     }, [sliderValues]);
 
     // Check if total is exactly 100
@@ -227,7 +315,8 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
                 id: triple.id,
                 vault_id: triple.vault_id,
                 counter_vault_id: triple.counter_vault_id,
-                percentage: sliderValues[triple.id] || 0
+                percentage: Math.round(sliderValues[triple.id] || 0),
+                
             }))
 
             const stakes = calculateStakes(triplesWithPercentages, totalStakeWei)
@@ -289,6 +378,8 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             currency={currency}
             onCurrencyToggle={toggleCurrency}
             setDebouncedSliderValues={setDebouncedSliderValues}
+            userAddress={userAddress || ''}
+            triplesData={triplesData}
         />
     );
 }; 

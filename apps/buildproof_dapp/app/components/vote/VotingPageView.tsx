@@ -21,18 +21,20 @@ import {
 } from '@0xintuition/buildproof_ui';
 import type { VoteItem, SupportedCurrency } from './types';
 import { formatUnits } from 'viem';
+import { useState } from 'react';
 
 import { CurrencyToggle } from './CurrencyToggle';
+import { RedeemStakeModal } from './RedeemStakeModal';
+import { getChainEnvConfig } from '../../lib/utils/environment';
+import { CURRENT_ENV } from '../../consts';
 
 const formatTVL = (value: string, currency: SupportedCurrency) => {
+    if (!value) return '0';
     const num = Number(formatUnits(BigInt(value), 18));
-    if (isNaN(num) || num === 0) return '0';
     
     if (currency === 'ETH') {
-        if (num > 0 && num < 0.0001) return '<0.0001';
         return num.toFixed(4);
     } else {
-        if (num > 0 && num < 0.01) return '<0.01';
         return num.toFixed(2);
     }
 };
@@ -61,6 +63,14 @@ interface VotingPageViewProps {
     currency: SupportedCurrency;
     onCurrencyToggle: () => void;
     setDebouncedSliderValues: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+    userAddress: string;
+    triplesData?: {
+        triples: Array<{
+            id: string;
+            vault_id: string;
+            counter_vault_id: string;
+        }>;
+    };
 }
 
 export const VotingPageView = ({
@@ -86,8 +96,20 @@ export const VotingPageView = ({
     data,
     currency,
     onCurrencyToggle,
-    setDebouncedSliderValues
+    setDebouncedSliderValues,
+    userAddress,
+    triplesData
 }: VotingPageViewProps) => {
+    const [redeemModalState, setRedeemModalState] = useState<{
+        isOpen: boolean;
+        claimId: string;
+        maxStake: number;
+    }>({
+        isOpen: false,
+        claimId: '',
+        maxStake: 0
+    });
+
     // Calculer les pages à afficher
     const getVisiblePages = (current: number, total: number) => {
         if (total <= 3) return Array.from({ length: total }, (_, i) => i + 1);
@@ -172,11 +194,32 @@ export const VotingPageView = ({
                                     onStakeAgainstClick={() => console.log('Vote AGAINST project', item.subject)}
                                 >
                                     <div className="flex flex-col w-full gap-4">
-                                        <Claim
-                                            subject={{ variant: 'non-user', label: item.subject }}
-                                            predicate={{ variant: 'non-user', label: item.predicate }}
-                                            object={{ variant: 'non-user', label: item.object }}
-                                        />
+                                        <div className="flex justify-between items-center">
+                                            <Claim
+                                                subject={{ variant: 'non-user', label: item.subject }}
+                                                predicate={{ variant: 'non-user', label: item.predicate }}
+                                                object={{ variant: 'non-user', label: item.object }}
+                                            />
+                                            {item.userPosition && (
+                                                <Button
+                                                    variant="outline"
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        // Trouver le triple correspondant dans triplesData pour avoir accès aux IDs complets
+                                                        const triple = triplesData?.triples?.find((t: { id: string; vault_id: string; counter_vault_id: string; }) => t.id === item.id);
+                                                        setRedeemModalState({
+                                                            isOpen: true,
+                                                            claimId: item.positionDirection === ClaimPosition.claimFor 
+                                                                ? (triple?.vault_id || item.id)
+                                                                : (triple?.counter_vault_id || item.id),
+                                                            maxStake: Number(formatUnits(BigInt(item.userPosition || '0'), 18))
+                                                        });
+                                                    }}
+                                                >
+                                                    Redeem Stake
+                                                </Button>
+                                            )}
+                                        </div>
                                         <div className="flex items-center gap-4">
                                             <div className="flex-1">
                                                 <MultiSlider
@@ -193,8 +236,8 @@ export const VotingPageView = ({
                                                             `${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(5)} ETH` :
                                                             `$${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(2)}`
                                                             }
-                                                        </div>
-                                                    )}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -211,9 +254,6 @@ export const VotingPageView = ({
                             </div>
                         ))}
                     </div>
-
-                    {/* Spacer pour la barre fixe du bas */}
-                    <div className="h-32" aria-hidden="true"></div>
                 </div>
 
                 {/* Fixed container at bottom */}
@@ -276,6 +316,15 @@ export const VotingPageView = ({
                     </div>
                 </div>
             </div>
+
+            <RedeemStakeModal
+                isOpen={redeemModalState.isOpen}
+                onClose={() => setRedeemModalState({ isOpen: false, claimId: '', maxStake: 0 })}
+                claimId={redeemModalState.claimId}
+                maxStake={redeemModalState.maxStake}
+                contractAddress={getChainEnvConfig(CURRENT_ENV).contractAddress}
+                userAddress={userAddress}
+            />
         </div>
     );
 }; 

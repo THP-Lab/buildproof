@@ -12,7 +12,7 @@ configureClient({
 // Constants
 const TAG_PREDICATE_ID = 3; // for dev environment
 const DEFAULT_PAGE_SIZE = 50;
-const TOP_WEB3_TOOLING_LABEL = "Top Web3 Developer Tooling";
+const fetched_list_object = "Spaceship Capital";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     try {
@@ -44,13 +44,13 @@ const VotePage = () => {
             where: {
                 _and: [
                     { predicate_id: { _eq: predicateId } },
-                    { object: { label: { _eq: TOP_WEB3_TOOLING_LABEL } } }
+                    { object: { label: { _eq: fetched_list_object } } }
                 ]
             },
             address: userAddress?.toLowerCase()
         },
         {
-            queryKey: ['get-triples-with-positions', predicateId, TOP_WEB3_TOOLING_LABEL, userAddress],
+            queryKey: ['get-triples-with-positions', predicateId, fetched_list_object, userAddress],
             enabled: !!userAddress && !!predicateId
         }
     );
@@ -58,7 +58,7 @@ const VotePage = () => {
     console.log('Query variables:', {
         predicateId,
         address: userAddress,
-        TOP_WEB3_TOOLING_LABEL
+        fetched_list_object
     });
 
     console.log('Response data:', triplesData);
