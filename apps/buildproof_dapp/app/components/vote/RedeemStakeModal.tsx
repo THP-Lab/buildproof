@@ -1,25 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  Input,
 } from '@0xintuition/buildproof_ui'
-import { Button } from '@0xintuition/buildproof_ui'
-import { Input } from '@0xintuition/buildproof_ui'
-import { useBatchRedeemTriple } from '../../lib/hooks/useBatchRedeemTriple'
+
 import { parseEther } from 'viem'
+
 import { multivaultAbi } from '../../lib/abis/multivault'
-import { calculateStakes } from '../../lib/utils/calculateStakes'
+import { useRedeemTriple } from '../../lib/hooks/useRedeemTriple'
 
 interface RedeemStakeModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  claimId: string;
-  maxStake: number;
-  contractAddress: string;
-  userAddress: string;
+  isOpen: boolean
+  onClose: () => void
+  claimId: string
+  maxStake: number
+  contractAddress: string
+  userAddress: string
 }
 
 export function RedeemStakeModal({
@@ -28,10 +30,14 @@ export function RedeemStakeModal({
   claimId,
   maxStake,
   contractAddress,
-  userAddress
+  userAddress,
 }: RedeemStakeModalProps) {
   const [amount, setAmount] = useState(maxStake)
-  const { batchRedeemTriple, isPending } = useBatchRedeemTriple(contractAddress)
+  const {
+    writeContractAsync: redeemTriple,
+    awaitingWalletConfirmation,
+    awaitingOnChainConfirmation,
+  } = useRedeemTriple(contractAddress)
 
   useEffect(() => {
     if (isOpen && !userAddress) {
@@ -54,26 +60,19 @@ export function RedeemStakeModal({
     try {
       const amountInWei = parseEther(amount.toString())
       console.log('Amount in Wei:', amountInWei)
-      
-      const attestorAddress = "0x64Abd54a86DfeB710eF2943d6304FC7B29f18e36"
-      console.log('Attestor address:', attestorAddress)
 
-      const params = {
-        values: [amountInWei],
-        receiver: userAddress as `0x${string}`,
-        ids: [BigInt(claimId)],
-        attestorAddress: attestorAddress as `0x${string}`
-      }
-      console.log('Transaction params:', params)
-
-      console.log('Calling batchRedeemTriple...')
-      const tx = await batchRedeemTriple(params)
+      // Call redeemTriple with all required parameters, following the portal's approach
+      const tx = await redeemTriple({
+        address: `0x1A6950807E33d5bC9975067e6D6b5Ea4cD661665`,
+        abi: multivaultAbi,
+        functionName: 'redeemTriple',
+        args: [amountInWei, userAddress as `0x${string}`, claimId],
+      })
       console.log('Transaction response:', tx)
 
       onClose()
     } catch (error) {
-      console.error('Detailed error in redeem process:', error)
-      throw error
+      console.error('Error redeeming stake:', error)
     }
   }
 
@@ -88,8 +87,14 @@ export function RedeemStakeModal({
     }
   }
 
-  // Disable the button if there's no valid user address
-  const isDisabled = !userAddress || userAddress === 'undefined' || isPending || amount <= 0 || amount > maxStake
+  // Disable the button if there's no valid user address or transaction is pending
+  const isPending = awaitingWalletConfirmation || awaitingOnChainConfirmation
+  const isDisabled =
+    !userAddress ||
+    userAddress === 'undefined' ||
+    isPending ||
+    amount <= 0 ||
+    amount > maxStake
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -102,6 +107,7 @@ export function RedeemStakeModal({
         </DialogHeader>
         <div className="space-y-4">
           <div>
+            {/*  eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label className="text-sm font-medium">Amount to Redeem</label>
             <Input
               type="number"
@@ -150,10 +156,7 @@ export function RedeemStakeModal({
             <Button variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button
-              onClick={handleRedeem}
-              disabled={isDisabled}
-            >
+            <Button onClick={handleRedeem} disabled={isDisabled}>
               {isPending ? 'Redeeming...' : 'Redeem Stake'}
             </Button>
           </div>
@@ -161,4 +164,4 @@ export function RedeemStakeModal({
       </DialogContent>
     </Dialog>
   )
-} 
+}

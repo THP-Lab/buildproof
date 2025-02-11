@@ -39,6 +39,7 @@ export type Scalars = {
   account_type: { input: any; output: any }
   atom_type: { input: any; output: any }
   bigint: { input: any; output: any }
+  bytea: { input: any; output: any }
   event_type: { input: any; output: any }
   float8: { input: any; output: any }
   jsonb: { input: any; output: any }
@@ -157,8 +158,7 @@ export type Accounts = {
   atoms: Array<Atoms>
   /** An aggregate relationship */
   atoms_aggregate: Atoms_Aggregate
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   /** An array relationship */
   claims: Array<Claims>
   /** An aggregate relationship */
@@ -456,7 +456,6 @@ export type Accounts_Bool_Exp = {
   atom_id?: InputMaybe<Numeric_Comparison_Exp>
   atoms?: InputMaybe<Atoms_Bool_Exp>
   atoms_aggregate?: InputMaybe<Atoms_Aggregate_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   claims?: InputMaybe<Claims_Bool_Exp>
   claims_aggregate?: InputMaybe<Claims_Aggregate_Bool_Exp>
   deposits_received?: InputMaybe<Deposits_Bool_Exp>
@@ -524,7 +523,6 @@ export type Accounts_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
   atom_id?: InputMaybe<Order_By>
   atoms_aggregate?: InputMaybe<Atoms_Aggregate_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   claims_aggregate?: InputMaybe<Claims_Aggregate_Order_By>
   deposits_received_aggregate?: InputMaybe<Deposits_Aggregate_Order_By>
   deposits_sent_aggregate?: InputMaybe<Deposits_Aggregate_Order_By>
@@ -677,13 +675,24 @@ export type Atom_Values = {
   /** An object relationship */
   book?: Maybe<Books>
   book_id?: Maybe<Scalars['numeric']['output']>
+  /** An object relationship */
+  byte_object?: Maybe<Byte_Object>
+  byte_object_id?: Maybe<Scalars['numeric']['output']>
+  /** An object relationship */
+  caip10?: Maybe<Caip10>
   id: Scalars['numeric']['output']
+  /** An object relationship */
+  json_object?: Maybe<Json_Objects>
+  json_object_id?: Maybe<Scalars['numeric']['output']>
   /** An object relationship */
   organization?: Maybe<Organizations>
   organization_id?: Maybe<Scalars['numeric']['output']>
   /** An object relationship */
   person?: Maybe<Persons>
   person_id?: Maybe<Scalars['numeric']['output']>
+  /** An object relationship */
+  text_object?: Maybe<Text_Objects>
+  text_object_id?: Maybe<Scalars['numeric']['output']>
   /** An object relationship */
   thing?: Maybe<Things>
   thing_id?: Maybe<Scalars['numeric']['output']>
@@ -722,9 +731,12 @@ export type Atom_Values_Aggregate_FieldsCountArgs = {
 export type Atom_Values_Avg_Fields = {
   __typename?: 'atom_values_avg_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -738,11 +750,18 @@ export type Atom_Values_Bool_Exp = {
   atom?: InputMaybe<Atoms_Bool_Exp>
   book?: InputMaybe<Books_Bool_Exp>
   book_id?: InputMaybe<Numeric_Comparison_Exp>
+  byte_object?: InputMaybe<Byte_Object_Bool_Exp>
+  byte_object_id?: InputMaybe<Numeric_Comparison_Exp>
+  caip10?: InputMaybe<Caip10_Bool_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
+  json_object?: InputMaybe<Json_Objects_Bool_Exp>
+  json_object_id?: InputMaybe<Numeric_Comparison_Exp>
   organization?: InputMaybe<Organizations_Bool_Exp>
   organization_id?: InputMaybe<Numeric_Comparison_Exp>
   person?: InputMaybe<Persons_Bool_Exp>
   person_id?: InputMaybe<Numeric_Comparison_Exp>
+  text_object?: InputMaybe<Text_Objects_Bool_Exp>
+  text_object_id?: InputMaybe<Numeric_Comparison_Exp>
   thing?: InputMaybe<Things_Bool_Exp>
   thing_id?: InputMaybe<Numeric_Comparison_Exp>
 }
@@ -752,9 +771,12 @@ export type Atom_Values_Max_Fields = {
   __typename?: 'atom_values_max_fields'
   account_id?: Maybe<Scalars['String']['output']>
   book_id?: Maybe<Scalars['numeric']['output']>
+  byte_object_id?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['numeric']['output']>
+  json_object_id?: Maybe<Scalars['numeric']['output']>
   organization_id?: Maybe<Scalars['numeric']['output']>
   person_id?: Maybe<Scalars['numeric']['output']>
+  text_object_id?: Maybe<Scalars['numeric']['output']>
   thing_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -763,9 +785,12 @@ export type Atom_Values_Min_Fields = {
   __typename?: 'atom_values_min_fields'
   account_id?: Maybe<Scalars['String']['output']>
   book_id?: Maybe<Scalars['numeric']['output']>
+  byte_object_id?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['numeric']['output']>
+  json_object_id?: Maybe<Scalars['numeric']['output']>
   organization_id?: Maybe<Scalars['numeric']['output']>
   person_id?: Maybe<Scalars['numeric']['output']>
+  text_object_id?: Maybe<Scalars['numeric']['output']>
   thing_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -776,11 +801,18 @@ export type Atom_Values_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
   book?: InputMaybe<Books_Order_By>
   book_id?: InputMaybe<Order_By>
+  byte_object?: InputMaybe<Byte_Object_Order_By>
+  byte_object_id?: InputMaybe<Order_By>
+  caip10?: InputMaybe<Caip10_Order_By>
   id?: InputMaybe<Order_By>
+  json_object?: InputMaybe<Json_Objects_Order_By>
+  json_object_id?: InputMaybe<Order_By>
   organization?: InputMaybe<Organizations_Order_By>
   organization_id?: InputMaybe<Order_By>
   person?: InputMaybe<Persons_Order_By>
   person_id?: InputMaybe<Order_By>
+  text_object?: InputMaybe<Text_Objects_Order_By>
+  text_object_id?: InputMaybe<Order_By>
   thing?: InputMaybe<Things_Order_By>
   thing_id?: InputMaybe<Order_By>
 }
@@ -792,11 +824,17 @@ export type Atom_Values_Select_Column =
   /** column name */
   | 'book_id'
   /** column name */
+  | 'byte_object_id'
+  /** column name */
   | 'id'
+  /** column name */
+  | 'json_object_id'
   /** column name */
   | 'organization_id'
   /** column name */
   | 'person_id'
+  /** column name */
+  | 'text_object_id'
   /** column name */
   | 'thing_id'
 
@@ -804,9 +842,12 @@ export type Atom_Values_Select_Column =
 export type Atom_Values_Stddev_Fields = {
   __typename?: 'atom_values_stddev_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -814,9 +855,12 @@ export type Atom_Values_Stddev_Fields = {
 export type Atom_Values_Stddev_Pop_Fields = {
   __typename?: 'atom_values_stddev_pop_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -824,9 +868,12 @@ export type Atom_Values_Stddev_Pop_Fields = {
 export type Atom_Values_Stddev_Samp_Fields = {
   __typename?: 'atom_values_stddev_samp_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -842,9 +889,12 @@ export type Atom_Values_Stream_Cursor_Input = {
 export type Atom_Values_Stream_Cursor_Value_Input = {
   account_id?: InputMaybe<Scalars['String']['input']>
   book_id?: InputMaybe<Scalars['numeric']['input']>
+  byte_object_id?: InputMaybe<Scalars['numeric']['input']>
   id?: InputMaybe<Scalars['numeric']['input']>
+  json_object_id?: InputMaybe<Scalars['numeric']['input']>
   organization_id?: InputMaybe<Scalars['numeric']['input']>
   person_id?: InputMaybe<Scalars['numeric']['input']>
+  text_object_id?: InputMaybe<Scalars['numeric']['input']>
   thing_id?: InputMaybe<Scalars['numeric']['input']>
 }
 
@@ -852,9 +902,12 @@ export type Atom_Values_Stream_Cursor_Value_Input = {
 export type Atom_Values_Sum_Fields = {
   __typename?: 'atom_values_sum_fields'
   book_id?: Maybe<Scalars['numeric']['output']>
+  byte_object_id?: Maybe<Scalars['numeric']['output']>
   id?: Maybe<Scalars['numeric']['output']>
+  json_object_id?: Maybe<Scalars['numeric']['output']>
   organization_id?: Maybe<Scalars['numeric']['output']>
   person_id?: Maybe<Scalars['numeric']['output']>
+  text_object_id?: Maybe<Scalars['numeric']['output']>
   thing_id?: Maybe<Scalars['numeric']['output']>
 }
 
@@ -862,9 +915,12 @@ export type Atom_Values_Sum_Fields = {
 export type Atom_Values_Var_Pop_Fields = {
   __typename?: 'atom_values_var_pop_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -872,9 +928,12 @@ export type Atom_Values_Var_Pop_Fields = {
 export type Atom_Values_Var_Samp_Fields = {
   __typename?: 'atom_values_var_samp_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -882,9 +941,12 @@ export type Atom_Values_Var_Samp_Fields = {
 export type Atom_Values_Variance_Fields = {
   __typename?: 'atom_values_variance_fields'
   book_id?: Maybe<Scalars['Float']['output']>
+  byte_object_id?: Maybe<Scalars['Float']['output']>
   id?: Maybe<Scalars['Float']['output']>
+  json_object_id?: Maybe<Scalars['Float']['output']>
   organization_id?: Maybe<Scalars['Float']['output']>
   person_id?: Maybe<Scalars['Float']['output']>
+  text_object_id?: Maybe<Scalars['Float']['output']>
   thing_id?: Maybe<Scalars['Float']['output']>
 }
 
@@ -921,8 +983,7 @@ export type Atoms = {
   as_subject_triples_aggregate: Triples_Aggregate
   block_number: Scalars['numeric']['output']
   block_timestamp: Scalars['bigint']['output']
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   /** An object relationship */
   controler?: Maybe<Accounts>
   /** An object relationship */
@@ -1187,7 +1248,6 @@ export type Atoms_Bool_Exp = {
   as_subject_triples_aggregate?: InputMaybe<Triples_Aggregate_Bool_Exp>
   block_number?: InputMaybe<Numeric_Comparison_Exp>
   block_timestamp?: InputMaybe<Bigint_Comparison_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   controler?: InputMaybe<Accounts_Bool_Exp>
   creator?: InputMaybe<Accounts_Bool_Exp>
   creator_id?: InputMaybe<String_Comparison_Exp>
@@ -1288,7 +1348,6 @@ export type Atoms_Order_By = {
   as_subject_triples_aggregate?: InputMaybe<Triples_Aggregate_Order_By>
   block_number?: InputMaybe<Order_By>
   block_timestamp?: InputMaybe<Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   controler?: InputMaybe<Accounts_Order_By>
   creator?: InputMaybe<Accounts_Order_By>
   creator_id?: InputMaybe<Order_By>
@@ -1669,9 +1728,154 @@ export type Books_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>
 }
 
-/** columns and relationships of "cached_image" */
-export type Cached_Images = {
-  __typename?: 'cached_images'
+/** columns and relationships of "byte_object" */
+export type Byte_Object = {
+  __typename?: 'byte_object'
+  data: Scalars['bytea']['output']
+  id: Scalars['numeric']['output']
+}
+
+/** aggregated selection of "byte_object" */
+export type Byte_Object_Aggregate = {
+  __typename?: 'byte_object_aggregate'
+  aggregate?: Maybe<Byte_Object_Aggregate_Fields>
+  nodes: Array<Byte_Object>
+}
+
+/** aggregate fields of "byte_object" */
+export type Byte_Object_Aggregate_Fields = {
+  __typename?: 'byte_object_aggregate_fields'
+  avg?: Maybe<Byte_Object_Avg_Fields>
+  count: Scalars['Int']['output']
+  max?: Maybe<Byte_Object_Max_Fields>
+  min?: Maybe<Byte_Object_Min_Fields>
+  stddev?: Maybe<Byte_Object_Stddev_Fields>
+  stddev_pop?: Maybe<Byte_Object_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Byte_Object_Stddev_Samp_Fields>
+  sum?: Maybe<Byte_Object_Sum_Fields>
+  var_pop?: Maybe<Byte_Object_Var_Pop_Fields>
+  var_samp?: Maybe<Byte_Object_Var_Samp_Fields>
+  variance?: Maybe<Byte_Object_Variance_Fields>
+}
+
+/** aggregate fields of "byte_object" */
+export type Byte_Object_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Byte_Object_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** aggregate avg on columns */
+export type Byte_Object_Avg_Fields = {
+  __typename?: 'byte_object_avg_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to filter rows from the table "byte_object". All fields are combined with a logical 'AND'. */
+export type Byte_Object_Bool_Exp = {
+  _and?: InputMaybe<Array<Byte_Object_Bool_Exp>>
+  _not?: InputMaybe<Byte_Object_Bool_Exp>
+  _or?: InputMaybe<Array<Byte_Object_Bool_Exp>>
+  data?: InputMaybe<Bytea_Comparison_Exp>
+  id?: InputMaybe<Numeric_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Byte_Object_Max_Fields = {
+  __typename?: 'byte_object_max_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate min on columns */
+export type Byte_Object_Min_Fields = {
+  __typename?: 'byte_object_min_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** Ordering options when selecting data from "byte_object". */
+export type Byte_Object_Order_By = {
+  data?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+}
+
+/** select columns of table "byte_object" */
+export type Byte_Object_Select_Column =
+  /** column name */
+  | 'data'
+  /** column name */
+  | 'id'
+
+/** aggregate stddev on columns */
+export type Byte_Object_Stddev_Fields = {
+  __typename?: 'byte_object_stddev_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Byte_Object_Stddev_Pop_Fields = {
+  __typename?: 'byte_object_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Byte_Object_Stddev_Samp_Fields = {
+  __typename?: 'byte_object_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Streaming cursor of the table "byte_object" */
+export type Byte_Object_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Byte_Object_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Byte_Object_Stream_Cursor_Value_Input = {
+  data?: InputMaybe<Scalars['bytea']['input']>
+  id?: InputMaybe<Scalars['numeric']['input']>
+}
+
+/** aggregate sum on columns */
+export type Byte_Object_Sum_Fields = {
+  __typename?: 'byte_object_sum_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate var_pop on columns */
+export type Byte_Object_Var_Pop_Fields = {
+  __typename?: 'byte_object_var_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate var_samp on columns */
+export type Byte_Object_Var_Samp_Fields = {
+  __typename?: 'byte_object_var_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate variance on columns */
+export type Byte_Object_Variance_Fields = {
+  __typename?: 'byte_object_variance_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
+export type Bytea_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['bytea']['input']>
+  _gt?: InputMaybe<Scalars['bytea']['input']>
+  _gte?: InputMaybe<Scalars['bytea']['input']>
+  _in?: InputMaybe<Array<Scalars['bytea']['input']>>
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>
+  _lt?: InputMaybe<Scalars['bytea']['input']>
+  _lte?: InputMaybe<Scalars['bytea']['input']>
+  _neq?: InputMaybe<Scalars['bytea']['input']>
+  _nin?: InputMaybe<Array<Scalars['bytea']['input']>>
+}
+
+/** columns and relationships of "cached_images.cached_image" */
+export type Cached_Images_Cached_Image = {
+  __typename?: 'cached_images_cached_image'
   created_at: Scalars['timestamptz']['output']
   model?: Maybe<Scalars['String']['output']>
   original_url: Scalars['String']['output']
@@ -1680,16 +1884,16 @@ export type Cached_Images = {
   url: Scalars['String']['output']
 }
 
-/** columns and relationships of "cached_image" */
-export type Cached_ImagesScoreArgs = {
+/** columns and relationships of "cached_images.cached_image" */
+export type Cached_Images_Cached_ImageScoreArgs = {
   path?: InputMaybe<Scalars['String']['input']>
 }
 
-/** Boolean expression to filter rows from the table "cached_image". All fields are combined with a logical 'AND'. */
-export type Cached_Images_Bool_Exp = {
-  _and?: InputMaybe<Array<Cached_Images_Bool_Exp>>
-  _not?: InputMaybe<Cached_Images_Bool_Exp>
-  _or?: InputMaybe<Array<Cached_Images_Bool_Exp>>
+/** Boolean expression to filter rows from the table "cached_images.cached_image". All fields are combined with a logical 'AND'. */
+export type Cached_Images_Cached_Image_Bool_Exp = {
+  _and?: InputMaybe<Array<Cached_Images_Cached_Image_Bool_Exp>>
+  _not?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+  _or?: InputMaybe<Array<Cached_Images_Cached_Image_Bool_Exp>>
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>
   model?: InputMaybe<String_Comparison_Exp>
   original_url?: InputMaybe<String_Comparison_Exp>
@@ -1698,8 +1902,8 @@ export type Cached_Images_Bool_Exp = {
   url?: InputMaybe<String_Comparison_Exp>
 }
 
-/** Ordering options when selecting data from "cached_image". */
-export type Cached_Images_Order_By = {
+/** Ordering options when selecting data from "cached_images.cached_image". */
+export type Cached_Images_Cached_Image_Order_By = {
   created_at?: InputMaybe<Order_By>
   model?: InputMaybe<Order_By>
   original_url?: InputMaybe<Order_By>
@@ -1708,8 +1912,8 @@ export type Cached_Images_Order_By = {
   url?: InputMaybe<Order_By>
 }
 
-/** select columns of table "cached_image" */
-export type Cached_Images_Select_Column =
+/** select columns of table "cached_images.cached_image" */
+export type Cached_Images_Cached_Image_Select_Column =
   /** column name */
   | 'created_at'
   /** column name */
@@ -1723,22 +1927,180 @@ export type Cached_Images_Select_Column =
   /** column name */
   | 'url'
 
-/** Streaming cursor of the table "cached_images" */
-export type Cached_Images_Stream_Cursor_Input = {
+/** Streaming cursor of the table "cached_images_cached_image" */
+export type Cached_Images_Cached_Image_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Cached_Images_Stream_Cursor_Value_Input
+  initial_value: Cached_Images_Cached_Image_Stream_Cursor_Value_Input
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>
 }
 
 /** Initial value of the column from where the streaming should start */
-export type Cached_Images_Stream_Cursor_Value_Input = {
+export type Cached_Images_Cached_Image_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>
   model?: InputMaybe<Scalars['String']['input']>
   original_url?: InputMaybe<Scalars['String']['input']>
   safe?: InputMaybe<Scalars['Boolean']['input']>
   score?: InputMaybe<Scalars['jsonb']['input']>
   url?: InputMaybe<Scalars['String']['input']>
+}
+
+/** columns and relationships of "caip10" */
+export type Caip10 = {
+  __typename?: 'caip10'
+  account_address: Scalars['String']['output']
+  chain_id: Scalars['Int']['output']
+  id: Scalars['numeric']['output']
+  namespace: Scalars['String']['output']
+}
+
+/** aggregated selection of "caip10" */
+export type Caip10_Aggregate = {
+  __typename?: 'caip10_aggregate'
+  aggregate?: Maybe<Caip10_Aggregate_Fields>
+  nodes: Array<Caip10>
+}
+
+/** aggregate fields of "caip10" */
+export type Caip10_Aggregate_Fields = {
+  __typename?: 'caip10_aggregate_fields'
+  avg?: Maybe<Caip10_Avg_Fields>
+  count: Scalars['Int']['output']
+  max?: Maybe<Caip10_Max_Fields>
+  min?: Maybe<Caip10_Min_Fields>
+  stddev?: Maybe<Caip10_Stddev_Fields>
+  stddev_pop?: Maybe<Caip10_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Caip10_Stddev_Samp_Fields>
+  sum?: Maybe<Caip10_Sum_Fields>
+  var_pop?: Maybe<Caip10_Var_Pop_Fields>
+  var_samp?: Maybe<Caip10_Var_Samp_Fields>
+  variance?: Maybe<Caip10_Variance_Fields>
+}
+
+/** aggregate fields of "caip10" */
+export type Caip10_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Caip10_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** aggregate avg on columns */
+export type Caip10_Avg_Fields = {
+  __typename?: 'caip10_avg_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to filter rows from the table "caip10". All fields are combined with a logical 'AND'. */
+export type Caip10_Bool_Exp = {
+  _and?: InputMaybe<Array<Caip10_Bool_Exp>>
+  _not?: InputMaybe<Caip10_Bool_Exp>
+  _or?: InputMaybe<Array<Caip10_Bool_Exp>>
+  account_address?: InputMaybe<String_Comparison_Exp>
+  chain_id?: InputMaybe<Int_Comparison_Exp>
+  id?: InputMaybe<Numeric_Comparison_Exp>
+  namespace?: InputMaybe<String_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Caip10_Max_Fields = {
+  __typename?: 'caip10_max_fields'
+  account_address?: Maybe<Scalars['String']['output']>
+  chain_id?: Maybe<Scalars['Int']['output']>
+  id?: Maybe<Scalars['numeric']['output']>
+  namespace?: Maybe<Scalars['String']['output']>
+}
+
+/** aggregate min on columns */
+export type Caip10_Min_Fields = {
+  __typename?: 'caip10_min_fields'
+  account_address?: Maybe<Scalars['String']['output']>
+  chain_id?: Maybe<Scalars['Int']['output']>
+  id?: Maybe<Scalars['numeric']['output']>
+  namespace?: Maybe<Scalars['String']['output']>
+}
+
+/** Ordering options when selecting data from "caip10". */
+export type Caip10_Order_By = {
+  account_address?: InputMaybe<Order_By>
+  chain_id?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  namespace?: InputMaybe<Order_By>
+}
+
+/** select columns of table "caip10" */
+export type Caip10_Select_Column =
+  /** column name */
+  | 'account_address'
+  /** column name */
+  | 'chain_id'
+  /** column name */
+  | 'id'
+  /** column name */
+  | 'namespace'
+
+/** aggregate stddev on columns */
+export type Caip10_Stddev_Fields = {
+  __typename?: 'caip10_stddev_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Caip10_Stddev_Pop_Fields = {
+  __typename?: 'caip10_stddev_pop_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Caip10_Stddev_Samp_Fields = {
+  __typename?: 'caip10_stddev_samp_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Streaming cursor of the table "caip10" */
+export type Caip10_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Caip10_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Caip10_Stream_Cursor_Value_Input = {
+  account_address?: InputMaybe<Scalars['String']['input']>
+  chain_id?: InputMaybe<Scalars['Int']['input']>
+  id?: InputMaybe<Scalars['numeric']['input']>
+  namespace?: InputMaybe<Scalars['String']['input']>
+}
+
+/** aggregate sum on columns */
+export type Caip10_Sum_Fields = {
+  __typename?: 'caip10_sum_fields'
+  chain_id?: Maybe<Scalars['Int']['output']>
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate var_pop on columns */
+export type Caip10_Var_Pop_Fields = {
+  __typename?: 'caip10_var_pop_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate var_samp on columns */
+export type Caip10_Var_Samp_Fields = {
+  __typename?: 'caip10_var_samp_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate variance on columns */
+export type Caip10_Variance_Fields = {
+  __typename?: 'caip10_variance_fields'
+  chain_id?: Maybe<Scalars['Float']['output']>
+  id?: Maybe<Scalars['Float']['output']>
 }
 
 /** columns and relationships of "chainlink_price" */
@@ -3446,6 +3808,143 @@ export type Following_Args = {
   address?: InputMaybe<Scalars['String']['input']>
 }
 
+/** columns and relationships of "json_object" */
+export type Json_Objects = {
+  __typename?: 'json_objects'
+  data: Scalars['jsonb']['output']
+  id: Scalars['numeric']['output']
+}
+
+/** columns and relationships of "json_object" */
+export type Json_ObjectsDataArgs = {
+  path?: InputMaybe<Scalars['String']['input']>
+}
+
+/** aggregated selection of "json_object" */
+export type Json_Objects_Aggregate = {
+  __typename?: 'json_objects_aggregate'
+  aggregate?: Maybe<Json_Objects_Aggregate_Fields>
+  nodes: Array<Json_Objects>
+}
+
+/** aggregate fields of "json_object" */
+export type Json_Objects_Aggregate_Fields = {
+  __typename?: 'json_objects_aggregate_fields'
+  avg?: Maybe<Json_Objects_Avg_Fields>
+  count: Scalars['Int']['output']
+  max?: Maybe<Json_Objects_Max_Fields>
+  min?: Maybe<Json_Objects_Min_Fields>
+  stddev?: Maybe<Json_Objects_Stddev_Fields>
+  stddev_pop?: Maybe<Json_Objects_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Json_Objects_Stddev_Samp_Fields>
+  sum?: Maybe<Json_Objects_Sum_Fields>
+  var_pop?: Maybe<Json_Objects_Var_Pop_Fields>
+  var_samp?: Maybe<Json_Objects_Var_Samp_Fields>
+  variance?: Maybe<Json_Objects_Variance_Fields>
+}
+
+/** aggregate fields of "json_object" */
+export type Json_Objects_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Json_Objects_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** aggregate avg on columns */
+export type Json_Objects_Avg_Fields = {
+  __typename?: 'json_objects_avg_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to filter rows from the table "json_object". All fields are combined with a logical 'AND'. */
+export type Json_Objects_Bool_Exp = {
+  _and?: InputMaybe<Array<Json_Objects_Bool_Exp>>
+  _not?: InputMaybe<Json_Objects_Bool_Exp>
+  _or?: InputMaybe<Array<Json_Objects_Bool_Exp>>
+  data?: InputMaybe<Jsonb_Comparison_Exp>
+  id?: InputMaybe<Numeric_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Json_Objects_Max_Fields = {
+  __typename?: 'json_objects_max_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate min on columns */
+export type Json_Objects_Min_Fields = {
+  __typename?: 'json_objects_min_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** Ordering options when selecting data from "json_object". */
+export type Json_Objects_Order_By = {
+  data?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+}
+
+/** select columns of table "json_object" */
+export type Json_Objects_Select_Column =
+  /** column name */
+  | 'data'
+  /** column name */
+  | 'id'
+
+/** aggregate stddev on columns */
+export type Json_Objects_Stddev_Fields = {
+  __typename?: 'json_objects_stddev_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Json_Objects_Stddev_Pop_Fields = {
+  __typename?: 'json_objects_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Json_Objects_Stddev_Samp_Fields = {
+  __typename?: 'json_objects_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Streaming cursor of the table "json_objects" */
+export type Json_Objects_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Json_Objects_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Json_Objects_Stream_Cursor_Value_Input = {
+  data?: InputMaybe<Scalars['jsonb']['input']>
+  id?: InputMaybe<Scalars['numeric']['input']>
+}
+
+/** aggregate sum on columns */
+export type Json_Objects_Sum_Fields = {
+  __typename?: 'json_objects_sum_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate var_pop on columns */
+export type Json_Objects_Var_Pop_Fields = {
+  __typename?: 'json_objects_var_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate var_samp on columns */
+export type Json_Objects_Var_Samp_Fields = {
+  __typename?: 'json_objects_var_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate variance on columns */
+export type Json_Objects_Variance_Fields = {
+  __typename?: 'json_objects_variance_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
 export type Jsonb_Cast_Exp = {
   String?: InputMaybe<String_Comparison_Exp>
 }
@@ -3533,8 +4032,6 @@ export type Organizations = {
   __typename?: 'organizations'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
   description?: Maybe<Scalars['String']['output']>
   email?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
@@ -3584,7 +4081,6 @@ export type Organizations_Bool_Exp = {
   _not?: InputMaybe<Organizations_Bool_Exp>
   _or?: InputMaybe<Array<Organizations_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   email?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
@@ -3618,7 +4114,6 @@ export type Organizations_Min_Fields = {
 /** Ordering options when selecting data from "organization". */
 export type Organizations_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   email?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
@@ -3707,8 +4202,7 @@ export type Persons = {
   __typename?: 'persons'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   description?: Maybe<Scalars['String']['output']>
   email?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
@@ -3759,7 +4253,6 @@ export type Persons_Bool_Exp = {
   _not?: InputMaybe<Persons_Bool_Exp>
   _or?: InputMaybe<Array<Persons_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   email?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
@@ -3796,7 +4289,6 @@ export type Persons_Min_Fields = {
 /** Ordering options when selecting data from "person". */
 export type Persons_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   email?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
@@ -4360,10 +4852,22 @@ export type Query_Root = {
   books: Array<Books>
   /** fetch aggregated fields from the table: "book" */
   books_aggregate: Books_Aggregate
-  /** fetch data from the table: "cached_image" using primary key columns */
-  cached_image?: Maybe<Cached_Images>
-  /** fetch data from the table: "cached_image" */
-  cached_images: Array<Cached_Images>
+  /** fetch data from the table: "byte_object" */
+  byte_object: Array<Byte_Object>
+  /** fetch aggregated fields from the table: "byte_object" */
+  byte_object_aggregate: Byte_Object_Aggregate
+  /** fetch data from the table: "byte_object" using primary key columns */
+  byte_object_by_pk?: Maybe<Byte_Object>
+  /** fetch data from the table: "cached_images.cached_image" */
+  cached_images_cached_image: Array<Cached_Images_Cached_Image>
+  /** fetch data from the table: "cached_images.cached_image" using primary key columns */
+  cached_images_cached_image_by_pk?: Maybe<Cached_Images_Cached_Image>
+  /** fetch data from the table: "caip10" using primary key columns */
+  caip10?: Maybe<Caip10>
+  /** fetch aggregated fields from the table: "caip10" */
+  caip10_aggregate: Caip10_Aggregate
+  /** fetch data from the table: "caip10" */
+  caip10s: Array<Caip10>
   /** fetch data from the table: "chainlink_price" using primary key columns */
   chainlink_price?: Maybe<Chainlink_Prices>
   /** fetch data from the table: "chainlink_price" */
@@ -4400,6 +4904,12 @@ export type Query_Root = {
   following: Array<Accounts>
   /** execute function "following" and query aggregates on result of table type "account" */
   following_aggregate: Accounts_Aggregate
+  /** fetch data from the table: "json_object" using primary key columns */
+  json_object?: Maybe<Json_Objects>
+  /** fetch data from the table: "json_object" */
+  json_objects: Array<Json_Objects>
+  /** fetch aggregated fields from the table: "json_object" */
+  json_objects_aggregate: Json_Objects_Aggregate
   /** fetch data from the table: "organization" using primary key columns */
   organization?: Maybe<Organizations>
   /** fetch data from the table: "organization" */
@@ -4446,6 +4956,12 @@ export type Query_Root = {
   stats: Array<Stats>
   /** fetch aggregated fields from the table: "stats" */
   stats_aggregate: Stats_Aggregate
+  /** fetch data from the table: "text_object" using primary key columns */
+  text_object?: Maybe<Text_Objects>
+  /** fetch data from the table: "text_object" */
+  text_objects: Array<Text_Objects>
+  /** fetch aggregated fields from the table: "text_object" */
+  text_objects_aggregate: Text_Objects_Aggregate
   /** fetch data from the table: "thing" using primary key columns */
   thing?: Maybe<Things>
   /** fetch data from the table: "thing" */
@@ -4564,16 +5080,56 @@ export type Query_RootBooks_AggregateArgs = {
   where?: InputMaybe<Books_Bool_Exp>
 }
 
-export type Query_RootCached_ImageArgs = {
+export type Query_RootByte_ObjectArgs = {
+  distinct_on?: InputMaybe<Array<Byte_Object_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Byte_Object_Order_By>>
+  where?: InputMaybe<Byte_Object_Bool_Exp>
+}
+
+export type Query_RootByte_Object_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Byte_Object_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Byte_Object_Order_By>>
+  where?: InputMaybe<Byte_Object_Bool_Exp>
+}
+
+export type Query_RootByte_Object_By_PkArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Query_RootCached_Images_Cached_ImageArgs = {
+  distinct_on?: InputMaybe<Array<Cached_Images_Cached_Image_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Cached_Images_Cached_Image_Order_By>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+}
+
+export type Query_RootCached_Images_Cached_Image_By_PkArgs = {
   url: Scalars['String']['input']
 }
 
-export type Query_RootCached_ImagesArgs = {
-  distinct_on?: InputMaybe<Array<Cached_Images_Select_Column>>
+export type Query_RootCaip10Args = {
+  id: Scalars['numeric']['input']
+}
+
+export type Query_RootCaip10_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Caip10_Select_Column>>
   limit?: InputMaybe<Scalars['Int']['input']>
   offset?: InputMaybe<Scalars['Int']['input']>
-  order_by?: InputMaybe<Array<Cached_Images_Order_By>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
+  order_by?: InputMaybe<Array<Caip10_Order_By>>
+  where?: InputMaybe<Caip10_Bool_Exp>
+}
+
+export type Query_RootCaip10sArgs = {
+  distinct_on?: InputMaybe<Array<Caip10_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Caip10_Order_By>>
+  where?: InputMaybe<Caip10_Bool_Exp>
 }
 
 export type Query_RootChainlink_PriceArgs = {
@@ -4702,6 +5258,26 @@ export type Query_RootFollowing_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>
   order_by?: InputMaybe<Array<Accounts_Order_By>>
   where?: InputMaybe<Accounts_Bool_Exp>
+}
+
+export type Query_RootJson_ObjectArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Query_RootJson_ObjectsArgs = {
+  distinct_on?: InputMaybe<Array<Json_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Json_Objects_Order_By>>
+  where?: InputMaybe<Json_Objects_Bool_Exp>
+}
+
+export type Query_RootJson_Objects_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Json_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Json_Objects_Order_By>>
+  where?: InputMaybe<Json_Objects_Bool_Exp>
 }
 
 export type Query_RootOrganizationArgs = {
@@ -4860,6 +5436,26 @@ export type Query_RootStats_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>
   order_by?: InputMaybe<Array<Stats_Order_By>>
   where?: InputMaybe<Stats_Bool_Exp>
+}
+
+export type Query_RootText_ObjectArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Query_RootText_ObjectsArgs = {
+  distinct_on?: InputMaybe<Array<Text_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Text_Objects_Order_By>>
+  where?: InputMaybe<Text_Objects_Bool_Exp>
+}
+
+export type Query_RootText_Objects_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Text_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Text_Objects_Order_By>>
+  where?: InputMaybe<Text_Objects_Bool_Exp>
 }
 
 export type Query_RootThingArgs = {
@@ -6038,12 +6634,28 @@ export type Subscription_Root = {
   books_aggregate: Books_Aggregate
   /** fetch data from the table in a streaming manner: "book" */
   books_stream: Array<Books>
-  /** fetch data from the table: "cached_image" using primary key columns */
-  cached_image?: Maybe<Cached_Images>
-  /** fetch data from the table: "cached_image" */
-  cached_images: Array<Cached_Images>
-  /** fetch data from the table in a streaming manner: "cached_image" */
-  cached_images_stream: Array<Cached_Images>
+  /** fetch data from the table: "byte_object" */
+  byte_object: Array<Byte_Object>
+  /** fetch aggregated fields from the table: "byte_object" */
+  byte_object_aggregate: Byte_Object_Aggregate
+  /** fetch data from the table: "byte_object" using primary key columns */
+  byte_object_by_pk?: Maybe<Byte_Object>
+  /** fetch data from the table in a streaming manner: "byte_object" */
+  byte_object_stream: Array<Byte_Object>
+  /** fetch data from the table: "cached_images.cached_image" */
+  cached_images_cached_image: Array<Cached_Images_Cached_Image>
+  /** fetch data from the table: "cached_images.cached_image" using primary key columns */
+  cached_images_cached_image_by_pk?: Maybe<Cached_Images_Cached_Image>
+  /** fetch data from the table in a streaming manner: "cached_images.cached_image" */
+  cached_images_cached_image_stream: Array<Cached_Images_Cached_Image>
+  /** fetch data from the table: "caip10" using primary key columns */
+  caip10?: Maybe<Caip10>
+  /** fetch aggregated fields from the table: "caip10" */
+  caip10_aggregate: Caip10_Aggregate
+  /** fetch data from the table in a streaming manner: "caip10" */
+  caip10_stream: Array<Caip10>
+  /** fetch data from the table: "caip10" */
+  caip10s: Array<Caip10>
   /** fetch data from the table: "chainlink_price" using primary key columns */
   chainlink_price?: Maybe<Chainlink_Prices>
   /** fetch data from the table: "chainlink_price" */
@@ -6090,6 +6702,14 @@ export type Subscription_Root = {
   following: Array<Accounts>
   /** execute function "following" and query aggregates on result of table type "account" */
   following_aggregate: Accounts_Aggregate
+  /** fetch data from the table: "json_object" using primary key columns */
+  json_object?: Maybe<Json_Objects>
+  /** fetch data from the table: "json_object" */
+  json_objects: Array<Json_Objects>
+  /** fetch aggregated fields from the table: "json_object" */
+  json_objects_aggregate: Json_Objects_Aggregate
+  /** fetch data from the table in a streaming manner: "json_object" */
+  json_objects_stream: Array<Json_Objects>
   /** fetch data from the table: "organization" using primary key columns */
   organization?: Maybe<Organizations>
   /** fetch data from the table: "organization" */
@@ -6150,6 +6770,14 @@ export type Subscription_Root = {
   stats_aggregate: Stats_Aggregate
   /** fetch data from the table in a streaming manner: "stats" */
   stats_stream: Array<Stats>
+  /** fetch data from the table: "text_object" using primary key columns */
+  text_object?: Maybe<Text_Objects>
+  /** fetch data from the table: "text_object" */
+  text_objects: Array<Text_Objects>
+  /** fetch aggregated fields from the table: "text_object" */
+  text_objects_aggregate: Text_Objects_Aggregate
+  /** fetch data from the table in a streaming manner: "text_object" */
+  text_objects_stream: Array<Text_Objects>
   /** fetch data from the table: "thing" using primary key columns */
   thing?: Maybe<Things>
   /** fetch data from the table: "thing" */
@@ -6298,22 +6926,74 @@ export type Subscription_RootBooks_StreamArgs = {
   where?: InputMaybe<Books_Bool_Exp>
 }
 
-export type Subscription_RootCached_ImageArgs = {
+export type Subscription_RootByte_ObjectArgs = {
+  distinct_on?: InputMaybe<Array<Byte_Object_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Byte_Object_Order_By>>
+  where?: InputMaybe<Byte_Object_Bool_Exp>
+}
+
+export type Subscription_RootByte_Object_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Byte_Object_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Byte_Object_Order_By>>
+  where?: InputMaybe<Byte_Object_Bool_Exp>
+}
+
+export type Subscription_RootByte_Object_By_PkArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Subscription_RootByte_Object_StreamArgs = {
+  batch_size: Scalars['Int']['input']
+  cursor: Array<InputMaybe<Byte_Object_Stream_Cursor_Input>>
+  where?: InputMaybe<Byte_Object_Bool_Exp>
+}
+
+export type Subscription_RootCached_Images_Cached_ImageArgs = {
+  distinct_on?: InputMaybe<Array<Cached_Images_Cached_Image_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Cached_Images_Cached_Image_Order_By>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
+}
+
+export type Subscription_RootCached_Images_Cached_Image_By_PkArgs = {
   url: Scalars['String']['input']
 }
 
-export type Subscription_RootCached_ImagesArgs = {
-  distinct_on?: InputMaybe<Array<Cached_Images_Select_Column>>
-  limit?: InputMaybe<Scalars['Int']['input']>
-  offset?: InputMaybe<Scalars['Int']['input']>
-  order_by?: InputMaybe<Array<Cached_Images_Order_By>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
+export type Subscription_RootCached_Images_Cached_Image_StreamArgs = {
+  batch_size: Scalars['Int']['input']
+  cursor: Array<InputMaybe<Cached_Images_Cached_Image_Stream_Cursor_Input>>
+  where?: InputMaybe<Cached_Images_Cached_Image_Bool_Exp>
 }
 
-export type Subscription_RootCached_Images_StreamArgs = {
+export type Subscription_RootCaip10Args = {
+  id: Scalars['numeric']['input']
+}
+
+export type Subscription_RootCaip10_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Caip10_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Caip10_Order_By>>
+  where?: InputMaybe<Caip10_Bool_Exp>
+}
+
+export type Subscription_RootCaip10_StreamArgs = {
   batch_size: Scalars['Int']['input']
-  cursor: Array<InputMaybe<Cached_Images_Stream_Cursor_Input>>
-  where?: InputMaybe<Cached_Images_Bool_Exp>
+  cursor: Array<InputMaybe<Caip10_Stream_Cursor_Input>>
+  where?: InputMaybe<Caip10_Bool_Exp>
+}
+
+export type Subscription_RootCaip10sArgs = {
+  distinct_on?: InputMaybe<Array<Caip10_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Caip10_Order_By>>
+  where?: InputMaybe<Caip10_Bool_Exp>
 }
 
 export type Subscription_RootChainlink_PriceArgs = {
@@ -6472,6 +7152,32 @@ export type Subscription_RootFollowing_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>
   order_by?: InputMaybe<Array<Accounts_Order_By>>
   where?: InputMaybe<Accounts_Bool_Exp>
+}
+
+export type Subscription_RootJson_ObjectArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Subscription_RootJson_ObjectsArgs = {
+  distinct_on?: InputMaybe<Array<Json_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Json_Objects_Order_By>>
+  where?: InputMaybe<Json_Objects_Bool_Exp>
+}
+
+export type Subscription_RootJson_Objects_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Json_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Json_Objects_Order_By>>
+  where?: InputMaybe<Json_Objects_Bool_Exp>
+}
+
+export type Subscription_RootJson_Objects_StreamArgs = {
+  batch_size: Scalars['Int']['input']
+  cursor: Array<InputMaybe<Json_Objects_Stream_Cursor_Input>>
+  where?: InputMaybe<Json_Objects_Bool_Exp>
 }
 
 export type Subscription_RootOrganizationArgs = {
@@ -6674,6 +7380,32 @@ export type Subscription_RootStats_StreamArgs = {
   where?: InputMaybe<Stats_Bool_Exp>
 }
 
+export type Subscription_RootText_ObjectArgs = {
+  id: Scalars['numeric']['input']
+}
+
+export type Subscription_RootText_ObjectsArgs = {
+  distinct_on?: InputMaybe<Array<Text_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Text_Objects_Order_By>>
+  where?: InputMaybe<Text_Objects_Bool_Exp>
+}
+
+export type Subscription_RootText_Objects_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Text_Objects_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  order_by?: InputMaybe<Array<Text_Objects_Order_By>>
+  where?: InputMaybe<Text_Objects_Bool_Exp>
+}
+
+export type Subscription_RootText_Objects_StreamArgs = {
+  batch_size: Scalars['Int']['input']
+  cursor: Array<InputMaybe<Text_Objects_Stream_Cursor_Input>>
+  where?: InputMaybe<Text_Objects_Bool_Exp>
+}
+
 export type Subscription_RootThingArgs = {
   id: Scalars['numeric']['input']
 }
@@ -6752,13 +7484,146 @@ export type Subscription_RootVaults_StreamArgs = {
   where?: InputMaybe<Vaults_Bool_Exp>
 }
 
+/** columns and relationships of "text_object" */
+export type Text_Objects = {
+  __typename?: 'text_objects'
+  data: Scalars['String']['output']
+  id: Scalars['numeric']['output']
+}
+
+/** aggregated selection of "text_object" */
+export type Text_Objects_Aggregate = {
+  __typename?: 'text_objects_aggregate'
+  aggregate?: Maybe<Text_Objects_Aggregate_Fields>
+  nodes: Array<Text_Objects>
+}
+
+/** aggregate fields of "text_object" */
+export type Text_Objects_Aggregate_Fields = {
+  __typename?: 'text_objects_aggregate_fields'
+  avg?: Maybe<Text_Objects_Avg_Fields>
+  count: Scalars['Int']['output']
+  max?: Maybe<Text_Objects_Max_Fields>
+  min?: Maybe<Text_Objects_Min_Fields>
+  stddev?: Maybe<Text_Objects_Stddev_Fields>
+  stddev_pop?: Maybe<Text_Objects_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Text_Objects_Stddev_Samp_Fields>
+  sum?: Maybe<Text_Objects_Sum_Fields>
+  var_pop?: Maybe<Text_Objects_Var_Pop_Fields>
+  var_samp?: Maybe<Text_Objects_Var_Samp_Fields>
+  variance?: Maybe<Text_Objects_Variance_Fields>
+}
+
+/** aggregate fields of "text_object" */
+export type Text_Objects_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Text_Objects_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** aggregate avg on columns */
+export type Text_Objects_Avg_Fields = {
+  __typename?: 'text_objects_avg_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Boolean expression to filter rows from the table "text_object". All fields are combined with a logical 'AND'. */
+export type Text_Objects_Bool_Exp = {
+  _and?: InputMaybe<Array<Text_Objects_Bool_Exp>>
+  _not?: InputMaybe<Text_Objects_Bool_Exp>
+  _or?: InputMaybe<Array<Text_Objects_Bool_Exp>>
+  data?: InputMaybe<String_Comparison_Exp>
+  id?: InputMaybe<Numeric_Comparison_Exp>
+}
+
+/** aggregate max on columns */
+export type Text_Objects_Max_Fields = {
+  __typename?: 'text_objects_max_fields'
+  data?: Maybe<Scalars['String']['output']>
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate min on columns */
+export type Text_Objects_Min_Fields = {
+  __typename?: 'text_objects_min_fields'
+  data?: Maybe<Scalars['String']['output']>
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** Ordering options when selecting data from "text_object". */
+export type Text_Objects_Order_By = {
+  data?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+}
+
+/** select columns of table "text_object" */
+export type Text_Objects_Select_Column =
+  /** column name */
+  | 'data'
+  /** column name */
+  | 'id'
+
+/** aggregate stddev on columns */
+export type Text_Objects_Stddev_Fields = {
+  __typename?: 'text_objects_stddev_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Text_Objects_Stddev_Pop_Fields = {
+  __typename?: 'text_objects_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Text_Objects_Stddev_Samp_Fields = {
+  __typename?: 'text_objects_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** Streaming cursor of the table "text_objects" */
+export type Text_Objects_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Text_Objects_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Text_Objects_Stream_Cursor_Value_Input = {
+  data?: InputMaybe<Scalars['String']['input']>
+  id?: InputMaybe<Scalars['numeric']['input']>
+}
+
+/** aggregate sum on columns */
+export type Text_Objects_Sum_Fields = {
+  __typename?: 'text_objects_sum_fields'
+  id?: Maybe<Scalars['numeric']['output']>
+}
+
+/** aggregate var_pop on columns */
+export type Text_Objects_Var_Pop_Fields = {
+  __typename?: 'text_objects_var_pop_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate var_samp on columns */
+export type Text_Objects_Var_Samp_Fields = {
+  __typename?: 'text_objects_var_samp_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
+/** aggregate variance on columns */
+export type Text_Objects_Variance_Fields = {
+  __typename?: 'text_objects_variance_fields'
+  id?: Maybe<Scalars['Float']['output']>
+}
+
 /** columns and relationships of "thing" */
 export type Things = {
   __typename?: 'things'
   /** An object relationship */
   atom?: Maybe<Atoms>
-  /** An object relationship */
-  cached_image?: Maybe<Cached_Images>
+  cached_image?: Maybe<Cached_Images_Cached_Image>
   description?: Maybe<Scalars['String']['output']>
   id: Scalars['numeric']['output']
   image?: Maybe<Scalars['String']['output']>
@@ -6807,7 +7672,6 @@ export type Things_Bool_Exp = {
   _not?: InputMaybe<Things_Bool_Exp>
   _or?: InputMaybe<Array<Things_Bool_Exp>>
   atom?: InputMaybe<Atoms_Bool_Exp>
-  cached_image?: InputMaybe<Cached_Images_Bool_Exp>
   description?: InputMaybe<String_Comparison_Exp>
   id?: InputMaybe<Numeric_Comparison_Exp>
   image?: InputMaybe<String_Comparison_Exp>
@@ -6838,7 +7702,6 @@ export type Things_Min_Fields = {
 /** Ordering options when selecting data from "thing". */
 export type Things_Order_By = {
   atom?: InputMaybe<Atoms_Order_By>
-  cached_image?: InputMaybe<Cached_Images_Order_By>
   description?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   image?: InputMaybe<Order_By>
