@@ -305,24 +305,77 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
 
     // Handle submit function
     const handleSubmit = async () => {
-        if (!userAddress || !ethAmount || !triplesData?.triples) return
+        if (!userAddress || !ethAmount || !triplesData?.triples) return;
 
         try {
-            const totalStakeWei = parseEther(ethAmount)
-            
-            // Transform triples to include percentage from sliderValues
-            const triplesWithPercentages = triplesData.triples.map(triple => ({
-                id: triple.id,
-                vault_id: triple.vault_id,
-                counter_vault_id: triple.counter_vault_id,
-                percentage: Math.round(sliderValues[triple.id] || 0),
-                
-            }))
+            // Calculer le montant total initial
+            const initialTotal = triplesData.triples.reduce((total, triple) => {
+                const userVaultPosition = triple.vault?.positions?.[0];
+                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+                const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+                return total + vaultAmount + counterVaultAmount;
+            }, 0);
 
-            const stakes = calculateStakes(triplesWithPercentages, totalStakeWei)
+            // Calculer le montant à répartir (différence entre nouvel input et input initial)
+            const amountToDistribute = Number(ethAmount) - initialTotal;
+
+            // Calculer le pourcentage total initial
+            const totalInitialPercentage = triplesData.triples.reduce((total, triple) => {
+                const userVaultPosition = triple.vault?.positions?.[0];
+                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+                const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+                const totalAmount = vaultAmount + counterVaultAmount;
+                return total + (totalAmount > 0 ? (totalAmount / Number(ethAmount)) * 100 : 0);
+            }, 0);
+
+            // Calculer le pourcentage restant disponible
+            const remainingPercentage = 100 - totalInitialPercentage;
+
+            // Transform triples to include percentage from sliderValues and calculate exact amounts
+            const triplesWithPercentages = triplesData.triples.map(triple => {
+                const userVaultPosition = triple.vault?.positions?.[0];
+                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                
+                const sliderValue = sliderValues[triple.id] || 0;
+                const truncatedPercentage = Math.floor(Math.abs(sliderValue));
+                
+                // Calculer le pourcentage initial de ce claim
+                const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
+                const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
+                const totalAmount = vaultAmount + counterVaultAmount;
+                const initialPercentage = totalAmount > 0 ? (totalAmount / Number(ethAmount)) * 100 : 0;
+
+                // Si le pourcentage a changé, calculer le montant à ajouter
+                if (truncatedPercentage > initialPercentage) {
+                    // Calculer quelle part du pourcentage restant ce claim prend
+                    const percentageOfRemaining = (truncatedPercentage - initialPercentage) / remainingPercentage;
+                    // Calculer le montant à ajouter basé sur cette part
+                    const amountToAdd = amountToDistribute * percentageOfRemaining;
+
+                    return {
+                        id: triple.id,
+                        vault_id: triple.vault_id,
+                        counter_vault_id: triple.counter_vault_id,
+                        percentage: sliderValue > 0 ? truncatedPercentage : -truncatedPercentage,
+                        amountToAdd: parseEther(amountToAdd.toFixed(18))
+                    } as const;
+                }
+                return null;
+            }).filter((triple): triple is NonNullable<typeof triple> => triple !== null);
+
+            // Pas besoin de calculateStakes puisqu'on a déjà les montants exacts
+            const stakes = {
+                ids: triplesWithPercentages.map(t => BigInt(t.percentage > 0 ? t.vault_id : t.counter_vault_id)),
+                values: triplesWithPercentages.map(t => t.amountToAdd)
+            };
+
+            // Calculate the total value to send (sum of stakes)
+            const totalValueToSend = stakes.values.reduce((sum, value) => sum + value, 0n);
 
             // Use hardcoded attestor address
-            const attestorAddress = "0x64Abd54a86DfeB710eF2943d6304FC7B29f18e36"
+            const attestorAddress = "0x64Abd54a86DfeB710eF2943d6304FC7B29f18e36";
 
             // Submit all stakes in one transaction
             if (stakes.ids.length > 0) {
@@ -333,13 +386,13 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
                         values: stakes.values,
                         attestorAddress: attestorAddress as `0x${string}`
                     },
-                    { value: totalStakeWei }
-                )
+                    { value: totalValueToSend }
+                );
             }
 
             // Handle success (e.g., show notification, reset form, etc.)
         } catch (error) {
-            console.error('Error submitting stakes:', error)
+            console.error('Error submitting stakes:', error);
             // Handle error (e.g., show error notification)
         }
     };
