@@ -1,4 +1,4 @@
-const HackathonInfos = () => {
+export const HackathonInfos = () => {
   return (
     <div className="bg-gray-600 p-6 rounded-lg text-white max-w-4xl mx-auto">
       <h2 className="text-center text-lg font-bold">Basic hackathon information</h2>
@@ -38,4 +38,3 @@ const HackathonInfos = () => {
   );
 };
 
-export default HackathonInfos;

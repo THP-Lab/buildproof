@@ -1,4 +1,4 @@
-import { HackathonInfos } from "../hackathonDetails/BasicHackathonInfos"
+import { HackathonInfos } from "@routes/hackathonDetails/BasicHackathonInfos"
 
 export default function HackathonDetailsPage() {
   return <HackathonInfos />
