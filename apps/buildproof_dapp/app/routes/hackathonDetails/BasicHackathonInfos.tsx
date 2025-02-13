@@ -12,30 +12,46 @@ export const HackathonInfos = () => {
     args: [BigInt(THING_VAULT_ID_TESTNET)]
   })
 
-  // Decode atom data from hex to string
-  const decodedAtomData = atomData ? (() => {
+  // Fonction utilitaire pour extraire les données de l'atom
+  const extractAtomData = (hexData: `0x${string}` | undefined) => {
+    if (!hexData) return { name: '', description: '' }
+    
     try {
-      const decodedString = hexToString(atomData as `0x${string}`)
+      const decodedString = hexToString(hexData)
       console.log('Decoded atom data:', decodedString)
       
-      // Si la chaîne décodée est une URL, on retourne une valeur par défaut
+      // Si la chaîne décodée est une URL, on retourne des valeurs par défaut
       if (decodedString.startsWith('http')) {
-        return 'MetaMask'
+        return {
+          name: 'MetaMask',
+          description: 'A free, digital cryptocurrency wallet that allows users to store and manage their cryptocurrencies, interact with decentralized applications (dApps), and execute transactions on blockchain networks.'
+        }
       }
       
       // Sinon on essaie de parser le JSON
       try {
         const parsedData = JSON.parse(decodedString)
-        return parsedData.name || 'No name found'
+        return {
+          name: parsedData.name || 'No name found',
+          description: parsedData.description || 'No description found'
+        }
       } catch (jsonError) {
         console.error('Error parsing JSON:', jsonError)
-        return decodedString // Retourne la chaîne décodée si ce n'est pas du JSON
+        return {
+          name: decodedString,
+          description: 'No description available'
+        }
       }
     } catch (error) {
       console.error('Error decoding atom data:', error)
-      return 'Error decoding data'
+      return {
+        name: 'Error decoding data',
+        description: 'Error decoding data'
+      }
     }
-  })() : ''
+  }
+
+  const atomInfo = extractAtomData(atomData as `0x${string}`)
 
   return (
     <div className="bg-gray-600 p-6 rounded-lg text-white max-w-4xl mx-auto">
@@ -49,9 +65,11 @@ export const HackathonInfos = () => {
       
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white text-black p-4 rounded">
-          {isLoading ? 'Loading...' : decodedAtomData || 'No atom data'}
+          {isLoading ? 'Loading...' : atomInfo.name || 'No atom data'}
         </div>
-        <div className="bg-white text-black p-4 rounded">Description</div>
+        <div className="bg-white text-black p-4 rounded">
+          {isLoading ? 'Loading...' : atomInfo.description || 'No description available'}
+        </div>
       </div>
       
       <div className="grid grid-cols-3 gap-4 mt-4">
