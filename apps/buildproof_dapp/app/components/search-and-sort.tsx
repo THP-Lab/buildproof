@@ -1,4 +1,4 @@
-import { Input } from '@0xintuition/1ui'
+import { Input } from '@0xintuition/buildproof_ui'
 import { SortDirection } from '@0xintuition/api'
 
 import { SortOption, SortSelect } from '@components/sort-select'

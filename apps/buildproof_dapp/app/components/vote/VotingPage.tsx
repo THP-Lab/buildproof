@@ -1,29 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useFetcher } from '@remix-run/react';
-import {
-    ClaimRow,
-    Claim,
-    SegmentedControl,
-    SegmentedControlItem,
-    EmptyStateCard,
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationNext,
-    PaginationPrevious,
-    PaginationSummary,
-    PaginationRowSelection,
-    PaginationPageCounter,
-    PaginationFirst,
-    PaginationLast,
-    ClaimPosition,
-    MultiSlider,
-    cn,
-    Button,
-    Input,
-    CurrencyType,
-    Switch
-} from '@0xintuition/buildproof_ui';
+import { ClaimPosition } from '@0xintuition/buildproof_ui';
 import {
     handleSliderChange as handleSliderChangeWithValidation,
     resetSingleSlider as resetSingleSliderWithValidation,
@@ -38,7 +15,7 @@ import { calculateStakes } from '../../lib/utils/calculateStakes'
 import { parseEther, formatUnits } from 'viem'
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-
+import { calculateStakeValue } from './CalcuateStakeValue';
 interface VotingPageProps {
     triplesData: GetTriplesWithPositionsQuery | undefined;
     userAddress: string | undefined;
@@ -46,6 +23,43 @@ interface VotingPageProps {
 
 interface EthPriceResponse {
     price: string;
+}
+
+interface VaultWithSharePrice {
+    total_shares: string;
+    position_count: number;
+    current_share_price: string;
+    positions: Array<{
+        shares: string;
+        account?: {
+            id: string;
+            label: string;
+            image?: string;
+        } | null;
+    }>;
+}
+
+interface TripleWithVaults {
+    id: string;
+    vault_id: string;
+    counter_vault_id: string;
+    subject: {
+        id: string;
+        label: string;
+        image?: string;
+    };
+    predicate: {
+        id: string;
+        label: string;
+        image?: string;
+    };
+    object: {
+        id: string;
+        label: string;
+        image?: string;
+    };
+    vault: VaultWithSharePrice;
+    counter_vault: VaultWithSharePrice;
 }
 
 export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
@@ -58,12 +72,23 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const [ethAmount, setEthAmount] = useState(() => {
         if (!triplesData?.triples) return '0.001';
         
+        // Calculer le total des positions existantes en ETH
         const totalPositions = triplesData.triples.reduce((total, triple) => {
-            const userVaultPosition = triple.vault?.positions?.[0];
-            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
-            const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
-            const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
-            return total + vaultAmount + counterVaultAmount;
+            const typedTriple = triple as unknown as TripleWithVaults;
+            const userVaultPosition = typedTriple.vault?.positions?.[0];
+            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
+            
+            // Calculer la valeur en ETH pour la position FOR
+            const vaultValue = userVaultPosition && typedTriple.vault?.current_share_price
+                ? Number(formatUnits(BigInt(calculateStakeValue(userVaultPosition.shares, typedTriple.vault.current_share_price)), 18))
+                : 0;
+                
+            // Calculer la valeur en ETH pour la position AGAINST
+            const counterVaultValue = userCounterVaultPosition && typedTriple.counter_vault?.current_share_price
+                ? Number(formatUnits(BigInt(calculateStakeValue(userCounterVaultPosition.shares, typedTriple.counter_vault.current_share_price)), 18))
+                : 0;
+                
+            return total + vaultValue + counterVaultValue;
         }, 0);
 
         return totalPositions > 0 ? totalPositions.toString() : '0.001';
@@ -77,16 +102,24 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         if (totalEth === 0) return {};
 
         return triplesData.triples.reduce((values, triple) => {
-            const userVaultPosition = triple.vault?.positions?.[0];
-            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            const typedTriple = triple as unknown as TripleWithVaults;
+            const userVaultPosition = typedTriple.vault?.positions?.[0];
+            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
             
-            const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
-            const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
-            
-            const totalPosition = vaultAmount + counterVaultAmount;
-            if (totalPosition > 0) {
-                const percentage = Math.round((totalPosition / totalEth) * 100 * 100) / 100;
-                values[triple.id] = vaultAmount > 0 ? percentage : -percentage;
+            // Calculer la valeur en ETH pour la position FOR
+            const vaultValue = userVaultPosition && typedTriple.vault?.current_share_price
+                ? Number(formatUnits(BigInt(calculateStakeValue(userVaultPosition.shares, typedTriple.vault.current_share_price)), 18))
+                : 0;
+                
+            // Calculer la valeur en ETH pour la position AGAINST
+            const counterVaultValue = userCounterVaultPosition && typedTriple.counter_vault?.current_share_price
+                ? Number(formatUnits(BigInt(calculateStakeValue(userCounterVaultPosition.shares, typedTriple.counter_vault.current_share_price)), 18))
+                : 0;
+
+            if (vaultValue > 0) {
+                values[typedTriple.id] = (vaultValue / totalEth) * 100;
+            } else if (counterVaultValue > 0) {
+                values[typedTriple.id] = -(counterVaultValue / totalEth) * 100;
             }
             
             return values;
@@ -137,12 +170,13 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         if (!triplesData?.triples) return [];
         
         return triplesData.triples.map((triple: any) => {
-            const userVaultPosition = triple.vault?.positions?.[0];
-            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            const typedTriple = triple as unknown as TripleWithVaults;
+            const userVaultPosition = typedTriple.vault?.positions?.[0];
+            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
             
-            const totalShares = (Number(triple.vault?.total_shares ?? 0) + Number(triple.counter_vault?.total_shares ?? 0)).toString();
-            const vaultShares = triple.vault?.total_shares ?? '0';
-            const counterVaultShares = triple.counter_vault?.total_shares ?? '0';
+            const totalShares = (Number(typedTriple.vault?.total_shares ?? 0) + Number(typedTriple.counter_vault?.total_shares ?? 0)).toString();
+            const vaultShares = typedTriple.vault?.total_shares ?? '0';
+            const counterVaultShares = typedTriple.counter_vault?.total_shares ?? '0';
 
             // Récupérer les positions de l'utilisateur
             const userVaultShares = userVaultPosition?.shares ?? '0';
@@ -151,29 +185,46 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             // Déterminer la direction et le montant de la position
             let positionDirection;
             let userPosition;
-            if (Number(userVaultShares) > 0) {
-                positionDirection = ClaimPosition.claimFor;
-                userPosition = userVaultShares;
-            } else if (Number(userCounterVaultShares) > 0) {
+            let sliderInitialValue = 0;
+            
+            const vaultAmount = Number(formatUnits(BigInt(userVaultShares), 18));
+            const counterVaultAmount = Number(formatUnits(BigInt(userCounterVaultShares), 18));
+            
+            if (counterVaultAmount > 0) {
                 positionDirection = ClaimPosition.claimAgainst;
                 userPosition = userCounterVaultShares;
+                if (Number(ethAmount) > 0) {
+                    sliderInitialValue = -(counterVaultAmount / Number(ethAmount) * 100);
+                }
+            } else if (vaultAmount > 0) {
+                positionDirection = ClaimPosition.claimFor;
+                userPosition = userVaultShares;
+                if (Number(ethAmount) > 0) {
+                    sliderInitialValue = (vaultAmount / Number(ethAmount) * 100);
+                }
             }
 
             return {
-                id: triple.id,
-                numPositionsFor: triple.vault?.position_count ?? 0,
-                numPositionsAgainst: triple.counter_vault?.position_count ?? 0,
+                id: typedTriple.id,
+                numPositionsFor: typedTriple.vault?.position_count ?? 0,
+                numPositionsAgainst: typedTriple.counter_vault?.position_count ?? 0,
                 totalTVL: totalShares,
                 tvlFor: vaultShares,
                 tvlAgainst: counterVaultShares,
                 currency: currency,
-                subject: triple.subject?.label ?? '',
-                predicate: triple.predicate?.label ?? '',
-                object: triple.object?.label ?? '',
-                votesCount: (triple.vault?.position_count ?? 0) + (triple.counter_vault?.position_count ?? 0),
+                subject: typedTriple.subject?.label ?? '',
+                predicate: typedTriple.predicate?.label ?? '',
+                object: typedTriple.object?.label ?? '',
+                votesCount: (typedTriple.vault?.position_count ?? 0) + (typedTriple.counter_vault?.position_count ?? 0),
                 totalEth: Number(totalShares),
                 userPosition,
-                positionDirection
+                positionDirection,
+                vault: {
+                    current_share_price: typedTriple.vault?.current_share_price ?? '0'
+                },
+                counter_vault: {
+                    current_share_price: typedTriple.counter_vault?.current_share_price ?? '0'
+                }
             };
         });
     }, [triplesData, currency, ethPrice]);
@@ -234,8 +285,9 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         if (!triplesData?.triples) return 0;
         
         return triplesData.triples.reduce((total, triple) => {
-            const userVaultPosition = triple.vault?.positions?.[0];
-            const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+            const typedTriple = triple as unknown as TripleWithVaults;
+            const userVaultPosition = typedTriple.vault?.positions?.[0];
+            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
             const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
             const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
             return total + vaultAmount + counterVaultAmount;
@@ -310,8 +362,9 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         try {
             // Calculer le montant total initial
             const initialTotal = triplesData.triples.reduce((total, triple) => {
-                const userVaultPosition = triple.vault?.positions?.[0];
-                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                const typedTriple = triple as unknown as TripleWithVaults;
+                const userVaultPosition = typedTriple.vault?.positions?.[0];
+                const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
                 const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
                 const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
                 return total + vaultAmount + counterVaultAmount;
@@ -322,8 +375,9 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
 
             // Calculer le pourcentage total initial
             const totalInitialPercentage = triplesData.triples.reduce((total, triple) => {
-                const userVaultPosition = triple.vault?.positions?.[0];
-                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                const typedTriple = triple as unknown as TripleWithVaults;
+                const userVaultPosition = typedTriple.vault?.positions?.[0];
+                const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
                 const vaultAmount = userVaultPosition ? Number(formatUnits(BigInt(userVaultPosition.shares), 18)) : 0;
                 const counterVaultAmount = userCounterVaultPosition ? Number(formatUnits(BigInt(userCounterVaultPosition.shares), 18)) : 0;
                 const totalAmount = vaultAmount + counterVaultAmount;
@@ -335,10 +389,11 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
 
             // Transform triples to include percentage from sliderValues and calculate exact amounts
             const triplesWithPercentages = triplesData.triples.map(triple => {
-                const userVaultPosition = triple.vault?.positions?.[0];
-                const userCounterVaultPosition = triple.counter_vault?.positions?.[0];
+                const typedTriple = triple as unknown as TripleWithVaults;
+                const userVaultPosition = typedTriple.vault?.positions?.[0];
+                const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
                 
-                const sliderValue = sliderValues[triple.id] || 0;
+                const sliderValue = sliderValues[typedTriple.id] || 0;
                 const truncatedPercentage = Math.floor(Math.abs(sliderValue));
                 
                 // Calculer le pourcentage initial de ce claim
@@ -355,9 +410,9 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
                     const amountToAdd = amountToDistribute * percentageOfRemaining;
 
                     return {
-                        id: triple.id,
-                        vault_id: triple.vault_id,
-                        counter_vault_id: triple.counter_vault_id,
+                        id: typedTriple.id,
+                        vault_id: typedTriple.vault_id,
+                        counter_vault_id: typedTriple.counter_vault_id,
                         percentage: sliderValue > 0 ? truncatedPercentage : -truncatedPercentage,
                         amountToAdd: parseEther(amountToAdd.toFixed(18))
                     } as const;
@@ -433,6 +488,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             setDebouncedSliderValues={setDebouncedSliderValues}
             userAddress={userAddress || ''}
             triplesData={triplesData}
+            ethPrice={ethPrice}
         />
     );
 }; 

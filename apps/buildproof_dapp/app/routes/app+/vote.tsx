@@ -2,8 +2,8 @@ import { VotingPage } from '../../components/vote/VotingPage';
 import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { requireUser } from '@server/auth';
-import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql';
-import { configureClient } from '@0xintuition/graphql';
+import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql_bp';
+import { configureClient } from '@0xintuition/graphql_bp';
 
 configureClient({
     apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
@@ -58,7 +58,8 @@ const VotePage = () => {
     console.log('Query variables:', {
         predicateId,
         address: userAddress,
-        fetched_list_object
+        fetched_list_object,
+        triplesData
     });
 
     console.log('Response data:', triplesData);

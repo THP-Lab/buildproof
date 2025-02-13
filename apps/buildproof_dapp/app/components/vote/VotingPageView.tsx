@@ -27,15 +27,38 @@ import { CurrencyToggle } from './CurrencyToggle';
 import { RedeemStakeModal } from './RedeemStakeModal';
 import { getChainEnvConfig } from '../../lib/utils/environment';
 import { CURRENT_ENV } from '../../consts';
+import { calculateStakeValue } from './CalcuateStakeValue';
 
-const formatTVL = (value: string, currency: SupportedCurrency) => {
+
+const formatTVL = (value: string, currency: SupportedCurrency, ethPrice: string) => {
     if (!value) return '0';
-    const num = Number(formatUnits(BigInt(value), 18));
     
-    if (currency === 'ETH') {
-        return num.toFixed(4);
-    } else {
-        return num.toFixed(2);
+    try {
+        let num: number;
+        
+        if (value.includes('e+')) {
+            // Si c'est en notation e+, on considère que c'est une erreur et on convertit en e-
+            const [base, exp] = value.split('e+');
+            num = Number(`${base}e-${exp}`);
+        } else {
+            num = Number(value);
+        }
+        
+        // Convertir en ETH (division par 10^18)
+        const ethValue = Number(formatUnits(
+            // Pour BigInt, on doit d'abord convertir en chaîne décimale
+            BigInt(num.toLocaleString('fullwide', { useGrouping: false })),
+            18
+        ));
+
+        if (currency === '$') {
+            return (ethValue * Number(ethPrice)).toFixed(2);
+        }
+
+        return ethValue.toFixed(6);
+    } catch (error) {
+        console.warn('Error formatting TVL:', error, value);
+        return '0';
     }
 };
 
@@ -61,6 +84,7 @@ interface VotingPageViewProps {
     setCurrentPage: (page: number) => void;
     data: VoteItem[];
     currency: SupportedCurrency;
+    ethPrice: string;
     onCurrencyToggle: () => void;
     setDebouncedSliderValues: React.Dispatch<React.SetStateAction<Record<string, number>>>;
     userAddress: string;
@@ -95,6 +119,7 @@ export const VotingPageView = ({
     setCurrentPage,
     data,
     currency,
+    ethPrice,
     onCurrencyToggle,
     setDebouncedSliderValues,
     userAddress,
@@ -184,11 +209,17 @@ export const VotingPageView = ({
                                 <ClaimRow
                                     numPositionsFor={item.numPositionsFor}
                                     numPositionsAgainst={item.numPositionsAgainst}
-                                    totalTVL={formatTVL(item.totalTVL, currency)}
-                                    tvlFor={formatTVL(item.tvlFor, currency)}
-                                    tvlAgainst={formatTVL(item.tvlAgainst, currency)}
+                                    totalTVL={formatTVL(item.totalTVL, currency, ethPrice)}
+                                    tvlFor={formatTVL(item.tvlFor, currency, ethPrice)}
+                                    tvlAgainst={formatTVL(item.tvlAgainst, currency, ethPrice)}
                                     currency={currency}
-                                    userPosition={item.userPosition ? formatTVL(item.userPosition, currency) : undefined}
+                                    userPosition={
+                                        (item.userPosition && item.vault?.current_share_price && item.positionDirection === ClaimPosition.claimFor) ? 
+                                            formatTVL(calculateStakeValue(item.userPosition, item.vault.current_share_price), currency, ethPrice) 
+                                        : (item.userPosition && item.counter_vault?.current_share_price && item.positionDirection === ClaimPosition.claimAgainst) ?
+                                            formatTVL(calculateStakeValue(item.userPosition, item.counter_vault.current_share_price), currency, ethPrice)
+                                        : undefined
+                                    }
                                     positionDirection={item.positionDirection}
                                     onStakeForClick={() => console.log('Vote FOR project', item.subject)}
                                     onStakeAgainstClick={() => console.log('Vote AGAINST project', item.subject)}
@@ -233,9 +264,9 @@ export const VotingPageView = ({
                                                 {sliderValues[item.id] && (
                                                     <div className="text-sm text-white/60 mt-1 ml-2">
                                                         You are about to stake : {currency === 'ETH' ? 
-                                                            `${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(5)} ETH` :
+                                                            `${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(6)} ETH` :
                                                             `$${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(2)}`
-                                                            }
+                                                        }
                                                     </div>
                                                 )}
                                             </div>

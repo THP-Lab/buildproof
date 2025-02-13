@@ -1,4 +1,4 @@
-import { ClaimPosition, ClaimPositionType } from '@0xintuition/buildproof_ui';
+import { ClaimPosition } from '@0xintuition/buildproof_ui';
 
 export type SupportedCurrency = 'ETH' | '$';
 
@@ -10,11 +10,17 @@ export interface VoteItem {
     tvlFor: string;
     tvlAgainst: string;
     currency: SupportedCurrency;
-    userPosition?: string;
-    positionDirection?: ClaimPositionType;
     subject: string;
     predicate: string;
     object: string;
     votesCount: number;
     totalEth: number;
+    userPosition?: string;
+    positionDirection?: typeof ClaimPosition[keyof typeof ClaimPosition];
+    vault?: {
+        current_share_price: string;
+    };
+    counter_vault?: {
+        current_share_price: string;
+    };
 } 
