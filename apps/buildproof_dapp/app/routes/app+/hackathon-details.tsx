@@ -1,5 +1,5 @@
-import { HackathonDetails } from '../hackathonDetails/HackathonDetails'
+import { HackathonInfos } from "../hackathonDetails/BasicHackathonInfos"
 
 export default function HackathonDetailsPage() {
-  return <HackathonDetails />
+  return <HackathonInfos />
 } 
