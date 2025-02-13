@@ -91,7 +91,11 @@ export const HackathonInfos = () => {
         </div>
         
         <div className="bg-gray-300 flex items-center justify-center p-4 rounded">
-          {atomInfo.image ? (
+          {isLoading ? (
+            <div className="bg-gray-400 p-8 rounded">
+              <span className="block text-gray-700">⌛</span>
+            </div>
+          ) : atomInfo.image ? (
             <img 
               src={atomInfo.image} 
               alt={atomInfo.name}
