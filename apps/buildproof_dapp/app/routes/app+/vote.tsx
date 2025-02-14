@@ -12,7 +12,7 @@ configureClient({
 // Constants
 const TAG_PREDICATE_ID = 3; // for dev environment
 const DEFAULT_PAGE_SIZE = 50;
-const fetched_list_object = "Spaceship Capital";
+const fetched_list_object = "S-Tier";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     try {
