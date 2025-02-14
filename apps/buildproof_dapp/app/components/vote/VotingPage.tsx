@@ -75,8 +75,8 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         // Calculer le total des positions existantes en ETH
         const totalPositions = triplesData.triples.reduce((total, triple) => {
             const typedTriple = triple as unknown as TripleWithVaults;
-            const userVaultPosition = typedTriple.vault?.positions?.[0];
-            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
+            const userVaultPosition = typedTriple.vault?.positions?.length ? typedTriple.vault.positions[0] : undefined;
+            const userCounterVaultPosition = typedTriple.counter_vault?.positions?.length ? typedTriple.counter_vault.positions[0] : undefined;
             
             // Calculer la valeur en ETH pour la position FOR
             const vaultValue = userVaultPosition && typedTriple.vault?.current_share_price
@@ -178,28 +178,27 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             const vaultShares = typedTriple.vault?.total_shares ?? '0';
             const counterVaultShares = typedTriple.counter_vault?.total_shares ?? '0';
 
-            // Récupérer les positions de l'utilisateur
-            const userVaultShares = userVaultPosition?.shares ?? '0';
-            const userCounterVaultShares = userCounterVaultPosition?.shares ?? '0';
+            // Récupérer les positions de l'utilisateur sans valeur par défaut
+            const userVaultShares = userVaultPosition?.shares;
+            const userCounterVaultShares = userCounterVaultPosition?.shares;
 
-            // Déterminer la direction et le montant de la position
+            // Déterminer la direction et le montant de la position seulement si on a des shares
             let positionDirection;
             let userPosition;
             let sliderInitialValue = 0;
             
-            const vaultAmount = Number(formatUnits(BigInt(userVaultShares), 18));
-            const counterVaultAmount = Number(formatUnits(BigInt(userCounterVaultShares), 18));
-            
-            if (counterVaultAmount > 0) {
+            if (userCounterVaultShares && BigInt(userCounterVaultShares) > 0n) {
                 positionDirection = ClaimPosition.claimAgainst;
                 userPosition = userCounterVaultShares;
                 if (Number(ethAmount) > 0) {
+                    const counterVaultAmount = Number(formatUnits(BigInt(userCounterVaultShares), 18));
                     sliderInitialValue = -(counterVaultAmount / Number(ethAmount) * 100);
                 }
-            } else if (vaultAmount > 0) {
+            } else if (userVaultShares && BigInt(userVaultShares) > 0n) {
                 positionDirection = ClaimPosition.claimFor;
                 userPosition = userVaultShares;
                 if (Number(ethAmount) > 0) {
+                    const vaultAmount = Number(formatUnits(BigInt(userVaultShares), 18));
                     sliderInitialValue = (vaultAmount / Number(ethAmount) * 100);
                 }
             }
@@ -227,7 +226,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
                 }
             };
         });
-    }, [triplesData, currency, ethPrice]);
+    }, [triplesData, currency, ethPrice, ethAmount]);
 
     // Set up the subscription when the component mounts
     useEffect(() => {
@@ -487,7 +486,7 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             onCurrencyToggle={toggleCurrency}
             setDebouncedSliderValues={setDebouncedSliderValues}
             userAddress={userAddress || ''}
-            triplesData={triplesData}
+            triplesData={triplesData as any}
             ethPrice={ethPrice}
         />
     );

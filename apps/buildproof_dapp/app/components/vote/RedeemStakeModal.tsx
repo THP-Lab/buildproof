@@ -10,7 +10,7 @@ import {
   Input,
 } from '@0xintuition/buildproof_ui'
 
-import { parseEther } from 'viem'
+import { parseEther, formatUnits } from 'viem'
 
 import { multivaultAbi } from '../../lib/abis/multivault'
 import { useRedeemTriple } from '../../lib/hooks/useRedeemTriple'
@@ -22,6 +22,7 @@ interface RedeemStakeModalProps {
   maxStake: number
   contractAddress: string
   userAddress: string
+  totalShares: string
 }
 
 export function RedeemStakeModal({
@@ -31,8 +32,10 @@ export function RedeemStakeModal({
   maxStake,
   contractAddress,
   userAddress,
+  totalShares,
 }: RedeemStakeModalProps) {
-  const [amount, setAmount] = useState(maxStake)
+  const [displayAmount, setDisplayAmount] = useState(maxStake)
+  
   const {
     writeContractAsync: redeemTriple,
     awaitingWalletConfirmation,
@@ -44,31 +47,46 @@ export function RedeemStakeModal({
       console.error('Modal opened without user address')
       onClose()
     }
-  }, [isOpen, userAddress, onClose])
+    setDisplayAmount(maxStake)
+  }, [isOpen, userAddress, onClose, maxStake])
 
   const handleRedeem = async () => {
-    console.log('Starting redeem process...')
-    console.log('User address:', userAddress)
-    console.log('Claim ID:', claimId)
-    console.log('Amount:', amount)
-
     if (!userAddress || userAddress === 'undefined') {
       console.error('No valid user address provided')
       return
     }
 
-    try {
-      const amountInWei = parseEther(amount.toString())
-      console.log('Amount in Wei:', amountInWei)
+    if (!totalShares) {
+      console.error('Missing share information', { totalShares })
+      return
+    }
 
-      // Call redeemTriple with all required parameters, following the portal's approach
+    try {
+      const percentage = displayAmount / maxStake
+      let sharesToRedeem: bigint
+
+      if (percentage >= 1) {
+        // Pour 100%, utiliser directement le nombre total de shares
+        sharesToRedeem = BigInt(totalShares)
+      } else {
+        // Pour un pourcentage partiel, utiliser le même pourcentage sur les shares
+        sharesToRedeem = BigInt(Math.floor(Number(totalShares) * percentage))
+      }
+
+      console.log('Redeeming shares:', {
+        displayAmount,
+        maxStake,
+        percentage,
+        sharesToRedeem: sharesToRedeem.toString(),
+        totalShares
+      })
+
       const tx = await redeemTriple({
         address: `0x1A6950807E33d5bC9975067e6D6b5Ea4cD661665`,
         abi: multivaultAbi,
         functionName: 'redeemTriple',
-        args: [amountInWei, userAddress as `0x${string}`, claimId],
+        args: [sharesToRedeem, userAddress as `0x${string}`, claimId],
       })
-      console.log('Transaction response:', tx)
 
       onClose()
     } catch (error) {
@@ -77,24 +95,18 @@ export function RedeemStakeModal({
   }
 
   const handlePercentageClick = (percentage: number) => {
-    setAmount(maxStake * (percentage / 100))
+    setDisplayAmount(maxStake * (percentage / 100))
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value)
     if (!isNaN(value) && value >= 0 && value <= maxStake) {
-      setAmount(value)
+      setDisplayAmount(value)
     }
   }
 
-  // Disable the button if there's no valid user address or transaction is pending
   const isPending = awaitingWalletConfirmation || awaitingOnChainConfirmation
-  const isDisabled =
-    !userAddress ||
-    userAddress === 'undefined' ||
-    isPending ||
-    amount <= 0 ||
-    amount > maxStake
+  const isDisabled = !userAddress || userAddress === 'undefined' || isPending || displayAmount <= 0 || displayAmount > maxStake
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -107,19 +119,18 @@ export function RedeemStakeModal({
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            {/*  eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="text-sm font-medium">Amount to Redeem</label>
+            <label className="text-sm font-medium">Amount to Redeem (ETH)</label>
             <Input
               type="number"
-              value={amount}
+              value={displayAmount}
               onChange={handleInputChange}
               max={maxStake}
               min={0}
-              step="any"
+              step="0.000001"
               className="mt-1"
             />
             <p className="text-sm text-gray-500 mt-1">
-              Maximum available: {maxStake}
+              Maximum available: {maxStake} ETH
             </p>
             <div className="flex gap-2 mt-2">
               <Button
