@@ -22,6 +22,7 @@ import {
 import type { VoteItem, SupportedCurrency } from './types';
 import { formatUnits } from 'viem';
 import { useState } from 'react';
+import type { GetTriplesWithPositionsQuery } from '@0xintuition/graphql_bp';
 
 import { CurrencyToggle } from './CurrencyToggle';
 import { RedeemStakeModal } from './RedeemStakeModal';
@@ -65,13 +66,13 @@ const formatTVL = (value: string, currency: SupportedCurrency, ethPrice: string)
 interface VotingPageViewProps {
     selectedTab: string;
     setSelectedTab: (tab: string) => void;
-    tabs: Array<{ value: string; label: string }>;
+    tabs: { value: string; label: string; }[];
     ethAmount: string;
-    setEthAmount: (value: string) => void;
+    setEthAmount: (amount: string) => void;
     totalAbsoluteValue: number;
     resetAllSliders: () => void;
     sortedItems: VoteItem[];
-    sliderValues: Record<string, number>;
+    sliderValues: { [key: string]: number };
     resetSingleSlider: (id: string) => void;
     handleSliderChange: (id: string, value: number) => void;
     handleSliderCommit: (id: string, value: number) => void;
@@ -84,17 +85,11 @@ interface VotingPageViewProps {
     setCurrentPage: (page: number) => void;
     data: VoteItem[];
     currency: SupportedCurrency;
-    ethPrice: string;
     onCurrencyToggle: () => void;
-    setDebouncedSliderValues: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+    setDebouncedSliderValues: (values: { [key: string]: number }) => void;
     userAddress: string;
-    triplesData?: {
-        triples: Array<{
-            id: string;
-            vault_id: string;
-            counter_vault_id: string;
-        }>;
-    };
+    triplesData: GetTriplesWithPositionsQuery | undefined;
+    ethPrice: string;
 }
 
 export const VotingPageView = ({
@@ -119,11 +114,11 @@ export const VotingPageView = ({
     setCurrentPage,
     data,
     currency,
-    ethPrice,
     onCurrencyToggle,
     setDebouncedSliderValues,
     userAddress,
-    triplesData
+    triplesData,
+    ethPrice
 }: VotingPageViewProps) => {
     const [redeemModalState, setRedeemModalState] = useState<{
         isOpen: boolean;
@@ -243,7 +238,11 @@ export const VotingPageView = ({
                                                             claimId: item.positionDirection === ClaimPosition.claimFor 
                                                                 ? (triple?.vault_id || item.id)
                                                                 : (triple?.counter_vault_id || item.id),
-                                                            maxStake: Number(formatUnits(BigInt(item.userPosition || '0'), 18))
+                                                            maxStake: item.positionDirection === ClaimPosition.claimFor && item.vault?.current_share_price
+                                                                ? Number(formatUnits(BigInt(calculateStakeValue(item.userPosition || '0', item.vault.current_share_price)), 18))
+                                                                : item.positionDirection === ClaimPosition.claimAgainst && item.counter_vault?.current_share_price
+                                                                ? Number(formatUnits(BigInt(calculateStakeValue(item.userPosition || '0', item.counter_vault.current_share_price)), 18))
+                                                                : 0
                                                         });
                                                     }}
                                                 >
@@ -355,6 +354,12 @@ export const VotingPageView = ({
                 maxStake={redeemModalState.maxStake}
                 contractAddress={getChainEnvConfig(CURRENT_ENV).contractAddress}
                 userAddress={userAddress}
+                totalShares={triplesData?.triples.find(t => 
+                    t.vault_id === redeemModalState.claimId || t.counter_vault_id === redeemModalState.claimId
+                )?.vault?.positions?.[0]?.shares || 
+                triplesData?.triples.find(t => 
+                    t.vault_id === redeemModalState.claimId || t.counter_vault_id === redeemModalState.claimId
+                )?.counter_vault?.positions?.[0]?.shares || '0'}
             />
         </div>
     );
