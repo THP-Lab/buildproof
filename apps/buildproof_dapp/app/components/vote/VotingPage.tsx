@@ -19,6 +19,16 @@ import { calculateStakeValue } from './CalcuateStakeValue';
 interface VotingPageProps {
     triplesData: GetTriplesWithPositionsQuery | undefined;
     userAddress: string | undefined;
+    onSearch: (search: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }) => void;
+    currentSearch: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    };
 }
 
 interface EthPriceResponse {
@@ -62,7 +72,7 @@ interface TripleWithVaults {
     counter_vault: VaultWithSharePrice;
 }
 
-export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
+export const VotingPage = ({ triplesData, userAddress, onSearch, currentSearch }: VotingPageProps) => {
     const [selectedTab, setSelectedTab] = useState('voting');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -169,7 +179,9 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
     const data: VoteItem[] = useMemo(() => {
         if (!triplesData?.triples) return [];
         
-        return triplesData.triples.map((triple: any) => {
+        let filteredTriples = triplesData.triples;
+
+        return filteredTriples.map((triple: any) => {
             const typedTriple = triple as unknown as TripleWithVaults;
             const userVaultPosition = typedTriple.vault?.positions?.[0];
             const userCounterVaultPosition = typedTriple.counter_vault?.positions?.[0];
@@ -457,6 +469,25 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
         sliderSubject.current.next({ id, value: 0 });
     };
 
+    const [searchValues, setSearchValues] = useState<{
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }>({
+        subject: null,
+        predicate: null,
+        object: null,
+    });
+
+    const handleSearch = (values: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }) => {
+        setSearchValues(values);
+        onSearch(values);
+    };
+
     return (
         <VotingPageView
             selectedTab={selectedTab}
@@ -488,6 +519,8 @@ export const VotingPage = ({ triplesData, userAddress }: VotingPageProps) => {
             userAddress={userAddress || ''}
             triplesData={triplesData as any}
             ethPrice={ethPrice}
+            onSearch={onSearch}
+            searchValues={currentSearch}
         />
     );
 }; 

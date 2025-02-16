@@ -4,15 +4,11 @@ import { useLoaderData } from '@remix-run/react';
 import { requireUser } from '@server/auth';
 import { useGetTriplesWithPositionsQuery } from '@0xintuition/graphql_bp';
 import { configureClient } from '@0xintuition/graphql_bp';
+import { useState } from 'react';
 
 configureClient({
     apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
 });
-
-// Constants
-const TAG_PREDICATE_ID = 3; // for dev environment
-const DEFAULT_PAGE_SIZE = 50;
-const fetched_list_object = "S-Tier";
 
 export async function loader({ request }: LoaderFunctionArgs) {
     try {
@@ -22,7 +18,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
         return json({
             userAddress: user.wallet?.address,
-            predicateId: TAG_PREDICATE_ID,
         });
     } catch (error) {
         console.error('Error in vote loader:', error);
@@ -31,38 +26,94 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 const VotePage = () => {
-    const { userAddress, predicateId } = useLoaderData<typeof loader>();
+    const { userAddress } = useLoaderData<typeof loader>();
+    const [searchConditions, setSearchConditions] = useState<any[]>([]);
+    const [currentSearch, setCurrentSearch] = useState<{
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }>({
+        subject: null,
+        predicate: null,
+        object: null,
+    });
 
     // Fetch triples data using GraphQL
     const {
         data: triplesData,
         isLoading,
-        error
+        error,
     } = useGetTriplesWithPositionsQuery(
         {
-            limit: DEFAULT_PAGE_SIZE,
             where: {
-                _and: [
-                    { predicate_id: { _eq: predicateId } },
-                    { object: { label: { _eq: fetched_list_object } } }
-                ]
+                _and: searchConditions
             },
-            address: userAddress?.toLowerCase()
+            address: userAddress?.toLowerCase(),
+            orderBy: [
+                {
+                    vault: {
+                        positions_aggregate: {
+                            count: "desc_nulls_last"
+                        }
+                    }
+                },
+                {
+                    counter_vault: {
+                        positions_aggregate: {
+                            count: "desc_nulls_last"
+                        }
+                    }
+                },
+                {
+                    vault: {
+                        total_shares: "desc_nulls_last"
+                    }
+                }
+            ]
         },
         {
-            queryKey: ['get-triples-with-positions', predicateId, fetched_list_object, userAddress],
-            enabled: !!userAddress && !!predicateId
+            queryKey: ['get-triples-with-positions', userAddress, searchConditions],
+            enabled: !!userAddress
         }
     );
 
-    console.log('Query variables:', {
-        predicateId,
-        address: userAddress,
-        fetched_list_object,
-        triplesData
-    });
+    const handleSearch = (search: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }) => {
+        console.log('Search values:', search); // Pour le debug
+        const conditions = [];
+        
+        if (search.subject) {
+            conditions.push({
+                _and: [
+                    { subject: { label: { _eq: search.subject } } },
+                    
+                ]
+            });
+        }
+        if (search.predicate) {
+            conditions.push({
+                _and: [
+                    { predicate: { label: { _eq: search.predicate } } },
+                    { predicate: { label: { _neq: search.predicate + 's' } } }
+                ]
+            });
+        }
+        if (search.object) {
+            conditions.push({
+                _and: [
+                    { object: { label: { _eq: search.object } } },
+                    { object: { label: { _neq: search.object + 's' } } }
+                ]
+            });
+        }
 
-    console.log('Response data:', triplesData);
+        console.log('Search conditions:', JSON.stringify(conditions, null, 2)); // Pour le debug
+        setSearchConditions(conditions);
+        setCurrentSearch(search);
+    };
 
     // Loading state
     if (isLoading) {
@@ -78,7 +129,12 @@ const VotePage = () => {
         );
     }
 
-    return <VotingPage triplesData={triplesData} userAddress={userAddress} />;
+    return <VotingPage 
+        triplesData={triplesData} 
+        userAddress={userAddress}
+        onSearch={handleSearch}
+        currentSearch={currentSearch}
+    />;
 };
 
 export default VotePage; 

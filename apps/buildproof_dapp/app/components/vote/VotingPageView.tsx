@@ -29,6 +29,7 @@ import { RedeemStakeModal } from './RedeemStakeModal';
 import { getChainEnvConfig } from '../../lib/utils/environment';
 import { CURRENT_ENV } from '../../consts';
 import { calculateStakeValue } from './CalcuateStakeValue';
+import { SearchBar } from './SearchBar';
 
 
 const formatTVL = (value: string, currency: SupportedCurrency, ethPrice: string) => {
@@ -90,6 +91,16 @@ interface VotingPageViewProps {
     userAddress: string;
     triplesData: GetTriplesWithPositionsQuery | undefined;
     ethPrice: string;
+    onSearch: (search: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    }) => void;
+    searchValues: {
+        subject: string | null;
+        predicate: string | null;
+        object: string | null;
+    };
 }
 
 export const VotingPageView = ({
@@ -118,7 +129,9 @@ export const VotingPageView = ({
     setDebouncedSliderValues,
     userAddress,
     triplesData,
-    ethPrice
+    ethPrice,
+    onSearch,
+    searchValues,
 }: VotingPageViewProps) => {
     const [redeemModalState, setRedeemModalState] = useState<{
         isOpen: boolean;
@@ -180,12 +193,16 @@ export const VotingPageView = ({
 
                 {/* Main content */}
                 <div className="p-4 space-y-6">
-                    {/* Carte d'explication */}
+                    {/* Carte d'explication avec SearchBar */}
                     <EmptyStateCard
                         title="How to Vote"
                         message="Use the sliders to allocate your voting power. Positive values support a project, negative values oppose it. The total absolute values cannot exceed 100%."
                         className="mb-6"
-                    />
+                    >
+                        <div className="mt-4">
+                            <SearchBar onSearch={onSearch} initialValues={searchValues} />
+                        </div>
+                    </EmptyStateCard>
                     
                     {/* Currency Toggle et Reset */}
                     <CurrencyToggle
