@@ -66,8 +66,8 @@ export const BasicUsage: Story = {
 
     return (
       <div>
-        <MultiSlider sliders={sliders} className="w-[800px]" />
-        <button 
+        <MultiSlider slider={sliders[0]} className="w-[800px]" />
+        <button
           onClick={handleValidate}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >
@@ -210,8 +210,8 @@ export const TenProjects: Story = {
 
     return (
       <div>
-        <MultiSlider sliders={sliders} className="w-[800px]" />
-        <button 
+        <MultiSlider slider={sliders[0]} className="w-[800px]" />
+        <button
           onClick={handleValidate}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >

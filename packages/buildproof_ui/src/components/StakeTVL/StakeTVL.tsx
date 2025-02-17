@@ -23,6 +23,14 @@ export interface StakeTVLProps {
   className?: string
 }
 
+const formatTVLValue = (value: number, currency: CurrencyType) => {
+  if (currency === 'ETH') {
+    return value < 0.0001 ? '<\u00A00.0001' : value.toFixed(4);
+  } else {
+    return value < 0.01 ? '<\u00A00.01' : value.toFixed(2);
+  }
+};
+
 const StakeTVL = React.forwardRef<HTMLDivElement, StakeTVLProps>(
   (
     {
@@ -40,8 +48,7 @@ const StakeTVL = React.forwardRef<HTMLDivElement, StakeTVLProps>(
   ) => {
     const stakedForPercentage =
       tvlFor && totalTVL ? (+tvlFor / +totalTVL) * 100 : 0
-    const formattedTVL =
-      totalTVL < 0.0001 ? '<\u00A00.0001' : totalTVL.toFixed(4)
+    const formattedTVL = formatTVLValue(totalTVL, currency)
 
     const content = (
       <div
