@@ -143,7 +143,8 @@ const SubmitHackathon = () => {
       hackathonTitle,
       'starts_on',
       'ends_on',
-      'has_prize',
+      'has tag',
+      'BP_test',
       ...prizes.map(prize => prize.name)
     ];
 
@@ -162,35 +163,32 @@ const SubmitHackathon = () => {
     const triplesToValidate = [
       {
         subject: hackathonTitle,
+        predicate: 'has tag',
+        object: 'BP_test'
+      },
+      {
+        subject: hackathonTitle,
         predicate: 'Total Cash Prize',
         object: totalCashPrize
       },
       {
-        subject: {
-          subject: hackathonTitle,
-          predicate: 'Total Cash Prize',
-          object: totalCashPrize
-        },
+        subject: hackathonTitle,
         predicate: 'starts_on',
         object: startDate,
         displayValue: new Date(startDate).toLocaleDateString()
       },
       {
-        subject: {
-          subject: hackathonTitle,
-          predicate: 'Total Cash Prize',
-          object: totalCashPrize
-        },
+        subject: hackathonTitle,
         predicate: 'ends_on',
         object: endDate,
         displayValue: new Date(endDate).toLocaleDateString()
       },
 
-      ...prizes.map(prize => ({
-        subject: prize.name,
-        predicate: 'is',
-        object: prize.amount
-      })),
+      // ...prizes.map(prize => ({
+      //   subject: prize.name,
+      //   predicate: 'is',
+      //   object: prize.amount
+      // })),
       
       ...prizes.map(prize => {
         if (prize.name === 'Other') {
@@ -201,26 +199,14 @@ const SubmitHackathon = () => {
 
           return {
             subject: hackathonTitle,
-            predicate: 'is composed',
-            object: {
-              subject: prize.otherName || otherPrizeNames[0] || 'Other', // Fallback to the first prize name
-              predicate: 'is',
-              object: prize.amount
-            }
+            predicate:  prize.otherName || otherPrizeNames[0] || 'Other',
+            object: prize.amount
           };
         } else {
           return {
-            subject: {
-              subject: hackathonTitle,
-              predicate: 'Total Cash Prize',
-              object: totalCashPrize
-            },
-            predicate: 'is composed',
-            object: {
-              subject: prize.name,
-              predicate: 'is',
-              object: prize.amount
-            }
+            subject: hackathonTitle,
+            predicate: prize.name,
+            object: prize.amount
           };
         }
       })
@@ -245,34 +231,39 @@ const SubmitHackathon = () => {
 
       // 1. D'abord, on stocke les données sur IPFS
       const hackathonData = {
-        title: hackathonTitle,
-        description,
         partnerName,
-        totalCashPrize,
-        startDate,
-        endDate,
-        prizes: prizes.map(prize => ({
-          name: prize.name,
-          amount: prize.amount
-        }))
+        name: hackathonTitle,
+        description
       };
 
       // Utiliser la fonction hashDataToIPFS
-      const { value: titleValue, ipfsHash: titleIpfsHash } = await hashDataToIPFS(hackathonTitle, env.PINATA_JWT);
-      const { value: descValue, ipfsHash: descIpfsHash } = await hashDataToIPFS(description, env.PINATA_JWT);
+      const { value: nameValue, ipfsHash: nameIpfsHash } = await hashDataToIPFS(hackathonTitle, env.PINATA_JWT);
       const { ipfsHash } = await hashDataToIPFS(hackathonData, env.PINATA_JWT);
 
       // 3. Créer les atoms pour les données IPFS et les autres atoms nécessaires
+      const startDateStr = new Date(startDate).toLocaleDateString();
+      const endDateStr = new Date(endDate).toLocaleDateString();
+      const prizeAmounts = prizes.map(prize => prize.amount.toString());
+      const totalCashPrizeStr = totalCashPrize.toString();
+      const otherPlaceNames = prizes
+        .filter(prize => prize.name === 'Other' && prize.otherName)
+        .map(prize => prize.otherName as string);
+
       const atomsToCreate = [
-        titleValue,        // Le titre lisible
-        titleIpfsHash,     // Le lien IPFS du titre
-        descValue,         // La description lisible
-        descIpfsHash,      // Le lien IPFS de la description
-        ipfsHash,          // Le lien IPFS des données complètes
+        ipfsHash,
+        'has tag',
         'starts_on',
         'ends_on',
-        'has_prize',
-        ...prizes.map(prize => prize.name)
+        'BP_test',
+        'First Place',
+        'Second Place',
+        'Third Place',
+        ...otherPlaceNames,
+        'total cash prize',
+        startDateStr,
+        endDateStr,
+        totalCashPrizeStr,
+        ...prizeAmounts
       ];
 
       // Première vérification des atomes existants
@@ -308,31 +299,67 @@ const SubmitHackathon = () => {
         }
       }
 
-      const [titleIpfsId, descIpfsId, dataIpfsId, startsOnId, endsOnId, hasPrizeId, ...prizeIds] = atomIds;
+      const [ipfsHashId, hasTagId, startsOnId, endsOnId,  bpTestId, firstPlaceId, secondPlaceId, thirdPlaceId, ...remainingIds] = atomIds;
+      const otherPlaceIds =remainingIds.slice(0, otherPlaceNames.length);
+      const [ totalCashPrizePredicateId, startDateId, endDateId, totalCashPrizeAmountId, ...prizeAmountIds] = remainingIds.slice(otherPlaceNames.length);
 
-      if (!titleIpfsId || !descIpfsId || !dataIpfsId || !startsOnId || !endsOnId || !hasPrizeId) {
+      if ( !ipfsHashId || !hasTagId || !startsOnId || !endsOnId || !bpTestId || !firstPlaceId || !totalCashPrizePredicateId || !startDateId || !endDateId || !totalCashPrizeAmountId ) {
         throw new Error('Failed to create or retrieve required atoms. Please try again.');
       }
 
       // 5. Créer les triples avec des dates simplifiées
       const triplesToCreate = [
         {
-          subjectId: titleIpfsId,
-          predicateId: startsOnId,
-          objectId: BigInt(new Date(startDate).getDate())
+          subjectId: ipfsHashId,
+          predicateId: 3,
+          objectId: bpTestId
         },
         {
-          subjectId: titleIpfsId,
+          subjectId: ipfsHashId,
+          predicateId: startsOnId,
+          objectId: startDateId
+        },
+        {
+          subjectId: ipfsHashId,
           predicateId: endsOnId,
-          objectId: BigInt(new Date(endDate).getDate())
+          objectId: endDateId
+        },
+        {
+          subjectId: ipfsHashId,
+          predicateId: totalCashPrizePredicateId,
+          objectId: totalCashPrizeAmountId
         },
         ...prizes.map((prize, index) => {
-          const prizeId = prizeIds[index];
+          const prizeId = prizeAmountIds[index];
           if (!prizeId) throw new Error(`Prize ID not found for ${prize.name}`);
+
+          let predicateId;
+      switch(prize.name) {
+        case 'First Place':
+          predicateId = firstPlaceId;
+          break;
+        case 'Second Place':
+          predicateId = secondPlaceId;
+          break;
+        case 'Third Place':
+            predicateId = thirdPlaceId;
+            break;
+        case 'Other':
+          const otherIndex = prizes
+            .filter(p => p.name === 'Other')
+            .findIndex(p => p.otherName === prize.otherName);
+          if (otherIndex === -1 || !otherPlaceIds[otherIndex]) {
+            throw new Error(`Predicate ID not found for Other prize: ${prize.otherName}`);
+          }
+          predicateId = otherPlaceIds[otherIndex];
+          break;
+        default:
+          throw new Error(`Unknown prize type: ${prize.name}`);
+      }
           return {
-            subjectId: titleIpfsId,
-            predicateId: hasPrizeId,
-            objectId: prizeId
+            subjectId: ipfsHashId,
+            predicateId: predicateId,
+            objectId: prizeAmountIds[index]
           };
         })
       ];
