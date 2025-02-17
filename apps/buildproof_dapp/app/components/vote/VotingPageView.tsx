@@ -34,10 +34,10 @@ import { SearchBar } from './SearchBar';
 
 const formatTVL = (value: string, currency: SupportedCurrency, ethPrice: string) => {
     if (!value) return '0';
-    
+
     try {
         let num: number;
-        
+
         if (value.includes('e+')) {
             // Si c'est en notation e+, on considère que c'est une erreur et on convertit en e-
             const [base, exp] = value.split('e+');
@@ -45,7 +45,7 @@ const formatTVL = (value: string, currency: SupportedCurrency, ethPrice: string)
         } else {
             num = Number(value);
         }
-        
+
         // Convertir en ETH (division par 10^18)
         const ethValue = Number(formatUnits(
             // Pour BigInt, on doit d'abord convertir en chaîne décimale
@@ -146,27 +146,27 @@ export const VotingPageView = ({
     // Calculer les pages à afficher
     const getVisiblePages = (current: number, total: number) => {
         if (total <= 3) return Array.from({ length: total }, (_, i) => i + 1);
-        
+
         if (current === 1) {
             // Première page : afficher 1, 2, 3, ..., total
             return [1, 2, 3, null, total];
         }
-        
+
         if (current === total) {
             // Dernière page : afficher 1, ..., total-2, total-1, total
             return [1, null, total - 2, total - 1, total];
         }
-        
+
         if (current === 2) {
             // Deuxième page : afficher 1, 2, 3, ..., total
             return [1, 2, 3, null, total];
         }
-        
+
         if (current === total - 1) {
             // Avant-dernière page : afficher 1, ..., total-2, total-1, total
             return [1, null, total - 2, total - 1, total];
         }
-        
+
         // Pages du milieu : afficher 1, ..., current-1, current, current+1, ..., total
         return [1, null, current - 1, current, current + 1, null, total];
     };
@@ -203,7 +203,7 @@ export const VotingPageView = ({
                             <SearchBar onSearch={onSearch} initialValues={searchValues} />
                         </div>
                     </EmptyStateCard>
-                    
+
                     {/* Currency Toggle et Reset */}
                     <CurrencyToggle
                         currency={currency}
@@ -226,11 +226,11 @@ export const VotingPageView = ({
                                     tvlAgainst={formatTVL(item.tvlAgainst, currency, ethPrice)}
                                     currency={currency}
                                     userPosition={
-                                        (item.userPosition && item.vault?.current_share_price && item.positionDirection === ClaimPosition.claimFor) ? 
-                                            formatTVL(calculateStakeValue(item.userPosition, item.vault.current_share_price), currency, ethPrice) 
-                                        : (item.userPosition && item.counter_vault?.current_share_price && item.positionDirection === ClaimPosition.claimAgainst) ?
-                                            formatTVL(calculateStakeValue(item.userPosition, item.counter_vault.current_share_price), currency, ethPrice)
-                                        : undefined
+                                        (item.userPosition && item.vault?.current_share_price && item.positionDirection === ClaimPosition.claimFor) ?
+                                            formatTVL(calculateStakeValue(item.userPosition, item.vault.current_share_price), currency, ethPrice)
+                                            : (item.userPosition && item.counter_vault?.current_share_price && item.positionDirection === ClaimPosition.claimAgainst) ?
+                                                formatTVL(calculateStakeValue(item.userPosition, item.counter_vault.current_share_price), currency, ethPrice)
+                                                : undefined
                                     }
                                     positionDirection={item.positionDirection}
                                     onStakeForClick={() => console.log('Vote FOR project', item.subject)}
@@ -252,14 +252,14 @@ export const VotingPageView = ({
                                                         const triple = triplesData?.triples?.find((t: { id: string; vault_id: string; counter_vault_id: string; }) => t.id === item.id);
                                                         setRedeemModalState({
                                                             isOpen: true,
-                                                            claimId: item.positionDirection === ClaimPosition.claimFor 
+                                                            claimId: item.positionDirection === ClaimPosition.claimFor
                                                                 ? (triple?.vault_id || item.id)
                                                                 : (triple?.counter_vault_id || item.id),
                                                             maxStake: item.positionDirection === ClaimPosition.claimFor && item.vault?.current_share_price
                                                                 ? Number(formatUnits(BigInt(calculateStakeValue(item.userPosition || '0', item.vault.current_share_price)), 18))
                                                                 : item.positionDirection === ClaimPosition.claimAgainst && item.counter_vault?.current_share_price
-                                                                ? Number(formatUnits(BigInt(calculateStakeValue(item.userPosition || '0', item.counter_vault.current_share_price)), 18))
-                                                                : 0
+                                                                    ? Number(formatUnits(BigInt(calculateStakeValue(item.userPosition || '0', item.counter_vault.current_share_price)), 18))
+                                                                    : 0
                                                         });
                                                     }}
                                                 >
@@ -270,16 +270,16 @@ export const VotingPageView = ({
                                         <div className="flex items-center gap-4">
                                             <div className="flex-1">
                                                 <MultiSlider
-                                                    sliders={[{
+                                                    slider={{
                                                         id: item.id,
                                                         value: sliderValues[item.id] ?? 0,
                                                         onChange: (value: number) => handleSliderChange(item.id, value),
                                                         onChangeEnd: (value: number) => handleSliderCommit(item.id, value)
-                                                    }]}
+                                                    }}
                                                 />
                                                 {sliderValues[item.id] && (
                                                     <div className="text-sm text-white/60 mt-1 ml-2">
-                                                        You are about to stake : {currency === 'ETH' ? 
+                                                        You are about to stake : {currency === 'ETH' ?
                                                             `${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(6)} ETH` :
                                                             `$${((Math.abs(sliderValues[item.id]) / 100) * Number(ethAmount)).toFixed(2)}`
                                                         }
@@ -322,8 +322,8 @@ export const VotingPageView = ({
                             <div>{data.length} claims found</div>
                             <div className="flex items-center">
                                 <span className="mr-4">Rows per page</span>
-                                <select 
-                                    value={rowsPerPage} 
+                                <select
+                                    value={rowsPerPage}
                                     onChange={(e) => setRowsPerPage(e.target.value)}
                                     className="bg-transparent border border-gray-700 rounded px-2 mr-4"
                                 >
@@ -371,12 +371,12 @@ export const VotingPageView = ({
                 maxStake={redeemModalState.maxStake}
                 contractAddress={getChainEnvConfig(CURRENT_ENV).contractAddress}
                 userAddress={userAddress}
-                totalShares={triplesData?.triples.find(t => 
+                totalShares={triplesData?.triples.find(t =>
                     t.vault_id === redeemModalState.claimId || t.counter_vault_id === redeemModalState.claimId
-                )?.vault?.positions?.[0]?.shares || 
-                triplesData?.triples.find(t => 
-                    t.vault_id === redeemModalState.claimId || t.counter_vault_id === redeemModalState.claimId
-                )?.counter_vault?.positions?.[0]?.shares || '0'}
+                )?.vault?.positions?.[0]?.shares ||
+                    triplesData?.triples.find(t =>
+                        t.vault_id === redeemModalState.claimId || t.counter_vault_id === redeemModalState.claimId
+                    )?.counter_vault?.positions?.[0]?.shares || '0'}
             />
         </div>
     );
