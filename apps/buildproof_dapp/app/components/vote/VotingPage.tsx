@@ -16,6 +16,8 @@ import { parseEther, formatUnits } from 'viem'
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { calculateStakeValue } from './CalcuateStakeValue';
+import { useVerifyAttestor } from '../../lib/hooks/useVerifyAttestor'
+
 interface VotingPageProps {
     triplesData: GetTriplesWithPositionsQuery | undefined;
     userAddress: string | undefined;
@@ -285,6 +287,7 @@ export const VotingPage = ({ triplesData, userAddress, onSearch, currentSearch }
     ];
 
     const { batchDepositTriple, isPending } = useBatchDepositTriple();
+    const { verifyAndApproveAttestor, isCheckingApproval, approvalError } = useVerifyAttestor()
 
     // Update display amount when currency changes
     useEffect(() => {
@@ -371,6 +374,15 @@ export const VotingPage = ({ triplesData, userAddress, onSearch, currentSearch }
         if (!userAddress || !ethAmount || !triplesData?.triples) return;
 
         try {
+            // Vérifier d'abord l'approbation de l'attestor
+            console.log('Verifying attestor approval...')
+            const isAttestorApproved = await verifyAndApproveAttestor()
+            if (!isAttestorApproved) {
+                console.error('Attestor approval failed:', approvalError)
+                return
+            }
+            console.log('Attestor approved, proceeding with deposit...')
+
             // Calculer le montant total initial
             const initialTotal = triplesData.triples.reduce((total, triple) => {
                 const typedTriple = triple as unknown as TripleWithVaults;
@@ -458,8 +470,7 @@ export const VotingPage = ({ triplesData, userAddress, onSearch, currentSearch }
 
             // Handle success (e.g., show notification, reset form, etc.)
         } catch (error) {
-            console.error('Error submitting stakes:', error);
-            // Handle error (e.g., show error notification)
+            console.error('Error in handleSubmit:', error)
         }
     };
 

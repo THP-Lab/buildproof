@@ -7504,6 +7504,60 @@ type query_root {
   """
   stat(id: Int!): stats
   """
+  fetch data from the table: "stats_hour" using primary key columns
+  """
+  stat_hour(id: Int!): stat_hours
+  """
+  fetch data from the table: "stats_hour"
+  """
+  stat_hours(
+    """
+    distinct select on columns
+    """
+    distinct_on: [stat_hours_select_column!]
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [stat_hours_order_by!]
+    """
+    filter the rows returned
+    """
+    where: stat_hours_bool_exp
+  ): [stat_hours!]!
+  """
+  fetch aggregated fields from the table: "stats_hour"
+  """
+  stat_hours_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [stat_hours_select_column!]
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [stat_hours_order_by!]
+    """
+    filter the rows returned
+    """
+    where: stat_hours_bool_exp
+  ): stat_hours_aggregate!
+  """
   fetch data from the table: "stats"
   """
   stats(
@@ -8814,11 +8868,300 @@ input signals_variance_order_by {
 }
 
 """
+columns and relationships of "stats_hour"
+"""
+type stat_hours {
+  contract_balance: numeric
+  created_at: timestamptz!
+  id: Int!
+  total_accounts: Int
+  total_atoms: Int
+  total_fees: numeric
+  total_positions: Int
+  total_signals: Int
+  total_triples: Int
+}
+
+"""
+aggregated selection of "stats_hour"
+"""
+type stat_hours_aggregate {
+  aggregate: stat_hours_aggregate_fields
+  nodes: [stat_hours!]!
+}
+
+"""
+aggregate fields of "stats_hour"
+"""
+type stat_hours_aggregate_fields {
+  avg: stat_hours_avg_fields
+  count(columns: [stat_hours_select_column!], distinct: Boolean): Int!
+  max: stat_hours_max_fields
+  min: stat_hours_min_fields
+  stddev: stat_hours_stddev_fields
+  stddev_pop: stat_hours_stddev_pop_fields
+  stddev_samp: stat_hours_stddev_samp_fields
+  sum: stat_hours_sum_fields
+  var_pop: stat_hours_var_pop_fields
+  var_samp: stat_hours_var_samp_fields
+  variance: stat_hours_variance_fields
+}
+
+"""
+aggregate avg on columns
+"""
+type stat_hours_avg_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+Boolean expression to filter rows from the table "stats_hour". All fields are combined with a logical 'AND'.
+"""
+input stat_hours_bool_exp {
+  _and: [stat_hours_bool_exp!]
+  _not: stat_hours_bool_exp
+  _or: [stat_hours_bool_exp!]
+  contract_balance: numeric_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  total_accounts: Int_comparison_exp
+  total_atoms: Int_comparison_exp
+  total_fees: numeric_comparison_exp
+  total_positions: Int_comparison_exp
+  total_signals: Int_comparison_exp
+  total_triples: Int_comparison_exp
+}
+
+"""
+aggregate max on columns
+"""
+type stat_hours_max_fields {
+  contract_balance: numeric
+  created_at: timestamptz
+  id: Int
+  total_accounts: Int
+  total_atoms: Int
+  total_fees: numeric
+  total_positions: Int
+  total_signals: Int
+  total_triples: Int
+}
+
+"""
+aggregate min on columns
+"""
+type stat_hours_min_fields {
+  contract_balance: numeric
+  created_at: timestamptz
+  id: Int
+  total_accounts: Int
+  total_atoms: Int
+  total_fees: numeric
+  total_positions: Int
+  total_signals: Int
+  total_triples: Int
+}
+
+"""
+Ordering options when selecting data from "stats_hour".
+"""
+input stat_hours_order_by {
+  contract_balance: order_by
+  created_at: order_by
+  id: order_by
+  total_accounts: order_by
+  total_atoms: order_by
+  total_fees: order_by
+  total_positions: order_by
+  total_signals: order_by
+  total_triples: order_by
+}
+
+"""
+select columns of table "stats_hour"
+"""
+enum stat_hours_select_column {
+  """
+  column name
+  """
+  contract_balance
+  """
+  column name
+  """
+  created_at
+  """
+  column name
+  """
+  id
+  """
+  column name
+  """
+  total_accounts
+  """
+  column name
+  """
+  total_atoms
+  """
+  column name
+  """
+  total_fees
+  """
+  column name
+  """
+  total_positions
+  """
+  column name
+  """
+  total_signals
+  """
+  column name
+  """
+  total_triples
+}
+
+"""
+aggregate stddev on columns
+"""
+type stat_hours_stddev_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+aggregate stddev_pop on columns
+"""
+type stat_hours_stddev_pop_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+aggregate stddev_samp on columns
+"""
+type stat_hours_stddev_samp_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+Streaming cursor of the table "stat_hours"
+"""
+input stat_hours_stream_cursor_input {
+  """
+  Stream column input with initial value
+  """
+  initial_value: stat_hours_stream_cursor_value_input!
+  """
+  cursor ordering
+  """
+  ordering: cursor_ordering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input stat_hours_stream_cursor_value_input {
+  contract_balance: numeric
+  created_at: timestamptz
+  id: Int
+  total_accounts: Int
+  total_atoms: Int
+  total_fees: numeric
+  total_positions: Int
+  total_signals: Int
+  total_triples: Int
+}
+
+"""
+aggregate sum on columns
+"""
+type stat_hours_sum_fields {
+  contract_balance: numeric
+  id: Int
+  total_accounts: Int
+  total_atoms: Int
+  total_fees: numeric
+  total_positions: Int
+  total_signals: Int
+  total_triples: Int
+}
+
+"""
+aggregate var_pop on columns
+"""
+type stat_hours_var_pop_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+aggregate var_samp on columns
+"""
+type stat_hours_var_samp_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
+aggregate variance on columns
+"""
+type stat_hours_variance_fields {
+  contract_balance: Float
+  id: Float
+  total_accounts: Float
+  total_atoms: Float
+  total_fees: Float
+  total_positions: Float
+  total_signals: Float
+  total_triples: Float
+}
+
+"""
 columns and relationships of "stats"
 """
 type stats {
   contract_balance: numeric
   id: Int!
+  last_processed_block_number: numeric
+  last_processed_block_timestamp: bigint
+  last_updated: timestamptz!
   total_accounts: Int
   total_atoms: Int
   total_fees: numeric
@@ -8858,6 +9201,8 @@ aggregate avg on columns
 type stats_avg_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -8875,6 +9220,9 @@ input stats_bool_exp {
   _or: [stats_bool_exp!]
   contract_balance: numeric_comparison_exp
   id: Int_comparison_exp
+  last_processed_block_number: numeric_comparison_exp
+  last_processed_block_timestamp: bigint_comparison_exp
+  last_updated: timestamptz_comparison_exp
   total_accounts: Int_comparison_exp
   total_atoms: Int_comparison_exp
   total_fees: numeric_comparison_exp
@@ -8889,6 +9237,9 @@ aggregate max on columns
 type stats_max_fields {
   contract_balance: numeric
   id: Int
+  last_processed_block_number: numeric
+  last_processed_block_timestamp: bigint
+  last_updated: timestamptz
   total_accounts: Int
   total_atoms: Int
   total_fees: numeric
@@ -8903,6 +9254,9 @@ aggregate min on columns
 type stats_min_fields {
   contract_balance: numeric
   id: Int
+  last_processed_block_number: numeric
+  last_processed_block_timestamp: bigint
+  last_updated: timestamptz
   total_accounts: Int
   total_atoms: Int
   total_fees: numeric
@@ -8917,6 +9271,9 @@ Ordering options when selecting data from "stats".
 input stats_order_by {
   contract_balance: order_by
   id: order_by
+  last_processed_block_number: order_by
+  last_processed_block_timestamp: order_by
+  last_updated: order_by
   total_accounts: order_by
   total_atoms: order_by
   total_fees: order_by
@@ -8937,6 +9294,18 @@ enum stats_select_column {
   column name
   """
   id
+  """
+  column name
+  """
+  last_processed_block_number
+  """
+  column name
+  """
+  last_processed_block_timestamp
+  """
+  column name
+  """
+  last_updated
   """
   column name
   """
@@ -8969,6 +9338,8 @@ aggregate stddev on columns
 type stats_stddev_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -8983,6 +9354,8 @@ aggregate stddev_pop on columns
 type stats_stddev_pop_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -8997,6 +9370,8 @@ aggregate stddev_samp on columns
 type stats_stddev_samp_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -9025,6 +9400,9 @@ Initial value of the column from where the streaming should start
 input stats_stream_cursor_value_input {
   contract_balance: numeric
   id: Int
+  last_processed_block_number: numeric
+  last_processed_block_timestamp: bigint
+  last_updated: timestamptz
   total_accounts: Int
   total_atoms: Int
   total_fees: numeric
@@ -9039,6 +9417,8 @@ aggregate sum on columns
 type stats_sum_fields {
   contract_balance: numeric
   id: Int
+  last_processed_block_number: numeric
+  last_processed_block_timestamp: bigint
   total_accounts: Int
   total_atoms: Int
   total_fees: numeric
@@ -9053,6 +9433,8 @@ aggregate var_pop on columns
 type stats_var_pop_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -9067,6 +9449,8 @@ aggregate var_samp on columns
 type stats_var_samp_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -9081,6 +9465,8 @@ aggregate variance on columns
 type stats_variance_fields {
   contract_balance: Float
   id: Float
+  last_processed_block_number: Float
+  last_processed_block_timestamp: Float
   total_accounts: Float
   total_atoms: Float
   total_fees: Float
@@ -10625,6 +11011,77 @@ type subscription_root {
   fetch data from the table: "stats" using primary key columns
   """
   stat(id: Int!): stats
+  """
+  fetch data from the table: "stats_hour" using primary key columns
+  """
+  stat_hour(id: Int!): stat_hours
+  """
+  fetch data from the table: "stats_hour"
+  """
+  stat_hours(
+    """
+    distinct select on columns
+    """
+    distinct_on: [stat_hours_select_column!]
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [stat_hours_order_by!]
+    """
+    filter the rows returned
+    """
+    where: stat_hours_bool_exp
+  ): [stat_hours!]!
+  """
+  fetch aggregated fields from the table: "stats_hour"
+  """
+  stat_hours_aggregate(
+    """
+    distinct select on columns
+    """
+    distinct_on: [stat_hours_select_column!]
+    """
+    limit the number of rows returned
+    """
+    limit: Int
+    """
+    skip the first n rows. Use only with order_by
+    """
+    offset: Int
+    """
+    sort the rows by one or more columns
+    """
+    order_by: [stat_hours_order_by!]
+    """
+    filter the rows returned
+    """
+    where: stat_hours_bool_exp
+  ): stat_hours_aggregate!
+  """
+  fetch data from the table in a streaming manner: "stats_hour"
+  """
+  stat_hours_stream(
+    """
+    maximum number of rows returned in a single batch
+    """
+    batch_size: Int!
+    """
+    cursor to stream the results returned by the query
+    """
+    cursor: [stat_hours_stream_cursor_input]!
+    """
+    filter the rows returned
+    """
+    where: stat_hours_bool_exp
+  ): [stat_hours!]!
   """
   fetch data from the table: "stats"
   """
