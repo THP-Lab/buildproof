@@ -183,12 +183,6 @@ const SubmitHackathon = () => {
         object: endDate,
         displayValue: new Date(endDate).toLocaleDateString()
       },
-
-      // ...prizes.map(prize => ({
-      //   subject: prize.name,
-      //   predicate: 'is',
-      //   object: prize.amount
-      // })),
       
       ...prizes.map(prize => {
         if (prize.name === 'Other') {
@@ -235,10 +229,18 @@ const SubmitHackathon = () => {
         name: hackathonTitle,
         description
       };
-
+      
+      const bpTestname = 'BP_test';
+      const atomListData = {
+        "@context": "https://schema.org/",
+        "@type": "Thing",
+        name: bpTestname,
+      }
+      
       // Utiliser la fonction hashDataToIPFS
       const { value: nameValue, ipfsHash: nameIpfsHash } = await hashDataToIPFS(hackathonTitle, env.PINATA_JWT);
-      const { ipfsHash } = await hashDataToIPFS(hackathonData, env.PINATA_JWT);
+      const { ipfsHash: hackathonIpfsHash } = await hashDataToIPFS(hackathonData, env.PINATA_JWT);
+      const { ipfsHash: atomListIpfsHash } = await hashDataToIPFS(atomListData, env.PINATA_JWT);
 
       // 3. Créer les atoms pour les données IPFS et les autres atoms nécessaires
       const startDateStr = new Date(startDate).toLocaleDateString();
@@ -250,11 +252,11 @@ const SubmitHackathon = () => {
         .map(prize => prize.otherName as string);
 
       const atomsToCreate = [
-        ipfsHash,
+        hackathonIpfsHash,
         'has tag',
         'starts_on',
         'ends_on',
-        'BP_test',
+        atomListIpfsHash,
         'First Place',
         'Second Place',
         'Third Place',
@@ -299,33 +301,33 @@ const SubmitHackathon = () => {
         }
       }
 
-      const [ipfsHashId, hasTagId, startsOnId, endsOnId,  bpTestId, firstPlaceId, secondPlaceId, thirdPlaceId, ...remainingIds] = atomIds;
+      const [hackathonIpfsHashId, hasTagId, startsOnId, endsOnId,  bpTestIpfsHashId, firstPlaceId, secondPlaceId, thirdPlaceId, ...remainingIds] = atomIds;
       const otherPlaceIds =remainingIds.slice(0, otherPlaceNames.length);
       const [ totalCashPrizePredicateId, startDateId, endDateId, totalCashPrizeAmountId, ...prizeAmountIds] = remainingIds.slice(otherPlaceNames.length);
 
-      if ( !ipfsHashId || !hasTagId || !startsOnId || !endsOnId || !bpTestId || !firstPlaceId || !totalCashPrizePredicateId || !startDateId || !endDateId || !totalCashPrizeAmountId ) {
+      if ( !hackathonIpfsHashId || !hasTagId || !startsOnId || !endsOnId || !bpTestIpfsHashId || !firstPlaceId || !totalCashPrizePredicateId || !startDateId || !endDateId || !totalCashPrizeAmountId ) {
         throw new Error('Failed to create or retrieve required atoms. Please try again.');
       }
 
       // 5. Créer les triples avec des dates simplifiées
       const triplesToCreate = [
         {
-          subjectId: ipfsHashId,
+          subjectId: hackathonIpfsHashId,
           predicateId: 3,
-          objectId: bpTestId
+          objectId: bpTestIpfsHashId
         },
         {
-          subjectId: ipfsHashId,
+          subjectId: hackathonIpfsHashId,
           predicateId: startsOnId,
           objectId: startDateId
         },
         {
-          subjectId: ipfsHashId,
+          subjectId: hackathonIpfsHashId,
           predicateId: endsOnId,
           objectId: endDateId
         },
         {
-          subjectId: ipfsHashId,
+          subjectId: hackathonIpfsHashId,
           predicateId: totalCashPrizePredicateId,
           objectId: totalCashPrizeAmountId
         },
@@ -357,7 +359,7 @@ const SubmitHackathon = () => {
           throw new Error(`Unknown prize type: ${prize.name}`);
       }
           return {
-            subjectId: ipfsHashId,
+            subjectId: hackathonIpfsHashId,
             predicateId: predicateId,
             objectId: prizeAmountIds[index]
           };
