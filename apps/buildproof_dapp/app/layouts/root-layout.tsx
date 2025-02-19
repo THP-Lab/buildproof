@@ -32,11 +32,11 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
             <Link to="/app">
               <SidebarNavItem iconName={IconName.layoutGrid} label="Home" />
             </Link>
-            <Link to="/app/vote">
-              <SidebarNavItem iconName={IconName.medal} label="Vote" />
-            </Link>
             {authenticated && (
               <>
+                <Link to="/app/vote">
+                  <SidebarNavItem iconName={IconName.medal} label="Vote" />
+                </Link>
                 <Link to="/app/submit-project">
                   <SidebarNavItem iconName={IconName.medal} label="Submit Project" />
                 </Link>

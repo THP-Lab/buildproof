@@ -3,35 +3,41 @@ interface Triple {
   vault_id: string
   counter_vault_id: string
   percentage: number
+  initialPosition?: {
+    vault: bigint
+    counterVault: bigint
+  }
+  currentPosition?: {
+    vault: bigint
+    counterVault: bigint
+  }
 }
 
 interface StakeCalculation {
-  // Utilisation de any[] pour permettre la notation littérale de BigInt (ex: 47n)
   ids: any[]
   values: bigint[]
 }
 
 export function calculateStakes(
   triples: Triple[],
-  totalStakeWei: bigint
+  amountToAddWei: bigint
 ): StakeCalculation {
   const stakes: StakeCalculation = { ids: [], values: [] }
 
-  // Filter out triples with 0 percentage
-  const activeTriples = triples.filter(triple => triple.percentage !== 0)
+  // Filtrer les triples avec un pourcentage non nul
+  const activeTriples = triples.filter(triple => triple.percentage !== 0);
 
   activeTriples.forEach(triple => {
-    // Convert percentage to absolute value for calculation
-    const absolutePercentage = Math.abs(triple.percentage)
-    // Calculate the stake amount for this triple
-    const stakeAmount = (totalStakeWei * BigInt(absolutePercentage)) / 100n
+    // Calculer le nouveau montant basé sur le pourcentage de l'ajout
+    const absolutePercentage = Math.abs(triple.percentage);
+    const amountToAdd = (amountToAddWei * BigInt(absolutePercentage)) / 100n;
+    
+    if (amountToAdd > 0n) {
+      const id = triple.percentage > 0 ? triple.vault_id : triple.counter_vault_id;
+      stakes.ids.push(BigInt(id));
+      stakes.values.push(amountToAdd);
+    }
+  });
 
-    // Use vault_id for positive percentages, counter_vault_id for negative
-    const id = triple.percentage > 0 ? triple.vault_id : triple.counter_vault_id
-    // Utiliser eval pour créer un BigInt littéral (ex: 47n)
-    stakes.ids.push(eval(id + 'n'))
-    stakes.values.push(stakeAmount)
-  })
-
-  return stakes
-} 
+  return stakes;
+}
