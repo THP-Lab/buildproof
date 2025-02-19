@@ -1,61 +1,43 @@
-import { useContractRead } from 'wagmi'
-import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
-import { multivaultAbi } from 'app/lib/abis/multivault'
-import { THING_VAULT_ID_TESTNET } from 'app/consts/general'
-import { hexToString } from 'viem'
+import { useGetAtomQuery, useGetAtomsQuery, configureClient } from '@0xintuition/graphql';
+import { useState, useEffect } from 'react';
+
+configureClient({
+  apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
+});
 
 export const HackathonInfos = () => {
-  const { data: atomData, isLoading } = useContractRead({
-    address: MULTIVAULT_CONTRACT_ADDRESS as `0x${string}`,
-    abi: multivaultAbi,
-    functionName: 'atoms',
-    args: [BigInt(THING_VAULT_ID_TESTNET)]
-  })
+  const [ipfsData, setIpfsData] = useState<{ name?: string; description?: string }>();
+  const { data: atomData, isLoading: loading, error } = useGetAtomQuery(
+    { id: 13217 }
+  );
 
-  // Fonction utilitaire pour extraire les données de l'atom
-  const extractAtomData = (hexData: `0x${string}` | undefined) => {
-    if (!hexData) return { name: '', description: '', image: '' }
-    
-    try {
-      const decodedString = hexToString(hexData)
-      console.log('Decoded atom data:', decodedString)
-      
-      // Si la chaîne décodée est une URL, on retourne des valeurs par défaut
-      if (decodedString.startsWith('http')) {
-        return {
-          name: 'MetaMask',
-          description: 'A free, digital cryptocurrency wallet that allows users to store and manage their cryptocurrencies, interact with decentralized applications (dApps), and execute transactions on blockchain networks.',
-          image: 'https://res.cloudinary.com/dfpwy9nyv/image/upload/v1724108358/remix/imycjbqghqweopkyrk0n.png'
-        }
-      }
-      
-      // Sinon on essaie de parser le JSON
-      try {
-        const parsedData = JSON.parse(decodedString)
-        return {
-          name: parsedData.name || 'No name found',
-          description: parsedData.description || 'No description found',
-          image: parsedData.image || ''
-        }
-      } catch (jsonError) {
-        console.error('Error parsing JSON:', jsonError)
-        return {
-          name: decodedString,
-          description: 'No description available',
-          image: ''
-        }
-      }
-    } catch (error) {
-      console.error('Error decoding atom data:', error)
-      return {
-        name: 'Error decoding data',
-        description: 'Error decoding data',
-        image: ''
-      }
-    }
-  }
+  const { data: atomsData } = useGetAtomsQuery({
+    limit: 5
+  });
 
-  const atomInfo = extractAtomData(atomData as `0x${string}`)
+  useEffect(() => {
+    const fetchIpfsData = async () => {
+      if (atomData?.atom?.data && atomData.atom.data.startsWith('ipfs://')) {
+        const ipfsHash = atomData.atom.data.replace('ipfs://', '');
+        const ipfsUrl = `https://ipfs.io/ipfs/${ipfsHash}`;
+        try {
+          const response = await fetch(ipfsUrl);
+          const data = await response.json();
+          setIpfsData(data);
+        } catch (err) {
+          console.error('Error fetching IPFS data:', err);
+        }
+      }
+    };
+
+    fetchIpfsData();
+  }, [atomData?.atom?.data]);
+
+  console.log('Atom Data:', atomData);
+  console.log('Atom Details:', atomData?.atom);
+  console.log('Error:', error);
+  console.log('Available Atoms:', atomsData);
+  console.log('IPFS Data:', ipfsData);
 
   return (
     <div className="bg-gray-600 p-6 rounded-lg text-white max-w-4xl mx-auto">
@@ -69,19 +51,26 @@ export const HackathonInfos = () => {
       
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white text-black p-4 rounded">
-          {isLoading ? 'Loading...' : atomInfo.name || 'No atom data'}
+          {loading ? 'Loading...' : ipfsData?.name || 'No name available'}
         </div>
         <div className="bg-white text-black p-4 rounded">
-          {isLoading ? 'Loading...' : atomInfo.description || 'No description available'}
+          {loading ? 'Loading...' : ipfsData?.description || 'No description available'}
         </div>
       </div>
       
       <div className="grid grid-cols-3 gap-4 mt-4">
         <div className="bg-white p-4 rounded">
           <h3 className="text-black mb-2">Price pool</h3>
-          {[...Array(3)].map((_, i) => (
-            <button key={i} className="bg-teal-500 text-white w-full py-2 my-1 rounded">1st price</button>
-          ))}
+          {atomData?.atom?.as_subject_triples?.map((triple) => {
+            if (triple.predicate.data === 'total cash prize') {
+              return (
+                <button key={triple.id} className="bg-teal-500 text-white w-full py-2 my-1 rounded">
+                  {triple.object.data} USD
+                </button>
+              );
+            }
+            return null;
+          })}
         </div>
         
         <div className="bg-white p-4 rounded">
@@ -91,14 +80,14 @@ export const HackathonInfos = () => {
         </div>
         
         <div className="bg-gray-300 flex items-center justify-center p-4 rounded">
-          {isLoading ? (
+          {loading ? (
             <div className="bg-gray-400 p-8 rounded">
               <span className="block text-gray-700">⌛</span>
             </div>
-          ) : atomInfo.image ? (
+          ) : atomData?.atom?.image && typeof atomData.atom.image === 'string' ? (
             <img 
-              src={atomInfo.image} 
-              alt={atomInfo.name}
+              src={atomData.atom.image} 
+              alt={ipfsData?.name || ''}
               className="w-full h-full object-cover rounded"
             />
           ) : (

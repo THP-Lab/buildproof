@@ -46,6 +46,9 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                 <Link to="/app/profile">
                   <SidebarNavItem iconName={IconName.personCircle} label="Profile" />
                 </Link>
+                <Link to="/app/hackathon-details">
+                  <SidebarNavItem iconName={IconName.personCircle} label="Details" />
+                </Link>
               </>
             )}
           </SidebarLayoutNavBody>
