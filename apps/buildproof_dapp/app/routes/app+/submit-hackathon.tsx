@@ -4,6 +4,7 @@ import PrizeDistribution from '../../components/prize-distribution.tsx';
 import { Prize } from '../../components/prize-distribution.tsx';
 import { usePrivy } from '@privy-io/react-auth'
 import { useNavigate } from '@remix-run/react'
+import { AdminRoute } from '../../components/auth/admin-route.tsx'
 
 const SubmitHackathon = () => {
   const { authenticated, ready } = usePrivy()
@@ -103,92 +104,94 @@ const SubmitHackathon = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h1 className="text-xl font-bold">Submit a New Hackathon</h1>
-      <Input
-        startAdornment="Partner Name"
-        value={partnerName}
-        onChange={(e) => setPartnerName(e.target.value)}
-        required
-      />
-      <Input
-        startAdornment="Hackathon Title"
-        value={hackathonTitle}
-        onChange={(e) => setHackathonTitle(e.target.value)}
-        required
-      />
-      <div className="flex flex-col">
-        <label className="mb-1">Description</label>
-        <Textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Enter a brief description of the hackathon"
+    <AdminRoute>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <h1 className="text-xl font-bold">Submit a New Hackathon</h1>
+        <Input
+          startAdornment="Partner Name"
+          value={partnerName}
+          onChange={(e) => setPartnerName(e.target.value)}
           required
         />
-      </div>
-      <Input
-        type="date"
-        startAdornment="Start Date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        required
-        min={tomorrow.toISOString().split("T")[0]}
-      />
-      <Input
-        type="date"
-        startAdornment="End Date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        required
-        min={startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0] : ''}
-        disabled={!startDate || new Date(startDate) < today}
-      />
-      <Input
-        startAdornment="Total Cash Prize"
-        type="number"
-        value={totalCashPrize}
-        onChange={(e) => setTotalCashPrize(parseInt(e.target.value))}
-        placeholder="Enter total cash prize amount"
-        required
-        endAdornment="$"
-      />
-      {prizes.map((prize, index) => (
-        <PrizeDistribution
-          key={index}
-          prize={prize}
-          index={index}
-          removePrize={removePrize}
-          updatePrize={updatePrize}
-          availableOptions={getAvailablePrizeOptions()}
-          totalCashPrize={totalCashPrize || 0}
+        <Input
+          startAdornment="Hackathon Title"
+          value={hackathonTitle}
+          onChange={(e) => setHackathonTitle(e.target.value)}
+          required
         />
-      ))}
-      <div className="text-red-500">
-        {totalPrizeAmount > totalCashPrize && (
-          <p>Total prize amounts exceed the total cash prize!</p>
-        )}
-      </div>
-      <div className="flex justify-between">
-        <Button
-          variant={ButtonVariant.successOutline}
-          size={ButtonSize.md}
-          type="button"
-          onClick={addPrize}
-          className="px-4 py-2"
-        >
-          Add Prize
-        </Button>
-        <Button
-          variant={ButtonVariant.accentOutline}
-          size={ButtonSize.md}
-          type="submit"
-          disabled={!isFormValid()}
-          className="px-4 py-2"
-        >
-          Submit
-        </Button>
-      </div>
-    </form>
+        <div className="flex flex-col">
+          <label className="mb-1">Description</label>
+          <Textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Enter a brief description of the hackathon"
+            required
+          />
+        </div>
+        <Input
+          type="date"
+          startAdornment="Start Date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          required
+          min={tomorrow.toISOString().split("T")[0]}
+        />
+        <Input
+          type="date"
+          startAdornment="End Date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          required
+          min={startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0] : ''}
+          disabled={!startDate || new Date(startDate) < today}
+        />
+        <Input
+          startAdornment="Total Cash Prize"
+          type="number"
+          value={totalCashPrize}
+          onChange={(e) => setTotalCashPrize(parseInt(e.target.value))}
+          placeholder="Enter total cash prize amount"
+          required
+          endAdornment="$"
+        />
+        {prizes.map((prize, index) => (
+          <PrizeDistribution
+            key={index}
+            prize={prize}
+            index={index}
+            removePrize={removePrize}
+            updatePrize={updatePrize}
+            availableOptions={getAvailablePrizeOptions()}
+            totalCashPrize={totalCashPrize || 0}
+          />
+        ))}
+        <div className="text-red-500">
+          {totalPrizeAmount > totalCashPrize && (
+            <p>Total prize amounts exceed the total cash prize!</p>
+          )}
+        </div>
+        <div className="flex justify-between">
+          <Button
+            variant={ButtonVariant.successOutline}
+            size={ButtonSize.md}
+            type="button"
+            onClick={addPrize}
+            className="px-4 py-2"
+          >
+            Add Prize
+          </Button>
+          <Button
+            variant={ButtonVariant.accentOutline}
+            size={ButtonSize.md}
+            type="submit"
+            disabled={!isFormValid()}
+            className="px-4 py-2"
+          >
+            Submit
+          </Button>
+        </div>
+      </form>
+    </AdminRoute>
   );
 };
 
