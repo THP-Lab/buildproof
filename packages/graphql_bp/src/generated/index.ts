@@ -14037,7 +14037,10 @@ export type GetTriplesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>
   offset?: InputMaybe<Scalars['Int']['input']>
   orderBy?: InputMaybe<Array<Triples_Order_By> | Triples_Order_By>
-  where?: InputMaybe<Triples_Bool_Exp>
+  where: Triples_Bool_Exp
+  adminAddresses?: InputMaybe<
+    Array<Scalars['String']['input']> | Scalars['String']['input']
+  >
 }>
 
 export type GetTriplesQuery = {
@@ -19574,13 +19577,20 @@ useGetTagsCustomQuery.fetcher = (
   )
 
 export const GetTriplesDocument = `
-    query GetTriples($limit: Int, $offset: Int, $orderBy: [triples_order_by!], $where: triples_bool_exp) {
-  total: triples_aggregate(where: $where) {
+    query GetTriples($limit: Int, $offset: Int, $orderBy: [triples_order_by!], $where: triples_bool_exp!, $adminAddresses: [String!]) {
+  total: triples_aggregate(
+    where: {_and: [$where, {creator_id: {_in: $adminAddresses}}]}
+  ) {
     aggregate {
       count
     }
   }
-  triples(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
+  triples(
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+    where: {_and: [$where, {creator_id: {_in: $adminAddresses}}]}
+  ) {
     id
     subject {
       id
@@ -19624,7 +19634,7 @@ ${AtomValueFragmentDoc}
 ${AccountMetadataFragmentDoc}`
 
 export const useGetTriplesQuery = <TData = GetTriplesQuery, TError = unknown>(
-  variables?: GetTriplesQueryVariables,
+  variables: GetTriplesQueryVariables,
   options?: Omit<
     UseQueryOptions<GetTriplesQuery, TError, TData>,
     'queryKey'
@@ -19633,8 +19643,7 @@ export const useGetTriplesQuery = <TData = GetTriplesQuery, TError = unknown>(
   },
 ) => {
   return useQuery<GetTriplesQuery, TError, TData>({
-    queryKey:
-      variables === undefined ? ['GetTriples'] : ['GetTriples', variables],
+    queryKey: ['GetTriples', variables],
     queryFn: fetcher<GetTriplesQuery, GetTriplesQueryVariables>(
       GetTriplesDocument,
       variables,
@@ -19645,8 +19654,10 @@ export const useGetTriplesQuery = <TData = GetTriplesQuery, TError = unknown>(
 
 useGetTriplesQuery.document = GetTriplesDocument
 
-useGetTriplesQuery.getKey = (variables?: GetTriplesQueryVariables) =>
-  variables === undefined ? ['GetTriples'] : ['GetTriples', variables]
+useGetTriplesQuery.getKey = (variables: GetTriplesQueryVariables) => [
+  'GetTriples',
+  variables,
+]
 
 export const useInfiniteGetTriplesQuery = <
   TData = InfiniteData<GetTriplesQuery>,
@@ -19668,10 +19679,7 @@ export const useInfiniteGetTriplesQuery = <
     (() => {
       const { queryKey: optionsQueryKey, ...restOptions } = options
       return {
-        queryKey:
-          (optionsQueryKey ?? variables === undefined)
-            ? ['GetTriples.infinite']
-            : ['GetTriples.infinite', variables],
+        queryKey: optionsQueryKey ?? ['GetTriples.infinite', variables],
         queryFn: (metaData) =>
           fetcher<GetTriplesQuery, GetTriplesQueryVariables>(
             GetTriplesDocument,
@@ -19683,13 +19691,13 @@ export const useInfiniteGetTriplesQuery = <
   )
 }
 
-useInfiniteGetTriplesQuery.getKey = (variables?: GetTriplesQueryVariables) =>
-  variables === undefined
-    ? ['GetTriples.infinite']
-    : ['GetTriples.infinite', variables]
+useInfiniteGetTriplesQuery.getKey = (variables: GetTriplesQueryVariables) => [
+  'GetTriples.infinite',
+  variables,
+]
 
 useGetTriplesQuery.fetcher = (
-  variables?: GetTriplesQueryVariables,
+  variables: GetTriplesQueryVariables,
   options?: RequestInit['headers'],
 ) =>
   fetcher<GetTriplesQuery, GetTriplesQueryVariables>(
@@ -38490,8 +38498,28 @@ export const GetTriples = {
             name: { kind: 'Name', value: 'where' },
           },
           type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'triples_bool_exp' },
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'triples_bool_exp' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'adminAddresses' },
+          },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NonNullType',
+              type: {
+                kind: 'NamedType',
+                name: { kind: 'Name', value: 'String' },
+              },
+            },
           },
         },
       ],
@@ -38507,8 +38535,47 @@ export const GetTriples = {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'where' },
                 value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'where' },
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: '_and' },
+                      value: {
+                        kind: 'ListValue',
+                        values: [
+                          {
+                            kind: 'Variable',
+                            name: { kind: 'Name', value: 'where' },
+                          },
+                          {
+                            kind: 'ObjectValue',
+                            fields: [
+                              {
+                                kind: 'ObjectField',
+                                name: { kind: 'Name', value: 'creator_id' },
+                                value: {
+                                  kind: 'ObjectValue',
+                                  fields: [
+                                    {
+                                      kind: 'ObjectField',
+                                      name: { kind: 'Name', value: '_in' },
+                                      value: {
+                                        kind: 'Variable',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'adminAddresses',
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 },
               },
             ],
@@ -38560,8 +38627,47 @@ export const GetTriples = {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'where' },
                 value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'where' },
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: '_and' },
+                      value: {
+                        kind: 'ListValue',
+                        values: [
+                          {
+                            kind: 'Variable',
+                            name: { kind: 'Name', value: 'where' },
+                          },
+                          {
+                            kind: 'ObjectValue',
+                            fields: [
+                              {
+                                kind: 'ObjectField',
+                                name: { kind: 'Name', value: 'creator_id' },
+                                value: {
+                                  kind: 'ObjectValue',
+                                  fields: [
+                                    {
+                                      kind: 'ObjectField',
+                                      name: { kind: 'Name', value: '_in' },
+                                      value: {
+                                        kind: 'Variable',
+                                        name: {
+                                          kind: 'Name',
+                                          value: 'adminAddresses',
+                                        },
+                                      },
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 },
               },
             ],

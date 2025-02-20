@@ -62,7 +62,8 @@ export function useHackathons(adminAddresses: string[] = []) {
           { predicate_id: { _eq: TAG_PREDICATE_ID } },
           { object: { label: { _eq: TOP_WEB3_TOOLING_LABEL } } }
         ]
-      }
+      },
+      adminAddresses: adminAddresses
     }
   );
 
@@ -101,18 +102,6 @@ export function useHackathons(adminAddresses: string[] = []) {
         .map(triple => {
           if (!triple.subject) return null;
           
-          // Essayons de trouver le créateur de différentes manières
-          const creatorFromTriple = triple.creator?.id;
-          const creatorFromSubject = triple.subject.as_subject_triples?.find(
-            t => t.predicate.data === 'creator' || t.predicate.label === 'creator'
-          )?.object.data;
-
-          const creator = (creatorFromTriple || creatorFromSubject)?.toLowerCase();
-          
-          if (!creator || !adminAddresses.includes(creator)) {
-            return null;
-          }
-
           const ipfsData = ipfsDataMap[triple.subject.id];
           if (!ipfsData) return null;
 

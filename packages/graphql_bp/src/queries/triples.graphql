@@ -3,14 +3,32 @@ query GetTriples(
   $limit: Int
   $offset: Int
   $orderBy: [triples_order_by!]
-  $where: triples_bool_exp
+  $where: triples_bool_exp!
+  $adminAddresses: [String!]
 ) {
-  total: triples_aggregate(where: $where) {
+  total: triples_aggregate(
+    where: {
+      _and: [
+        $where,
+        { creator_id: { _in: $adminAddresses } }
+      ]
+    }
+  ) {
     aggregate {
       count
     }
   }
-  triples(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
+  triples(
+    limit: $limit,
+    offset: $offset,
+    order_by: $orderBy,
+    where: {
+      _and: [
+        $where,
+        { creator_id: { _in: $adminAddresses } }
+      ]
+    }
+  ) {
     id
     subject {
       id
