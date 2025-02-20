@@ -22,6 +22,7 @@ import {
   HackathonCard
 } from '@0xintuition/buildproof_ui';
 import { useHackathons, Hackathon } from '../../lib/hooks/useHackathons';
+import { useAdminAddresses } from '../../lib/hooks/useAdminAddresses';
 
 type HackathonStatus = 'past' | 'upcoming' | 'ongoing';
 const DEFAULT_PAGE_SIZE = 16;
@@ -31,7 +32,9 @@ export function Home() {
   const [statusFilter, setStatusFilter] = useState<'all' | HackathonStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const { hackathons, isLoading, error } = useHackathons();
+  const { adminAddresses, isLoading: isLoadingAdmins } = useAdminAddresses();
+  const { hackathons, isLoading: isLoadingHackathons, error } = useHackathons(adminAddresses);
+
 
   const filteredHackathons = hackathons.filter(hackathon => {
     const matchesStatus = statusFilter === 'all' || hackathon.status === statusFilter;
@@ -64,14 +67,14 @@ export function Home() {
     console.log(`Toggled like for hackathon at index ${index}`);
   };
 
-  if (isLoading) {
+  if (isLoadingAdmins || isLoadingHackathons) {
     return (
       <div className="p-6 w-full">
         <Text variant="h1" className="font-bold">
           Available Hackathons
         </Text>
         <div className="mt-4">
-          <Text>Loading hackathons...</Text>
+          <Text>Chargement des hackathons...</Text>
         </div>
       </div>
     );

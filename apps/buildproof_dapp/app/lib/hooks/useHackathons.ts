@@ -50,7 +50,7 @@ export interface Hackathon {
 const TAG_PREDICATE_ID = 3;
 const TOP_WEB3_TOOLING_LABEL = "BP_test";
 
-export function useHackathons() {
+export function useHackathons(adminAddresses: string[] = []) {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [ipfsDataMap, setIpfsDataMap] = useState<Record<string, any>>({});
 
@@ -95,10 +95,24 @@ export function useHackathons() {
 
   useEffect(() => {
     if (triplesData?.triples && Object.keys(ipfsDataMap).length > 0) {
+      console.log('Triples reçus:', triplesData.triples);
+
       const newHackathons = triplesData.triples
         .map(triple => {
           if (!triple.subject) return null;
           
+          // Essayons de trouver le créateur de différentes manières
+          const creatorFromTriple = triple.creator?.id;
+          const creatorFromSubject = triple.subject.as_subject_triples?.find(
+            t => t.predicate.data === 'creator' || t.predicate.label === 'creator'
+          )?.object.data;
+
+          const creator = (creatorFromTriple || creatorFromSubject)?.toLowerCase();
+          
+          if (!creator || !adminAddresses.includes(creator)) {
+            return null;
+          }
+
           const ipfsData = ipfsDataMap[triple.subject.id];
           if (!ipfsData) return null;
 
@@ -126,9 +140,6 @@ export function useHackathons() {
             status = 'ongoing';
           }
 
-          console.log('Date triples:', { startDateTriple, endDateTriple });
-          console.log('Parsed dates:', { startDate, endDate });
-
           const hackathon: Hackathon = {
             id: triple.subject.id,
             title: ipfsData.name || triple.subject.label || 'Unnamed Hackathon',
@@ -146,9 +157,10 @@ export function useHackathons() {
         })
         .filter((h): h is Hackathon => h !== null);
 
+      console.log('Hackathons filtrés final:', newHackathons);
       setHackathons(newHackathons);
     }
-  }, [triplesData, ipfsDataMap]);
+  }, [triplesData, ipfsDataMap, adminAddresses]);
 
   return {
     hackathons,
