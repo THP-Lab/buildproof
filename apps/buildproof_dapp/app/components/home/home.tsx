@@ -21,72 +21,19 @@ import {
   Text,
   HackathonCard
 } from '@0xintuition/buildproof_ui';
+import { useHackathons, Hackathon } from '../../lib/hooks/useHackathons';
 
-type HackathonStatus = 'completed' | 'upcoming' | 'ongoing';
-
-interface Hackathon {
-  title: string;
-  description: string;
-  tags: string[];
-  cashPrize: string;
-  imgSrc: string;
-  startDate: string;
-  endDate: string;
-  winners?: string[];
-  isLiked?: boolean;
-  onLikeToggle?: () => void;
-  status: HackathonStatus;
-}
-
-// Mock data
-const MOCK_HACKATHONS: Hackathon[] = [
-  {
-    title: 'Past Hackathon',
-    description: 'This hackathon project has been completed successfully.',
-    tags: ['Blockchain', 'AI', 'Open Source'],
-    cashPrize: '$10,000',
-    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
-    startDate: '01/01/2023',
-    endDate: '10/01/2023',
-    winners: ['John', 'Jane'],
-    isLiked: false,
-    status: 'completed',
-  },
-  {
-    title: 'Upcoming Hackathon',
-    description: 'This hackathon will start soon.',
-    tags: ['Blockchain', 'AI'],
-    cashPrize: '$5,000',
-    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
-    startDate: '01/02/2025',
-    endDate: '15/03/2025',
-    winners: [],
-    isLiked: false,
-    status: 'upcoming',
-  },
-  {
-    title: 'Ongoing Hackathon',
-    description: 'This hackathon is currently in progress.',
-    tags: ['Web3', 'Innovation'],
-    cashPrize: '$15,000',
-    imgSrc: 'https://avatars.githubusercontent.com/u/186075312?s=200&v=4',
-    startDate: '01/01/2024',
-    endDate: '03/01/2024',
-    winners: [],
-    isLiked: false,
-    status: 'ongoing',
-  }
-];
+type HackathonStatus = 'past' | 'upcoming' | 'ongoing';
+const DEFAULT_PAGE_SIZE = 16;
 
 export function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [statusFilter, setStatusFilter] = useState<'all' | HackathonStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const itemsPerPage = 6;
+  const { hackathons, isLoading, error } = useHackathons();
 
-  // Filter hackathons based on status and search query
-  const filteredHackathons = MOCK_HACKATHONS.filter(hackathon => {
+  const filteredHackathons = hackathons.filter(hackathon => {
     const matchesStatus = statusFilter === 'all' || hackathon.status === statusFilter;
     const matchesSearch = hackathon.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       hackathon.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -94,15 +41,13 @@ export function Home() {
     return matchesStatus && matchesSearch;
   });
 
-  // Calculate pagination
-  const totalPages = Math.ceil(filteredHackathons.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredHackathons.length / DEFAULT_PAGE_SIZE);
   const paginatedHackathons = filteredHackathons.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    (currentPage - 1) * DEFAULT_PAGE_SIZE,
+    currentPage * DEFAULT_PAGE_SIZE
   );
 
-  // Get all unique tags and their counts
-  const tagCounts = MOCK_HACKATHONS.flatMap(h => h.tags).reduce((acc, tag) => {
+  const tagCounts = filteredHackathons.flatMap(h => h.tags).reduce((acc, tag) => {
     acc[tag] = (acc[tag] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
@@ -116,9 +61,35 @@ export function Home() {
   };
 
   const handleLikeToggle = (index: number) => {
-    // Here you would typically update the like status in your backend
     console.log(`Toggled like for hackathon at index ${index}`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="p-6 w-full">
+        <Text variant="h1" className="font-bold">
+          Available Hackathons
+        </Text>
+        <div className="mt-4">
+          <Text>Loading hackathons...</Text>
+        </div>
+      </div>
+    );
+  }
+
+  if (error instanceof Error) {
+    return (
+      <div className="p-6 w-full">
+        <Text variant="h1" className="font-bold">
+          Available Hackathons
+        </Text>
+        <div className="mt-4 text-red-500">
+          <Text>Error loading hackathons: {error.message}</Text>
+          <pre className="mt-2 text-sm">{JSON.stringify(error, null, 2)}</pre>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 w-full">
@@ -127,7 +98,6 @@ export function Home() {
           Available Hackathons
         </Text>
 
-        {/* Filters */}
         <div className="flex gap-4 flex-wrap">
           <div className="w-[200px]">
             <Select onValueChange={handleStatusChange}>
@@ -140,7 +110,7 @@ export function Home() {
                   <SelectItem value="all">All</SelectItem>
                   <SelectItem value="upcoming">Upcoming</SelectItem>
                   <SelectItem value="ongoing">Ongoing</SelectItem>
-                  <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="past">Past</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -156,29 +126,38 @@ export function Home() {
           </div>
         </div>
 
-        {/* Tags */}
-        <div className="w-full">
-          <Tags>
-            <TagsContent numberOfTags={Object.keys(tagCounts).length}>
-              {Object.entries(tagCounts).map(([tag, count]) => (
-                <TagWithValue key={tag} label={tag} value={count} />
-              ))}
-            </TagsContent>
-          </Tags>
-        </div>
+        {Object.keys(tagCounts).length > 0 && (
+          <div className="w-full">
+            <Tags>
+              <TagsContent numberOfTags={Object.keys(tagCounts).length}>
+                {Object.entries(tagCounts).map(([tag, count]) => (
+                  <TagWithValue key={tag} label={tag} value={count} />
+                ))}
+              </TagsContent>
+            </Tags>
+          </div>
+        )}
 
-        {/* Hackathon Grid */}
         <ListGrid>
           {paginatedHackathons.map((hackathon, index) => (
-            <HackathonCard
+            <a 
               key={index}
-              {...hackathon}
-              onLikeToggle={() => handleLikeToggle(index)}
-            />
+              href={`/hackathonDetails/${hackathon.id}`}
+              className="block transition-transform hover:scale-105"
+              onClick={(e) => {
+                if (e.target instanceof HTMLElement && e.target.closest('.like-button')) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              <HackathonCard
+                {...hackathon}
+                onLikeToggle={() => handleLikeToggle(index)}
+              />
+            </a>
           ))}
         </ListGrid>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <Pagination>
             <PaginationContent>

@@ -1,19 +1,19 @@
-import { useGetAtomQuery, useGetAtomsQuery, configureClient } from '@0xintuition/graphql';
+import { useGetAtomQuery, configureClient } from '@0xintuition/graphql_bp';
 import { useState, useEffect } from 'react';
 
 configureClient({
   apiUrl: "https://dev.base-sepolia.intuition-api.com/v1/graphql",
 });
 
-export const HackathonInfos = () => {
+interface HackathonInfosProps {
+  atomId: number;
+}
+
+export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
   const [ipfsData, setIpfsData] = useState<{ name?: string; description?: string }>();
   const { data: atomData, isLoading: loading, error } = useGetAtomQuery(
-    { id: 13217 }
+    { id: atomId }
   );
-
-  const { data: atomsData } = useGetAtomsQuery({
-    limit: 5
-  });
 
   useEffect(() => {
     const fetchIpfsData = async () => {
@@ -36,7 +36,6 @@ export const HackathonInfos = () => {
   console.log('Atom Data:', atomData);
   console.log('Atom Details:', atomData?.atom);
   console.log('Error:', error);
-  console.log('Available Atoms:', atomsData);
   console.log('IPFS Data:', ipfsData);
 
   return (

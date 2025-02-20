@@ -11,7 +11,35 @@ query GetTriples(
     }
   }
   triples(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
-    ...TripleMetadata
+    id
+    subject {
+      id
+      data
+      label
+      image
+      as_subject_triples {
+        predicate {
+          id
+          data
+          label
+        }
+        object {
+          id
+          data
+          label
+        }
+      }
+    }
+    predicate {
+      id
+      data
+      label
+    }
+    object {
+      id
+      data
+      label
+    }
     ...TripleTxn
     ...TripleVaultDetails
     creator {
