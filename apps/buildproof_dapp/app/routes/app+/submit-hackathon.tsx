@@ -684,7 +684,6 @@ const SubmitHackathon = () => {
             </Button>
           </div>
         </form>
-    </AdminRoute>
       
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
         <DialogContent className="max-h-[80vh] overflow-y-auto">
@@ -700,6 +699,7 @@ const SubmitHackathon = () => {
         </DialogContent>
       </Dialog>
     </>
+    </AdminRoute>
   );
 };
 
