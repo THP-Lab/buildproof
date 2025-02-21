@@ -131,7 +131,7 @@ const SubmitHackathon = () => {
       
       try {
         const userAddress = user.wallet.address.toLowerCase();
-        const response = await fetch('http://localhost:3000/api/users');
+        const response = await fetch('http://217.154.8.211/api/users');
         const userData: UserData[] = await response.json();
         const userInfo = userData.find(u => u.address.toLowerCase() === userAddress);
         
@@ -234,7 +234,7 @@ const SubmitHackathon = () => {
       'starts_on',
       'ends_on',
       'has tag',
-      'BP_test',
+      'BuildProof test',
       ...prizes.map(prize => prize.name)
     ];
 
@@ -254,7 +254,7 @@ const SubmitHackathon = () => {
       {
         subject: hackathonTitle,
         predicate: 'has tag',
-        object: 'BP_test'
+        object: 'BuildProof test'
       },
       {
         subject: hackathonTitle,
@@ -315,12 +315,13 @@ const SubmitHackathon = () => {
 
       // 1. D'abord, on stocke les données sur IPFS
       const hackathonData = {
-        partnerName,
+        "@context": "https://schema.org/",
+        "@type": "Thing",
         name: hackathonTitle,
         description
       };
       
-      const bpTestname = 'BP_test';
+      const bpTestname = 'BuildProof test';
       const atomListData = {
         "@context": "https://schema.org/",
         "@type": "Thing",
@@ -474,7 +475,7 @@ const SubmitHackathon = () => {
 
       await publicClient?.waitForTransactionReceipt({ hash: triplesHash });
       setShowConfirmation(false);
-      navigate('/app/hackathons');
+      navigate(`/hackathonDetails/${hackathonIpfsHashId.toString()}`);
     } catch (error) {
       console.error('Transaction error:', error);
       alert(error instanceof Error ? error.message : 'Transaction failed. Please try again.');
@@ -702,5 +703,4 @@ const SubmitHackathon = () => {
     </AdminRoute>
   );
 };
-
 export default SubmitHackathon;

@@ -20,7 +20,7 @@ export function useAdminAddresses() {
   useEffect(() => {
     const fetchAdminAddresses = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/users');
+        const response = await fetch('http://217.154.8.211/api/users');
         const data: UserData[] = await response.json();
         
         const addresses = data

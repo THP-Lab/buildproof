@@ -19,7 +19,7 @@ export function useDomainFunds() {
   useEffect(() => {
     const fetchDomainFunds = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/domains');
+        const response = await fetch('http://217.154.8.211/api/domains');
         const data: Domain[] = await response.json();
         setDomainFunds(data);
       } catch (err) {
