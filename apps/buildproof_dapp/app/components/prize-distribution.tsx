@@ -17,9 +17,10 @@ interface PrizeDistributionProps {
   totalCashPrize: number;
   prizesNumber: number;
   prizes: Prize[];
+  selectedTicker: string;
 }
 
-const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions, totalCashPrize, prizesNumber, prizes }) => {
+const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, removePrize, updatePrize, availableOptions, totalCashPrize, prizesNumber, prizes, selectedTicker }) => {
 
   const handleAmountChange = (amount: number) => {
     if (totalCashPrize > 0) {
@@ -63,14 +64,14 @@ const PrizeDistribution: React.FC<PrizeDistributionProps> = ({ prize, index, rem
           type="number"
           value={prize.amount}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAmountChange(parseInt(e.target.value))}
-           endAdornment="$"
+          endAdornment={selectedTicker || '$'}
         />
         <Input
           startAdornment="Percent"
           type="number"
           value={prize.percent || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePercentChange(parseInt(e.target.value))}
-           endAdornment="%"
+          endAdornment="%"
         />
       </div>
     </div>
