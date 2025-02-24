@@ -20,24 +20,25 @@ interface StakeCalculation {
 
 export function calculateStakes(
   triples: Triple[],
-  amountToAddWei: bigint
+  amountToAddWei: bigint,
 ): StakeCalculation {
   const stakes: StakeCalculation = { ids: [], values: [] }
 
   // Filtrer les triples avec un pourcentage non nul
-  const activeTriples = triples.filter(triple => triple.percentage !== 0);
+  const activeTriples = triples.filter((triple) => triple.percentage !== 0)
 
-  activeTriples.forEach(triple => {
+  activeTriples.forEach((triple) => {
     // Calculer le nouveau montant basé sur le pourcentage de l'ajout
-    const absolutePercentage = Math.abs(triple.percentage);
-    const amountToAdd = (amountToAddWei * BigInt(absolutePercentage)) / 100n;
-    
-    if (amountToAdd > 0n) {
-      const id = triple.percentage > 0 ? triple.vault_id : triple.counter_vault_id;
-      stakes.ids.push(BigInt(id));
-      stakes.values.push(amountToAdd);
-    }
-  });
+    const absolutePercentage = Math.abs(triple.percentage)
+    const amountToAdd = (amountToAddWei * BigInt(absolutePercentage)) / 100n
 
-  return stakes;
+    if (amountToAdd > 0n) {
+      const id =
+        triple.percentage > 0 ? triple.vault_id : triple.counter_vault_id
+      stakes.ids.push(BigInt(id))
+      stakes.values.push(amountToAdd)
+    }
+  })
+
+  return stakes
 }

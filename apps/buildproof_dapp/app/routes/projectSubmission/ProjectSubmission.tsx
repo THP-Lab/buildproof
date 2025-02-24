@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+
 import {
-  Text,
-  Input,
   Button,
+  Icon,
+  IconName,
+  Input,
   Select,
   SelectContent,
   SelectGroup,
@@ -10,11 +12,10 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-  Icon,
-  IconName,
-  Textarea,
   Separator,
-} from '@0xintuition/buildproof_ui';
+  Text,
+  Textarea,
+} from '@0xintuition/buildproof_ui'
 
 // Predefined roles for team members
 const TEAM_ROLES = [
@@ -25,21 +26,21 @@ const TEAM_ROLES = [
   'Project Manager',
   'Smart Contract Developer',
   'DevOps Engineer',
-] as const;
+] as const
 
-type TeamRole = typeof TEAM_ROLES[number];
+type TeamRole = (typeof TEAM_ROLES)[number]
 
 interface TeamMember {
-  name: string;
-  role: TeamRole | '';
+  name: string
+  role: TeamRole | ''
 }
 
 interface ProjectSubmissionForm {
-  teamName: string;
-  projectName: string;
-  projectDescription: string;
-  submissionLink: string;
-  teamMembers: TeamMember[];
+  teamName: string
+  projectName: string
+  projectDescription: string
+  submissionLink: string
+  teamMembers: TeamMember[]
 }
 
 const INITIAL_FORM_STATE: ProjectSubmissionForm = {
@@ -48,96 +49,106 @@ const INITIAL_FORM_STATE: ProjectSubmissionForm = {
   projectDescription: '',
   submissionLink: '',
   teamMembers: [{ name: '', role: '' }], // Start with one empty team member
-};
+}
 
 export function ProjectSubmission() {
-  const [formData, setFormData] = useState<ProjectSubmissionForm>(INITIAL_FORM_STATE);
-  const [errors, setErrors] = useState<Partial<Record<keyof ProjectSubmissionForm, string>>>({});
+  const [formData, setFormData] =
+    useState<ProjectSubmissionForm>(INITIAL_FORM_STATE)
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof ProjectSubmissionForm, string>>
+  >({})
 
   const validateUrl = (url: string) => {
     try {
-      new URL(url);
-      return true;
+      new URL(url)
+      return true
     } catch {
-      return false;
+      return false
     }
-  };
+  }
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof ProjectSubmissionForm, string>> = {};
+    const newErrors: Partial<Record<keyof ProjectSubmissionForm, string>> = {}
 
     // Team name validation
     if (!formData.teamName.trim()) {
-      newErrors.teamName = 'Team name is required';
+      newErrors.teamName = 'Team name is required'
     }
 
     // Project name validation
     if (!formData.projectName.trim()) {
-      newErrors.projectName = 'Project name is required';
-    } else if (formData.projectName.length < 3 || formData.projectName.length > 20) {
-      newErrors.projectName = 'Project name must be between 3 and 20 characters';
+      newErrors.projectName = 'Project name is required'
+    } else if (
+      formData.projectName.length < 3 ||
+      formData.projectName.length > 20
+    ) {
+      newErrors.projectName = 'Project name must be between 3 and 20 characters'
     }
 
     // Project description validation
     if (!formData.projectDescription.trim()) {
-      newErrors.projectDescription = 'Project description is required';
+      newErrors.projectDescription = 'Project description is required'
     }
 
     // Submission link validation
     if (!formData.submissionLink.trim()) {
-      newErrors.submissionLink = 'Submission link is required';
+      newErrors.submissionLink = 'Submission link is required'
     } else if (!validateUrl(formData.submissionLink)) {
-      newErrors.submissionLink = 'Please enter a valid URL';
+      newErrors.submissionLink = 'Please enter a valid URL'
     }
 
     // Team members validation
     if (formData.teamMembers.length === 0) {
-      newErrors.teamMembers = 'At least one team member is required';
+      newErrors.teamMembers = 'At least one team member is required'
     } else {
       const hasEmptyFields = formData.teamMembers.some(
-        member => !member.name.trim() || !member.role
-      );
+        (member) => !member.name.trim() || !member.role,
+      )
       if (hasEmptyFields) {
-        newErrors.teamMembers = 'All team member fields must be filled';
+        newErrors.teamMembers = 'All team member fields must be filled'
       }
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (validateForm()) {
       // Here you would typically submit the form data to your backend
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', formData)
     }
-  };
+  }
 
   const addTeamMember = () => {
     if (formData.teamMembers.length < 5) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         teamMembers: [...prev.teamMembers, { name: '', role: '' }],
-      }));
+      }))
     }
-  };
+  }
 
   const removeTeamMember = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       teamMembers: prev.teamMembers.filter((_, i) => i !== index),
-    }));
-  };
+    }))
+  }
 
-  const updateTeamMember = (index: number, field: keyof TeamMember, value: string) => {
-    setFormData(prev => ({
+  const updateTeamMember = (
+    index: number,
+    field: keyof TeamMember,
+    value: string,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
       teamMembers: prev.teamMembers.map((member, i) =>
-        i === index ? { ...member, [field]: value } : member
+        i === index ? { ...member, [field]: value } : member,
       ),
-    }));
-  };
+    }))
+  }
 
   return (
     <div className="p-6 w-full max-w-3xl mx-auto">
@@ -157,7 +168,9 @@ export function ProjectSubmission() {
               </Text>
               <Input
                 value={formData.teamName}
-                onChange={e => setFormData(prev => ({ ...prev, teamName: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({ ...prev, teamName: e.target.value }))
+                }
                 placeholder="Enter your team name"
                 aria-invalid={!!errors.teamName}
                 aria-errormessage={errors.teamName}
@@ -192,13 +205,17 @@ export function ProjectSubmission() {
                   <div key={index} className="flex gap-3 items-start">
                     <Input
                       value={member.name}
-                      onChange={e => updateTeamMember(index, 'name', e.target.value)}
+                      onChange={(e) =>
+                        updateTeamMember(index, 'name', e.target.value)
+                      }
                       placeholder="Member name"
                       className="flex-1"
                     />
                     <Select
                       value={member.role}
-                      onValueChange={value => updateTeamMember(index, 'role', value)}
+                      onValueChange={(value) =>
+                        updateTeamMember(index, 'role', value)
+                      }
                     >
                       <SelectTrigger className="w-[200px]">
                         <SelectValue placeholder="Select role" />
@@ -206,7 +223,7 @@ export function ProjectSubmission() {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Roles</SelectLabel>
-                          {TEAM_ROLES.map(role => (
+                          {TEAM_ROLES.map((role) => (
                             <SelectItem key={role} value={role}>
                               {role}
                             </SelectItem>
@@ -247,7 +264,12 @@ export function ProjectSubmission() {
               </Text>
               <Input
                 value={formData.projectName}
-                onChange={e => setFormData(prev => ({ ...prev, projectName: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    projectName: e.target.value,
+                  }))
+                }
                 placeholder="Enter project name"
                 aria-invalid={!!errors.projectName}
                 aria-errormessage={errors.projectName}
@@ -265,7 +287,12 @@ export function ProjectSubmission() {
               </Text>
               <Textarea
                 value={formData.projectDescription}
-                onChange={e => setFormData(prev => ({ ...prev, projectDescription: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    projectDescription: e.target.value,
+                  }))
+                }
                 placeholder="Describe your project..."
                 className="min-h-[100px]"
                 aria-invalid={!!errors.projectDescription}
@@ -284,7 +311,12 @@ export function ProjectSubmission() {
               </Text>
               <Input
                 value={formData.submissionLink}
-                onChange={e => setFormData(prev => ({ ...prev, submissionLink: e.target.value }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    submissionLink: e.target.value,
+                  }))
+                }
                 placeholder="https://..."
                 aria-invalid={!!errors.submissionLink}
                 aria-errormessage={errors.submissionLink}
@@ -303,5 +335,5 @@ export function ProjectSubmission() {
         </Button>
       </form>
     </div>
-  );
-} 
+  )
+}

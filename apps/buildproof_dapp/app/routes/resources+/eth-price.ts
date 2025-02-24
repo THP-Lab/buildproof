@@ -1,5 +1,5 @@
-import { json } from '@remix-run/node'
 import { getEthPrice } from '@lib/services/pricefeeds'
+import { json } from '@remix-run/node'
 
 export async function loader() {
   try {
@@ -7,9 +7,6 @@ export async function loader() {
     return json({ price })
   } catch (error) {
     console.error('Error fetching ETH price:', error)
-    return json(
-      { error: 'Failed to fetch ETH price' },
-      { status: 500 }
-    )
+    return json({ error: 'Failed to fetch ETH price' }, { status: 500 })
   }
-} 
+}

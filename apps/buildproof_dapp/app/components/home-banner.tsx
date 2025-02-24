@@ -5,7 +5,7 @@ import { Button, Tag, Text } from '@0xintuition/buildproof_ui'
 import { HOME_BANNER_MP4 } from 'app/consts'
 import { AnimatePresence, motion } from 'framer-motion'
 
-export interface HomeBannerProps extends React.HTMLAttributes<HTMLDivElement> { }
+export interface HomeBannerProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function HomeBanner(props: HomeBannerProps) {
   return (

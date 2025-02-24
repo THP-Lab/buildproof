@@ -1,29 +1,36 @@
-import { useState, useEffect } from 'react';
-import { Icon, Input, IdentityTag, IdentityTagSize, Button } from '@0xintuition/buildproof_ui';
+import { useEffect, useState } from 'react'
+
+import {
+  Button,
+  Icon,
+  IdentityTag,
+  IdentityTagSize,
+  Input,
+} from '@0xintuition/buildproof_ui'
 
 interface SearchBarProps {
   onSearch: (search: {
-    subject: string | null;
-    predicate: string | null;
-    object: string | null;
-  }) => void;
+    subject: string | null
+    predicate: string | null
+    object: string | null
+  }) => void
   initialValues?: {
-    subject: string | null;
-    predicate: string | null;
-    object: string | null;
-  };
+    subject: string | null
+    predicate: string | null
+    object: string | null
+  }
 }
 
-const ClaimInput = ({ 
-  value, 
-  onChange, 
+const ClaimInput = ({
+  value,
+  onChange,
   placeholder,
-  onKeyDown
-}: { 
-  value: string | null;
-  onChange: (value: string) => void;
-  placeholder?: string;
-  onKeyDown: (e: React.KeyboardEvent) => void;
+  onKeyDown,
+}: {
+  value: string | null
+  onChange: (value: string) => void
+  placeholder?: string
+  onKeyDown: (e: React.KeyboardEvent) => void
 }) => {
   return (
     <IdentityTag
@@ -39,66 +46,71 @@ const ClaimInput = ({
         className="bg-transparent border-none text-inherit placeholder-gray-500 w-full p-0 focus:ring-0"
       />
     </IdentityTag>
-  );
-};
+  )
+}
 
 export const SearchBar = ({ onSearch, initialValues }: SearchBarProps) => {
   const [selectedValues, setSelectedValues] = useState<{
-    subject: string | null;
-    predicate: string | null;
-    object: string | null;
+    subject: string | null
+    predicate: string | null
+    object: string | null
   }>({
     subject: null,
     predicate: null,
     object: null,
-  });
+  })
 
   const [inputValues, setInputValues] = useState<{
-    subject: string | null;
-    predicate: string | null;
-    object: string | null;
-  }>(initialValues || {
-    subject: null,
-    predicate: null,
-    object: null,
-  });
+    subject: string | null
+    predicate: string | null
+    object: string | null
+  }>(
+    initialValues || {
+      subject: null,
+      predicate: null,
+      object: null,
+    },
+  )
 
   useEffect(() => {
     if (initialValues) {
-      setSelectedValues(initialValues);
-      setInputValues(initialValues);
+      setSelectedValues(initialValues)
+      setInputValues(initialValues)
     }
-  }, [initialValues]);
+  }, [initialValues])
 
-  const handleValueChange = (field: 'subject' | 'predicate' | 'object', value: string) => {
-    setInputValues(prev => ({
+  const handleValueChange = (
+    field: 'subject' | 'predicate' | 'object',
+    value: string,
+  ) => {
+    setInputValues((prev) => ({
       ...prev,
-      [field]: value || null
-    }));
-  };
+      [field]: value || null,
+    }))
+  }
 
   const handleSearch = () => {
-    onSearch(inputValues);
-    setSelectedValues(inputValues);
-  };
+    onSearch(inputValues)
+    setSelectedValues(inputValues)
+  }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
-      handleSearch();
+      e.preventDefault()
+      handleSearch()
     }
-  };
+  }
 
   const handleReset = () => {
     const resetValues = {
       subject: null,
       predicate: null,
       object: null,
-    };
-    setSelectedValues(resetValues);
-    setInputValues(resetValues);
-    onSearch(resetValues);
-  };
+    }
+    setSelectedValues(resetValues)
+    setInputValues(resetValues)
+    onSearch(resetValues)
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -123,7 +135,9 @@ export const SearchBar = ({ onSearch, initialValues }: SearchBarProps) => {
             placeholder="Object?"
           />
         </div>
-        {(selectedValues.subject || selectedValues.predicate || selectedValues.object) && (
+        {(selectedValues.subject ||
+          selectedValues.predicate ||
+          selectedValues.object) && (
           <button
             onClick={handleReset}
             className="p-1 hover:bg-secondary/10 rounded-full"
@@ -143,5 +157,5 @@ export const SearchBar = ({ onSearch, initialValues }: SearchBarProps) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}

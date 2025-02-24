@@ -1,20 +1,31 @@
-import { SidebarLayout, SidebarLayoutProvider, SidebarLayoutNav, SidebarLayoutNavBody, SidebarLayoutContent, SidebarLayoutNavHeader, SidebarLayoutNavHeaderButton, SidebarNavItem, IconName } from '@0xintuition/buildproof_ui'
+import React from 'react'
+
+import {
+  IconName,
+  SidebarLayout,
+  SidebarLayoutContent,
+  SidebarLayoutNav,
+  SidebarLayoutNavBody,
+  SidebarLayoutNavHeader,
+  SidebarLayoutNavHeaderButton,
+  SidebarLayoutProvider,
+  SidebarNavItem,
+} from '@0xintuition/buildproof_ui'
+
 import { usePrivy } from '@privy-io/react-auth'
 import { Link } from '@remix-run/react'
-import { AuthButton } from '../components/auth-button'
+
 import buildproofLogo from '../assets/svg/buildproof-logo.svg'
-import React from 'react'
+import { AuthButton } from '../components/auth-button'
 
 interface RootLayoutProps {
   children: React.ReactNode
 }
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
-
   const { authenticated, ready } = usePrivy()
 
   return (
-
     <SidebarLayoutProvider>
       <SidebarLayout>
         <div className="absolute top-4 right-4 z-50">
@@ -38,24 +49,31 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                   <SidebarNavItem iconName={IconName.medal} label="Vote" />
                 </Link>
                 <Link to="/app/submit-project">
-                  <SidebarNavItem iconName={IconName.medal} label="Submit Project" />
+                  <SidebarNavItem
+                    iconName={IconName.medal}
+                    label="Submit Project"
+                  />
                 </Link>
                 <Link to="/app/submit-hackathon">
-                  <SidebarNavItem iconName={IconName.medal} label="Submit Hackathon" />
+                  <SidebarNavItem
+                    iconName={IconName.medal}
+                    label="Submit Hackathon"
+                  />
                 </Link>
                 <Link to="/app/verify">
                   <SidebarNavItem iconName={IconName.medal} label="Verify" />
                 </Link>
                 <Link to="/app/profile">
-                  <SidebarNavItem iconName={IconName.personCircle} label="Profile" />
+                  <SidebarNavItem
+                    iconName={IconName.personCircle}
+                    label="Profile"
+                  />
                 </Link>
               </>
             )}
           </SidebarLayoutNavBody>
         </SidebarLayoutNav>
-        <SidebarLayoutContent>
-          {children}
-        </SidebarLayoutContent>
+        <SidebarLayoutContent>{children}</SidebarLayoutContent>
       </SidebarLayout>
     </SidebarLayoutProvider>
   )

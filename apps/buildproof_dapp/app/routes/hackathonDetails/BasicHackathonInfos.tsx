@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { configureClient, SubAtomDocument } from '@0xintuition/graphql_bp'
 
+import { ipfsToHttpUrl } from '@lib/utils/pinata'
 import { createClient } from 'graphql-ws'
+
+import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
 
 configureClient({
   apiUrl: 'https://dev.base-sepolia.intuition-api.com/v1/graphql',
@@ -37,7 +40,6 @@ export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
         },
         {
           next: (data) => {
-            console.log('data', data)
             setAtomData(data.data?.atom)
             setLoading(false)
           },
@@ -122,52 +124,80 @@ export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
         <div className="bg-white p-4 rounded">
           <h3 className="text-black mb-2">Price pool</h3>
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
-            {atomData
-              ? atomData?.as_subject_triples?.find(
-                  (triple: any) => triple.predicate.data === 'total cash prize',
-                )?.object.data + ' usd'
-              : 'loading...'}
+            {(() => {
+              const triple = atomData?.as_subject_triples?.find(
+                (triple: any) => triple.predicate.label === 'total cash prize',
+              )
+              return atomData
+                ? triple?.object?.label || 'No prize data'
+                : 'loading...'
+            })()}
           </div>
         </div>
 
         <div className="bg-white p-4 rounded">
           <h3 className="text-black mb-2">Dates</h3>
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
-            {atomData
-              ? atomData?.as_subject_triples?.find(
-                  (triple: any) => triple.predicate.data === 'starts_on',
-                )?.object.label
-              : 'loadindg...'}
+            {(() => {
+              const triple = atomData?.as_subject_triples?.find(
+                (triple: any) => triple.predicate.label === 'starts_on',
+              )
+              return atomData
+                ? triple?.object?.label || 'No prize data'
+                : 'loading...'
+            })()}
           </div>
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
-            {atomData
-              ? atomData?.as_subject_triples?.find(
-                  (triple: any) => triple.predicate.data === 'ends_on',
-                )?.object.label
-              : 'loadindg...'}
+            {(() => {
+              const triple = atomData?.as_subject_triples?.find(
+                (triple: any) => triple.predicate.label === 'ends_on',
+              )
+              return atomData
+                ? triple?.object?.label || 'No prize data'
+                : 'loading...'
+            })()}
           </div>
         </div>
 
         <div className="bg-gray-300 flex items-center justify-center p-4 rounded">
-          {!atomData ? (
-            <div className="bg-gray-400 p-8 rounded">
-              <span className="block text-gray-700">⌛</span>
-            </div>
-          ) : !ipfsData ? (
-            <div className="bg-gray-400 p-8 rounded">
-              <span className="block text-gray-700">Loading IPFS data...</span>
-            </div>
-          ) : ipfsData.image ? (
-            <img
-              src={ipfsData.image}
-              alt={ipfsData.name || ''}
-              className="w-full h-full object-cover rounded"
-            />
-          ) : (
-            <div className="bg-gray-400 p-8 rounded">
-              <span className="block text-gray-700">📷</span>
-            </div>
-          )}
+          {(() => {
+            if (!atomData) {
+              return (
+                <div className="bg-gray-400 p-8 rounded">
+                  <span className="block text-gray-700">⌛</span>
+                </div>
+              )
+            }
+
+            if (!ipfsData) {
+              return (
+                <div className="bg-gray-400 p-8 rounded">
+                  <span className="block text-gray-700">
+                    Loading IPFS data...
+                  </span>
+                </div>
+              )
+            }
+
+            // Si l'image n'existe pas ou n'est pas une URL valide
+            if (!ipfsData.image || ipfsData.image.startsWith('/')) {
+              return (
+                <img
+                  src={buildproofLogo}
+                  alt="BuildProof Logo"
+                  className="w-full h-full object-cover rounded"
+                />
+              )
+            }
+
+            return (
+              <img
+                src={ipfsToHttpUrl(ipfsData.image)}
+                alt={ipfsData.name || ''}
+                className="w-full h-full object-cover rounded"
+              />
+            )
+          })()}
         </div>
       </div>
     </div>

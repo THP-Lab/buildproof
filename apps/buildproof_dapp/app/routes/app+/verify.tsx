@@ -1,6 +1,8 @@
-import { Button, Input } from '@0xintuition/buildproof_ui'
-import { useFetcher } from '@remix-run/react'
 import { useEffect, useState } from 'react'
+
+import { Button, Input } from '@0xintuition/buildproof_ui'
+
+import { useFetcher } from '@remix-run/react'
 
 type VerifyResponse = {
   exists: boolean
@@ -26,15 +28,24 @@ export default function VerifyPage() {
   const [objectId, setObjectId] = useState('')
   const [hackathonTitle, setHackathonTitle] = useState('')
 
-  const [atomResult, setAtomResult] = useState<VerifyResult>({ data: null, timestamp: 0 })
-  const [tripleResult, setTripleResult] = useState<VerifyResult>({ data: null, timestamp: 0 })
-  const [hackathonResult, setHackathonResult] = useState<VerifyResult>({ data: null, timestamp: 0 })
+  const [atomResult, setAtomResult] = useState<VerifyResult>({
+    data: null,
+    timestamp: 0,
+  })
+  const [tripleResult, setTripleResult] = useState<VerifyResult>({
+    data: null,
+    timestamp: 0,
+  })
+  const [hackathonResult, setHackathonResult] = useState<VerifyResult>({
+    data: null,
+    timestamp: 0,
+  })
 
   useEffect(() => {
     if (fetcher.data && fetcher.formData) {
       const type = fetcher.formData.get('type') as string
       const result = { data: fetcher.data, timestamp: Date.now() }
-      
+
       switch (type) {
         case 'atom':
           setAtomResult(result)
@@ -57,7 +68,7 @@ export default function VerifyPage() {
     const formData = new FormData()
     formData.append('type', 'atom')
     formData.append('value', atomValue)
-    
+
     fetcher.submit(formData, {
       method: 'post',
       action: '/resources/verify',
@@ -70,7 +81,7 @@ export default function VerifyPage() {
     formData.append('subjectId', subjectId)
     formData.append('predicateId', predicateId)
     formData.append('objectId', objectId)
-    
+
     fetcher.submit(formData, {
       method: 'post',
       action: '/resources/verify',
@@ -81,7 +92,7 @@ export default function VerifyPage() {
     const formData = new FormData()
     formData.append('type', 'hackathon')
     formData.append('title', hackathonTitle)
-    
+
     fetcher.submit(formData, {
       method: 'post',
       action: '/resources/verify',
@@ -104,19 +115,29 @@ export default function VerifyPage() {
             disabled={isLoading}
           />
           <Button onClick={handleVerifyAtom} disabled={isLoading}>
-            {isLoading && fetcher.formData?.get('type') === 'atom' ? 'Vérification...' : 'Vérifier'}
+            {isLoading && fetcher.formData?.get('type') === 'atom'
+              ? 'Vérification...'
+              : 'Vérifier'}
           </Button>
         </div>
-        {(isLoading && fetcher.formData?.get('type') === 'atom') ? (
+        {isLoading && fetcher.formData?.get('type') === 'atom' ? (
           <div>Vérification en cours...</div>
-        ) : (atomResult.data && isResultValid(atomResult.timestamp)) && (
-          <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
-            <div className="text-lg">
-              Résultat: <span className={atomResult.data.exists ? "text-green-500" : "text-red-500"}>
-                {atomResult.data.exists ? 'Existe' : "N'existe pas"}
-              </span>
+        ) : (
+          atomResult.data &&
+          isResultValid(atomResult.timestamp) && (
+            <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
+              <div className="text-lg">
+                Résultat:{' '}
+                <span
+                  className={
+                    atomResult.data.exists ? 'text-green-500' : 'text-red-500'
+                  }
+                >
+                  {atomResult.data.exists ? 'Existe' : "N'existe pas"}
+                </span>
+              </div>
             </div>
-          </div>
+          )
         )}
       </div>
 
@@ -148,47 +169,67 @@ export default function VerifyPage() {
             disabled={isLoading}
           />
           <Button onClick={handleVerifyTriple} disabled={isLoading}>
-            {isLoading && fetcher.formData?.get('type') === 'triple' ? 'Vérification...' : 'Vérifier'}
+            {isLoading && fetcher.formData?.get('type') === 'triple'
+              ? 'Vérification...'
+              : 'Vérifier'}
           </Button>
         </div>
-        {(isLoading && fetcher.formData?.get('type') === 'triple') ? (
+        {isLoading && fetcher.formData?.get('type') === 'triple' ? (
           <div>Vérification en cours...</div>
-        ) : (tripleResult.data && isResultValid(tripleResult.timestamp)) && (
-          <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
-            <div className="text-lg">
-              Résultat: <span className={tripleResult.data.exists ? "text-green-500" : "text-red-500"}>
-                {tripleResult.data.exists ? 'Existe' : "N'existe pas"}
-              </span>
-            </div>
-            {tripleResult.data.exists && tripleResult.data.atoms && (
-              <div className="mt-4 space-y-3">
-                <div className="font-medium">ID: {tripleResult.data.id}</div>
-                <div className="break-all">
-                  <span className="font-medium">Sujet:</span> {tripleResult.data.atoms.subject}
-                </div>
-                <div>
-                  <span className="font-medium">Prédicat:</span> {tripleResult.data.atoms.predicate}
-                </div>
-                <div className="break-all">
-                  <span className="font-medium">Objet:</span>{' '}
-                  {tripleResult.data.atoms.predicate === 'stored_at' && tripleResult.data.atoms.rawObject ? (
-                    <a 
-                      href={tripleResult.data.atoms.rawObject.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 underline"
-                    >
-                      {tripleResult.data.atoms.object}
-                    </a>
-                  ) : (
-                    tripleResult.data.atoms.object.startsWith('{') 
-                      ? JSON.stringify(JSON.parse(tripleResult.data.atoms.object), null, 2)
-                      : tripleResult.data.atoms.object
-                  )}
-                </div>
+        ) : (
+          tripleResult.data &&
+          isResultValid(tripleResult.timestamp) && (
+            <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
+              <div className="text-lg">
+                Résultat:{' '}
+                <span
+                  className={
+                    tripleResult.data.exists ? 'text-green-500' : 'text-red-500'
+                  }
+                >
+                  {tripleResult.data.exists ? 'Existe' : "N'existe pas"}
+                </span>
               </div>
-            )}
-          </div>
+              {tripleResult.data.exists && tripleResult.data.atoms && (
+                <div className="mt-4 space-y-3">
+                  <div className="font-medium">ID: {tripleResult.data.id}</div>
+                  <div className="break-all">
+                    <span className="font-medium">Sujet:</span>{' '}
+                    {tripleResult.data.atoms.subject}
+                  </div>
+                  <div>
+                    <span className="font-medium">Prédicat:</span>{' '}
+                    {tripleResult.data.atoms.predicate}
+                  </div>
+                  <div className="break-all">
+                    <span className="font-medium">Objet:</span>{' '}
+                    {tripleResult.data.atoms.predicate === 'stored_at' &&
+                    tripleResult.data.atoms.rawObject ? (
+                      <a
+                        href={tripleResult.data.atoms.rawObject.replace(
+                          'ipfs://',
+                          'https://gateway.pinata.cloud/ipfs/',
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300 underline"
+                      >
+                        {tripleResult.data.atoms.object}
+                      </a>
+                    ) : tripleResult.data.atoms.object.startsWith('{') ? (
+                      JSON.stringify(
+                        JSON.parse(tripleResult.data.atoms.object),
+                        null,
+                        2,
+                      )
+                    ) : (
+                      tripleResult.data.atoms.object
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )
         )}
       </div>
 
@@ -204,21 +245,33 @@ export default function VerifyPage() {
             disabled={isLoading}
           />
           <Button onClick={handleVerifyHackathon} disabled={isLoading}>
-            {isLoading && fetcher.formData?.get('type') === 'hackathon' ? 'Vérification...' : 'Vérifier'}
+            {isLoading && fetcher.formData?.get('type') === 'hackathon'
+              ? 'Vérification...'
+              : 'Vérifier'}
           </Button>
         </div>
-        {(isLoading && fetcher.formData?.get('type') === 'hackathon') ? (
+        {isLoading && fetcher.formData?.get('type') === 'hackathon' ? (
           <div>Vérification en cours...</div>
-        ) : (hackathonResult.data && isResultValid(hackathonResult.timestamp)) && (
-          <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
-            <div className="text-lg">
-              Résultat: <span className={hackathonResult.data.exists ? "text-green-500" : "text-red-500"}>
-                {hackathonResult.data.exists ? 'Existe' : "N'existe pas"}
-              </span>
+        ) : (
+          hackathonResult.data &&
+          isResultValid(hackathonResult.timestamp) && (
+            <div className="space-y-2 p-4 bg-gray-800 rounded-lg">
+              <div className="text-lg">
+                Résultat:{' '}
+                <span
+                  className={
+                    hackathonResult.data.exists
+                      ? 'text-green-500'
+                      : 'text-red-500'
+                  }
+                >
+                  {hackathonResult.data.exists ? 'Existe' : "N'existe pas"}
+                </span>
+              </div>
             </div>
-          </div>
+          )
         )}
       </div>
     </div>
   )
-} 
+}
