@@ -1,8 +1,16 @@
 import { useWriteContract } from 'wagmi'
+
 import { attestorAbi } from '../../abi/attestor-abi'
 
 export function useBatchDepositTriple() {
-  const { writeContract, writeContractAsync, data, error, isPending, isSuccess } = useWriteContract()
+  const {
+    writeContract,
+    writeContractAsync,
+    data,
+    error,
+    isPending,
+    isSuccess,
+  } = useWriteContract()
 
   const batchDepositTriple = async (
     params: {
@@ -11,7 +19,7 @@ export function useBatchDepositTriple() {
       values: bigint[]
       attestorAddress: `0x${string}`
     },
-    options?: { value?: bigint }
+    options?: { value?: bigint },
   ) => {
     const { receiver, ids, values, attestorAddress } = params
 
@@ -20,7 +28,7 @@ export function useBatchDepositTriple() {
       abi: attestorAbi,
       functionName: 'batchDepositTriple',
       args: [receiver, ids, values],
-      value: options?.value
+      value: options?.value,
     })
   }
 
@@ -29,6 +37,6 @@ export function useBatchDepositTriple() {
     data,
     error,
     isPending,
-    isSuccess
+    isSuccess,
   }
 }

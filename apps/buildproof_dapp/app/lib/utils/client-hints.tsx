@@ -53,7 +53,7 @@ export function getHints(request?: Request) {
     typeof document !== 'undefined'
       ? document.cookie
       : typeof request !== 'undefined'
-        ? request.headers.get('Cookie') ?? ''
+        ? (request.headers.get('Cookie') ?? '')
         : ''
 
   return Object.entries(clientHints).reduce(
@@ -73,8 +73,8 @@ export function getHints(request?: Request) {
         /* eslint-disable @typescript-eslint/no-explicit-any */
         transform: (value: any) => infer ReturnValue
       }
-      ? ReturnValue
-      : (typeof clientHints)[name]['fallback']
+        ? ReturnValue
+        : (typeof clientHints)[name]['fallback']
     },
   )
 }
@@ -119,11 +119,11 @@ const cookies = document.cookie.split(';').map(c => c.trim()).reduce((acc, cur) 
 let cookieChanged = false;
 const hints = [
 ${Object.values(clientHints)
-            .map((hint) => {
-              const cookieName = JSON.stringify(hint.cookieName)
-              return `{ name: ${cookieName}, actual: String(${hint.getValueCode}), cookie: cookies[${cookieName}] }`
-            })
-            .join(',\n')}
+  .map((hint) => {
+    const cookieName = JSON.stringify(hint.cookieName)
+    return `{ name: ${cookieName}, actual: String(${hint.getValueCode}), cookie: cookies[${cookieName}] }`
+  })
+  .join(',\n')}
 ];
 for (const hint of hints) {
 	if (decodeURIComponent(hint.cookie) !== hint.actual) {

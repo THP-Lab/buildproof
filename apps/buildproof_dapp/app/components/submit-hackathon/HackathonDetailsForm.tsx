@@ -1,64 +1,83 @@
-import React from 'react';
-import { Input, Textarea, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@0xintuition/buildproof_ui';
-import type { Domain, Fund } from 'app/utils/submit-hackathon/types';
-import { getTomorrowDate, formatDateForInput } from 'app/utils/submit-hackathon/formatters';
-import { uploadToPinata, isIpfsUrl, ipfsToHttpUrl } from 'app/utils/submit-hackathon/pinata';
+import React from 'react'
+
+import {
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Textarea,
+} from '@0xintuition/buildproof_ui'
+
+import {
+  formatDateForInput,
+  getTomorrowDate,
+} from 'app/utils/submit-hackathon/formatters'
+import {
+  ipfsToHttpUrl,
+  isIpfsUrl,
+  uploadToPinata,
+} from 'app/utils/submit-hackathon/pinata'
+import type { Domain, Fund } from 'app/utils/submit-hackathon/types'
 
 interface HackathonDetailsFormProps {
   formState: {
-    partnerName: string;
-    hackathonTitle: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    totalCashPrize: number;
-    selectedDomain: number | null;
-    selectedTicker: string;
-    image: string;
-  };
+    partnerName: string
+    hackathonTitle: string
+    description: string
+    startDate: string
+    endDate: string
+    totalCashPrize: number
+    selectedDomain: number | null
+    selectedTicker: string
+    image: string
+  }
   setters: {
-    setPartnerName: (value: string) => void;
-    setHackathonTitle: (value: string) => void;
-    setDescription: (value: string) => void;
-    setStartDate: (value: string) => void;
-    setEndDate: (value: string) => void;
-    setTotalCashPrize: (value: number) => void;
-    setSelectedDomain: (value: number | null) => void;
-    setSelectedTicker: (value: string) => void;
-    setImage: (value: string) => void;
-  };
-  userAdminDomains: Domain[];
-  maxAmount: number;
+    setPartnerName: (value: string) => void
+    setHackathonTitle: (value: string) => void
+    setDescription: (value: string) => void
+    setStartDate: (value: string) => void
+    setEndDate: (value: string) => void
+    setTotalCashPrize: (value: number) => void
+    setSelectedDomain: (value: number | null) => void
+    setSelectedTicker: (value: string) => void
+    setImage: (value: string) => void
+  }
+  userAdminDomains: Domain[]
+  maxAmount: number
 }
 
 export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
   formState,
   setters,
   userAdminDomains,
-  maxAmount
+  maxAmount,
 }) => {
-  const tomorrow = getTomorrowDate(new Date());
-  const minEndDate = formState.startDate 
-    ? new Date(new Date(formState.startDate).getTime() + 7 * 24 * 60 * 60 * 1000)
-    : tomorrow;
+  const tomorrow = getTomorrowDate(new Date())
+  const minEndDate = formState.startDate
+    ? new Date(
+        new Date(formState.startDate).getTime() + 7 * 24 * 60 * 60 * 1000,
+      )
+    : tomorrow
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]
     if (file) {
       try {
-        const ipfsUrl = await uploadToPinata(file);
-        setters.setImage(ipfsUrl);
+        const ipfsUrl = await uploadToPinata(file)
+        setters.setImage(ipfsUrl)
       } catch (error) {
-        console.error('Erreur lors du téléversement:', error);
-        alert('Erreur lors du téléversement de l\'image');
+        console.error('Erreur lors du téléversement:', error)
+        alert("Erreur lors du téléversement de l'image")
       }
     }
-  };
+  }
 
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-bold">Submit a New Hackathon</h1>
-      
+
       <Input
         startAdornment="Partner Name"
         value={formState.partnerName}
@@ -85,15 +104,15 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
 
       <div className="flex flex-col">
         <label className="mb-1">Hackathon Image (optional)</label>
-        <Input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
+        <Input type="file" accept="image/*" onChange={handleImageChange} />
         {formState.image && (
-          <img 
-            src={isIpfsUrl(formState.image) ? ipfsToHttpUrl(formState.image) : formState.image} 
-            alt="Hackathon preview" 
+          <img
+            src={
+              isIpfsUrl(formState.image)
+                ? ipfsToHttpUrl(formState.image)
+                : formState.image
+            }
+            alt="Hackathon preview"
             className="mt-2 max-w-xs rounded-lg"
           />
         )}
@@ -121,8 +140,8 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
       <Select
         value={formState.selectedDomain?.toString()}
         onValueChange={(value) => {
-          setters.setSelectedDomain(parseInt(value));
-          setters.setSelectedTicker('');
+          setters.setSelectedDomain(parseInt(value))
+          setters.setSelectedTicker('')
         }}
       >
         <SelectTrigger>
@@ -131,12 +150,17 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
         <SelectContent>
           {userAdminDomains.length > 0 ? (
             userAdminDomains.map((domain) => (
-              <SelectItem key={domain.domainId} value={domain.domainId.toString()}>
+              <SelectItem
+                key={domain.domainId}
+                value={domain.domainId.toString()}
+              >
                 {domain.domainName}
               </SelectItem>
             ))
           ) : (
-            <SelectItem value="no-domains" disabled>No domains available</SelectItem>
+            <SelectItem value="no-domains" disabled>
+              No domains available
+            </SelectItem>
           )}
         </SelectContent>
       </Select>
@@ -151,16 +175,17 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
           </SelectTrigger>
           <SelectContent>
             {userAdminDomains
-              .find(d => d.domainId === formState.selectedDomain)
-              ?.funds
-              .filter((f: Fund) => parseFloat(f.amount) > 0)
+              .find((d) => d.domainId === formState.selectedDomain)
+              ?.funds.filter((f: Fund) => parseFloat(f.amount) > 0)
               .map((fund: Fund) => (
                 <SelectItem key={fund.ticker} value={fund.ticker}>
                   {fund.ticker}
                 </SelectItem>
               )) || (
-                <SelectItem value="no-currencies" disabled>No currencies available</SelectItem>
-              )}
+              <SelectItem value="no-currencies" disabled>
+                No currencies available
+              </SelectItem>
+            )}
           </SelectContent>
         </Select>
       )}
@@ -169,7 +194,11 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
         startAdornment="Total Cash Prize"
         type="number"
         value={formState.totalCashPrize.toString()}
-        onChange={(e) => setters.setTotalCashPrize(Math.min(parseFloat(e.target.value), maxAmount))}
+        onChange={(e) =>
+          setters.setTotalCashPrize(
+            Math.min(parseFloat(e.target.value), maxAmount),
+          )
+        }
         placeholder="Enter total cash prize amount"
         required
         endAdornment={formState.selectedTicker}
@@ -177,5 +206,5 @@ export const HackathonDetailsForm: React.FC<HackathonDetailsFormProps> = ({
         disabled={!formState.selectedDomain || !formState.selectedTicker}
       />
     </div>
-  );
-}; 
+  )
+}

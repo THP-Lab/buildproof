@@ -1,5 +1,5 @@
-import { Input } from '@0xintuition/buildproof_ui'
 import { SortDirection } from '@0xintuition/api'
+import { Input } from '@0xintuition/buildproof_ui'
 
 import { SortOption, SortSelect } from '@components/sort-select'
 

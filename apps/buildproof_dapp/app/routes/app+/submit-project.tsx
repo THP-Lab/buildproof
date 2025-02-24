@@ -1,7 +1,9 @@
-import { ProjectSubmission } from '../../components/project-submission/project-submission'
+import { useEffect } from 'react'
+
 import { usePrivy } from '@privy-io/react-auth'
 import { useNavigate } from '@remix-run/react'
-import { useEffect } from 'react'
+
+import { ProjectSubmission } from '../../components/project-submission/project-submission'
 
 export default function SubmitProject() {
   const { authenticated, ready } = usePrivy()
@@ -22,4 +24,4 @@ export default function SubmitProject() {
   }
 
   return <ProjectSubmission />
-} 
+}

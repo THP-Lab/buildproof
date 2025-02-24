@@ -1,4 +1,8 @@
-import { verifyAtom, verifyHackathon, verifyTriple } from '@lib/utils/verify-blockchain'
+import {
+  verifyAtom,
+  verifyHackathon,
+  verifyTriple,
+} from '@lib/utils/verify-blockchain'
 import { json } from '@remix-run/node'
 
 export async function action({ request }: { request: Request }) {
@@ -18,11 +22,13 @@ export async function action({ request }: { request: Request }) {
       const predicateId = formData.get('predicateId') as string
       const objectId = formData.get('objectId') as string
 
-      return json(await verifyTriple(
-        BigInt(subjectId),
-        BigInt(predicateId),
-        BigInt(objectId),
-      ))
+      return json(
+        await verifyTriple(
+          BigInt(subjectId),
+          BigInt(predicateId),
+          BigInt(objectId),
+        ),
+      )
     }
 
     case 'hackathon': {
@@ -33,4 +39,4 @@ export async function action({ request }: { request: Request }) {
     default:
       throw new Error('Type de vérification invalide')
   }
-} 
+}

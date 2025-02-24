@@ -39,8 +39,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
       fetcher(GetAtomsDocument, {
         where: search
           ? {
-            _or: [{ label: { _ilike: `%${search}%` } }],
-          }
+              _or: [{ label: { _ilike: `%${search}%` } }],
+            }
           : undefined,
       })(),
   })
@@ -70,8 +70,8 @@ export default function PlaygroundHydration() {
     {
       where: debouncedSearch
         ? {
-          _or: [{ label: { _ilike: `%${debouncedSearch}%` } }],
-        }
+            _or: [{ label: { _ilike: `%${debouncedSearch}%` } }],
+          }
         : undefined,
     },
     {

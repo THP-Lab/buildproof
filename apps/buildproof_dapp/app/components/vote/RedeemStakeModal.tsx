@@ -10,7 +10,7 @@ import {
   Input,
 } from '@0xintuition/buildproof_ui'
 
-import { parseEther, formatUnits } from 'viem'
+import { formatUnits, parseEther } from 'viem'
 
 import { multivaultAbi } from '../../lib/abis/multivault'
 import { useRedeemTriple } from '../../lib/hooks/useRedeemTriple'
@@ -35,7 +35,7 @@ export function RedeemStakeModal({
   totalShares,
 }: RedeemStakeModalProps) {
   const [displayAmount, setDisplayAmount] = useState(maxStake)
-  
+
   const {
     writeContractAsync: redeemTriple,
     awaitingWalletConfirmation,
@@ -78,7 +78,7 @@ export function RedeemStakeModal({
         maxStake,
         percentage,
         sharesToRedeem: sharesToRedeem.toString(),
-        totalShares
+        totalShares,
       })
 
       const tx = await redeemTriple({
@@ -106,7 +106,12 @@ export function RedeemStakeModal({
   }
 
   const isPending = awaitingWalletConfirmation || awaitingOnChainConfirmation
-  const isDisabled = !userAddress || userAddress === 'undefined' || isPending || displayAmount <= 0 || displayAmount > maxStake
+  const isDisabled =
+    !userAddress ||
+    userAddress === 'undefined' ||
+    isPending ||
+    displayAmount <= 0 ||
+    displayAmount > maxStake
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -119,7 +124,9 @@ export function RedeemStakeModal({
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium">Amount to Redeem (ETH)</label>
+            <label className="text-sm font-medium">
+              Amount to Redeem (ETH)
+            </label>
             <Input
               type="number"
               value={displayAmount}

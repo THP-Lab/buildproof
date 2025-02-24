@@ -1,18 +1,30 @@
-import React from 'react';
-import { Button, ButtonVariant, ButtonSize, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@0xintuition/buildproof_ui';
-import type { Prize } from 'app/utils/submit-hackathon/types';
-import { PRIZE_OPTIONS } from 'app/utils/submit-hackathon/constants';
-import { getAvailablePrizeOptions } from 'app/utils/submit-hackathon/validation';
+import React from 'react'
+
+import {
+  Button,
+  ButtonSize,
+  ButtonVariant,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@0xintuition/buildproof_ui'
+
+import { PRIZE_OPTIONS } from 'app/utils/submit-hackathon/constants'
+import type { Prize } from 'app/utils/submit-hackathon/types'
+import { getAvailablePrizeOptions } from 'app/utils/submit-hackathon/validation'
 
 interface PrizeDistributionFormProps {
-  prizes: Prize[];
-  totalCashPrize: number;
-  selectedTicker: string;
-  onAddPrize: () => void;
-  onRemovePrize: (index: number) => void;
-  onUpdatePrize: (index: number, prize: Prize) => void;
-  onSubmit: (e: React.FormEvent) => Promise<void>;
-  isValid: boolean;
+  prizes: Prize[]
+  totalCashPrize: number
+  selectedTicker: string
+  onAddPrize: () => void
+  onRemovePrize: (index: number) => void
+  onUpdatePrize: (index: number, prize: Prize) => void
+  onSubmit: (e: React.FormEvent) => Promise<void>
+  isValid: boolean
 }
 
 export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
@@ -23,10 +35,13 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
   onRemovePrize,
   onUpdatePrize,
   onSubmit,
-  isValid
+  isValid,
 }) => {
-  const totalPrizeAmount = prizes.reduce((total, prize) => total + (prize.amount || 0), 0);
-  const availablePrizeOptions = getAvailablePrizeOptions(prizes, PRIZE_OPTIONS);
+  const totalPrizeAmount = prizes.reduce(
+    (total, prize) => total + (prize.amount || 0),
+    0,
+  )
+  const availablePrizeOptions = getAvailablePrizeOptions(prizes, PRIZE_OPTIONS)
 
   return (
     <div className="space-y-4">
@@ -51,18 +66,23 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
             <Input
               startAdornment="Prize Name"
               value={prize.otherName || ''}
-              onChange={(e) => onUpdatePrize(index, { ...prize, otherName: e.target.value })}
+              onChange={(e) =>
+                onUpdatePrize(index, { ...prize, otherName: e.target.value })
+              }
               placeholder="Enter prize name"
               required
             />
           ) : (
             <Select
               value={prize.name}
-              onValueChange={(value) => onUpdatePrize(index, { ...prize, name: value })}
+              onValueChange={(value) =>
+                onUpdatePrize(index, { ...prize, name: value })
+              }
             >
               <SelectTrigger>
                 <SelectValue>
-                  {PRIZE_OPTIONS.find(option => option.value === prize.name)?.label || prize.name}
+                  {PRIZE_OPTIONS.find((option) => option.value === prize.name)
+                    ?.label || prize.name}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
@@ -80,7 +100,12 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
             startAdornment="Amount"
             endAdornment={selectedTicker}
             value={prize.amount.toString()}
-            onChange={(e) => onUpdatePrize(index, { ...prize, amount: parseFloat(e.target.value) })}
+            onChange={(e) =>
+              onUpdatePrize(index, {
+                ...prize,
+                amount: parseFloat(e.target.value),
+              })
+            }
             max={totalCashPrize}
             required
           />
@@ -92,9 +117,9 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
               endAdornment="%"
               value={((prize.amount / totalCashPrize) * 100).toFixed(2)}
               onChange={(e) => {
-                const newPercent = parseFloat(e.target.value);
-                const newAmount = (newPercent / 100) * totalCashPrize;
-                onUpdatePrize(index, { ...prize, amount: newAmount });
+                const newPercent = parseFloat(e.target.value)
+                const newAmount = (newPercent / 100) * totalCashPrize
+                onUpdatePrize(index, { ...prize, amount: newAmount })
               }}
               min={0}
               max={100}
@@ -104,7 +129,8 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
           </div>
 
           <div className="text-sm text-gray-500">
-            {((prize.amount / totalCashPrize) * 100).toFixed(2)}% of total prize pool
+            {((prize.amount / totalCashPrize) * 100).toFixed(2)}% of total prize
+            pool
           </div>
         </div>
       ))}
@@ -132,11 +158,11 @@ export const PrizeDistributionForm: React.FC<PrizeDistributionFormProps> = ({
 
       {totalPrizeAmount !== totalCashPrize && (
         <div className="text-red-500">
-          {totalPrizeAmount > totalCashPrize 
-            ? "Total prize amounts exceed the total cash prize!"
-            : "Total prize amounts are less than the total cash prize!"}
+          {totalPrizeAmount > totalCashPrize
+            ? 'Total prize amounts exceed the total cash prize!'
+            : 'Total prize amounts are less than the total cash prize!'}
         </div>
       )}
     </div>
-  );
-}; 
+  )
+}

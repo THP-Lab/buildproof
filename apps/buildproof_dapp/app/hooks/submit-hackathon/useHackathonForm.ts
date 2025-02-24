@@ -1,42 +1,43 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from '@remix-run/react';
-import { usePrivy } from '@privy-io/react-auth';
-import type { Domain, Fund } from 'app/utils/submit-hackathon/types';
-import { isFormValid } from 'app/utils/submit-hackathon/validation';
+import { useEffect, useState } from 'react'
+
+import { usePrivy } from '@privy-io/react-auth'
+import { useNavigate } from '@remix-run/react'
+import type { Domain, Fund } from 'app/utils/submit-hackathon/types'
+import { isFormValid } from 'app/utils/submit-hackathon/validation'
 
 export const useHackathonForm = () => {
-  const navigate = useNavigate();
-  const { authenticated, ready, user, login } = usePrivy();
-  
+  const navigate = useNavigate()
+  const { authenticated, ready, user, login } = usePrivy()
+
   // Form states
-  const [partnerName, setPartnerName] = useState('');
-  const [hackathonTitle, setHackathonTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [totalCashPrize, setTotalCashPrize] = useState(0);
-  const [selectedDomain, setSelectedDomain] = useState<number | null>(null);
-  const [selectedTicker, setSelectedTicker] = useState<string>('');
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [image, setImage] = useState<string>('');
+  const [partnerName, setPartnerName] = useState('')
+  const [hackathonTitle, setHackathonTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [totalCashPrize, setTotalCashPrize] = useState(0)
+  const [selectedDomain, setSelectedDomain] = useState<number | null>(null)
+  const [selectedTicker, setSelectedTicker] = useState<string>('')
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [image, setImage] = useState<string>('')
 
   // Authentication check
   useEffect(() => {
     if (ready && !authenticated) {
-      navigate('/login?redirectTo=/app/submit-hackathon');
+      navigate('/login?redirectTo=/app/submit-hackathon')
     }
-  }, [ready, authenticated, navigate]);
+  }, [ready, authenticated, navigate])
 
   const handleTotalCashPrizeChange = (value: number, maxAmount: number) => {
-    setTotalCashPrize(Math.min(value, maxAmount));
-  };
+    setTotalCashPrize(Math.min(value, maxAmount))
+  }
 
   const getMaxAmount = (userAdminDomains: Domain[]) => {
-    if (!selectedDomain || !selectedTicker) return 0;
-    const domain = userAdminDomains.find(d => d.domainId === selectedDomain);
-    const fund = domain?.funds.find((f: Fund) => f.ticker === selectedTicker);
-    return fund ? parseFloat(fund.amount) : 0;
-  };
+    if (!selectedDomain || !selectedTicker) return 0
+    const domain = userAdminDomains.find((d) => d.domainId === selectedDomain)
+    const fund = domain?.funds.find((f: Fund) => f.ticker === selectedTicker)
+    return fund ? parseFloat(fund.amount) : 0
+  }
 
   const validateForm = (totalPrizeAmount: number) => {
     return isFormValid(
@@ -46,9 +47,9 @@ export const useHackathonForm = () => {
       startDate,
       endDate,
       totalCashPrize,
-      totalPrizeAmount
-    );
-  };
+      totalPrizeAmount,
+    )
+  }
 
   return {
     formState: {
@@ -61,7 +62,7 @@ export const useHackathonForm = () => {
       selectedDomain,
       selectedTicker,
       showConfirmation,
-      image
+      image,
     },
     setters: {
       setPartnerName,
@@ -73,18 +74,18 @@ export const useHackathonForm = () => {
       setSelectedDomain,
       setSelectedTicker,
       setShowConfirmation,
-      setImage
+      setImage,
     },
     auth: {
       authenticated,
       ready,
       user,
-      login
+      login,
     },
     handlers: {
       handleTotalCashPrizeChange,
       getMaxAmount,
-      validateForm
-    }
-  };
-}; 
+      validateForm,
+    },
+  }
+}

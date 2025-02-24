@@ -1,36 +1,43 @@
-import { useState, useCallback } from 'react';
-import { uploadToPinata, ipfsToHttpUrl } from 'app/utils/submit-hackathon/pinata';
+import { useCallback, useState } from 'react'
+
+import {
+  ipfsToHttpUrl,
+  uploadToPinata,
+} from 'app/utils/submit-hackathon/pinata'
 
 interface ImageUploaderProps {
-  onImageUploaded: (ipfsUrl: string) => void;
+  onImageUploaded: (ipfsUrl: string) => void
 }
 
 export function ImageUploader({ onImageUploaded }: ImageUploaderProps) {
-  const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
-  const handleFileChange = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const handleFileChange = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0]
+      if (!file) return
 
-    // Créer une URL de prévisualisation
-    const objectUrl = URL.createObjectURL(file);
-    setPreviewUrl(objectUrl);
+      // Créer une URL de prévisualisation
+      const objectUrl = URL.createObjectURL(file)
+      setPreviewUrl(objectUrl)
 
-    try {
-      setIsUploading(true);
-      const ipfsUrl = await uploadToPinata(file);
-      onImageUploaded(ipfsUrl);
-    } catch (error) {
-      console.error('Erreur lors du téléversement:', error);
-      alert('Erreur lors du téléversement de l\'image');
-    } finally {
-      setIsUploading(false);
-    }
+      try {
+        setIsUploading(true)
+        const ipfsUrl = await uploadToPinata(file)
+        onImageUploaded(ipfsUrl)
+      } catch (error) {
+        console.error('Error during upload:', error)
+        alert('Error during upload of the image')
+      } finally {
+        setIsUploading(false)
+      }
 
-    // Nettoyer l'URL de prévisualisation
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [onImageUploaded]);
+      // Nettoyer l'URL de prévisualisation
+      return () => URL.revokeObjectURL(objectUrl)
+    },
+    [onImageUploaded],
+  )
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -43,7 +50,7 @@ export function ImageUploader({ onImageUploaded }: ImageUploaderProps) {
           />
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p className="text-gray-500">Cliquez pour téléverser une image</p>
+            <p className="text-gray-500">Click to upload an image</p>
           </div>
         )}
         <input
@@ -55,10 +62,8 @@ export function ImageUploader({ onImageUploaded }: ImageUploaderProps) {
         />
       </div>
       {isUploading && (
-        <div className="text-sm text-blue-600">
-          Téléversement en cours...
-        </div>
+        <div className="text-sm text-blue-600">Uploading in progress...</div>
       )}
     </div>
-  );
-} 
+  )
+}

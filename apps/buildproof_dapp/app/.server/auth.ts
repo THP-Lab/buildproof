@@ -1,4 +1,5 @@
 import { OpenAPI } from '@0xintuition/api'
+
 import logger from '@lib/utils/logger'
 import { combineHeaders, getAuthHeaders } from '@lib/utils/misc'
 import { getRedirectToUrl } from '@lib/utils/redirect'

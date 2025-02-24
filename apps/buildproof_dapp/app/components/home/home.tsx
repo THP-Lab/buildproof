@@ -1,7 +1,15 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react'
+
 import {
-  ListGrid,
+  HackathonCard,
   Input,
+  ListGrid,
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
   Select,
   SelectContent,
   SelectGroup,
@@ -12,60 +20,66 @@ import {
   Tags,
   TagsContent,
   TagWithValue,
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
   Text,
-  HackathonCard
-} from '@0xintuition/buildproof_ui';
-import { useHackathons, Hackathon } from '../../lib/hooks/useHackathons';
-import { useAdminAddresses } from '../../lib/hooks/useAdminAddresses';
+} from '@0xintuition/buildproof_ui'
 
-type HackathonStatus = 'past' | 'upcoming' | 'ongoing';
-const DEFAULT_PAGE_SIZE = 16;
+import { useAdminAddresses } from '../../lib/hooks/useAdminAddresses'
+import { Hackathon, useHackathons } from '../../lib/hooks/useHackathons'
+
+type HackathonStatus = 'past' | 'upcoming' | 'ongoing'
+const DEFAULT_PAGE_SIZE = 16
 
 export function Home() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [statusFilter, setStatusFilter] = useState<'all' | HackathonStatus>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1)
+  const [statusFilter, setStatusFilter] = useState<'all' | HackathonStatus>(
+    'all',
+  )
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const { adminAddresses, isLoading: isLoadingAdmins } = useAdminAddresses();
-  const { hackathons, isLoading: isLoadingHackathons, error } = useHackathons(adminAddresses);
+  const { adminAddresses, isLoading: isLoadingAdmins } = useAdminAddresses()
+  const {
+    hackathons,
+    isLoading: isLoadingHackathons,
+    error,
+  } = useHackathons(adminAddresses)
 
+  const filteredHackathons = hackathons.filter((hackathon) => {
+    const matchesStatus =
+      statusFilter === 'all' || hackathon.status === statusFilter
+    const matchesSearch =
+      hackathon.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      hackathon.description.toLowerCase().includes(searchQuery.toLowerCase())
 
-  const filteredHackathons = hackathons.filter(hackathon => {
-    const matchesStatus = statusFilter === 'all' || hackathon.status === statusFilter;
-    const matchesSearch = hackathon.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      hackathon.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesStatus && matchesSearch
+  })
 
-    return matchesStatus && matchesSearch;
-  });
-
-  const totalPages = Math.ceil(filteredHackathons.length / DEFAULT_PAGE_SIZE);
+  const totalPages = Math.ceil(filteredHackathons.length / DEFAULT_PAGE_SIZE)
   const paginatedHackathons = filteredHackathons.slice(
     (currentPage - 1) * DEFAULT_PAGE_SIZE,
-    currentPage * DEFAULT_PAGE_SIZE
-  );
+    currentPage * DEFAULT_PAGE_SIZE,
+  )
 
-  const tagCounts = filteredHackathons.flatMap(h => h.tags).reduce((acc, tag) => {
-    acc[tag] = (acc[tag] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const tagCounts = filteredHackathons
+    .flatMap((h) => h.tags)
+    .reduce(
+      (acc, tag) => {
+        acc[tag] = (acc[tag] || 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    )
 
   const handleStatusChange = (value: string) => {
-    setStatusFilter(value as 'all' | HackathonStatus);
-  };
+    setStatusFilter(value as 'all' | HackathonStatus)
+  }
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+    setSearchQuery(e.target.value)
+  }
 
   const handleLikeToggle = (index: number) => {
-    console.log(`Toggled like for hackathon at index ${index}`);
-  };
+    console.log(`Toggled like for hackathon at index ${index}`)
+  }
 
   if (isLoadingAdmins || isLoadingHackathons) {
     return (
@@ -77,7 +91,7 @@ export function Home() {
           <Text>Chargement des hackathons...</Text>
         </div>
       </div>
-    );
+    )
   }
 
   if (error instanceof Error) {
@@ -91,7 +105,7 @@ export function Home() {
           <pre className="mt-2 text-sm">{JSON.stringify(error, null, 2)}</pre>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -143,13 +157,16 @@ export function Home() {
 
         <ListGrid>
           {paginatedHackathons.map((hackathon, index) => (
-            <a 
+            <a
               key={index}
               href={`/hackathonDetails/${hackathon.id}`}
               className="block transition-transform hover:scale-105"
               onClick={(e) => {
-                if (e.target instanceof HTMLElement && e.target.closest('.like-button')) {
-                  e.preventDefault();
+                if (
+                  e.target instanceof HTMLElement &&
+                  e.target.closest('.like-button')
+                ) {
+                  e.preventDefault()
                 }
               }}
             >
@@ -167,25 +184,29 @@ export function Home() {
               <PaginationItem>
                 <PaginationPrevious
                   href="#"
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
                 />
               </PaginationItem>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <PaginationItem key={page}>
-                  <PaginationLink
-                    href="#"
-                    onClick={() => setCurrentPage(page)}
-                    isActive={currentPage === page}
-                  >
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      href="#"
+                      onClick={() => setCurrentPage(page)}
+                      isActive={currentPage === page}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                ),
+              )}
               <PaginationItem>
                 <PaginationNext
                   href="#"
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  }
                   disabled={currentPage === totalPages}
                 />
               </PaginationItem>
@@ -194,5 +215,5 @@ export function Home() {
         )}
       </div>
     </div>
-  );
-} 
+  )
+}

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { configureClient, SubAtomDocument } from '@0xintuition/graphql_bp'
 
+import { ipfsToHttpUrl } from 'app/utils/submit-hackathon/pinata'
 import { createClient } from 'graphql-ws'
 
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
-import { ipfsToHttpUrl } from 'app/utils/submit-hackathon/pinata'
 
 configureClient({
   apiUrl: 'https://dev.base-sepolia.intuition-api.com/v1/graphql',
@@ -126,11 +126,11 @@ export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
             {(() => {
               const triple = atomData?.as_subject_triples?.find(
-                (triple: any) => triple.predicate.label === 'total cash prize'
-              );              
+                (triple: any) => triple.predicate.label === 'total cash prize',
+              )
               return atomData
                 ? triple?.object?.label || 'No prize data'
-                : 'loading...';
+                : 'loading...'
             })()}
           </div>
         </div>
@@ -138,45 +138,47 @@ export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
         <div className="bg-white p-4 rounded">
           <h3 className="text-black mb-2">Dates</h3>
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
-          {(() => {
+            {(() => {
               const triple = atomData?.as_subject_triples?.find(
-                (triple: any) => triple.predicate.label === 'starts_on'
-              );              
+                (triple: any) => triple.predicate.label === 'starts_on',
+              )
               return atomData
                 ? triple?.object?.label || 'No prize data'
-                : 'loading...';
+                : 'loading...'
             })()}
           </div>
           <div className="flex justify-center items-center bg-teal-500 text-white w-full py-2 my-1 rounded">
-          {(() => {
+            {(() => {
               const triple = atomData?.as_subject_triples?.find(
-                (triple: any) => triple.predicate.label === 'ends_on'
-              );              
+                (triple: any) => triple.predicate.label === 'ends_on',
+              )
               return atomData
                 ? triple?.object?.label || 'No prize data'
-                : 'loading...';
+                : 'loading...'
             })()}
           </div>
         </div>
 
         <div className="bg-gray-300 flex items-center justify-center p-4 rounded">
-          {(() => {    
+          {(() => {
             if (!atomData) {
               return (
                 <div className="bg-gray-400 p-8 rounded">
                   <span className="block text-gray-700">⌛</span>
                 </div>
-              );
+              )
             }
 
             if (!ipfsData) {
               return (
                 <div className="bg-gray-400 p-8 rounded">
-                  <span className="block text-gray-700">Loading IPFS data...</span>
+                  <span className="block text-gray-700">
+                    Loading IPFS data...
+                  </span>
                 </div>
-              );
+              )
             }
-            
+
             // Si l'image n'existe pas ou n'est pas une URL valide
             if (!ipfsData.image || ipfsData.image.startsWith('/')) {
               return (
@@ -185,16 +187,16 @@ export const HackathonInfos = ({ atomId }: HackathonInfosProps) => {
                   alt="BuildProof Logo"
                   className="w-full h-full object-cover rounded"
                 />
-              );
+              )
             }
-            
+
             return (
               <img
                 src={ipfsToHttpUrl(ipfsData.image)}
                 alt={ipfsData.name || ''}
                 className="w-full h-full object-cover rounded"
               />
-            );
+            )
           })()}
         </div>
       </div>
