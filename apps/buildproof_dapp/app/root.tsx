@@ -32,6 +32,7 @@ import { getChainEnvConfig } from '@lib/utils/environment'
 import { CURRENT_ENV } from 'app/consts'
 import { ClientOnly } from 'remix-utils/client-only'
 import { useAccount, useSwitchChain } from 'wagmi'
+
 import RootLayout from './layouts/root-layout'
 
 // Configure GraphQL client at module initialization using the URLs from the package

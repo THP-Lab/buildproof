@@ -1,5 +1,14 @@
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  Icon,
+  IconName,
+} from '@0xintuition/buildproof_ui'
+
 import { usePrivy } from '@privy-io/react-auth'
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, Icon, IconName } from '@0xintuition/buildproof_ui'
 import { useNavigate } from '@remix-run/react'
 
 export function AuthButton() {
@@ -34,7 +43,10 @@ export function AuthButton() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 mt-2 rounded-lg">
-        <DropdownMenuItem onClick={() => navigate('/app/profile')} className="gap-2">
+        <DropdownMenuItem
+          onClick={() => navigate('/app/profile')}
+          className="gap-2"
+        >
           <Icon name={IconName.personCircle} className="h-4 w-4" />
           Profile
         </DropdownMenuItem>
@@ -45,4 +57,4 @@ export function AuthButton() {
       </DropdownMenuContent>
     </DropdownMenu>
   )
-} 
+}

@@ -1,5 +1,4 @@
-export const attestorAbi = 
-[
+export const attestorAbi = [
   { inputs: [], name: 'Attestoor_EmptyAttestorsArray', type: 'error' },
   { inputs: [], name: 'Attestoor_InsufficientValue', type: 'error' },
   { inputs: [], name: 'Attestoor_InvalidEthMultiVaultAddress', type: 'error' },

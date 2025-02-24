@@ -1,3 +1,7 @@
 **/*.yaml
 **/*.template
 /.nx/workspace-data
+/apps/portal
+/apps/template
+/apps/launchpad
+/apps/data-populator

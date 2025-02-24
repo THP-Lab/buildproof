@@ -1,6 +1,6 @@
-import { PATHS } from '@consts/paths'
 import { redirect } from '@remix-run/node'
 import type { LoaderFunctionArgs } from '@remix-run/node'
+import { PATHS } from 'app/config/paths'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const redirectTo = new URL(request.url).searchParams.get('redirectTo')

@@ -15,4 +15,4 @@ export const useBatchCreateAtom = () => {
     // @ts-ignore TODO: Fix type for useContractWriteAndWait
     functionName: 'batchCreateAtom',
   })
-} 
+}

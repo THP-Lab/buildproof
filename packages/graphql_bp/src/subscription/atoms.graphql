@@ -1,0 +1,11 @@
+subscription SubAtom($id: numeric!) {
+  atom(id: $id) {
+    ...AtomMetadata
+    ...AtomTxn
+    ...AtomVaultDetails
+    creator {
+      ...AccountMetadata
+    }
+    ...AtomTriple
+  }
+}

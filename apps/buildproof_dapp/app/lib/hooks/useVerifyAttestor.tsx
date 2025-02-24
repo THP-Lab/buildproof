@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
-import { useReadContract, useWriteContract } from 'wagmi'
+
 import { type Address } from 'viem'
-import { useAccount } from 'wagmi'
+import { useAccount, useReadContract, useWriteContract } from 'wagmi'
 
 const ATTESTOR_ADDRESS = '0x64Abd54a86DfeB710eF2943d6304FC7B29f18e36'
 const MULTIVAULT_ADDRESS = '0x1A6950807E33d5bC9975067e6D6b5Ea4cD661665'
@@ -9,42 +9,42 @@ const MULTIVAULT_ADDRESS = '0x1A6950807E33d5bC9975067e6D6b5Ea4cD661665'
 // ABI du MultiVault pour les fonctions d'approbation
 const ABI = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      }
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
     ],
-    "name": "approveSender",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'approveSender',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "receiver",
-        "type": "address"
+        internalType: 'address',
+        name: 'receiver',
+        type: 'address',
       },
       {
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      }
+        internalType: 'address',
+        name: 'sender',
+        type: 'address',
+      },
     ],
-    "name": "approvals",
-    "outputs": [
+    name: 'approvals',
+    outputs: [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+    stateMutability: 'view',
+    type: 'function',
+  },
 ] as const
 
 export function useVerifyAttestor() {
@@ -61,7 +61,9 @@ export function useVerifyAttestor() {
   const { data: isApproved, refetch: refetchApproval } = useReadContract({
     ...contractConfig,
     functionName: 'approvals',
-    args: userAddress ? [userAddress as Address, ATTESTOR_ADDRESS as Address] : undefined,
+    args: userAddress
+      ? [userAddress as Address, ATTESTOR_ADDRESS as Address]
+      : undefined,
   })
 
   // Écrire pour approuver l'attestor
@@ -77,7 +79,7 @@ export function useVerifyAttestor() {
 
     try {
       console.log('Current approval status:', isApproved)
-      
+
       // Si déjà approuvé, retourner true immédiatement
       if (isApproved) {
         console.log('Attestor already approved by user')
@@ -98,7 +100,9 @@ export function useVerifyAttestor() {
       return true
     } catch (error) {
       console.error('Error approving attestor:', error)
-      setApprovalError(error instanceof Error ? error : new Error('Unknown error'))
+      setApprovalError(
+        error instanceof Error ? error : new Error('Unknown error'),
+      )
       return false
     } finally {
       setIsCheckingApproval(false)
@@ -111,4 +115,4 @@ export function useVerifyAttestor() {
     approvalError,
     verifyAndApproveAttestor,
   }
-} 
+}
