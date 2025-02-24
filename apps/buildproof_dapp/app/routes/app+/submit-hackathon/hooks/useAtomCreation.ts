@@ -1,7 +1,7 @@
 import { multivaultAbi } from '@lib/abis/multivault'
 import { useBatchCreateAtom } from '@lib/hooks/useBatchCreateAtom'
 import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
-import { VALUE_PER_ATOM } from 'app/utils/submit-hackathon/constants'
+import { VALUE_PER_ATOM } from '@routes/app+/submit-hackathon/utils/constants'
 import { keccak256, toHex } from 'viem'
 import { useAccount, usePublicClient } from 'wagmi'
 

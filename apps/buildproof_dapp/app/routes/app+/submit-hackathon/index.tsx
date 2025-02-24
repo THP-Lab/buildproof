@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
 
 import { useDomainFunds } from '@lib/hooks/useDomainFunds'
+import { hashDataToIPFS } from '@lib/utils/ipfs-utils'
 import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { useLoaderData, useNavigate } from '@remix-run/react'
-import { AdminRoute } from 'app/components/auth/admin-route'
-import { ConfirmationDialog } from 'app/components/submit-hackathon/ConfirmationDialog'
-import { HackathonDetailsForm } from 'app/components/submit-hackathon/HackathonDetailsForm'
-import { PrizeDistributionForm } from 'app/components/submit-hackathon/PrizeDistributionForm'
-import { useAtomCreation } from 'app/hooks/submit-hackathon/useAtomCreation'
-import type { IpfsAtom } from 'app/hooks/submit-hackathon/useAtomCreation'
-import { useHackathonForm } from 'app/hooks/submit-hackathon/useHackathonForm'
-import { useIPFSStorage } from 'app/hooks/submit-hackathon/useIPFSStorage'
-import { usePrizeDistribution } from 'app/hooks/submit-hackathon/usePrizeDistribution'
-import { useTripleCreation } from 'app/hooks/submit-hackathon/useTripleCreation'
-import { hashDataToIPFS } from 'app/utils/ipfs-utils'
-import { DEFAULT_IMAGE } from 'app/utils/submit-hackathon/constants'
+import {
+  useAtomCreation,
+  type IpfsAtom,
+} from '@routes/app+/submit-hackathon/hooks/useAtomCreation'
+import { useHackathonForm } from '@routes/app+/submit-hackathon/hooks/useHackathonForm'
+import { useIPFSStorage } from '@routes/app+/submit-hackathon/hooks/useIPFSStorage'
+import { usePrizeDistribution } from '@routes/app+/submit-hackathon/hooks/usePrizeDistribution'
+import { useTripleCreation } from '@routes/app+/submit-hackathon/hooks/useTripleCreation'
+import { DEFAULT_IMAGE } from '@routes/app+/submit-hackathon/utils/constants'
 import type {
   Domain,
   Triple,
   TripleToCreate,
-} from 'app/utils/submit-hackathon/types'
+} from '@routes/app+/submit-hackathon/utils/types'
+import { AdminRoute } from 'app/components/auth/admin-route'
+import { ConfirmationDialog } from 'app/components/submit-hackathon/ConfirmationDialog'
+import { HackathonDetailsForm } from 'app/components/submit-hackathon/HackathonDetailsForm'
+import { PrizeDistributionForm } from 'app/components/submit-hackathon/PrizeDistributionForm'
 import { usePublicClient } from 'wagmi'
 
 export type LoaderData = {
@@ -312,7 +314,6 @@ const SubmitHackathon = () => {
 
       // S'assurer que tous les atomes existent et obtenir leurs IDs
       const finalMapping = await ensureAtomsExist(atomMapping)
-
       // Créer les triples avec les IDs
       const triplesToCreate = await createTriples(
         Object.entries(finalMapping).reduce(

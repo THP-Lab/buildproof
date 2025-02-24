@@ -1,8 +1,8 @@
 import { multivaultAbi } from '@lib/abis/multivault'
 import { useBatchCreateTriple } from '@lib/hooks/useBatchCreateTriple'
 import { MULTIVAULT_CONTRACT_ADDRESS } from 'app/consts'
-import { VALUE_PER_TRIPLE } from 'app/utils/submit-hackathon/constants'
-import type { Prize, TripleToCreate } from 'app/utils/submit-hackathon/types'
+import { VALUE_PER_TRIPLE } from '@routes/app+/submit-hackathon/utils/constants'
+import type { Prize, TripleToCreate } from '@routes/app+/submit-hackathon/utils/types'
 import { usePublicClient } from 'wagmi'
 
 export const useTripleCreation = () => {

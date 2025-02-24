@@ -1,9 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import {
-  ipfsToHttpUrl,
-  uploadToPinata,
-} from 'app/utils/submit-hackathon/pinata'
+import { ipfsToHttpUrl, uploadToPinata } from '@lib/utils/pinata'
 
 interface ImageUploaderProps {
   onImageUploaded: (ipfsUrl: string) => void

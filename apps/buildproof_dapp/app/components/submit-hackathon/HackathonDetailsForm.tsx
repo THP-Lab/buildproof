@@ -10,16 +10,12 @@ import {
   Textarea,
 } from '@0xintuition/buildproof_ui'
 
+import { ipfsToHttpUrl, isIpfsUrl, uploadToPinata } from '@lib/utils/pinata'
 import {
   formatDateForInput,
   getTomorrowDate,
-} from 'app/utils/submit-hackathon/formatters'
-import {
-  ipfsToHttpUrl,
-  isIpfsUrl,
-  uploadToPinata,
-} from 'app/utils/submit-hackathon/pinata'
-import type { Domain, Fund } from 'app/utils/submit-hackathon/types'
+} from '@routes/app+/submit-hackathon/utils/formatters'
+import type { Domain, Fund } from '@routes/app+/submit-hackathon/utils/types'
 
 interface HackathonDetailsFormProps {
   formState: {

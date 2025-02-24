@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { usePrivy } from '@privy-io/react-auth'
 import { useNavigate } from '@remix-run/react'
-import type { Domain, Fund } from 'app/utils/submit-hackathon/types'
-import { isFormValid } from 'app/utils/submit-hackathon/validation'
+import type { Domain, Fund } from '@routes/app+/submit-hackathon/utils/types'
+import { isFormValid } from '@routes/app+/submit-hackathon/utils/validation'
 
 export const useHackathonForm = () => {
   const navigate = useNavigate()

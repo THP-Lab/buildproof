@@ -1,4 +1,4 @@
-import type { Prize } from './types'
+import type { Prize } from '@routes/app+/submit-hackathon/utils/types'
 
 export const isFormValid = (
   partnerName: string,

@@ -9,8 +9,8 @@ import {
   DialogTitle,
 } from '@0xintuition/buildproof_ui'
 
-import { formatTriplesForDisplay } from 'app/utils/submit-hackathon/formatters'
-import type { Triple } from 'app/utils/submit-hackathon/types'
+import type { Triple } from '@routes/app+/submit-hackathon/utils/types'
+import { formatTriplesForDisplay } from '@routes/app+/submit-hackathon/utils/formatters'
 
 interface ConfirmationDialogProps {
   open: boolean

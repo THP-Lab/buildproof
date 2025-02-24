@@ -1,5 +1,5 @@
 import { useLoaderData } from '@remix-run/react'
-import { hashDataToIPFS } from 'app/utils/ipfs-utils'
+import { hashDataToIPFS } from '@lib/utils/ipfs-utils'
 
 import type { IpfsAtom } from './useAtomCreation'
 

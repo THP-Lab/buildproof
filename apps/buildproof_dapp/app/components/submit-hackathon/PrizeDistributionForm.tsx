@@ -12,9 +12,9 @@ import {
   SelectValue,
 } from '@0xintuition/buildproof_ui'
 
-import { PRIZE_OPTIONS } from 'app/utils/submit-hackathon/constants'
-import type { Prize } from 'app/utils/submit-hackathon/types'
-import { getAvailablePrizeOptions } from 'app/utils/submit-hackathon/validation'
+import { PRIZE_OPTIONS } from '@routes/app+/submit-hackathon/utils/constants'
+import type { Prize } from '@routes/app+/submit-hackathon/utils/types'
+import { getAvailablePrizeOptions } from '@routes/app+/submit-hackathon/utils/validation'
 
 interface PrizeDistributionFormProps {
   prizes: Prize[]

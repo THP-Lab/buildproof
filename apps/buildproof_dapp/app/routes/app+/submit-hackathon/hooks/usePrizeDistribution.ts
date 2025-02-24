@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { PRIZE_ORDER } from 'app/utils/submit-hackathon/constants'
-import type { Prize } from 'app/utils/submit-hackathon/types'
+import { PRIZE_ORDER } from '@routes/app+/submit-hackathon/utils/constants'
+import type { Prize } from '@routes/app+/submit-hackathon/utils/types'
 
 export const usePrizeDistribution = (totalCashPrize: number = 0) => {
   const [prizes, setPrizes] = useState<Prize[]>([

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { configureClient, SubAtomDocument } from '@0xintuition/graphql_bp'
 
-import { ipfsToHttpUrl } from 'app/utils/submit-hackathon/pinata'
+import { ipfsToHttpUrl } from '@lib/utils/pinata'
 import { createClient } from 'graphql-ws'
 
 import buildproofLogo from '../../assets/svg/buildproof-logo.svg'
